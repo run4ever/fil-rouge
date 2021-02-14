@@ -52,37 +52,37 @@ public class User extends Person {
             return new Builder();
         }
 
-        public Builder id(Long id) {
+        public Builder withId(Long id) {
             this.id = id;
             return this;
         }
 
-        public Builder lastname(String lastname) {
+        public Builder withLastname(String lastname) {
             this.lastname = lastname;
             return this;
         }
 
-        public Builder firstname(String firstname) {
+        public Builder withFirstname(String firstname) {
             this.firstname = firstname;
             return this;
         }
 
-        public Builder birthdayDate(LocalDate birthdayDate) {
+        public Builder withBirthdayDate(LocalDate birthdayDate) {
             this.birthdayDate = birthdayDate;
             return this;
         }
 
-        public Builder email(EmailAddress email) {
+        public Builder withEmail(EmailAddress email) {
             this.email = email;
             return this;
         }
 
-        public Builder password(String password) {
+        public Builder withPassword(String password) {
             this.password = password;
             return this;
         }
 
-        public Builder role(Role role) {
+        public Builder withRole(Role role) {
             this.role = role;
             return this;
         }
@@ -99,4 +99,5 @@ public class User extends Person {
             return user;
         }
     }
+
 }

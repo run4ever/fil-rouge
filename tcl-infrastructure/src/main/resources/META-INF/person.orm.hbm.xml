@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.1"
+                 xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd">
+
+    <!-- FIELD on n'a plus besoin de setter et getter， on peut donc supprimer les setters et les getters -->
+    <access>FIELD</access>
+
+    <!-- déclarer les entité ici pour être créer dans la base de données -->
+    <entity class="fr.epita.filrouge.domain.person.User">
+            <!-- la déclaration de la liste des attributs n'est pas obligatoire -->
+    </entity>
+</entity-mappings>
