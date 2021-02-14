@@ -1,0 +1,15 @@
+#### Fichier config pour exécution en local #######
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tcl
+    username: postgres
+    password: admin
+    ## forcer exécution data.sql
+    initialization-mode: always
+
+
+### log au niveau Debug en local
+logging:
+  level: debug
