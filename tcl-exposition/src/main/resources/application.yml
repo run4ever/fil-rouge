@@ -2,9 +2,3 @@
 spring:
   application:
     name: tcl
-
-
-### config log
-logging:
-  level: info
-

@@ -6,10 +6,7 @@ spring:
     url: jdbc:postgresql://localhost:5432/tcl
     username: postgres
     password: admin
-    ## forcer exécution data.sql
+    ## forcer exécution import.sql
     initialization-mode: always
 
 
-### log au niveau Debug en local
-logging:
-  level: debug
