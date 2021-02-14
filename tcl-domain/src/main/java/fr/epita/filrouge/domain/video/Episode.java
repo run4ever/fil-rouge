@@ -5,7 +5,7 @@ public class Episode extends Video {
     private Integer episodeNumber;
 
     //default constructor
-    public Episode() {
+    Episode() {
     }
 
     public Integer getEpisodeNumber() {

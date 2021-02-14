@@ -5,7 +5,7 @@ public class Movie extends Video {
     private MovieFormat movieFormat;
 
     //default constructor
-    public Movie() {
+    Movie() {
     }
 
     public MovieFormat getMovieFormat() {
