@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fr.epita.filrouge</groupId>
+    <artifactId>fil-rouge-tcl</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>tcl-application</module>
+        <module>tcl-domain</module>
+        <module>tcl-exposition</module>
+        <module>tcl-infrastructure</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <spring-boot.version>2.4.1</spring-boot.version>
+        <swagger.version>2.9.2</swagger.version>
+        <junit-jupiter.version>5.6.2</junit-jupiter.version>
+        <mockito.version>1.10.19</mockito.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <build>
+   <pluginManagement>
+       <plugins>
+           <!-- DEBUT pour créer un JAR qui embarque toutes les dépendances Tomcat, et les autres -->
+           <plugin>
+               <groupId>org.springframework.boot</groupId>
+               <artifactId>spring-boot-maven-plugin</artifactId>
+               <version>${spring-boot.version}</version>
+               <executions>
+                   <execution>
+                       <id>repackage</id>
+                       <goals>
+                           <goal>repackage</goal>
+                       </goals>
+                       <configuration>
+                           <mainClass>fr.epita.filrouge.FilrougeApplication</mainClass>
+                       </configuration>
+                   </execution>
+               </executions>
+           </plugin>
+           <!-- FIN pour créer un JAR qui embarque toutes les dépendances Tomcat, et les autres -->
+       </plugins>
+   </pluginManagement>
+    </build>
+</project>
