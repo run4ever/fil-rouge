@@ -7,6 +7,7 @@
     <!-- hbm => fichier hibernate -->
     <access>FIELD</access>
 
+    <!-- classe abstraite Person -->
     <mapped-superclass
             class="fr.epita.filrouge.domain.person.Person">
         <attributes>
@@ -14,6 +15,18 @@
             <basic name="lastname" />
             <basic name="firstname" />
             <basic name="birthdayDate" />
+        </attributes>
+    </mapped-superclass>
+
+    <!-- classe abstraite Video    -->
+    <mapped-superclass class="fr.epita.filrouge.domain.video.Video">
+        <attributes>
+            <id name="id" />
+            <basic name="description" />
+            <basic name="title" />
+            <basic name="imageUrl" />
+            <basic name="averageRating" />
+            <basic name="numberOfVotes" />
         </attributes>
     </mapped-superclass>
 
