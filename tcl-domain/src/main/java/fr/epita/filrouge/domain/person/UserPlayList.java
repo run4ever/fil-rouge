@@ -1,62 +1,40 @@
 package fr.epita.filrouge.domain.person;
 
-import fr.epita.filrouge.domain.video.Video;
-
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserPlayList {
+
     private Long id;
 
-    private int notationUser;
+    private User user;
 
-    private Status status;
+    private List<UserPlayListItem> userPlayListItems = new ArrayList<>();;
 
-    private List<Video> videoList;
+   //default constructor
+    UserPlayList() {   }
 
-   //constructeur par défaut pour Spring
-    UserPlayList() {
-
+    public User getUser() {
+        return user;
     }
 
-    public Long getId() {
-        return id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public List<UserPlayListItem> getUserPlayListItems() {
+        return userPlayListItems;
     }
 
-    public int getNotationUser() {
-        return notationUser;
+    public void setUserPlayListItems(List<UserPlayListItem> userPlayListItems) {
+        this.userPlayListItems = userPlayListItems;
     }
 
-    public void setNotationUser(int notationUser) {
-        this.notationUser = notationUser;
-    }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public List<Video> getVideoList() {
-        return videoList;
-    }
-
-    public void setVideoList(List<Video> videoList) {
-        this.videoList = videoList;
-    }
-
-    /** Début Builder */
     public static final class Builder {
         private Long id;
-        private int notationUser;
-        private Status status;
-        private List<Video> videoList;
+        private User user;
+        private List<UserPlayListItem> userPlayListItems;
 
         private Builder() {
         }
@@ -70,31 +48,21 @@ public class UserPlayList {
             return this;
         }
 
-        public Builder withNotationUser(int notationUser) {
-            this.notationUser = notationUser;
+        public Builder withUser(User user) {
+            this.user = user;
             return this;
         }
 
-        public Builder withStatus(Status status) {
-            this.status = status;
-            return this;
-        }
-
-        public Builder withVideoList(List<Video> videoList) {
-            this.videoList = videoList;
+        public Builder withUserPlayListItems(List<UserPlayListItem> userPlayListItems) {
+            this.userPlayListItems = userPlayListItems;
             return this;
         }
 
         public UserPlayList build() {
             UserPlayList userPlayList = new UserPlayList();
-            userPlayList.setId(id);
-            userPlayList.setNotationUser(notationUser);
-            userPlayList.setStatus(status);
-            userPlayList.setVideoList(videoList);
+            userPlayList.setUser(user);
+            userPlayList.setUserPlayListItems(userPlayListItems);
             return userPlayList;
         }
     }
-
-    /** Fin Builder */
-
 }

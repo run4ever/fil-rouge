@@ -31,13 +31,46 @@
         <table name="episode"/>
     </entity>
 
-    <!--    <entity class="fr.epita.filrouge.domain.person.UserPlayList">
-            <table name="user_play_list"/>
-            <attributes>
-                <id name="id" />
-                <one-to-many name="videoList">
-                    <join-column name="VIDEO_ID" />
-                </one-to-many>
-            </attributes>
-        </entity>-->
+<!--    <entity-->
+<!--            class="fr.epita.filrouge.domain.person.UserPlayList">-->
+<!--        <table name="playlist" />-->
+<!--        <attributes>-->
+<!--            <id name="id">-->
+<!--                <generated-value strategy="SEQUENCE" generator="author_generator"/>-->
+<!--            </id>-->
+<!--            <many-to-one name="users" fetch="LAZY">-->
+<!--                <join-column name="id" />-->
+<!--            </many-to-one>-->
+
+<!--            <one-to-many name="userPlaylistItems" fetch="LAZY"-->
+<!--                         orphan-removal="true">-->
+<!--                <join-column name="id" referenced-column-name="id"-->
+<!--                             nullable="false" updatable="false" />-->
+<!--                <cascade>-->
+<!--                    <cascade-all />-->
+<!--                </cascade>-->
+<!--            </one-to-many>-->
+
+<!--        </attributes>-->
+<!--    </entity>-->
+
+
+    <entity
+            class="fr.epita.filrouge.domain.person.UserPlayListItem">
+        <table name="playlist_items" />
+
+        <attributes>
+            <id name="id">
+                <generated-value strategy="SEQUENCE" generator="author_generator"/>
+            </id>
+            <basic name="notation_user" />
+            <many-to-one name="movie" fetch="LAZY">
+                <join-column name="movie_id" />
+            </many-to-one>
+            <many-to-one name="episode" fetch="LAZY">
+                <join-column name="episode_id" />
+            </many-to-one>
+        </attributes>
+    </entity>
+
 </entity-mappings>
