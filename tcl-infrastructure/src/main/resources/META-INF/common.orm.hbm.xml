@@ -9,9 +9,11 @@
 
     <!-- classe abstraite Person -->
     <mapped-superclass
-            class="fr.epita.filrouge.domain.person.Person">
+            class="fr.epita.filrouge.domain.common.Person">
         <attributes>
-            <id name="id" />
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
             <basic name="lastname" />
             <basic name="firstname" />
             <basic name="birthdayDate" />
@@ -21,7 +23,9 @@
     <!-- classe abstraite Video    -->
     <mapped-superclass class="fr.epita.filrouge.domain.video.Video">
         <attributes>
-            <id name="id" />
+            <id name="id">
+                <generated-value strategy="IDENTITY"/>
+            </id>
             <basic name="description" />
             <basic name="title" />
             <basic name="imageUrl" />

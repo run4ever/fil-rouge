@@ -1,7 +1,6 @@
-package fr.epita.filrouge.domain.person;
+package fr.epita.filrouge.domain.video;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import fr.epita.filrouge.domain.common.Person;
 
 import java.time.LocalDate;
 

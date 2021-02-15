@@ -19,7 +19,7 @@
              </embedded>
          </attributes>-->
     </entity>
-    <entity class="fr.epita.filrouge.domain.person.Actor">
+    <entity class="fr.epita.filrouge.domain.video.Actor">
         <table name="actor"/>
     </entity>
 
@@ -61,7 +61,7 @@
 
         <attributes>
             <id name="id">
-                <generated-value strategy="SEQUENCE" generator="author_generator"/>
+                <generated-value strategy="IDENTITY"/>
             </id>
             <basic name="notation_user" />
             <many-to-one name="movie" fetch="LAZY">

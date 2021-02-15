@@ -1,9 +1,11 @@
 package fr.epita.filrouge.domain.person;
 
+import fr.epita.filrouge.domain.common.Person;
+
 import java.time.LocalDate;
 
 public class User extends Person {
-    private EmailAddress email;
+    private String email;
     private String password;
     private Role role;
 
@@ -11,11 +13,11 @@ public class User extends Person {
     User() {
 
     }
-    public EmailAddress getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmail(EmailAddress email) {
+    public void setEmail(String email) {
         this.email = email;
     }
 
@@ -41,7 +43,7 @@ public class User extends Person {
         private String lastname;
         private String firstname;
         private LocalDate birthdayDate;
-        private EmailAddress email;
+        private String email;
         private String password;
         private Role role;
 
@@ -72,7 +74,7 @@ public class User extends Person {
             return this;
         }
 
-        public Builder withEmail(EmailAddress email) {
+        public Builder withEmail(String email) {
             this.email = email;
             return this;
         }

@@ -1,4 +1,4 @@
-package fr.epita.filrouge.domain.person;
+package fr.epita.filrouge.domain.common;
 
 import java.time.LocalDate;
 

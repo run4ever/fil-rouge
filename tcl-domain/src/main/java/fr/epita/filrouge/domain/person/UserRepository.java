@@ -1,6 +1,6 @@
 package fr.epita.filrouge.domain.person;
 
 public interface UserRepository {
-    User findByEmail(EmailAddress emailAddress);
+    User findByEmail(String emailAddress);
     void save(User user);
 }
