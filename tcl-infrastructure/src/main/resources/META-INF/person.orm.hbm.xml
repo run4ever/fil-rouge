@@ -9,6 +9,30 @@
 
     <!-- déclarer les entité ici pour être créer dans la base de données -->
     <entity class="fr.epita.filrouge.domain.person.User">
+        <table name="users"/>
             <!-- la déclaration de la liste des attributs n'est pas obligatoire -->
+       <!--<attributes>
+            <embedded name="email">
+                <attribute-override name="value">
+                    <column name="email"/>
+                </attribute-override>
+            </embedded>
+        </attributes>-->
     </entity>
+    <entity class="fr.epita.filrouge.domain.person.Actor">
+        <table name="actor"/>
+       <!-- <attributes>
+            <basic name="pseudo"/>
+        </attributes>-->
+    </entity>
+
+<!--    <entity class="fr.epita.filrouge.domain.person.UserPlayList">
+        <table name="user_play_list"/>
+        <attributes>
+            <id name="id" />
+            <one-to-many name="videoList">
+                <join-column name="VIDEO_ID" />
+            </one-to-many>
+        </attributes>
+    </entity>-->
 </entity-mappings>

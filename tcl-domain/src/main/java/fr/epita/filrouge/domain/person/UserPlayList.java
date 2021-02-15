@@ -1,7 +1,7 @@
 package fr.epita.filrouge.domain.person;
 
-import fr.epita.filrouge.domain.video.Episode;
-import fr.epita.filrouge.domain.video.Movie;
+import fr.epita.filrouge.domain.video.Video;
+
 
 import java.util.List;
 
@@ -12,16 +12,15 @@ public class UserPlayList {
 
     private Status status;
 
-    private List<Movie> moviesList;
+    private List<Video> videoList;
 
-    private List<Episode> episodeList;
+   //constructeur par défaut pour Spring
+    UserPlayList() {
+
+    }
 
     public Long getId() {
         return id;
-    }
-    //constructeur par défaut pour Spring
-    UserPlayList() {
-
     }
 
     public void setId(Long id) {
@@ -44,20 +43,58 @@ public class UserPlayList {
         this.status = status;
     }
 
-    public List<Movie> getMoviesList() {
-        return moviesList;
+    public List<Video> getVideoList() {
+        return videoList;
     }
 
-    public void setMoviesList(List<Movie> moviesList) {
-        this.moviesList = moviesList;
+    public void setVideoList(List<Video> videoList) {
+        this.videoList = videoList;
     }
 
-    public List<Episode> getEpisodeList() {
-        return episodeList;
+    /** Début Builder */
+    public static final class Builder {
+        private Long id;
+        private int notationUser;
+        private Status status;
+        private List<Video> videoList;
+
+        private Builder() {
+        }
+
+        public static Builder anUserPlayList() {
+            return new Builder();
+        }
+
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withNotationUser(int notationUser) {
+            this.notationUser = notationUser;
+            return this;
+        }
+
+        public Builder withStatus(Status status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder withVideoList(List<Video> videoList) {
+            this.videoList = videoList;
+            return this;
+        }
+
+        public UserPlayList build() {
+            UserPlayList userPlayList = new UserPlayList();
+            userPlayList.setId(id);
+            userPlayList.setNotationUser(notationUser);
+            userPlayList.setStatus(status);
+            userPlayList.setVideoList(videoList);
+            return userPlayList;
+        }
     }
 
-    public void setEpisodeList(List<Episode> episodeList) {
-        this.episodeList = episodeList;
-    }
+    /** Fin Builder */
 
 }
