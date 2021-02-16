@@ -1,5 +1,6 @@
 package fr.epita.filrouge.domain.video;
 
+
 public class Episode extends Video {
 
     private Integer episodeNumber;
