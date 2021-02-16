@@ -3,11 +3,11 @@ package fr.epita.filrouge.domain.video;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Serie extends Video {
+public class Serie {
 
     private Long id;
     private LocalDate dateStart ;
-    private List<Season> numberOfSeason;
+    private List<Season> seasons;
 
     //default constructor visibility package
     Serie() {
@@ -30,28 +30,25 @@ public class Serie extends Video {
         this.dateStart = dateStart;
     }
 
-    public List<Season> getNumberOfSeason() {
-        return numberOfSeason;
+    public List<Season> getSeasons() {
+        return seasons;
     }
 
-    public void setNumberOfSeason(List<Season> numberOfSeason) {
-        this.numberOfSeason = numberOfSeason;
+    public void setSeasons(List<Season> seasons) {
+        this.seasons = seasons;
     }
 
 
-    /**
-     *
-     */
     public static final class Builder {
         private Long id;
         private LocalDate dateStart ;
-        private List<Season> numberOfSeason;
+        private List<Season> seasons;
 
         private Builder() {
         }
 
         public static Builder aSerie() {
-            return new Builder ();
+            return new Builder();
         }
 
         public Builder withId(Long id) {
@@ -64,16 +61,16 @@ public class Serie extends Video {
             return this;
         }
 
-        public Builder withNumberOfSeason(List<Season> numberOfSeason) {
-            this.numberOfSeason = numberOfSeason;
+        public Builder withSeasons(List<Season> seasons) {
+            this.seasons = seasons;
             return this;
         }
 
-        public Serie build () {
-            Serie serie = new Serie ();
-            serie.setId (id);
-            serie.setDateStart (dateStart);
-            serie.setNumberOfSeason (numberOfSeason);
+        public Serie build() {
+            Serie serie = new Serie();
+            serie.setId(id);
+            serie.setDateStart(dateStart);
+            serie.setSeasons(seasons);
             return serie;
         }
     }

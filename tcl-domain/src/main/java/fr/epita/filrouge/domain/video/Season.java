@@ -8,16 +8,10 @@ public class Season {
 
     private String seasonTitle;
 
-    private List<Episode> numberOfEpisode;
+    private List<Episode> episodes;
 
     //default constructor visibility package
     Season() {
-    }
-
-    public Season(Long id, String seasonTitle, List<Episode> numberOfEpisode) {
-        this.id = id;
-        this.seasonTitle = seasonTitle;
-        this.numberOfEpisode = numberOfEpisode;
     }
 
     public Long getId() {
@@ -36,19 +30,19 @@ public class Season {
         this.seasonTitle = seasonTitle;
     }
 
-    public List<Episode> getNumberOfEpisode() {
-        return numberOfEpisode;
+    public List<Episode> getEpisodes() {
+        return episodes;
     }
 
-    public void setNumberOfEpisode(List<Episode> numberOfEpisode) {
-        this.numberOfEpisode = numberOfEpisode;
+    public void setEpisodes(List<Episode> episodes) {
+        this.episodes = episodes;
     }
 
 
     public static final class Builder {
         private Long id;
         private String seasonTitle;
-        private List<Episode> numberOfEpisode;
+        private List<Episode> episodes;
 
         private Builder() {
         }
@@ -67,8 +61,8 @@ public class Season {
             return this;
         }
 
-        public Builder withNumberOfEpisode(List<Episode> numberOfEpisode) {
-            this.numberOfEpisode = numberOfEpisode;
+        public Builder withEpisodes(List<Episode> episodes) {
+            this.episodes = episodes;
             return this;
         }
 
@@ -76,7 +70,7 @@ public class Season {
             Season season = new Season();
             season.setId(id);
             season.setSeasonTitle(seasonTitle);
-            season.setNumberOfEpisode(numberOfEpisode);
+            season.setEpisodes(episodes);
             return season;
         }
     }
