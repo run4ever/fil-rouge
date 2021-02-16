@@ -9,6 +9,7 @@ public class Serie extends Video {
     private LocalDate dateStart ;
     private List<Season> numberOfSeason;
 
+    //default constructor visibility package
     Serie() {
     }
 

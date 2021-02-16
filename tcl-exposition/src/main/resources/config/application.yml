@@ -13,9 +13,10 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
-    mapping-resources:
-      - META-INF/common.orm.hbm.xml
-      - META-INF/object.orm.hbm.xml
+# *** utilisation de mapping pour créer les tables
+#    mapping-resources:
+#      - META-INF/common.orm.hbm.xml
+#      - META-INF/object.orm.hbm.xml
   cache:
     jcache:
       config: classpath:cache/ehcache.xml

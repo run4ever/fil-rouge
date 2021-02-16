@@ -4,7 +4,7 @@ public class Movie extends Video {
 
     private MovieFormat movieFormat;
 
-    //default constructor
+    //default constructor visibility package
     Movie() {
     }
 

@@ -7,11 +7,10 @@ import java.time.LocalDate;
 public class User extends Person {
     private String email;
     private String password;
-    private Role role;
+    private Role role;  // attention, on gère un seul Role ici !!!!
 
-    //constructeur par défaut
+    //default constructor visibility package
     User() {
-
     }
     public String getEmail() {
         return email;

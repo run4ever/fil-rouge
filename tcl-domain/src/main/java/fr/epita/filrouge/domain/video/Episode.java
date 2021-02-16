@@ -4,7 +4,7 @@ public class Episode extends Video {
 
     private Integer episodeNumber;
 
-    //default constructor
+    //default constructor visibility package
     Episode() {
     }
 

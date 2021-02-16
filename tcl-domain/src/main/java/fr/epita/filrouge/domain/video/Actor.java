@@ -8,9 +8,8 @@ public class Actor extends Person {
 
     private String pseudo;
 
-    //constructeur par défaut
+    //default constructor visibility package
     Actor() {
-
     }
 
     public String getPseudo() {
