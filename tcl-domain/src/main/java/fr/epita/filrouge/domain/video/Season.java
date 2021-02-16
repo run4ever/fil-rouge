@@ -4,29 +4,27 @@ import java.util.List;
 
 public class Season {
 
-    private long id;
+    private Long id;
 
     private String seasonTitle;
 
     private List<Episode> numberOfEpisode;
 
-    // default constructor for spring
-
-
+    //default constructor visibility package
     Season() {
     }
 
-    public Season(long id, String seasonTitle, List<Episode> numberOfEpisode) {
+    public Season(Long id, String seasonTitle, List<Episode> numberOfEpisode) {
         this.id = id;
         this.seasonTitle = seasonTitle;
         this.numberOfEpisode = numberOfEpisode;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -44,5 +42,42 @@ public class Season {
 
     public void setNumberOfEpisode(List<Episode> numberOfEpisode) {
         this.numberOfEpisode = numberOfEpisode;
+    }
+
+
+    public static final class Builder {
+        private Long id;
+        private String seasonTitle;
+        private List<Episode> numberOfEpisode;
+
+        private Builder() {
+        }
+
+        public static Builder aSeason() {
+            return new Builder();
+        }
+
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder withSeasonTitle(String seasonTitle) {
+            this.seasonTitle = seasonTitle;
+            return this;
+        }
+
+        public Builder withNumberOfEpisode(List<Episode> numberOfEpisode) {
+            this.numberOfEpisode = numberOfEpisode;
+            return this;
+        }
+
+        public Season build() {
+            Season season = new Season();
+            season.setId(id);
+            season.setSeasonTitle(seasonTitle);
+            season.setNumberOfEpisode(numberOfEpisode);
+            return season;
+        }
     }
 }

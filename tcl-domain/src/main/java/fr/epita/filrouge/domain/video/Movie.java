@@ -1,25 +1,24 @@
 package fr.epita.filrouge.domain.video;
 
+public class Movie extends Video {
 
-public class Episode extends Video {
-
-    private Integer episodeNumber;
+    private MovieFormat movieFormat;
 
     //default constructor visibility package
-    Episode() {
+    Movie() {
     }
 
-    public Integer getEpisodeNumber() {
-        return episodeNumber;
+    public MovieFormat getMovieFormat() {
+        return movieFormat;
     }
 
-    public void setEpisodeNumber(Integer episodeNumber) {
-        this.episodeNumber = episodeNumber;
+    public void setMovieFormat(MovieFormat movieFormat) {
+        this.movieFormat = movieFormat;
     }
 
 
     public static final class Builder {
-        private Integer episodeNumber;
+        private MovieFormat movieFormat;
         private Long id;
         private String title;
         private String description;
@@ -30,12 +29,12 @@ public class Episode extends Video {
         private Builder() {
         }
 
-        public static Builder anEpisode() {
+        public static Builder aMovie() {
             return new Builder();
         }
 
-        public Builder withEpisodeNumber(Integer episodeNumber) {
-            this.episodeNumber = episodeNumber;
+        public Builder withMovieFormat(MovieFormat movieFormat) {
+            this.movieFormat = movieFormat;
             return this;
         }
 
@@ -69,16 +68,16 @@ public class Episode extends Video {
             return this;
         }
 
-        public Episode build() {
-            Episode episode = new Episode();
-            episode.setEpisodeNumber(episodeNumber);
-            episode.setId(id);
-            episode.setTitle(title);
-            episode.setDescription(description);
-            episode.setImageUrl(imageUrl);
-            episode.setAverageRating(averageRating);
-            episode.setNumberOfVotes(numberOfVotes);
-            return episode;
+        public Movie build() {
+            Movie movie = new Movie();
+            movie.setMovieFormat(movieFormat);
+            movie.setId(id);
+            movie.setTitle(title);
+            movie.setDescription(description);
+            movie.setImageUrl(imageUrl);
+            movie.setAverageRating(averageRating);
+            movie.setNumberOfVotes(numberOfVotes);
+            return movie;
         }
     }
 }

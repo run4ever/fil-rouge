@@ -1,15 +1,15 @@
 package fr.epita.filrouge.domain.video;
 
-
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Serie extends Video {
 
     private Long id;
-    private Date dateStart ;
+    private LocalDate dateStart ;
     private List<Season> numberOfSeason;
 
+    //default constructor visibility package
     Serie() {
     }
 
@@ -22,11 +22,11 @@ public class Serie extends Video {
         this.id = id;
     }
 
-    public Date getDateStart() {
+    public LocalDate getDateStart() {
         return dateStart;
     }
 
-    public void setDateStart(Date dateStart) {
+    public void setDateStart(LocalDate dateStart) {
         this.dateStart = dateStart;
     }
 
@@ -44,7 +44,7 @@ public class Serie extends Video {
      */
     public static final class Builder {
         private Long id;
-        private Date dateStart ;
+        private LocalDate dateStart ;
         private List<Season> numberOfSeason;
 
         private Builder() {
@@ -59,7 +59,7 @@ public class Serie extends Video {
             return this;
         }
 
-        public Builder withDateStart(Date dateStart) {
+        public Builder withDateStart(LocalDate dateStart) {
             this.dateStart = dateStart;
             return this;
         }
