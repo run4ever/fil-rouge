@@ -9,7 +9,7 @@
 
     <!-- déclarer les entité ici pour être créer dans la base de données -->
     <entity class="fr.epita.filrouge.domain.person.User">
-        <table name="users"/>
+        <table name="users"/> <!-- user est mot réservé de PostgreSQL, donc on met users-->
         <!-- la déclaration de la liste des attributs n'est pas obligatoire -->
         <!--<attributes>
              <embedded name="email">
@@ -63,7 +63,7 @@
             <id name="id">
                 <generated-value strategy="IDENTITY"/>
             </id>
-            <basic name="notation_user" />
+          <!--  <basic name="notation_user" /> -->
             <many-to-one name="movie" fetch="LAZY">
                 <join-column name="movie_id" />
             </many-to-one>
