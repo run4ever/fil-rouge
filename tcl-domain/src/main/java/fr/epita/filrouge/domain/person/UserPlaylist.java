@@ -6,10 +6,12 @@ import fr.epita.filrouge.domain.video.Video;
 public class UserPlaylist {
 
     private Long id;
-    private User user;
+    private AppUser user;
     private Video video;
     private Integer notationUser;
     private Status status;
+    private Integer seasonNumber;
+    private Integer episodeNumber;
 
 
     //default constructor visibility package
@@ -23,11 +25,11 @@ public class UserPlaylist {
         this.id = id;
     }
 
-    public User getUser() {
+    public AppUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(AppUser user) {
         this.user = user;
     }
 
@@ -55,13 +57,31 @@ public class UserPlaylist {
         this.status = status;
     }
 
+    public Integer getSeasonNumber() {
+        return seasonNumber;
+    }
+
+    public void setSeasonNumber(Integer seasonNumber) {
+        this.seasonNumber = seasonNumber;
+    }
+
+    public Integer getEpisodeNumber() {
+        return episodeNumber;
+    }
+
+    public void setEpisodeNumber(Integer episodeNumber) {
+        this.episodeNumber = episodeNumber;
+    }
+
 
     public static final class Builder {
         private Long id;
-        private User user;
+        private AppUser user;
         private Video video;
         private Integer notationUser;
         private Status status;
+        private Integer seasonNumber;
+        private Integer episodeNumber;
 
         private Builder() {
         }
@@ -75,7 +95,7 @@ public class UserPlaylist {
             return this;
         }
 
-        public Builder withUser(User user) {
+        public Builder withUser(AppUser user) {
             this.user = user;
             return this;
         }
@@ -95,6 +115,16 @@ public class UserPlaylist {
             return this;
         }
 
+        public Builder withSeasonNumber(Integer seasonNumber) {
+            this.seasonNumber = seasonNumber;
+            return this;
+        }
+
+        public Builder withEpisodeNumber(Integer episodeNumber) {
+            this.episodeNumber = episodeNumber;
+            return this;
+        }
+
         public UserPlaylist build() {
             UserPlaylist userPlaylist = new UserPlaylist();
             userPlaylist.setId(id);
@@ -102,6 +132,8 @@ public class UserPlaylist {
             userPlaylist.setVideo(video);
             userPlaylist.setNotationUser(notationUser);
             userPlaylist.setStatus(status);
+            userPlaylist.setSeasonNumber(seasonNumber);
+            userPlaylist.setEpisodeNumber(episodeNumber);
             return userPlaylist;
         }
     }

@@ -1,17 +1,20 @@
-package fr.epita.filrouge.domain.video;
+package fr.epita.filrouge.infrastructure.video;
 
+import fr.epita.filrouge.domain.video.Category;
+import fr.epita.filrouge.infrastructure.person.ActorJPA;
+
+import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.List;
 
-public class Serie extends Video {
-
+//@Entity(name="serie")
+public class SerieJPA extends VideoJPA {
     private LocalDate dateStart ;
     private LocalDate dateEnd;
     private Integer numberOfSeason;
     private Integer numberOfEpisode;
 
-    //default constructor visibility package
-    Serie() {
+    public SerieJPA() {
     }
 
     public LocalDate getDateStart() {
@@ -59,12 +62,12 @@ public class Serie extends Video {
         private Double averageRating;
         private Integer numberOfVotes;
         private Category category;
-        private List<Actor> actors;
+        private List<ActorJPA> actors;
 
         private Builder() {
         }
 
-        public static Builder aSerie() {
+        public static Builder aSerieJPA() {
             return new Builder();
         }
 
@@ -123,26 +126,26 @@ public class Serie extends Video {
             return this;
         }
 
-        public Builder withActors(List<Actor> actors) {
+        public Builder withActors(List<ActorJPA> actors) {
             this.actors = actors;
             return this;
         }
 
-        public Serie build() {
-            Serie serie = new Serie();
-            serie.setDateStart(dateStart);
-            serie.setDateEnd(dateEnd);
-            serie.setNumberOfSeason(numberOfSeason);
-            serie.setNumberOfEpisode(numberOfEpisode);
-            serie.setId(id);
-            serie.setTitle(title);
-            serie.setDescription(description);
-            serie.setImageUrl(imageUrl);
-            serie.setAverageRating(averageRating);
-            serie.setNumberOfVotes(numberOfVotes);
-            serie.setCategory(category);
-            serie.setActors(actors);
-            return serie;
+        public SerieJPA build() {
+            SerieJPA serieJPA = new SerieJPA();
+            serieJPA.setDateStart(dateStart);
+            serieJPA.setDateEnd(dateEnd);
+            serieJPA.setNumberOfSeason(numberOfSeason);
+            serieJPA.setNumberOfEpisode(numberOfEpisode);
+            serieJPA.setId(id);
+            serieJPA.setTitle(title);
+            serieJPA.setDescription(description);
+            serieJPA.setImageUrl(imageUrl);
+            serieJPA.setAverageRating(averageRating);
+            serieJPA.setNumberOfVotes(numberOfVotes);
+            serieJPA.setCategory(category);
+            serieJPA.setActors(actors);
+            return serieJPA;
         }
     }
 }

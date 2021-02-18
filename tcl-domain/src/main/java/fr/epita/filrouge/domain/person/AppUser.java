@@ -4,13 +4,13 @@ import fr.epita.filrouge.domain.common.Person;
 
 import java.time.LocalDate;
 
-public class User extends Person {
+public class AppUser extends Person {
     private String email;
     private String password;
     private Role role;  // attention, on gère un seul Role ici !!!!
 
     //default constructor visibility package
-    User() {
+    AppUser() {
     }
     public String getEmail() {
         return email;
@@ -44,12 +44,12 @@ public class User extends Person {
         private LocalDate birthdayDate;
         private String email;
         private String password;
-        private Role role;
+        private Role role;  // attention, on gère un seul Role ici !!!!
 
         private Builder() {
         }
 
-        public static Builder anUser() {
+        public static Builder anAppUser() {
             return new Builder();
         }
 
@@ -88,17 +88,16 @@ public class User extends Person {
             return this;
         }
 
-        public User build() {
-            User user = new User();
-            user.setId(id);
-            user.setLastname(lastname);
-            user.setFirstname(firstname);
-            user.setBirthdayDate(birthdayDate);
-            user.setEmail(email);
-            user.setPassword(password);
-            user.setRole(role);
-            return user;
+        public AppUser build() {
+            AppUser appUser = new AppUser();
+            appUser.setId(id);
+            appUser.setLastname(lastname);
+            appUser.setFirstname(firstname);
+            appUser.setBirthdayDate(birthdayDate);
+            appUser.setEmail(email);
+            appUser.setPassword(password);
+            appUser.setRole(role);
+            return appUser;
         }
     }
-
 }

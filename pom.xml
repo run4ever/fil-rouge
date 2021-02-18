@@ -8,6 +8,23 @@
     <artifactId>fil-rouge-tcl</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <swagger.version>2.9.2</swagger.version>
+        <junit-jupiter.version>5.6.2</junit-jupiter.version>
+        <mockito.version>1.10.19</mockito.version>
+    </properties>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
     <modules>
         <module>tcl-application</module>
         <module>tcl-domain</module>
@@ -15,22 +32,18 @@
         <module>tcl-infrastructure</module>
     </modules>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <spring-boot.version>2.4.1</spring-boot.version>
-        <swagger.version>2.9.2</swagger.version>
-        <junit-jupiter.version>5.6.2</junit-jupiter.version>
-        <mockito.version>1.10.19</mockito.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
+    <dependencies>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter</artifactId>
-                <version>${spring-boot.version}</version>
+                <artifactId>spring-boot-starter-test</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-jpa</artifactId>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -42,21 +55,15 @@
                 <artifactId>springfox-swagger-ui</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter</artifactId>
-                <version>${junit-jupiter.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-all</artifactId>
-                <version>${mockito.version}</version>
-            </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
         </dependencies>
-    </dependencyManagement>
+
     <build>
-   <pluginManagement>
+     <pluginManagement>
        <plugins>
            <!-- DEBUT pour créer un JAR qui embarque toutes les dépendances Tomcat, et les autres -->
            <plugin>
