@@ -1,6 +1,9 @@
-package fr.epita.filrouge.infrastructure.playlist;
+package fr.epita.filrouge.infrastructure;
 
 import fr.epita.filrouge.domain.person.UserPlaylist;
+import fr.epita.filrouge.domain.person.UserPlaylistRepository;
+import fr.epita.filrouge.infrastructure.UserPlaylistDAO;
+import fr.epita.filrouge.infrastructure.playlist.UserPlaylistJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,4 @@
-package fr.epita.filrouge.infrastructure.playlist;
-
-import fr.epita.filrouge.domain.person.UserPlaylist;
+package fr.epita.filrouge.domain.person;
 
 public interface UserPlaylistRepository {
     void save(UserPlaylist userPlaylist);

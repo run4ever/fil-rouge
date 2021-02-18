@@ -33,7 +33,7 @@ public class UserPlaylistJPA {
     public UserPlaylistJPA(UserPlaylist userPlaylist) {
         this.id = userPlaylist.getId();
         this.appUserJPA = new AppUserJPA(userPlaylist.getUser());
-        this.videoJPA = new VideoJPA(userPlaylist.getVideo());
+        //this.videoJPA = new VideoJPA(userPlaylist.getVideo());
         this.notationUser = userPlaylist.getNotationUser();
         this.status = userPlaylist.getStatus();
         this.seasonNumber = userPlaylist.getSeasonNumber();

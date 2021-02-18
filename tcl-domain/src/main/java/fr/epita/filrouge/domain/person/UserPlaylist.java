@@ -137,4 +137,17 @@ public class UserPlaylist {
             return userPlaylist;
         }
     }
+
+    @Override
+    public String toString() {
+        return "UserPlaylist{" +
+                "id=" + id +
+                ", user=" + user +
+                ", video=" + video +
+                ", notationUser=" + notationUser +
+                ", status=" + status +
+                ", seasonNumber=" + seasonNumber +
+                ", episodeNumber=" + episodeNumber +
+                '}';
+    }
 }

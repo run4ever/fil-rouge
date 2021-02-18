@@ -9,7 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>fr.epita.filrouge.domain</groupId>
     <artifactId>tcl-domain</artifactId>
 
 

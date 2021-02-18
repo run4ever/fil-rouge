@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import java.time.LocalDate;
 import java.util.List;
 
-//@Entity(name="serie")
+@Entity(name="serie")
 public class SerieJPA extends VideoJPA {
     private LocalDate dateStart ;
     private LocalDate dateEnd;

@@ -7,7 +7,7 @@ import fr.epita.filrouge.infrastructure.person.ActorJPA;
 import javax.persistence.Entity;
 import java.util.List;
 
-//@Entity(name = "movie")
+@Entity(name = "movie")
 public class MovieJPA extends VideoJPA {
     private MovieFormat movieFormat;
 
