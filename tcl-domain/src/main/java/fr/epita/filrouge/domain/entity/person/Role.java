@@ -1,4 +1,4 @@
-package fr.epita.filrouge.domain.person;
+package fr.epita.filrouge.domain.entity.person;
 
 public enum Role {
     ROLE_USER,

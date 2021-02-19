@@ -1,4 +1,4 @@
-package fr.epita.filrouge.domain.person;
+package fr.epita.filrouge.domain.entity.common;
 
 public enum Status {
     WATCHED,

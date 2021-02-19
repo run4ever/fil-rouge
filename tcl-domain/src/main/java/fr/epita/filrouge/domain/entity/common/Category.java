@@ -1,4 +1,4 @@
-package fr.epita.filrouge.domain.video;
+package fr.epita.filrouge.domain.entity.common;
 
 public enum Category {
     ACTION,

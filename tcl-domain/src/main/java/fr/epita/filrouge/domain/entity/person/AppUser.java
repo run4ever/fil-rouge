@@ -1,6 +1,4 @@
-package fr.epita.filrouge.domain.person;
-
-import fr.epita.filrouge.domain.common.Person;
+package fr.epita.filrouge.domain.entity.person;
 
 import java.time.LocalDate;
 
@@ -9,8 +7,8 @@ public class AppUser extends Person {
     private String password;
     private Role role;  // attention, on gère un seul Role ici !!!!
 
-    //default constructor visibility package
-    AppUser() {
+    //default constructor
+    public AppUser() {
     }
     public String getEmail() {
         return email;
@@ -100,4 +98,6 @@ public class AppUser extends Person {
             return appUser;
         }
     }
+
+
 }

@@ -1,4 +1,4 @@
-package fr.epita.filrouge.domain.common;
+package fr.epita.filrouge.domain.entity.person;
 
 import java.time.LocalDate;
 
@@ -7,6 +7,9 @@ public abstract class Person {
     private String lastname;
     private String firstname;
     private LocalDate birthdayDate;
+
+    public Person() {
+    }
 
     public Long getId() {
         return id;
