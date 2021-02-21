@@ -1,6 +1,6 @@
 package fr.epita.filrouge.infrastructure.appuser;
 
-import fr.epita.filrouge.infrastructure.domain.entity.person.Role;
+import fr.epita.filrouge.domain.entity.person.Role;
 
 import javax.persistence.*;
 import java.time.LocalDate;

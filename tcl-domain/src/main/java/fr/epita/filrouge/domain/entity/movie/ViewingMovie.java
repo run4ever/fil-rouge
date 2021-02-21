@@ -1,8 +1,8 @@
-package fr.epita.filrouge.infrastructure.domain.entity.movie;
+package fr.epita.filrouge.domain.entity.movie;
 
 
-import fr.epita.filrouge.infrastructure.domain.entity.common.Status;
-import fr.epita.filrouge.infrastructure.domain.entity.person.AppUser;
+import fr.epita.filrouge.domain.entity.common.Status;
+import fr.epita.filrouge.domain.entity.person.AppUser;
 
 public class ViewingMovie {
     private Long id;

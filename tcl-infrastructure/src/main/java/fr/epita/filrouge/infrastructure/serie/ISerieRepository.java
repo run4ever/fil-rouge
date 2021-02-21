@@ -8,7 +8,7 @@ public interface ISerieRepository extends JpaRepository<SerieJpa,Long>{
 
   SerieJpa save(SerieJpa serie);
 
-  SerieJpa findByIdSerie(Long id);
+  SerieJpa findByImdbId(String id);
 
 
 }

@@ -1,8 +1,8 @@
-package fr.epita.filrouge.infrastructure.domain.entity.serie;
+package fr.epita.filrouge.domain.entity.serie;
 
 
-import fr.epita.filrouge.infrastructure.domain.entity.common.Status;
-import fr.epita.filrouge.infrastructure.domain.entity.person.AppUser;
+import fr.epita.filrouge.domain.entity.common.Status;
+import fr.epita.filrouge.domain.entity.person.AppUser;
 
 public class ViewingSerie {
     private Long id;

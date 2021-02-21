@@ -1,7 +1,7 @@
 package fr.epita.filrouge.infrastructure.serie;
 
-import fr.epita.filrouge.infrastructure.domain.entity.serie.Serie;
-import fr.epita.filrouge.infrastructure.domain.entity.serie.ISerie;
+import fr.epita.filrouge.domain.entity.serie.Serie;
+import fr.epita.filrouge.domain.entity.serie.ISerie;
 import fr.epita.filrouge.infrastructure.mapper.SerieJpaMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,16 +21,16 @@ public class SerieRepositoryImpl implements ISerie {
 
 
 
-    @Override
-    public Long create (Serie serie) {
-        logger.trace("Ma Serie est créée : create");
-        SerieJpa serieJpa = iSerieRepository.save(serieJpaMapper.mapToJpa(serie));
-        return serieJpa.getId ();
 
+
+    @Override
+    public Serie findById(String id) {
+        logger.info("Serie JPA impl, findById : " + id);
+        return serieJpaMapper.mapToDomain (iSerieRepository.findByImdbId (id));
     }
 
     @Override
-    public Serie findById(Long id) {
-        return serieJpaMapper.mapToDomain (iSerieRepository.findByIdSerie (id));
+    public Serie create(Serie serie) {
+        return serieJpaMapper.mapToDomain (iSerieRepository.save (serieJpaMapper.mapToJpa (serie)));
     }
 }

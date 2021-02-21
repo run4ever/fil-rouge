@@ -1,7 +1,7 @@
 package fr.epita.filrouge.infrastructure.serie;
 
 import fr.epita.filrouge.infrastructure.appuser.AppUserJpa;
-import fr.epita.filrouge.infrastructure.domain.entity.common.Status;
+import fr.epita.filrouge.domain.entity.common.Status;
 
 import javax.persistence.*;
 

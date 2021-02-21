@@ -1,6 +1,6 @@
 package fr.epita.filrouge.infrastructure.serie;
 
-import fr.epita.filrouge.infrastructure.domain.entity.common.Category;
+import fr.epita.filrouge.domain.entity.common.Category;
 
 import javax.persistence.*;
 
@@ -12,8 +12,9 @@ public class SerieJpa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="serie_id")
     private Long idSerie;
-
+    private String imdbId;
     private String title;
+
     private String description;
     private Integer startYear;
     private Integer endYear;
@@ -26,8 +27,9 @@ public class SerieJpa {
     public SerieJpa() {
     }
 
-    public SerieJpa(Long idSerie, String title, String description, Integer startYear, Integer endYear, Integer numberOfSeason, Integer numberOfEpisode, Category category) {
+    public SerieJpa(Long idSerie, String imdbId, String title, String description, Integer startYear, Integer endYear, Integer numberOfSeason, Integer numberOfEpisode, Category category) {
         this.idSerie = idSerie;
+        this.imdbId = imdbId;
         this.title = title;
         this.description = description;
         this.startYear = startYear;
@@ -45,6 +47,13 @@ public class SerieJpa {
         this.idSerie = id;
     }
 
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
     public String getTitle() {
         return title;
     }
@@ -104,6 +113,7 @@ public class SerieJpa {
 
     public static final class Builder {
         private Long idSerie;
+        private String imdbId;
         private String title;
         private String description;
         private Integer startYear;
@@ -123,6 +133,11 @@ public class SerieJpa {
 
         public Builder withId(Long id) {
             this.idSerie = id;
+            return this;
+        }
+
+        public Builder withImdbId(String imdbId) {
+            this.imdbId = imdbId;
             return this;
         }
 
@@ -163,6 +178,7 @@ public class SerieJpa {
 
         public SerieJpa build() {
             SerieJpa serieJpa = new SerieJpa ();
+            serieJpa.setImdbId (imdbId);
             serieJpa.setId (idSerie);
             serieJpa.setTitle (title);
             serieJpa.setDescription (description);

@@ -1,10 +1,10 @@
-package fr.epita.filrouge.infrastructure.domain.entity.serie;
+package fr.epita.filrouge.domain.entity.serie;
 
-import fr.epita.filrouge.infrastructure.domain.entity.common.Category;
+import fr.epita.filrouge.domain.entity.common.Category;
 
 public class Serie {
 
-    private Long id;
+    private String imdbId;
     private String title;
     private String description;
     private Integer startYear;
@@ -17,8 +17,8 @@ public class Serie {
     public Serie() {
     }
 
-    public Serie(Long id, String title, String description, Integer startYear, Integer endYear, Integer numberOfSeason, Integer numberOfEpisode, Category category) {
-        this.id = id;
+    public Serie(String imdbId, String title, String description, Integer startYear, Integer endYear, Integer numberOfSeason, Integer numberOfEpisode, Category category) {
+        this.imdbId = imdbId;
         this.title = title;
         this.description = description;
         this.startYear = startYear;
@@ -28,12 +28,12 @@ public class Serie {
         this.category = category;
     }
 
-    public Long getId() {
-        return id;
+    public String getImdbId() {
+        return imdbId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
     public String getTitle() {
@@ -94,7 +94,7 @@ public class Serie {
 
 
     public static final class Builder {
-        private Long id;
+        private String imdbId;
         private String title;
         private String description;
         private Integer startYear;
@@ -110,8 +110,8 @@ public class Serie {
             return new Builder();
         }
 
-        public Builder withId(Long id) {
-            this.id = id;
+        public Builder withImdbId(String imdbId) {
+            this.imdbId = imdbId;
             return this;
         }
 
@@ -152,7 +152,7 @@ public class Serie {
 
         public Serie build() {
             Serie serie = new Serie();
-            serie.setId(id);
+            serie.setImdbId (imdbId);
             serie.setTitle(title);
             serie.setDescription(description);
             serie.setStartYear(startYear);

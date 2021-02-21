@@ -1,4 +1,4 @@
-package fr.epita.filrouge.infrastructure.domain.entity.movie;
+package fr.epita.filrouge.domain.entity.movie;
 
 public abstract class Video {
 

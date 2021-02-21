@@ -1,8 +1,8 @@
-package fr.epita.filrouge.infrastructure.domain.entity.movie;
+package fr.epita.filrouge.domain.entity.movie;
 
-import fr.epita.filrouge.infrastructure.domain.entity.common.UserAppreciation;
-import fr.epita.filrouge.infrastructure.domain.entity.common.Category;
-import fr.epita.filrouge.infrastructure.domain.entity.common.PublicNotation;
+import fr.epita.filrouge.domain.entity.common.UserAppreciation;
+import fr.epita.filrouge.domain.entity.common.Category;
+import fr.epita.filrouge.domain.entity.common.PublicNotation;
 
 import java.time.LocalDate;
 import java.util.List;

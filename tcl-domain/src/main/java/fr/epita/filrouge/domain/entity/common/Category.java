@@ -1,4 +1,4 @@
-package fr.epita.filrouge.infrastructure.domain.entity.common;
+package fr.epita.filrouge.domain.entity.common;
 
 public enum Category {
     ACTION,

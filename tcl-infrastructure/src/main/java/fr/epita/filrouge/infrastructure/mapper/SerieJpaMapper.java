@@ -1,6 +1,6 @@
 package fr.epita.filrouge.infrastructure.mapper;
 
-import fr.epita.filrouge.infrastructure.domain.entity.serie.Serie;
+import fr.epita.filrouge.domain.entity.serie.Serie;
 import fr.epita.filrouge.infrastructure.serie.SerieJpa;
 import org.springframework.stereotype.Component;
 
@@ -18,7 +18,8 @@ public class SerieJpaMapper {
         }
 
         return SerieJpa.Builder.aSerieJpa ()
-                .withId (entity.getId ())
+//                .withId (entity.getId ())
+                .withImdbId (entity.getImdbId ())
                 .withTitle (entity.getTitle ())
                 .withDescription (entity.getDescription ())
                 .withStartYear (entity.getStartYear ())
@@ -48,7 +49,8 @@ public class SerieJpaMapper {
 
 
         final Serie entity = Serie.Builder.aSerie ()
-                .withId (jpa.getId ())
+//                .withId (jpa.getId ())
+                .withImdbId (jpa.getImdbId ())
                 .withTitle (jpa.getTitle ())
                 .withDescription (jpa.getDescription ())
                 .withStartYear (jpa.getStartYear ())
