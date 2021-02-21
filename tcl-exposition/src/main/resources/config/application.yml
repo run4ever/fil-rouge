@@ -1,7 +1,7 @@
 ######## Fichier configuration de l'application ######
 spring:
   application:
-    name: tcl
+    name: mytcl1
   profiles:
     active: local
   jta:
@@ -11,9 +11,9 @@ spring:
     driver-class-name: org.postgresql.Driver
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     show-sql: true
-# *** utilisation de mapping pour créer les tables
+# /*** utilisation de mapping pour créer les tables
 #    mapping-resources:
 #      - META-INF/common.orm.hbm.xml
 #      - META-INF/object.orm.hbm.xml
