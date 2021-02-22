@@ -3,7 +3,7 @@ server:
   port: 8080
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/mytcl1
+    url: jdbc:postgresql://localhost:5432/tcl
     username: postgres
     password: admin
     ## forcer exécution import.sql

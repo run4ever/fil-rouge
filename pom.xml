@@ -85,7 +85,7 @@
                            <goal>repackage</goal>
                        </goals>
                        <configuration>
-                           <mainClass>FilrougeApplication</mainClass>
+                           <mainClass>fr.epita.filrouge.FilrougeApplication</mainClass>
                        </configuration>
                    </execution>
                </executions>

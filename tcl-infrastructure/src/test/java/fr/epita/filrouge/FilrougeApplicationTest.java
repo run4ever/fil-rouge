@@ -1,22 +1,18 @@
 package fr.epita.filrouge;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication
+
+@SpringBootConfiguration
 @ComponentScan(basePackages = { "fr.epita.filrouge" }, lazyInit = true)
 @EntityScan(basePackages = { "fr.epita.filrouge.infrastructure.*"})
-//@EnableJpaRepositories
+@EnableJpaRepositories
 public class FilrougeApplicationTest {
-
-
-    public static void main(String[] args) {
-        SpringApplication.run (FilrougeApplicationTest.class, args);
+    @Test
+    void contextLoads() {
     }
-
 }
-
-
-
