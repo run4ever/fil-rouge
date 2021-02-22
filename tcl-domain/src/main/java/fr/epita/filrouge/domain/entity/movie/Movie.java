@@ -9,7 +9,7 @@ import java.util.List;
 
 public class Movie extends Video {
 
-    private Double duration;
+    private Integer duration;
     private LocalDate releaseDate;
     private List<UserAppreciation> userAppreciations;
     private PublicNotation publicNotation;
@@ -20,11 +20,11 @@ public class Movie extends Video {
     public Movie() {
     }
 
-    public Double getDuration() {
+    public Integer getDuration() {
         return duration;
     }
 
-    public void setDuration(Double duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
@@ -70,7 +70,7 @@ public class Movie extends Video {
 
 
     public static final class Builder {
-        private Double duration;
+        private Integer duration;
         private LocalDate releaseDate;
         private List<UserAppreciation> userAppreciations;
         private PublicNotation publicNotation;
@@ -88,7 +88,7 @@ public class Movie extends Video {
             return new Builder();
         }
 
-        public Builder withDuration(Double duration) {
+        public Builder withDuration(Integer duration) {
             this.duration = duration;
             return this;
         }
