@@ -81,7 +81,7 @@ public class Movie extends Video {
         private String description;
         private String imageUrl;
 
-        private Builder() {
+        public Builder() {
         }
 
         public static Builder aMovie() {

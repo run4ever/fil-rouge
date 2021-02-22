@@ -27,7 +27,7 @@
             <artifactId>junit</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- base en mémoire h2 pour les test uniquement -->
+        <!-- base en mémoire h2 pour les tests uniquement -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
