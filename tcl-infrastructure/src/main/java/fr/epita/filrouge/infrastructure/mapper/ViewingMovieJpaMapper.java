@@ -1,7 +1,7 @@
-package fr.epita.filrouge.infrastructure.movie;
+package fr.epita.filrouge.infrastructure.mapper;
 
 import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
-import fr.epita.filrouge.infrastructure.person.AppUserJpaMapper;
+import fr.epita.filrouge.infrastructure.movie.ViewingMovieJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
