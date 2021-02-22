@@ -1,6 +1,7 @@
 package fr.epita.filrouge;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,4 +16,8 @@ public class FilrougeApplicationTest {
     @Test
     void contextLoads() {
     }
+
+   /* public static void main(String[] args) {
+        SpringApplication.run (FilrougeApplicationTest.class, args);
+    }*/
 }
