@@ -17,6 +17,9 @@ public class MovieJpa {
     @Column(name="movie_id")
     private Long id;
 
+    @Column(unique = true)
+    private String imdbId;
+
     private String title;
     private String description;
     private String imageUrl;
@@ -115,9 +118,18 @@ public class MovieJpa {
         this.category = category;
     }
 
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
+    }
+
 
     public static final class Builder {
         private Long id;
+        private String imdbId;
         private String title;
         private String description;
         private String imageUrl;
@@ -137,6 +149,11 @@ public class MovieJpa {
 
         public Builder withId(Long id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder withImdbId(String imdbId) {
+            this.imdbId = imdbId;
             return this;
         }
 
@@ -188,6 +205,7 @@ public class MovieJpa {
         public MovieJpa build() {
             MovieJpa movieJpa = new MovieJpa();
             movieJpa.setId(id);
+            movieJpa.setImdbId(imdbId);
             movieJpa.setTitle(title);
             movieJpa.setDescription(description);
             movieJpa.setImageUrl(imageUrl);
