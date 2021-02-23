@@ -1,22 +1,18 @@
 package fr.epita.filrouge.infrastructure.movie;
 
-
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.common.PublicNotation;
 import fr.epita.filrouge.domain.entity.movie.Movie;
 import fr.epita.filrouge.domain.entity.movie.MovieRepository;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)   //Junit 4
-@DataJpaTest
+@SpringBootTest
 public class MovieTests {
 
     @Autowired
@@ -25,7 +21,7 @@ public class MovieTests {
     @Test
     public void add_new_movie_should_success()  {
         //Given
-        final Movie movie = new Movie.Builder()
+        final Movie movie = Movie.Builder.aMovie()
                 .withTitle("Indiana Jones and the Raiders of the Lost Ark")
                 .withPublicNotation(new PublicNotation(4.0,1234))
                 .withActors("Harrison Ford, Karen Allen, Paul Freeman, Ronald Lacey")
