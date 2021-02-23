@@ -21,14 +21,33 @@ public class AppUserRepositoryImpl implements AppUserRepository {
 
     @Override
     public AppUser findbyEmail(String email) {
-        logger.info("AppUser JPA impl, findByEmail : " + email);
+        logger.info("AppUserRepository impl, findByEmail : " + email);
         //TODO : Ici il faut gérer le cas AppUserJpa non trouvé par email NotFoundException
         return appUserJpaMapper.mapToEntity(appUserJpaRepository.findByEmail(email));
     }
 
     @Override
     public void create(AppUser appUser) {
-        logger.info("AppUser JPA impl, create : " + appUser.getEmail());
+        logger.info("AppUserRepository impl, create : " + appUser.getEmail());
         appUserJpaRepository.save(appUserJpaMapper.mapToJpa(appUser));
     }
+
+    @Override
+    public Boolean authentificatedAppUser(String email, String password) {
+        logger.info("AppUserRepository impl, authentificated : " + email);
+        //TODO : Ici il faut gérer le cas AppUserJpa non trouvé par email et mot de passe NotFoundException??? ou Autentification failed
+        AppUserJpa appUserJpa = appUserJpaRepository.findByEmailAndPassword(email,password);
+        if(appUserJpa != null)
+            {
+                logger.info("AppUserRepository impl, authentificated, resultat OK : " + appUserJpa.getEmail() +";"+ appUserJpa.getLastname()+";"+appUserJpa.getRole());
+                return true;
+            }
+        else
+            {
+                logger.info("AppUserRepository impl, authentificated, resultat KO : " + email);
+                return false;
+            }
+    }
+
+
 }

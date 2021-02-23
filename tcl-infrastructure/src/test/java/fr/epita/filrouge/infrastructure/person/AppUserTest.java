@@ -6,15 +6,14 @@ import fr.epita.filrouge.domain.entity.person.Role;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
+
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@ExtendWith(SpringExtension.class) //Junit 5
-@DataJpaTest
-
+@SpringBootTest
 public class AppUserTest {
 
     @Autowired
@@ -57,6 +56,30 @@ public class AppUserTest {
         //Then
         //**** Il faut avoir un retour AppUserNotFoundException c'est mieux
         assertThat(appUser).isNull();
+    }
 
+    @Test
+    @DisplayName("Authentification d'un AppUser")
+    public void given_a_valid_AppUser_auhtentification_should_be_success() {
+        //Given
+        AppUser appUser = AppUser.Builder.anAppUser()
+                .withFirstname("Brad")
+                .withLastname("Pitt")
+                .withEmail("brad@pitt.com")
+                .withBirthdayDate(LocalDate.of(1963, 12, 18))
+                .withRole(Role.ROLE_USER)
+                .withPassword("superman")
+                .build();
+
+        String email = "brad@pitt.com";
+        String password = "superman";
+
+        //When
+        //*** sauvegarder d'abord AppUser, puis appeler la méthode authentification
+        appUserRepository.create(appUser);
+        Boolean isAuthentificated = appUserRepository.authentificatedAppUser(email, password);
+
+        //Then
+        assertThat(isAuthentificated).isEqualTo(true);
     }
 }
