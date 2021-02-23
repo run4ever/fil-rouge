@@ -1,6 +1,7 @@
-package fr.epita.filrouge.infrastructure.appuser;
+package fr.epita.filrouge.infrastructure.mapper;
 
 import fr.epita.filrouge.domain.entity.person.AppUser;
+import fr.epita.filrouge.infrastructure.person.AppUserJpa;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

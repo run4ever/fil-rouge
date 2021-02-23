@@ -12,7 +12,11 @@ public class SerieJpa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="serie_id")
     private Long idSerie;
+
+
+    @Column(unique = true)
     private String imdbId;
+
     private String title;
 
     private String description;

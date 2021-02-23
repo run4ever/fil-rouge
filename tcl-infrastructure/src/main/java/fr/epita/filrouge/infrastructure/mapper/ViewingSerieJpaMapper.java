@@ -1,7 +1,6 @@
 package fr.epita.filrouge.infrastructure.mapper;
 
 import fr.epita.filrouge.domain.entity.serie.ViewingSerie;
-import fr.epita.filrouge.infrastructure.appuser.AppUserJpaMapper;
 import fr.epita.filrouge.infrastructure.serie.ViewingSerieJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

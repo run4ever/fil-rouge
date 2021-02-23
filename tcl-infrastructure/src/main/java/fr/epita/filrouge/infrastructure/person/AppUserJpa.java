@@ -1,4 +1,4 @@
-package fr.epita.filrouge.infrastructure.appuser;
+package fr.epita.filrouge.infrastructure.person;
 
 import fr.epita.filrouge.domain.entity.person.Role;
 

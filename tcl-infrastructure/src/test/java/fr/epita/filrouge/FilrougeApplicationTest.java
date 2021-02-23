@@ -8,7 +8,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @ComponentScan(basePackages = { "fr.epita.filrouge" }, lazyInit = true)
 @EntityScan(basePackages = { "fr.epita.filrouge.infrastructure.*"})
-//@EnableJpaRepositories
+
 public class FilrougeApplicationTest {
 
 
