@@ -1,23 +1,38 @@
-package fr.epita.filrouge.domain.entity.serie;
+package fr.epita.filrouge.infrastructure.serie;
 
 import fr.epita.filrouge.domain.entity.common.Category;
 
-public class Serie {
+import javax.persistence.*;
 
+@Entity
+@Table(name="serie")
+public class SerieJpa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="serie_id")
+    private Long idSerie;
+
+
+    @Column(unique = true)
     private String imdbId;
+
     private String title;
+
     private String description;
     private Integer startYear;
     private Integer endYear;
     private Integer numberOfSeason;
     private Integer numberOfEpisode;
+
+    @Enumerated(EnumType.STRING)
     private Category category; // Attention, on gère une seul Category ici
 
-    //default constructor
-    public Serie() {
+    public SerieJpa() {
     }
 
-    public Serie(String imdbId, String title, String description, Integer startYear, Integer endYear, Integer numberOfSeason, Integer numberOfEpisode, Category category) {
+    public SerieJpa(Long idSerie, String imdbId, String title, String description, Integer startYear, Integer endYear, Integer numberOfSeason, Integer numberOfEpisode, Category category) {
+        this.idSerie = idSerie;
         this.imdbId = imdbId;
         this.title = title;
         this.description = description;
@@ -28,6 +43,14 @@ public class Serie {
         this.category = category;
     }
 
+    public Long getId() {
+        return idSerie;
+    }
+
+    public void setId(Long id) {
+        this.idSerie = id;
+    }
+
     public String getImdbId() {
         return imdbId;
     }
@@ -35,7 +58,6 @@ public class Serie {
     public void setImdbId(String imdbId) {
         this.imdbId = imdbId;
     }
-
     public String getTitle() {
         return title;
     }
@@ -94,6 +116,7 @@ public class Serie {
 
 
     public static final class Builder {
+        private Long idSerie;
         private String imdbId;
         private String title;
         private String description;
@@ -101,13 +124,20 @@ public class Serie {
         private Integer endYear;
         private Integer numberOfSeason;
         private Integer numberOfEpisode;
-        private Category category; // Attention, on gère Serie est dans une seule Category
+
+        @Enumerated(EnumType.STRING)
+        private Category category; // Attention, on gère une seul Category ici
 
         private Builder() {
         }
 
-        public static Builder aSerie() {
-            return new Builder();
+        public static Builder aSerieJpa() {
+            return new Builder ();
+        }
+
+        public Builder withId(Long id) {
+            this.idSerie = id;
+            return this;
         }
 
         public Builder withImdbId(String imdbId) {
@@ -150,17 +180,18 @@ public class Serie {
             return this;
         }
 
-        public Serie build() {
-            Serie serie = new Serie();
-            serie.setImdbId (imdbId);
-            serie.setTitle(title);
-            serie.setDescription(description);
-            serie.setStartYear(startYear);
-            serie.setEndYear(endYear);
-            serie.setNumberOfSeason(numberOfSeason);
-            serie.setNumberOfEpisode(numberOfEpisode);
-            serie.setCategory(category);
-            return serie;
+        public SerieJpa build() {
+            SerieJpa serieJpa = new SerieJpa ();
+            serieJpa.setImdbId (imdbId);
+            serieJpa.setId (idSerie);
+            serieJpa.setTitle (title);
+            serieJpa.setDescription (description);
+            serieJpa.setStartYear (startYear);
+            serieJpa.setEndYear (endYear);
+            serieJpa.setNumberOfSeason (numberOfSeason);
+            serieJpa.setNumberOfEpisode (numberOfEpisode);
+            serieJpa.setCategory (category);
+            return serieJpa;
         }
     }
 }
