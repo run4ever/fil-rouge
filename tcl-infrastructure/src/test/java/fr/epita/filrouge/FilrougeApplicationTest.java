@@ -9,8 +9,5 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = { "fr.epita.filrouge" }, lazyInit = true)
 @EntityScan(basePackages = { "fr.epita.filrouge.infrastructure.*"})
 public class FilrougeApplicationTest {
-    public static void main(final String[] args) {
-        SpringApplication.run(FilrougeApplicationTest.class, args);
-    }
-
+    public static void main(String[] args) {SpringApplication.run (FilrougeApplicationTest.class, args); }
 }
