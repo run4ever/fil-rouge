@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Movie extends Video {
 
+    private String imdbId;
     private Integer duration;
     private LocalDate releaseDate;
     private List<UserAppreciation> userAppreciations;
@@ -18,6 +19,14 @@ public class Movie extends Video {
 
     //default constructor
     public Movie() {
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
     public Integer getDuration() {
@@ -70,6 +79,7 @@ public class Movie extends Video {
 
 
     public static final class Builder {
+        private String imdbId;
         private Integer duration;
         private LocalDate releaseDate;
         private List<UserAppreciation> userAppreciations;
@@ -81,11 +91,16 @@ public class Movie extends Video {
         private String description;
         private String imageUrl;
 
-        private Builder() {
+        public Builder() {
         }
 
         public static Builder aMovie() {
             return new Builder();
+        }
+
+        public Builder withImdbId(String imdbId) {
+            this.imdbId = imdbId;
+            return this;
         }
 
         public Builder withDuration(Integer duration) {
@@ -140,6 +155,7 @@ public class Movie extends Video {
 
         public Movie build() {
             Movie movie = new Movie();
+            movie.setImdbId(imdbId);
             movie.setDuration(duration);
             movie.setReleaseDate(releaseDate);
             movie.setUserAppreciations(userAppreciations);

@@ -22,8 +22,7 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.14</version>
         </dependency>
-
-        <!-- base en mémoire h2 pour les test uniquement -->
+        <!-- base en mémoire h2 pour les tests uniquement -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>

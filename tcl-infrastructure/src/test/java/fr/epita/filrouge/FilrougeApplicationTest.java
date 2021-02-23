@@ -5,7 +5,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 
-
 @SpringBootApplication
 @ComponentScan(basePackages = { "fr.epita.filrouge" }, lazyInit = true)
 @EntityScan(basePackages = { "fr.epita.filrouge.infrastructure.*"})
