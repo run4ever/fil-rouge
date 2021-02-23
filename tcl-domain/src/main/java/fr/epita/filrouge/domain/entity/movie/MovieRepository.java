@@ -6,6 +6,6 @@ public interface MovieRepository {
 
     void create(Movie m);
     Movie findOne(Long id);
-    Movie findOneFromTitle(String movieTitle);
+    List<Movie> findMovieFromTitle(String movieTitle);
 
 }

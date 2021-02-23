@@ -8,6 +8,8 @@ import fr.epita.filrouge.infrastructure.mapper.MovieJpaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class MovieRepositoryImpl implements MovieRepository {
 
@@ -28,7 +30,7 @@ public class MovieRepositoryImpl implements MovieRepository {
     }
 
     @Override
-    public Movie findOneFromTitle(String movieTitle) {
+    public List<Movie> findMovieFromTitle(String movieTitle) {
         return movieJpaMapper.mapToEntity(movieJpaRepository.findByTitle(movieTitle));
     }
 }
