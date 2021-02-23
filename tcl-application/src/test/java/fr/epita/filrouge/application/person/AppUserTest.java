@@ -78,4 +78,30 @@ public class AppUserTest {
         verify(appUserRepositoryMock,never()).create(appUser);
     }
 
+    @Test
+    @DisplayName("Appel de getAppUser délenche un appel de findByEmail de Repository")
+    public void getAppUser_should_call_findByEmail_1_time() {
+        //Given
+        AppUser appUser = AppUser.Builder.anAppUser()
+                .withFirstname("Alice")
+                .withLastname("Tester")
+                .withEmail("alice@tester.fr")
+                .withBirthdayDate(LocalDate.of(2000, 12, 25))
+                .withRole(Role.ROLE_RESP)
+                .withPassword("wonderwoman")
+                .build();
+
+          /** Mock findByEmail, on recherche AnyString et on return appUser */
+          when(appUserRepositoryMock.findbyEmail(anyString())).thenReturn(appUser);
+
+        //When
+        AppUser appUserFound = appUserService.getAppUser("test@test.fr");
+
+        //Then
+        assertThat(appUserFound).isNotNull();
+        assertThat(appUserFound.getLastname()).isEqualTo("Tester");
+        /** on devait appeler une fois la méthode findbyEmail de Repository */
+        verify(appUserRepositoryMock, times(1)).findbyEmail(anyString());
+    }
+
 }

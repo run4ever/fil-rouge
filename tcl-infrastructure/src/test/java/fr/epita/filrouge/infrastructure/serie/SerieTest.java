@@ -92,7 +92,7 @@ public class SerieTest {
 
           serieDomaine.create (serieb);
 
-        assertThat(serieDomaine.create (serieb).getImdbId ()).isEqualTo(serieb.getImdbId ());
+        assertThat(serieDomaine.findById("tt00010").getTitle()).isEqualTo("serie builer");
 
         }
 
