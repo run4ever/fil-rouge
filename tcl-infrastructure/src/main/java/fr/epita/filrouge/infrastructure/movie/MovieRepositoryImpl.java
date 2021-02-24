@@ -26,7 +26,7 @@ public class MovieRepositoryImpl implements MovieRepository {
 
     @Override
     public Movie findMovieFromApiId(String id) {
-        return movieJpaMapper.mapToEntity(movieJpaRepository.findByApiMovieId(id));
+        return movieJpaMapper.mapToEntity(movieJpaRepository.findByImdbId(id));
     }
 
     @Override

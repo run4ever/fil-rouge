@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface MovieJpaRepository extends JpaRepository<MovieJpa, Long> {
     List<MovieJpa> findByTitle(String movieTitle);
-    MovieJpa findByApiMovieId(String id);
+    MovieJpa findByImdbId(String id);
 }

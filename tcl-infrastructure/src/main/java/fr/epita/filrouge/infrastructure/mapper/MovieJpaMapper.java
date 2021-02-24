@@ -17,6 +17,7 @@ public class MovieJpaMapper {
         }
         return MovieJpa.Builder.aMovieJpa()
                 .withId(entity.getId())
+                .withImdbId(entity.getImdbId())
                 .withTitle(entity.getTitle())
                 .withDescription(entity.getDescription())
                 .withCategory(entity.getCategory())
@@ -33,7 +34,7 @@ public class MovieJpaMapper {
         if (entities == null) {
             return null;
         }
-        final List<MovieJpa> moviesJpa = new ArrayList<MovieJpa>();
+        final List<MovieJpa> moviesJpa = new ArrayList<>();
         for( Movie item : entities ) {
             moviesJpa.add(mapToJpa(item));
         }
@@ -45,8 +46,9 @@ public class MovieJpaMapper {
             return null;
         }
 
-        final Movie entity = Movie.Builder.aMovie()
+        return Movie.Builder.aMovie()
                 .withId(jpa.getId())
+                .withImdbId(jpa.getImdbId())
                 .withTitle(jpa.getTitle())
                 .withDescription(jpa.getDescription())
                 .withCategory(jpa.getCategory())
@@ -56,16 +58,14 @@ public class MovieJpaMapper {
                 .withActors(jpa.getActors())
                 .withPublicNotation(new PublicNotation(jpa.getAverageRating(),jpa.getNumberOfVotes()))
                 .build();
-
-        return entity;
     }
 
-    public List<Movie> mapToEntity(List<MovieJpa> jpas){
-        if (jpas == null) {
+    public List<Movie> mapToEntity(List<MovieJpa> movieJpaList){
+        if (movieJpaList == null) {
             return null;
         }
-        final List<Movie> movies = new ArrayList<Movie>();
-        for( MovieJpa item : jpas ) {
+        final List<Movie> movies = new ArrayList<>();
+        for( MovieJpa item : movieJpaList ) {
             movies.add(mapToEntity(item));
         }
         return movies;
