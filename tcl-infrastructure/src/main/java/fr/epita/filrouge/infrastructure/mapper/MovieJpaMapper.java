@@ -45,7 +45,7 @@ public class MovieJpaMapper {
             return null;
         }
 
-        final Movie entity = Movie.Builder.aMovie()
+        return Movie.Builder.aMovie()
                 .withId(jpa.getId())
                 .withTitle(jpa.getTitle())
                 .withDescription(jpa.getDescription())
@@ -56,8 +56,6 @@ public class MovieJpaMapper {
                 .withActors(jpa.getActors())
                 .withPublicNotation(new PublicNotation(jpa.getAverageRating(),jpa.getNumberOfVotes()))
                 .build();
-
-        return entity;
     }
 
     public List<Movie> mapToEntity(List<MovieJpa> jpas){
