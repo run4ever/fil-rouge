@@ -25,8 +25,8 @@ public class MovieRepositoryImpl implements MovieRepository {
     }
 
     @Override
-    public Movie findOne(Long id) {
-        return movieJpaMapper.mapToEntity(movieJpaRepository.findById(id).orElseThrow(() -> new NotFoundException("No Movie found with ID "+id, ErrorCodes.MOVIE_NOT_FOUND)));
+    public Movie findMovieFromApiId(String id) {
+        return movieJpaMapper.mapToEntity(movieJpaRepository.findByApiMovieId(id));
     }
 
     @Override
