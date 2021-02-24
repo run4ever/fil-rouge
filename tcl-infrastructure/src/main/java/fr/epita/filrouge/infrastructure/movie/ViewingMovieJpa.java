@@ -19,11 +19,11 @@ public class ViewingMovieJpa {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private AppUserJpa appUserJpa;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "movie_id")
     private MovieJpa movieJpa;
 
