@@ -90,7 +90,7 @@ public class SerieTest {
     @DisplayName("Vérifier la création et récupération d'une série")
     public void VerifyCreationOfSerie() {
 
-          serieDomaine.create (serieb);
+
 
         assertThat(serieDomaine.findById("tt00010").getTitle()).isEqualTo("serie builer");
 

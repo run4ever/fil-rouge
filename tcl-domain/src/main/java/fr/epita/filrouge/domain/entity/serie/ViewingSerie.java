@@ -5,24 +5,36 @@ import fr.epita.filrouge.domain.entity.common.Status;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 
 public class ViewingSerie {
-    private Long id;
+//    private Long id;
     private Status status;
     private Integer currentSeason;
     private Integer currentEpisode;
     private AppUser appUser;
     private Serie serie;
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder ("ViewingSerie{");
+        sb.append ("status=").append (status);
+        sb.append (", currentSeason=").append (currentSeason);
+        sb.append (", currentEpisode=").append (currentEpisode);
+        sb.append (", appUser=").append (appUser);
+        sb.append (", serie=").append (serie);
+        sb.append ('}');
+        return sb.toString ();
+    }
+
     //default constructor
     public ViewingSerie() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public Status getStatus() {
         return status;
@@ -66,7 +78,7 @@ public class ViewingSerie {
 
 
     public static final class Builder {
-        private Long id;
+//        private Long id;
         private Status status;
         private Integer currentSeason;
         private Integer currentEpisode;
@@ -80,10 +92,10 @@ public class ViewingSerie {
             return new Builder();
         }
 
-        public Builder withId(Long id) {
-            this.id = id;
-            return this;
-        }
+//        public Builder withId(Long id) {
+//            this.id = id;
+//            return this;
+//        }
 
         public Builder withStatus(Status status) {
             this.status = status;
@@ -112,7 +124,7 @@ public class ViewingSerie {
 
         public ViewingSerie build() {
             ViewingSerie viewingSerie = new ViewingSerie();
-            viewingSerie.setId(id);
+//            viewingSerie.setId(id);
             viewingSerie.setStatus(status);
             viewingSerie.setCurrentSeason(currentSeason);
             viewingSerie.setCurrentEpisode(currentEpisode);

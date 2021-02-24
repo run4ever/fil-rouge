@@ -23,7 +23,7 @@ public class ViewingSerieJpaMapper {
         }
 
         return ViewingSerieJpa.Builder.aViewingSerieJpa ()
-                .withId (entity.getId ())
+      //          .idViewSerie (entity.getId ())
                 .withCurrentSeason (entity.getCurrentSeason ())
                 .withCurrentEpisode (entity.getCurrentEpisode ())
                 .withStatus (entity.getStatus ())
@@ -43,32 +43,32 @@ public class ViewingSerieJpaMapper {
         return viewingSeriesJpa;
     }
 
-    public ViewingSerie mapToEntity(ViewingSerieJpa jpa){
+    public ViewingSerie mapToDomain(ViewingSerieJpa jpa){
         if (jpa == null) {
             return null;
         }
 
-    final ViewingSerie entity = ViewingSerie.Builder.aViewingSerie ()
-            .withId(jpa.getId())
-            .withStatus(jpa.getStatus())
-            .withCurrentSeason (jpa.getCurrentSeason ())
-            .withCurrentEpisode (jpa.getCurrentEpisode ())
-            .withStatus (jpa.getStatus ())
-            .withSerie (serieJpaMapper.mapToDomain(jpa.getSerieJpa()))
-            .withAppUser (appUserJpaMapper.mapToEntity (jpa.getAppUserjpa()))
-            .build();
+        final ViewingSerie entity = ViewingSerie.Builder.aViewingSerie ()
+    //            .withId(jpa.getId())
+                .withStatus(jpa.getStatus())
+                .withCurrentSeason (jpa.getCurrentSeason ())
+                .withCurrentEpisode (jpa.getCurrentEpisode ())
+                .withStatus (jpa.getStatus ())
+                .withSerie (serieJpaMapper.mapToDomain(jpa.getSerieJpa()))
+                .withAppUser (appUserJpaMapper.mapToEntity (jpa.getAppUserjpa()))
+                .build();
 
-    return entity;
+        return entity;
     }
 
-    public List<ViewingSerie> mapToEntity(List<ViewingSerieJpa> jpas){
+    public List<ViewingSerie> mapToDomain(List<ViewingSerieJpa> jpas){
         if (jpas == null) {
             return null;
         }
 
         final List<ViewingSerie> viewingSeries = new ArrayList<ViewingSerie>();
         for( ViewingSerieJpa item : jpas ) {
-            viewingSeries.add(mapToEntity(item));
+            viewingSeries.add(mapToDomain(item));
         }
         return viewingSeries;
     }
