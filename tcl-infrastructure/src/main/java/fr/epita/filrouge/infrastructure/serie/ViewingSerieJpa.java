@@ -11,8 +11,8 @@ public class ViewingSerieJpa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="serie_viewing_id")
-    private Long id;
+    @Column(name="serie_viewing_id", unique = true)
+    private Long idViewSerie;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -20,22 +20,22 @@ public class ViewingSerieJpa {
     private Integer currentSeason;
     private Integer currentEpisode;
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private AppUserJpa appUserjpa;
 
 
-    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private SerieJpa serieJpa;
 
     public ViewingSerieJpa() {
     }
 
     public Long getId() {
-        return id;
+        return idViewSerie;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.idViewSerie = id;
     }
 
     public Status getStatus() {
@@ -79,7 +79,7 @@ public class ViewingSerieJpa {
     }
 
     public static final class Builder {
-        private Long id;
+        private Long idViewSerie;
         private Status status;
         private Integer currentSeason;
         private Integer currentEpisode;
@@ -93,9 +93,8 @@ public class ViewingSerieJpa {
             return new Builder ();
         }
 
-        public Builder withId(Long id) {
-            this.id = id;
-            return this;
+        public Builder(Long idViewSerie) {
+            this.idViewSerie = idViewSerie;
         }
 
         public Builder withStatus(Status status) {
@@ -125,7 +124,7 @@ public class ViewingSerieJpa {
 
         public ViewingSerieJpa build() {
             ViewingSerieJpa viewingSerieJpa = new ViewingSerieJpa ();
-            viewingSerieJpa.setId (id);
+            viewingSerieJpa.setId (idViewSerie);
             viewingSerieJpa.setStatus (status);
             viewingSerieJpa.setCurrentSeason (currentSeason);
             viewingSerieJpa.setCurrentEpisode (currentEpisode);

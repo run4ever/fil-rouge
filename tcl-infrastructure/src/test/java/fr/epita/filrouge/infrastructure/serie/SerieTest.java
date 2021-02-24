@@ -90,7 +90,7 @@ public class SerieTest {
     @DisplayName("Vérifier la création et récupération d'une série")
     public void VerifyCreationOfSerie() {
 
-          serieDomaine.create (serieb);
+
 
         assertThat(serieDomaine.create (serieb).getImdbId ()).isEqualTo(serieb.getImdbId ());
 
