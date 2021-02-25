@@ -3,7 +3,6 @@ package fr.epita.filrouge.infrastructure.serie;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.serie.Serie;
 import fr.epita.filrouge.domain.entity.serie.SerieRepository;
-import fr.epita.filrouge.infrastructure.mapper.SerieJpaMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,31 +19,7 @@ public class SerieTest {
     @Autowired
     private SerieRepository serieDomaine;
 
-    @Autowired
-    private SerieJpaMapper serieJpaMapper;
 
-    @Autowired
-    private SerieJpaRepository iSerieRepository;
-
-
-   Serie serieb = Serie.Builder.aSerie ()
-           .withImdbId ("tt00010")
-           .withTitle ("serie builer")
-           .withCategory (Category.THRILLER)
-           .build ();
-
-
-
-
-    private static final Serie serie1 = new Serie ("tt0001",
-            "UJA",
-            "serie1",
-            2018,
-            2019,
-            5,
-            20,
-            Category.ROMANCE
-    );
 
     private static final Serie serie_to_delete = new Serie ("tt_test_suppr3",
             "UJA",
@@ -90,9 +65,18 @@ public class SerieTest {
     @DisplayName("Vérifier la création et récupération d'une série")
     public void VerifyCreationOfSerie() {
 
+        Serie serie1 = new Serie ("tt0099",
+                "UJA",
+                "serie1",
+                2018,
+                2019,
+                5,
+                20,
+                Category.ROMANCE
+        );
 
-
-        assertThat(serieDomaine.findById("tt00010").getTitle()).isEqualTo("serie builer");
+        serieDomaine.create (serie1);
+        assertThat(serieDomaine.findById("tt0099").getTitle()).isEqualTo("UJA");
 
         }
 

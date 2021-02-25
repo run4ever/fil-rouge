@@ -1,5 +1,6 @@
 package fr.epita.filrouge.application.person;
 
+import fr.epita.filrouge.application.person.AppUserService;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
