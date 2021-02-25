@@ -18,7 +18,6 @@ public class SerieJpaMapper {
         }
 
         return SerieJpa.Builder.aSerieJpa ()
-//                .withId (entity.getId ())
                 .withImdbId (entity.getImdbId ())
                 .withTitle (entity.getTitle ())
                 .withDescription (entity.getDescription ())
@@ -48,7 +47,7 @@ public class SerieJpaMapper {
         }
 
 
-        final Serie entity = Serie.Builder.aSerie ()
+        return Serie.Builder.aSerie ()
 
                 .withImdbId (jpa.getImdbId ())
                 .withTitle (jpa.getTitle ())
@@ -60,7 +59,6 @@ public class SerieJpaMapper {
                 .withCategory (jpa.getCategory ())
                 .build ();
 
-        return entity;
 
 
     }

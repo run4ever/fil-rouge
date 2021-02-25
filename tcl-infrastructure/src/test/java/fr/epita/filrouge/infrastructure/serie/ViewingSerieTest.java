@@ -27,7 +27,8 @@ public class ViewingSerieTest {
     Serie serie15 = Serie.Builder.aSerie ()
             .withImdbId ("tt00015")
             .withTitle ("serie tt00015")
-            .withCategory (Category.THRILLER)            .build ();
+            .withCategory (Category.THRILLER)
+            .build ();
 
     Serie serie11 = Serie.Builder.aSerie ()
             .withImdbId ("tt00011")
