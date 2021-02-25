@@ -89,4 +89,21 @@ public class ViewingMovie {
             return viewingMovie;
         }
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ViewingMovie that = (ViewingMovie) o;
+
+        return new org.apache.commons.lang3.builder.EqualsBuilder().append(id, that.id).append(status, that.status).append(appUser, that.appUser).append(movie, that.movie).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new org.apache.commons.lang3.builder.HashCodeBuilder(17, 37).append(id).append(status).append(appUser).append(movie).toHashCode();
+    }
 }
