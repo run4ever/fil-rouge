@@ -48,7 +48,7 @@ public class ViewingSerieJpaMapper {
             return null;
         }
 
-        final ViewingSerie entity = ViewingSerie.Builder.aViewingSerie ()
+        return ViewingSerie.Builder.aViewingSerie ()
     //            .withId(jpa.getId())
                 .withStatus(jpa.getStatus())
                 .withCurrentSeason (jpa.getCurrentSeason ())
@@ -57,8 +57,6 @@ public class ViewingSerieJpaMapper {
                 .withSerie (serieJpaMapper.mapToDomain(jpa.getSerieJpa()))
                 .withAppUser (appUserJpaMapper.mapToEntity (jpa.getAppUserjpa()))
                 .build();
-
-        return entity;
     }
 
     public List<ViewingSerie> mapToDomain(List<ViewingSerieJpa> jpas){
