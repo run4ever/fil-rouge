@@ -25,18 +25,12 @@ public class ViewingMovieServiceImpl implements ViewingMovieService{
         List<ViewingMovie> viewingMovie = viewingMovieRepository.findViewingMovieFromUser(appUser);
 
         if(viewingMovie!= null) {//si viewingMovie n'est pas null, il faut tester si on a le Movie déjà dans ViewingMovie
-            Boolean movieInViewingMovie = false;
 
             for (ViewingMovie vm : viewingMovie) {
                 if (vm.getMovie().getImdbId() == movie.getImdbId()) {
-                    movieInViewingMovie = true; //on a déjà ce Movie dans ViewingMovie
-                    break;// on sort de la boucle dès qu'on a trouvé une fois le Movie
+                    throw new AlreadyExistingException("Movie already exiting in ViewingMovie " + movie.getImdbId() + " " + movie.getTitle(),
+                            ErrorCodes.MOVIE_ALREADY_EXISTING_IN_VIEWINGMOVIE);
                 }
-            }
-            if (movieInViewingMovie) {
-                //si Movie est déjà présent alors Exception
-                throw new AlreadyExistingException("Movie already exiting in ViewingMovie " + movie.getImdbId() + " " + movie.getTitle(),
-                        ErrorCodes.MOVIE_ALREADY_EXISTING_IN_VIEWINGMOVIE);
             }
         }
 
