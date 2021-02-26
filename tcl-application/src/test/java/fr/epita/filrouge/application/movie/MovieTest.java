@@ -47,15 +47,15 @@ public class MovieTest {
                 .build();
 
         // Mocks
-        when(movieDtoMapper.mapToEntity(m1)).thenReturn(m1e);
-        when(movieDtoMapper.mapToDto(m1e)).thenReturn(m1);
+        when(movieDtoMapper.mapDtoToDomain(m1)).thenReturn(m1e);
+        when(movieDtoMapper.mapDomainToDto(m1e)).thenReturn(m1);
         when(movieRepositoryMock.findMovieFromApiId("apiM001")).thenReturn(null);
 
         //When
         movieService.createMovieService(m1);
 
         //Then
-        verify(movieRepositoryMock,times(1)).create(movieDtoMapper.mapToEntity(m1));
+        verify(movieRepositoryMock,times(1)).create(movieDtoMapper.mapDtoToDomain(m1));
     }
 
     @Test
@@ -78,8 +78,8 @@ public class MovieTest {
                 .build();
 
         // Mocks
-        when(movieDtoMapper.mapToEntity(m2)).thenReturn(m2e);
-        when(movieDtoMapper.mapToDto(m2e)).thenReturn(m2);
+        when(movieDtoMapper.mapDtoToDomain(m2)).thenReturn(m2e);
+        when(movieDtoMapper.mapDomainToDto(m2e)).thenReturn(m2);
         when(movieRepositoryMock.findMovieFromApiId("apiM002"))
                 .thenReturn(m2e);
 
@@ -91,7 +91,7 @@ public class MovieTest {
         }
 
         //Then
-        verify(movieRepositoryMock,never()).create(movieDtoMapper.mapToEntity(m2));
+        verify(movieRepositoryMock,never()).create(movieDtoMapper.mapDtoToDomain(m2));
     }
 
     @Test
@@ -113,8 +113,8 @@ public class MovieTest {
                 .withReleaseDate(LocalDate.of(2000,10,02))
                 .build();
 
-        when(movieDtoMapper.mapToEntity(m3)).thenReturn(m3e);
-        when(movieDtoMapper.mapToDto(m3e)).thenReturn(m3);
+        when(movieDtoMapper.mapDtoToDomain(m3)).thenReturn(m3e);
+        when(movieDtoMapper.mapDomainToDto(m3e)).thenReturn(m3);
         when(movieRepositoryMock.findMovieFromApiId("apiM002"))
                 .thenReturn(m3e);
 

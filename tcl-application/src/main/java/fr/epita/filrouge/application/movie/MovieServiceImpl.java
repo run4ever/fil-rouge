@@ -24,7 +24,7 @@ public class MovieServiceImpl implements MovieService {
                 throw new AlreadyExistingException("Movie already existing " + movieDto.getTitle(), ErrorCodes.MOVIE_ALREADY_EXISTING);
             }
             else{
-                    movieRepository.create(movieDtoMapper.mapToEntity(movieDto));
+                    movieRepository.create(movieDtoMapper.mapDtoToDomain(movieDto));
                 }
     }
 
@@ -33,11 +33,7 @@ public class MovieServiceImpl implements MovieService {
         if(apiMovieId == null) {
             return null;
         }
-        return movieDtoMapper.mapToDto(movieRepository.findMovieFromApiId(apiMovieId));
+        return movieDtoMapper.mapDomainToDto(movieRepository.findMovieFromApiId(apiMovieId));
     }
 
-    @Override
-    public List<MovieDto> listAllMovies() {
-        return movieDtoMapper.mapToDto(movieRepository.findAllMovies());
-    }
 }

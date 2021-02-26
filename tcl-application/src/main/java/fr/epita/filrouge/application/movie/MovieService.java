@@ -6,6 +6,5 @@ public interface MovieService {
 
     void createMovieService(MovieDto movieDto);
     MovieDto getOneMovieService(String apiMovieid);
-    List<MovieDto> listAllMovies();
 
 }

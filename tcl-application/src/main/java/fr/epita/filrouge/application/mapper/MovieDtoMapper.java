@@ -11,9 +11,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface MovieDtoMapper {
 
-        Movie mapToEntity(MovieDto movieDto);
-        List<Movie> mapToEntity(List<MovieDto> movieDtoList);
-        MovieDto mapToDto(Movie movie);
-        List<MovieDto> mapToDto(List<Movie> movieList);
+        Movie mapDtoToDomain(MovieDto movieDto);
+        List<Movie> mapDtoToDomain(List<MovieDto> movieDtoList);
+        MovieDto mapDomainToDto(Movie movie);
+        List<MovieDto> mapDomainToDto(List<Movie> movieList);
 
 }
