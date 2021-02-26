@@ -5,7 +5,7 @@ import java.util.List;
 public interface MovieRepository {
 
     void create(Movie m);
-    Movie findOne(Long id);
+    Movie findMovieFromApiId(String id);
     List<Movie> findMovieFromTitle(String movieTitle);
 
 }

@@ -45,14 +45,12 @@ public class ViewingMovieJpaMapper {
             return null;
         }
 
-        final ViewingMovie entity = ViewingMovie.Builder.aViewingMovie()
+        return ViewingMovie.Builder.aViewingMovie()
                 .withId(jpa.getId())
                 .withStatus(jpa.getStatus())
                 .withAppUser(appUserJpaMapper.mapToEntity(jpa.getAppUserJpa()))
                 .withMovie(movieJpaMapper.mapToEntity(jpa.getMovieJpa()))
                 .build();
-
-        return entity;
     }
 
     public List<ViewingMovie> mapToEntity(List<ViewingMovieJpa> jpas){

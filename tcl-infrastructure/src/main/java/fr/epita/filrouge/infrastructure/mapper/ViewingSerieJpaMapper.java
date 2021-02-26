@@ -48,7 +48,6 @@ public class ViewingSerieJpaMapper {
         }
 
         return ViewingSerie.Builder.aViewingSerie ()
-
                 .withStatus(jpa.getStatus())
                 .withCurrentSeason (jpa.getCurrentSeason ())
                 .withCurrentEpisode (jpa.getCurrentEpisode ())
@@ -56,7 +55,6 @@ public class ViewingSerieJpaMapper {
                 .withSerie (serieJpaMapper.mapToDomain(jpa.getSerieJpa()))
                 .withAppUser (appUserJpaMapper.mapToEntity (jpa.getAppUserjpa()))
                 .build();
-
 
     }
 
@@ -71,9 +69,4 @@ public class ViewingSerieJpaMapper {
         }
         return viewingSeries;
     }
-
-
-
 }
-
-
