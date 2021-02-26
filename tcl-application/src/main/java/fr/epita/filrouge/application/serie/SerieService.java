@@ -10,7 +10,8 @@ import fr.epita.filrouge.domain.entity.serie.Serie;
 
 public interface SerieService {
 
-    Serie getSerieById(String id);
+    SerieDto getSerieById(String id);
 
-    void createSerie(Serie serie);
+    SerieDto createSerie(SerieDto serieDto);
 }
+

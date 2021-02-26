@@ -1,4 +1,4 @@
-package fr.epita.filrouge.application.mapperdto;
+package fr.epita.filrouge.application.mapper;
 
 import fr.epita.filrouge.domain.entity.serie.Serie;
 import org.mapstruct.Mapper;
