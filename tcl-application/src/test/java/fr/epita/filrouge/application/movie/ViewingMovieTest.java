@@ -149,7 +149,7 @@ public class ViewingMovieTest {
         /** Mock sur create de ViewingMovieRepository (accès à la base de la couche Infra) */
         when(viewingMovieRepositoryMock.findViewingMovieFromUser(appUser)).thenReturn(null);
         when(appUserDtoMapper.mapDtoToDomain(appUserDto)).thenReturn(appUser);
-        when(movieDtoMapper.mapToEntity(movieDto)).thenReturn(movie);
+        when(movieDtoMapper.mapDtoToDomain(movieDto)).thenReturn(movie);
 
 
         //When
@@ -198,7 +198,7 @@ public class ViewingMovieTest {
         /** Mock sur create de ViewingMovieRepository (accès à la base de la couche Infra) */
         when(viewingMovieRepositoryMock.findViewingMovieFromUser(appUser)).thenReturn(listViewingMovie);
         when(appUserDtoMapper.mapDtoToDomain(appUserDto)).thenReturn(appUser);
-        when(movieDtoMapper.mapToEntity(movieDto)).thenReturn(movie);
+        when(movieDtoMapper.mapDtoToDomain(movieDto)).thenReturn(movie);
 
         //When
         viewingMovieService.addMovieToViewingMovie(appUserDto,movieDto);

@@ -25,6 +25,7 @@ public class ViewingMovieTest {
     final Movie movie1 = Movie.Builder.aMovie()
             .withTitle("Indiana Jones and the Raiders of the Lost Ark")
             .withPublicNotation(new PublicNotation(4.0,1234))
+            .withReleaseDate(LocalDate.now())
             .withDuration(115)
             .withCategory(Category.ACTION)
             .build();
@@ -32,6 +33,7 @@ public class ViewingMovieTest {
     final Movie movie2 = Movie.Builder.aMovie()
             .withTitle("Movie title 2")
             .withPublicNotation(new PublicNotation(4.0,1234))
+            .withReleaseDate(LocalDate.now())
             .withDuration(120)
             .withCategory(Category.COMEDY)
             .build();
@@ -77,12 +79,14 @@ public class ViewingMovieTest {
                 .withStatus(Status.TO_WATCH)
                 .build();
 
+        int wmNb = viewingMovieRepository.findAllViewingMovie().size();
+
         //When
         viewingMovieRepository.create(wm1);
         viewingMovieRepository.create(wm2);
 
         //Then
-        assertThat(viewingMovieRepository.findAllViewingMovie()).size().isEqualTo(2);
+        assertThat(viewingMovieRepository.findAllViewingMovie()).size().isEqualTo(wmNb+2);
 
     }
 
