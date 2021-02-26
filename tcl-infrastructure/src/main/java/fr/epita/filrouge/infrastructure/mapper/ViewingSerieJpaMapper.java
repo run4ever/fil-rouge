@@ -23,7 +23,6 @@ public class ViewingSerieJpaMapper {
         }
 
         return ViewingSerieJpa.Builder.aViewingSerieJpa ()
-      //          .idViewSerie (entity.getId ())
                 .withCurrentSeason (entity.getCurrentSeason ())
                 .withCurrentEpisode (entity.getCurrentEpisode ())
                 .withStatus (entity.getStatus ())
@@ -49,7 +48,6 @@ public class ViewingSerieJpaMapper {
         }
 
         return ViewingSerie.Builder.aViewingSerie ()
-    //            .withId(jpa.getId())
                 .withStatus(jpa.getStatus())
                 .withCurrentSeason (jpa.getCurrentSeason ())
                 .withCurrentEpisode (jpa.getCurrentEpisode ())
@@ -57,6 +55,7 @@ public class ViewingSerieJpaMapper {
                 .withSerie (serieJpaMapper.mapToDomain(jpa.getSerieJpa()))
                 .withAppUser (appUserJpaMapper.mapToEntity (jpa.getAppUserjpa()))
                 .build();
+
     }
 
     public List<ViewingSerie> mapToDomain(List<ViewingSerieJpa> jpas){
@@ -70,9 +69,4 @@ public class ViewingSerieJpaMapper {
         }
         return viewingSeries;
     }
-
-
-
 }
-
-

@@ -28,13 +28,6 @@ public class ViewingSerie {
     public ViewingSerie() {
     }
 
-//    public Long getId() {
-//        return id;
-//    }
-//
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
 
     public Status getStatus() {
         return status;

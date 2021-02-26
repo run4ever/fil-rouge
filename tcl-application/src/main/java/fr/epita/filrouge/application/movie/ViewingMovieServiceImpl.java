@@ -1,5 +1,9 @@
 package fr.epita.filrouge.application.movie;
 
+import fr.epita.filrouge.application.mapper.AppUserDtoMapper;
+import fr.epita.filrouge.application.mapper.MovieDtoMapper;
+import fr.epita.filrouge.application.mapper.ViewingMovieDtoMapper;
+import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.domain.entity.common.Status;
 import fr.epita.filrouge.domain.entity.movie.Movie;
 import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
@@ -18,17 +22,29 @@ public class ViewingMovieServiceImpl implements ViewingMovieService{
     @Autowired
     private ViewingMovieRepository viewingMovieRepository;
 
+    @Autowired
+    private ViewingMovieDtoMapper viewingMovieDtoMapper;
+
+    @Autowired
+    private AppUserDtoMapper appUserDtoMapper;
+
+    @Autowired
+    private MovieDtoMapper movieDtoMapper;
+
     @Override
-    public void addMovieToViewingMovie(AppUser appUser, Movie movie) {
+    public void addMovieToViewingMovie(AppUserDto appUserDto, MovieDto movieDto) {
         // si un AppUser a déjà le Movie dans son visionnage,
         // alors il n'est pas possible d'ajouter le Movie 2è fois dans ViewingMovie
-        List<ViewingMovie> viewingMovie = viewingMovieRepository.findViewingMovieFromUser(appUser);
+        AppUser appUser = appUserDtoMapper.mapDtoToDomain(appUserDto);
+        Movie movie = movieDtoMapper.mapToEntity(movieDto);
 
-        if(viewingMovie!= null) {//si viewingMovie n'est pas null, il faut tester si on a le Movie déjà dans ViewingMovie
+        List<ViewingMovie> viewingMovies = viewingMovieRepository.findViewingMovieFromUser(appUser);
 
-            for (ViewingMovie vm : viewingMovie) {
-                if (vm.getMovie().getImdbId() == movie.getImdbId()) {
-                    throw new AlreadyExistingException("Movie already exiting in ViewingMovie " + movie.getImdbId() + " " + movie.getTitle(),
+        if(viewingMovies!= null) {//si viewingMovie n'est pas null, il faut tester si on a le Movie déjà dans ViewingMovie
+
+            for (ViewingMovie vm : viewingMovies) {
+                if (vm.getMovie().getImdbId() == movieDto.getImdbId()) {
+                    throw new AlreadyExistingException("Movie already exiting in ViewingMovie " + movieDto.getImdbId() + " " + movieDto.getTitle(),
                             ErrorCodes.MOVIE_ALREADY_EXISTING_IN_VIEWINGMOVIE);
                 }
             }
@@ -44,11 +60,13 @@ public class ViewingMovieServiceImpl implements ViewingMovieService{
     }
 
     @Override
-    public List<ViewingMovie> getViewingMovie(AppUser appUser) {
-        if(appUser == null) {
+    public List<ViewingMovieDto> getViewingMovie(AppUserDto appUserDto) {
+        if(appUserDto == null) {
             return null;
         }
-        return viewingMovieRepository.findViewingMovieFromUser(appUser);
+        AppUser appUser = appUserDtoMapper.mapDtoToDomain(appUserDto);
+        return viewingMovieDtoMapper.mapDomainToDto(viewingMovieRepository.findViewingMovieFromUser(appUser));
+
     }
 
 }

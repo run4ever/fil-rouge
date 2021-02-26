@@ -1,18 +1,53 @@
-package fr.epita.filrouge.domain.entity.person;
+package fr.epita.filrouge.application.person;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.epita.filrouge.domain.entity.person.Role;
 
 import java.time.LocalDate;
 
-public class AppUser extends Person {
-    private String email;
-    private String password;
-    private Role role;  // attention, on gère un seul Role ici !!!!
+public class AppUserDto {
+    @JsonProperty("lastname")
+    private String lastname;
 
-    //default constructor
-    public AppUser() {
+    @JsonProperty("firstname")
+    private String firstname;
+
+    @JsonProperty("birhdayDate")
+    private LocalDate birthdayDate;
+
+    @JsonProperty("email")
+    private String email;
+
+    @JsonProperty("password")
+    private String password;
+
+    @JsonProperty("role")
+    private Role role;
+
+    public String getLastname() {
+        return lastname;
     }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public LocalDate getBirthdayDate() {
+        return birthdayDate;
+    }
+
+    public void setBirthdayDate(LocalDate birthdayDate) {
+        this.birthdayDate = birthdayDate;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -37,41 +72,20 @@ public class AppUser extends Person {
         this.role = role;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        AppUser appUser = (AppUser) o;
-
-        return new EqualsBuilder().append(email, appUser.email).append(password, appUser.password).append(role, appUser.role).isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new HashCodeBuilder(17, 37).append(email).append(password).append(role).toHashCode();
-    }
 
     public static final class Builder {
-        private Long id;
         private String lastname;
         private String firstname;
         private LocalDate birthdayDate;
         private String email;
         private String password;
-        private Role role;  // attention, on gère un seul Role ici !!!!
+        private Role role;
 
         private Builder() {
         }
 
-        public static Builder anAppUser() {
+        public static Builder anAppUserDto() {
             return new Builder();
-        }
-
-        public Builder withId(Long id) {
-            this.id = id;
-            return this;
         }
 
         public Builder withLastname(String lastname) {
@@ -104,18 +118,15 @@ public class AppUser extends Person {
             return this;
         }
 
-        public AppUser build() {
-            AppUser appUser = new AppUser();
-            appUser.setId(id);
-            appUser.setLastname(lastname);
-            appUser.setFirstname(firstname);
-            appUser.setBirthdayDate(birthdayDate);
-            appUser.setEmail(email);
-            appUser.setPassword(password);
-            appUser.setRole(role);
-            return appUser;
+        public AppUserDto build() {
+            AppUserDto appUserDto = new AppUserDto();
+            appUserDto.setLastname(lastname);
+            appUserDto.setFirstname(firstname);
+            appUserDto.setBirthdayDate(birthdayDate);
+            appUserDto.setEmail(email);
+            appUserDto.setPassword(password);
+            appUserDto.setRole(role);
+            return appUserDto;
         }
     }
-
-
 }
