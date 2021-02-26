@@ -119,21 +119,20 @@ public class AppUserTest {
                 .withPassword("testpass")
                 .build();
 
-        AppUserDto appUserDto = AppUserDto.Builder.anAppUserDto()
+        AppUserLightDto appUserLightDto = AppUserLightDto.Builder.anAppUserLightDto()
                 .withFirstname("Alice")
                 .withLastname("Tester")
                 .withEmail("alice@tester.fr")
                 .withBirthdayDate(LocalDate.of(2000, 12, 25))
                 .withRole(Role.ROLE_RESP)
-                .withPassword("wonderwoman")
                 .build();
 
           /** Mock findByEmail, on recherche AnyString et on return appUser */
           when(appUserRepositoryMock.findbyEmail(anyString())).thenReturn(appUser);
-        when(appUserDtoMapper.mapDomainToDto(appUser)).thenReturn(appUserDto);
+        when(appUserDtoMapper.mapDomaineToLightDto(appUser)).thenReturn(appUserLightDto);
 
         //When
-        AppUserDto appUserFound =  appUserService.getAppUser("test@test.fr");
+        AppUserLightDto appUserFound =  appUserService.getAppUser("test@test.fr");
 
         //Then
         assertThat(appUserFound).isNotNull();
