@@ -36,7 +36,7 @@ public class ViewingMovieServiceImpl implements ViewingMovieService{
         // si un AppUser a déjà le Movie dans son visionnage,
         // alors il n'est pas possible d'ajouter le Movie 2è fois dans ViewingMovie
         AppUser appUser = appUserDtoMapper.mapDtoToDomain(appUserDto);
-        Movie movie = movieDtoMapper.mapToEntity(movieDto);
+        Movie movie = movieDtoMapper.mapDtoToDomain(movieDto);
 
         List<ViewingMovie> viewingMovies = viewingMovieRepository.findViewingMovieFromUser(appUser);
 
