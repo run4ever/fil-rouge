@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface SerieRepository {
 
-    Serie findById(String id);
+     Serie findById(String id);
 
-    Serie create(Serie serie);
+     Serie create(Serie serie);
 
     boolean deleteSerie(String imdbId);
 
