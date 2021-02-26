@@ -1,5 +1,6 @@
 package fr.epita.filrouge.application.movie;
 
+import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.movie.Movie;
 import fr.epita.filrouge.domain.entity.movie.MovieRepository;
@@ -21,12 +22,15 @@ public class MovieTest {
     private MovieService movieService;
 
     @MockBean
+    private MovieDtoMapper movieDtoMapper;
+
+    @MockBean
     private MovieRepository movieRepositoryMock;
 
     @Test
     public void create_not_existing_movie_should_succeed(){
         //Given
-        Movie m1 = Movie.Builder.aMovie()
+        MovieDto m1 = MovieDto.Builder.aMovieDto()
                 .withImdbId("apiM001")
                 .withCategory(Category.ACTION)
                 .withDuration(120)
@@ -34,19 +38,30 @@ public class MovieTest {
                 .withReleaseDate(LocalDate.of(2000,10,01))
                 .build();
 
+        Movie m1e = Movie.Builder.aMovie()
+                .withImdbId("apiM001")
+                .withCategory(Category.ACTION)
+                .withDuration(120)
+                .withTitle("Movie title 1")
+                .withReleaseDate(LocalDate.of(2000,10,01))
+                .build();
+
+        // Mocks
+        when(movieDtoMapper.mapDtoToDomain(m1)).thenReturn(m1e);
+        when(movieDtoMapper.mapDomainToDto(m1e)).thenReturn(m1);
         when(movieRepositoryMock.findMovieFromApiId("apiM001")).thenReturn(null);
 
         //When
         movieService.createMovieService(m1);
 
         //Then
-        verify(movieRepositoryMock,times(1)).create(m1);
+        verify(movieRepositoryMock,times(1)).create(movieDtoMapper.mapDtoToDomain(m1));
     }
 
     @Test
     public void create_existing_movie_should_crash(){
         //Given
-        Movie m2 = Movie.Builder.aMovie()
+        MovieDto m2 = MovieDto.Builder.aMovieDto()
                 .withImdbId("apiM002")
                 .withCategory(Category.COMEDY)
                 .withDuration(120)
@@ -54,7 +69,19 @@ public class MovieTest {
                 .withReleaseDate(LocalDate.of(2000,10,02))
                 .build();
 
-        when(movieRepositoryMock.findMovieFromApiId("apiM002")).thenReturn(m2);
+        Movie m2e = Movie.Builder.aMovie()
+                .withImdbId("apiM002")
+                .withCategory(Category.COMEDY)
+                .withDuration(120)
+                .withTitle("Movie title 2")
+                .withReleaseDate(LocalDate.of(2000,10,02))
+                .build();
+
+        // Mocks
+        when(movieDtoMapper.mapDtoToDomain(m2)).thenReturn(m2e);
+        when(movieDtoMapper.mapDomainToDto(m2e)).thenReturn(m2);
+        when(movieRepositoryMock.findMovieFromApiId("apiM002"))
+                .thenReturn(m2e);
 
         //When
         try{
@@ -64,13 +91,13 @@ public class MovieTest {
         }
 
         //Then
-        verify(movieRepositoryMock,never()).create(m2);
+        verify(movieRepositoryMock,never()).create(movieDtoMapper.mapDtoToDomain(m2));
     }
 
     @Test
     public void find_movie_should_success(){
         //Given
-        Movie m3 = Movie.Builder.aMovie()
+        MovieDto m3 = MovieDto.Builder.aMovieDto()
                 .withImdbId("apiM003")
                 .withCategory(Category.COMEDY)
                 .withDuration(120)
@@ -78,10 +105,21 @@ public class MovieTest {
                 .withReleaseDate(LocalDate.of(2000,10,02))
                 .build();
 
-        when(movieRepositoryMock.findMovieFromApiId("apiM002")).thenReturn(m3);
+        Movie m3e = Movie.Builder.aMovie()
+                .withImdbId("apiM003")
+                .withCategory(Category.COMEDY)
+                .withDuration(120)
+                .withTitle("Movie title 3")
+                .withReleaseDate(LocalDate.of(2000,10,02))
+                .build();
+
+        when(movieDtoMapper.mapDtoToDomain(m3)).thenReturn(m3e);
+        when(movieDtoMapper.mapDomainToDto(m3e)).thenReturn(m3);
+        when(movieRepositoryMock.findMovieFromApiId("apiM002"))
+                .thenReturn(m3e);
 
         //When
-        final Movie result = movieService.getOneMovieService("apiM002");
+        final MovieDto result = movieService.getOneMovieService("apiM002");
 
         //Then
         assertThat(result).isNotNull();

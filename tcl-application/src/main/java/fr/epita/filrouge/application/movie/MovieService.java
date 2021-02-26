@@ -1,10 +1,10 @@
 package fr.epita.filrouge.application.movie;
 
-import fr.epita.filrouge.domain.entity.movie.Movie;
+import java.util.List;
 
 public interface MovieService {
 
-    void createMovieService(Movie movie);
-    Movie getOneMovieService(String apiMovieid);
+    void createMovieService(MovieDto movieDto);
+    MovieDto getOneMovieService(String apiMovieid);
 
 }

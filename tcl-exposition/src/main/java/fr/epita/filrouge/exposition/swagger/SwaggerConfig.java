@@ -1,4 +1,4 @@
-package fr.epita.filrouge.exposition;
+package fr.epita.filrouge.exposition.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
