@@ -33,4 +33,9 @@ public class MovieRepositoryImpl implements MovieRepository {
     public List<Movie> findMovieFromTitle(String movieTitle) {
         return movieJpaMapper.mapToEntity(movieJpaRepository.findByTitle(movieTitle));
     }
+
+    @Override
+    public List<Movie> findAllMovies() {
+        return movieJpaMapper.mapToEntity(movieJpaRepository.findAll());
+    }
 }

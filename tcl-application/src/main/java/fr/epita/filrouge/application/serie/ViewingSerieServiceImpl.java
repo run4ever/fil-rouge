@@ -5,9 +5,11 @@ import fr.epita.filrouge.domain.entity.serie.ViewingSerieRepository;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
 import fr.epita.filrouge.domain.exception.ErrorCodes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ViewingSerieServiceImpl implements ViewingSerieService{
 
     @Autowired
