@@ -5,6 +5,8 @@ import fr.epita.filrouge.domain.entity.serie.SerieRepository;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
 import fr.epita.filrouge.domain.exception.ErrorCodes;
 import fr.epita.filrouge.domain.exception.NotFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class SerieServiceImpl implements SerieService {
 
+    private static Logger logger = LoggerFactory.getLogger(SerieServiceImpl.class);
 
     @Autowired
     SerieRepository serieRepository;
@@ -24,7 +27,7 @@ public class SerieServiceImpl implements SerieService {
     @Override
     public SerieDto getSerieById(String id) {
 
-        if (serieRepository.findById (id) != null) {
+        if (serieRepository.findById (id) == null) {
             throw new NotFoundException ("Serie not existing : " + id, ErrorCodes.SERIE_NOT_FOUND);
         }
         return mapperSerieDto.mapDomainToDto (serieRepository.findById (id));
@@ -40,8 +43,11 @@ public class SerieServiceImpl implements SerieService {
     }
 
     @Override
-    public void deleteSerie(String id) {
-        serieRepository.deleteSerie (id);
+    public boolean deleteSerie(String id) {
+        if(serieRepository.findById (id) == null) {
+            throw new NotFoundException ("Serie not existing : " + id, ErrorCodes.SERIE_NOT_FOUND);
+        }
+        return serieRepository.deleteSerie (id);
     }
 }
 

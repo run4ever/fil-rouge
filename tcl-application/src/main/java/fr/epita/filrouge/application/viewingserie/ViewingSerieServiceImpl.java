@@ -9,6 +9,7 @@ import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerieRepository;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
 import fr.epita.filrouge.domain.exception.ErrorCodes;
+import fr.epita.filrouge.domain.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,8 +40,6 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     @Autowired
     private MapperSerieDto mapperSerieDto;
 
-    @Autowired
-    private AppUserDtoMapper appUserDtoMapper;
 
     /**
      * Création d'un nouveau visionnage
@@ -75,6 +74,9 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     @Override
     public List<ViewingSerieRestitDto> findByUserAllVievingSerieDto(String email) {
 
+        if (appUserRepository.findbyEmail (email) == null) {
+            throw new NotFoundException ("User inconnu : " + email, ErrorCodes.USER_NOT_FOUND);
+        }
         List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<ViewingSerieRestitDto> ();
         for (ViewingSerie viewingSerie : viewingSerieRepository.findallViewingSerieByUser(email)) {
             ViewingSerieRestitDto viewingSerieRestitDto = new ViewingSerieRestitDto ();

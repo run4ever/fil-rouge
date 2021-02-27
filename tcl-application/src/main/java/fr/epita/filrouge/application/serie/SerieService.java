@@ -12,6 +12,6 @@ public interface SerieService {
 
     SerieDto createSerie(SerieDto serieDto);
 
-    void deleteSerie(String id);
+    boolean deleteSerie(String id);
 }
 

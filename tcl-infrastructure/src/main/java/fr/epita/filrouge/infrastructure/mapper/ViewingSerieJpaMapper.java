@@ -5,6 +5,9 @@ import fr.epita.filrouge.infrastructure.viewingserie.ViewingSerieJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +58,7 @@ public class ViewingSerieJpaMapper {
                 .withStatus (jpa.getStatus ())
                 .withSerie (serieJpaMapper.mapToDomain(jpa.getSerieJpa()))
                 .withAppUser (appUserJpaMapper.mapToEntity (jpa.getAppUserJpa ()))
-                .withDateLastAction (jpa.getDateLastAction ())
+                .withDateLastAction (convertToLocalDateViaInstant(jpa.getDateLastAction ()))
                 .build();
 
 
@@ -73,6 +76,11 @@ public class ViewingSerieJpaMapper {
         return viewingSeries;
     }
 
+    private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
 
 
 }

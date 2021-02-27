@@ -6,7 +6,8 @@ import fr.epita.filrouge.infrastructure.serie.SerieJpa;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
+
 
 @Entity
 @Table(name="serie_viewing")
@@ -32,7 +33,7 @@ public class ViewingSerieJpa {
 
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
-    private LocalDate dateLastAction;
+    private Date dateLastAction;
 
     public ViewingSerieJpa() {
     }
@@ -85,11 +86,11 @@ public class ViewingSerieJpa {
         this.serieJpa = serieJpa;
     }
 
-    public LocalDate getDateLastAction() {
+    public Date getDateLastAction() {
         return dateLastAction;
     }
 
-    public void setDateLastAction(LocalDate dateLastAction) {
+    public void setDateLastAction(Date dateLastAction) {
         this.dateLastAction = dateLastAction;
     }
 
@@ -100,7 +101,7 @@ public class ViewingSerieJpa {
         private Integer currentEpisode;
         private AppUserJpa appUserjpa;
         private SerieJpa serieJpa;
-        private LocalDate dateLastAction;
+        private Date dateLastAction;
 
         private Builder() {
         }
@@ -138,7 +139,7 @@ public class ViewingSerieJpa {
             return this;
         }
 
-        public Builder withDateLastAction(LocalDate dateLastAction) {
+        public Builder withDateLastAction(Date dateLastAction) {
             this.dateLastAction = dateLastAction;
             return this;
         }
