@@ -1,38 +1,29 @@
-package fr.epita.filrouge.infrastructure.person;
+package fr.epita.filrouge.application.person;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.epita.filrouge.domain.entity.person.Role;
 
-import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity
-//@Table(name="app_user")
-public class AppUserJpa {
+public class AppUserDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="user_id")
-    private Long id;
-
+    @JsonProperty("lastname")
     private String lastname;
+
+    @JsonProperty("firstname")
     private String firstname;
+
+    @JsonProperty("birhdayDate")
     private LocalDate birthdayDate;
+
+    @JsonProperty("email")
     private String email;
+
+    @JsonProperty("password")
     private String password;
 
-    @Enumerated(EnumType.STRING)
+    @JsonProperty("role")
     private Role role;
-
-    public AppUserJpa() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getLastname() {
         return lastname;
@@ -84,7 +75,6 @@ public class AppUserJpa {
 
 
     public static final class Builder {
-        private Long id;
         private String lastname;
         private String firstname;
         private LocalDate birthdayDate;
@@ -95,13 +85,8 @@ public class AppUserJpa {
         private Builder() {
         }
 
-        public static Builder anAppUserJpa() {
+        public static Builder anAppUserDto() {
             return new Builder();
-        }
-
-        public Builder withId(Long id) {
-            this.id = id;
-            return this;
         }
 
         public Builder withLastname(String lastname) {
@@ -134,16 +119,15 @@ public class AppUserJpa {
             return this;
         }
 
-        public AppUserJpa build() {
-            AppUserJpa appUserJpa = new AppUserJpa();
-            appUserJpa.setId(id);
-            appUserJpa.setLastname(lastname);
-            appUserJpa.setFirstname(firstname);
-            appUserJpa.setBirthdayDate(birthdayDate);
-            appUserJpa.setEmail(email);
-            appUserJpa.setPassword(password);
-            appUserJpa.setRole(role);
-            return appUserJpa;
+        public AppUserDto build() {
+            AppUserDto appUserDto = new AppUserDto();
+            appUserDto.setLastname(lastname);
+            appUserDto.setFirstname(firstname);
+            appUserDto.setBirthdayDate(birthdayDate);
+            appUserDto.setEmail(email);
+            appUserDto.setPassword(password);
+            appUserDto.setRole(role);
+            return appUserDto;
         }
     }
 }

@@ -1,19 +1,24 @@
 package fr.epita.filrouge.application.serie;
 
-import com.sun.istack.NotNull;
+
+
 import fr.epita.filrouge.domain.entity.common.Category;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 
 public class SerieDto {
 
     //id unique de série (et aussi de film)
     //il commence par "tt"
+
+    @Pattern(regexp = "^tt")
     private String imdbId;
     @NotNull
     private String title;
     @NotNull
     private String description;
-
     private Integer startYear;
     private Integer endYear;
     private Integer numberOfSeason;

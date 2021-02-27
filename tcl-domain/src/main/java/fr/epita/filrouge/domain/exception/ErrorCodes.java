@@ -4,6 +4,7 @@ public class ErrorCodes {
 
 
 
+
     public ErrorCodes() {}
     public static final String USER_NOT_FOUND = "ERR_0001";
     public static final String MOVIE_NOT_FOUND = "ERR_0002";
@@ -12,6 +13,7 @@ public class ErrorCodes {
     public static final String SERIE_ALREADY_EXISTING = "ERR_0013";
     public static final String SERIE_NOT_FOUND = "ERR_0014";
     public static final String VIEWVING_SERIE_ALREADY_EXISTING = "ERR_0015";
+    public static final String VIEWING_SERIE_ALREADY_EXISTING = "ERR_0016";
 
 
 }

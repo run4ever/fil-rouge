@@ -1,16 +1,20 @@
-package fr.epita.filrouge.domain.entity.serie;
+package fr.epita.filrouge.domain.entity.viewingserie;
 
 
 import fr.epita.filrouge.domain.entity.common.Status;
 import fr.epita.filrouge.domain.entity.person.AppUser;
+import fr.epita.filrouge.domain.entity.serie.Serie;
+
+import java.time.LocalDate;
 
 public class ViewingSerie {
-//    private Long id;
+
     private Status status;
     private Integer currentSeason;
     private Integer currentEpisode;
     private AppUser appUser;
     private Serie serie;
+    private LocalDate dateLastAction;
 
     @Override
     public String toString() {
@@ -20,6 +24,7 @@ public class ViewingSerie {
         sb.append (", currentEpisode=").append (currentEpisode);
         sb.append (", appUser=").append (appUser);
         sb.append (", serie=").append (serie);
+        sb.append (", datelastAction=").append (dateLastAction);
         sb.append ('}');
         return sb.toString ();
     }
@@ -69,6 +74,13 @@ public class ViewingSerie {
         this.serie = serie;
     }
 
+    public LocalDate getDateLastAction() {
+        return dateLastAction;
+    }
+
+    public void setDateLastAction(LocalDate dateLastAction) {
+        this.dateLastAction = dateLastAction;
+    }
 
     public static final class Builder {
 //        private Long id;
@@ -77,6 +89,7 @@ public class ViewingSerie {
         private Integer currentEpisode;
         private AppUser appUser;
         private Serie serie;
+        private LocalDate dateLastAction;
 
         private Builder() {
         }
@@ -115,6 +128,11 @@ public class ViewingSerie {
             return this;
         }
 
+        public Builder withDateLastAction(LocalDate date) {
+            this.dateLastAction = date;
+            return this;
+        }
+
         public ViewingSerie build() {
             ViewingSerie viewingSerie = new ViewingSerie();
 //            viewingSerie.setId(id);
@@ -123,6 +141,7 @@ public class ViewingSerie {
             viewingSerie.setCurrentEpisode(currentEpisode);
             viewingSerie.setAppUser(appUser);
             viewingSerie.setSerie(serie);
+            viewingSerie.setDateLastAction (dateLastAction);
             return viewingSerie;
         }
     }
