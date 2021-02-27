@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ViewingSerieService {
 
-    void create(ViewingSerieCreateDto serieViewDto);
+    ViewingSerieCreateDto create(ViewingSerieCreateDto serieViewDto);
 
     List<ViewingSerieRestitDto> findByUserAllVievingSerieDto(String email);
 

@@ -1,6 +1,7 @@
 package fr.epita.filrouge.application.serie;
 
 import fr.epita.filrouge.application.mapper.MapperSerieDto;
+import fr.epita.filrouge.domain.entity.serie.Serie;
 import fr.epita.filrouge.domain.entity.serie.SerieRepository;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
 import fr.epita.filrouge.domain.exception.ErrorCodes;
@@ -27,10 +28,11 @@ public class SerieServiceImpl implements SerieService {
     @Override
     public SerieDto getSerieById(String id) {
 
-        if (serieRepository.findById (id) == null) {
+        Serie serie = serieRepository.findById (id);
+        if (serie == null) {
             throw new NotFoundException ("Serie not existing : " + id, ErrorCodes.SERIE_NOT_FOUND);
         }
-        return mapperSerieDto.mapDomainToDto (serieRepository.findById (id));
+        return mapperSerieDto.mapDomainToDto (serie);
     }
 
     @Override
