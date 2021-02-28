@@ -4,6 +4,7 @@ public enum Category {
     ACTION,
     ADVENTURE,
     ANIMATION,
+    BIOGRAPHY,
     COMEDY,
     DRAMA,
     FAMILY,
