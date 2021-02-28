@@ -1,4 +1,4 @@
-package fr.epita.filrouge.exposition.person;
+package fr.epita.filrouge.exposition.api.person;
 
 
 import fr.epita.filrouge.application.person.AppUserLightDto;
@@ -22,14 +22,17 @@ public class PersonResourceTest {
     @Test
     public void show_appuser_by_email() throws Exception {
         //Given
-        String emailTest ="arnaud%40tcl.com";
+        //Cette adresse email est dans le fichier import.sql qui sera chargé à l'initialisation de l'application
+        String emailTest ="superman@world.com";
 
         //When
         ResponseEntity<AppUserLightDto> response = restTemplate.getForEntity("/api/v1/appuser/"+emailTest, AppUserLightDto.class);
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        //TODO à améliorer
-       // assertThat(response.getBody().getEmail()).isEqualTo(emailTest);
+        assertThat(response.getBody().getEmail()).isEqualTo(emailTest);
+        assertThat(response.getBody().getLastname()).isEqualTo("man");
     }
+
+
 }
