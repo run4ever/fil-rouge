@@ -3,6 +3,7 @@ package fr.epita.filrouge.application.movie;
 import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.domain.entity.movie.Movie;
 import fr.epita.filrouge.domain.entity.movie.MovieRepository;
+import fr.epita.filrouge.domain.entity.movie.MovieRepositoryExternal;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
 import fr.epita.filrouge.domain.exception.ErrorCodes;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private MovieRepositoryExternal movieRepositoryExternal;
 
     @Autowired
     private MovieDtoMapper movieDtoMapper;
@@ -41,6 +45,16 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<MovieDto> listAllMoviesService() {
         return  movieDtoMapper.mapDomainToDto(movieRepository.findAllMovies());
+    }
+
+    @Override
+    public List<MovieDto> searchExternalMovie(String title) {
+        return movieDtoMapper.mapDomainToDto(movieRepositoryExternal.searchByTitle(title));
+    }
+
+    @Override
+    public MovieDto getExternalMovie(String apiMovieId) {
+        return movieDtoMapper.mapDomainToDto(movieRepositoryExternal.searchByApiMovieId(apiMovieId));
     }
 
 }
