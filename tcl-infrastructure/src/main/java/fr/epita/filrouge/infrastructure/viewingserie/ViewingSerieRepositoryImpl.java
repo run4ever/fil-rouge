@@ -3,6 +3,9 @@ package fr.epita.filrouge.infrastructure.viewingserie;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerieRepository;
 import fr.epita.filrouge.infrastructure.mapper.ViewingSerieJpaMapper;
+import fr.epita.filrouge.infrastructure.person.AppUserJpaRepository;
+import fr.epita.filrouge.infrastructure.serie.SerieJpa;
+import fr.epita.filrouge.infrastructure.serie.SerieJpaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +26,22 @@ public class ViewingSerieRepositoryImpl implements ViewingSerieRepository{
     private ViewingSerieJpaRepository viewingSerieJpaRepository;
 
     @Autowired
-
     private ViewingSerieJpaMapper viewingSerieJpaMapper;
 
+    @Autowired
+    private AppUserJpaRepository appUserJpaRepository;
+
+    @Autowired
+    private SerieJpaRepository serieJpaRepository;
 
     @Override
     public ViewingSerie create(ViewingSerie serieView) {
 
-        return viewingSerieJpaMapper.mapToDomain (viewingSerieJpaRepository.save(viewingSerieJpaMapper.mapToJpa (serieView)));
+        logger.info ("ViewgingSerie - create : " +serieView.toString ());
+        ViewingSerieJpa viewingSerieJpa = viewingSerieJpaMapper.mapToJpa (serieView);
+        viewingSerieJpa.setAppUserJpa (appUserJpaRepository.findByEmail (serieView.getAppUser ().getEmail ()));
+        viewingSerieJpa.setSerieJpa (serieJpaRepository.findByImdbId (serieView.getSerie ().getImdbId ()));
+        return viewingSerieJpaMapper.mapToDomain (viewingSerieJpaRepository.save(viewingSerieJpa));
 
     }
 

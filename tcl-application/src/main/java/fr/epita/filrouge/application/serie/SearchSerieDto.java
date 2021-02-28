@@ -1,9 +1,6 @@
 package fr.epita.filrouge.application.serie;
 
-import fr.epita.filrouge.domain.entity.common.Category;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 public class SearchSerieDto {
 

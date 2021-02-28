@@ -22,7 +22,7 @@ import java.util.List;
 @Transactional
 public class SerieServiceImpl implements SerieService {
 
-    private static Logger logger = LoggerFactory.getLogger(SerieServiceImpl.class);
+//    private static Logger logger = LoggerFactory.getLogger(SerieServiceImpl.class);
 
     @Autowired
     private SerieRepository serieRepository;

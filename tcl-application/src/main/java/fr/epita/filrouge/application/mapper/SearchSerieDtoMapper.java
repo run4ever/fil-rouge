@@ -3,7 +3,7 @@ package fr.epita.filrouge.application.mapper;
 
 import fr.epita.filrouge.application.serie.SearchSerieDto;
 import fr.epita.filrouge.domain.entity.serie.SearchSerie;
-import fr.epita.filrouge.domain.entity.serie.Serie;
+
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 

@@ -22,15 +22,16 @@ public class ViewingSerie {
         sb.append ("status=").append (status);
         sb.append (", currentSeason=").append (currentSeason);
         sb.append (", currentEpisode=").append (currentEpisode);
-        sb.append (", appUser=").append (appUser);
-        sb.append (", serie=").append (serie);
+        sb.append (", appUser=").append (appUser.toString ());
+        sb.append (", serie=").append (serie.toString ());
         sb.append (", datelastAction=").append (dateLastAction);
         sb.append ('}');
         return sb.toString ();
     }
 
-    //default constructor
+
     public ViewingSerie() {
+        //default constructor
     }
 
 
@@ -83,7 +84,7 @@ public class ViewingSerie {
     }
 
     public static final class Builder {
-//        private Long id;
+
         private Status status;
         private Integer currentSeason;
         private Integer currentEpisode;
@@ -98,10 +99,6 @@ public class ViewingSerie {
             return new Builder();
         }
 
-//        public Builder withId(Long id) {
-//            this.id = id;
-//            return this;
-//        }
 
         public Builder withStatus(Status status) {
             this.status = status;
@@ -135,7 +132,6 @@ public class ViewingSerie {
 
         public ViewingSerie build() {
             ViewingSerie viewingSerie = new ViewingSerie();
-//            viewingSerie.setId(id);
             viewingSerie.setStatus(status);
             viewingSerie.setCurrentSeason(currentSeason);
             viewingSerie.setCurrentEpisode(currentEpisode);

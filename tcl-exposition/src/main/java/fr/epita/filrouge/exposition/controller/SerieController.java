@@ -1,4 +1,4 @@
-package fr.epita.filrouge.exposition.api;
+package fr.epita.filrouge.exposition.controller;
 
 import fr.epita.filrouge.application.common.PageDTO;
 import fr.epita.filrouge.application.serie.SearchSerieDto;
@@ -19,7 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -41,7 +40,7 @@ public class SerieController {
     })
     public ResponseEntity<SerieDto> getSerie(@PathVariable("id") String imdbId) {
 
-        logger.info("imdb Id en entrée : " + imdbId);
+        logger.info("imdb Id en entrée : ", imdbId);
         try {
             return new ResponseEntity<SerieDto>(iSerieManagement.getSerieById(imdbId), HttpStatus.OK);
         }

@@ -49,6 +49,7 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
             throw new AlreadyExistingException ("ViewingSerie existing : Id imdb : " + serieViewDto.getImdb ()
                     + " user : " + serieViewDto.getEmail (), ErrorCodes.VIEWVING_SERIE_ALREADY_EXISTING);
         }
+
         return mapToDtoCreate (viewingSerieRepository.create (mapToDomainCreate (serieViewDto)));
 
     }
@@ -89,10 +90,10 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
         List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<ViewingSerieRestitDto> ();
         String attributeVerify = "";
         if (controlSortAttribute (sortAttribute)) {
-            attributeVerify.concat (sortAttribute);
+            attributeVerify= "".concat (sortAttribute);
         }
         else {
-            attributeVerify.concat("DateLastAction");
+            attributeVerify = "".concat("DateLastAction");
         }
         for (ViewingSerie viewingSerie : viewingSerieRepository.findallViewingSerieByUserByPage(email, offset, limit, attributeVerify, sortAsc)) {
             viewingSerieRestitDtos.add (mapToDtoRestit (viewingSerie));
@@ -166,10 +167,6 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
         return viewingSerieRestitDto;
     }
 
-//    private ViewingSerie mapToDomainRestit(ViewingSerieRestitDto viewingSerieDto) {
-//        ViewingSerie viewingSerie = new ViewingSerie ();
-//
-//        return viewingSerie;
-//    }
+
 
 }

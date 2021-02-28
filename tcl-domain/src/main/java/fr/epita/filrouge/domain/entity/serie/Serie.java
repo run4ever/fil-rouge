@@ -178,5 +178,21 @@ public class Serie {
             serie.setStatusSerie (statusSerie);
             return serie;
         }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder ("Builder{");
+            sb.append ("imdbId='").append (imdbId).append ('\'');
+            sb.append (", title='").append (title).append ('\'');
+            sb.append (", description='").append (description).append ('\'');
+            sb.append (", startYear=").append (startYear);
+            sb.append (", endYear=").append (endYear);
+            sb.append (", numberOfSeason=").append (numberOfSeason);
+            sb.append (", numberOfEpisode=").append (numberOfEpisode);
+            sb.append (", category=").append (category);
+            sb.append (", statusSerie=").append (statusSerie);
+            sb.append ('}');
+            return sb.toString ();
+        }
     }
 }

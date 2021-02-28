@@ -34,7 +34,7 @@ public class SerieRepositoryImpl implements SerieRepository {
             return serieJpaMapper.mapToDomain (iSerieRepository.findByImdbId (id));
         }
         catch (DataAccessException e) {
-            logger.error ("erreur lors de la récupération de la série, imdbId :" + id);
+            logger.error ("erreur lors de la récupération de la série, imdbId :", id);
             throw new TechnicalException (TechnicalExceptionEnum.JPA_READ_ACCESS, "erreur lors de la récupération de la série");
         }
 
@@ -46,7 +46,7 @@ public class SerieRepositoryImpl implements SerieRepository {
             return serieJpaMapper.mapToDomain (iSerieRepository.save (serieJpaMapper.mapToJpa (serie)));
         }
         catch (DataAccessException e) {
-            logger.error ("erreur lors de la création de la série, imdbId :" + serie.getImdbId ());
+            logger.error ("erreur lors de la création de la série, imdbId :", serie.getImdbId ());
             throw new TechnicalException (TechnicalExceptionEnum.JPA_CREATE_ACCESS, "erreur lors de la création de la série");
         }
     }

@@ -4,7 +4,7 @@ public enum Status {
 
     WATCHED,
     FINISHED,
-    IN_PROGESS,
+    IN_PROGRESS,
     TO_WATCH;
 
 }

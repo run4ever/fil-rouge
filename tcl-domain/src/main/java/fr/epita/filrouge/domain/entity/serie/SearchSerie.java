@@ -1,6 +1,5 @@
 package fr.epita.filrouge.domain.entity.serie;
 
-import fr.epita.filrouge.domain.entity.common.Category;
 
 public class SearchSerie {
     private String imdbId;

@@ -66,7 +66,7 @@ public class ViewingSerieTest {
             .withSerie (serie14)
             .withCurrentEpisode (60)
             .withCurrentSeason (10)
-            .withStatus (Status.IN_PROGESS)
+            .withStatus (Status.IN_PROGRESS)
             .build ();
 
     ViewingSerie viewingSerie15 = ViewingSerie.Builder.aViewingSerie ()
@@ -74,7 +74,7 @@ public class ViewingSerieTest {
             .withSerie (serie15)
             .withCurrentEpisode (60)
             .withCurrentSeason (10)
-            .withStatus (Status.IN_PROGESS)
+            .withStatus (Status.IN_PROGRESS)
             .build ();
 
     @Test

@@ -24,11 +24,11 @@ public class ViewingSerieJpa {
     private Integer currentSeason;
     private Integer currentEpisode;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private AppUserJpa appUserJpa;
 
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private SerieJpa serieJpa;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,6 +36,7 @@ public class ViewingSerieJpa {
     private Date dateLastAction;
 
     public ViewingSerieJpa() {
+        //default constructor
     }
 
     public Long getId() {

@@ -97,6 +97,20 @@ public class AppUser extends Person {
             appUser.setRole(role);
             return appUser;
         }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder ("Builder{");
+            sb.append ("id=").append (id);
+            sb.append (", lastname='").append (lastname).append ('\'');
+            sb.append (", firstname='").append (firstname).append ('\'');
+            sb.append (", birthdayDate=").append (birthdayDate);
+            sb.append (", email='").append (email).append ('\'');
+            sb.append (", password='").append (password).append ('\'');
+            sb.append (", role=").append (role);
+            sb.append ('}');
+            return sb.toString ();
+        }
     }
 
 
