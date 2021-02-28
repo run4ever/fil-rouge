@@ -26,6 +26,7 @@ public class SerieJpaMapper {
                 .withNumberOfSeason (entity.getNumberOfSeason ())
                 .withNumberOfEpisode (entity.getNumberOfEpisode ())
                 .withCategory (entity.getCategory ())
+                .withStatusSerie (entity.getStatusSerie ())
                 .build ();
 
     }
@@ -57,6 +58,7 @@ public class SerieJpaMapper {
                 .withNumberOfSeason (jpa.getNumberOfSeason ())
                 .withNumberOfEpisode (jpa.getNumberOfEpisode ())
                 .withCategory (jpa.getCategory ())
+                .withStatusSerie (jpa.getStatusSerie ())
                 .build ();
 
 

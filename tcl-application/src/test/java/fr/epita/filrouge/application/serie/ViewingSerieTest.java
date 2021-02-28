@@ -2,7 +2,6 @@ package fr.epita.filrouge.application.serie;
 
 
 import fr.epita.filrouge.application.mapper.AppUserDtoMapper;
-import fr.epita.filrouge.application.mapper.MapperViewingSerieDto;
 import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieCreateDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieService;
@@ -38,9 +37,6 @@ public class ViewingSerieTest {
 
     private ViewingSerieRepository viewingSerieRepository;
 
-    @MockBean
-
-    private MapperViewingSerieDto mapperViewingSerieDto;
 
     @MockBean
 

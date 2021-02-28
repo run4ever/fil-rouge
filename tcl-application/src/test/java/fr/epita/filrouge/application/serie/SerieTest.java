@@ -1,12 +1,11 @@
 package fr.epita.filrouge.application.serie;
 
-import fr.epita.filrouge.application.mapper.MapperSerieDto;
+import fr.epita.filrouge.application.mapper.SerieDtoMapper;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.serie.Serie;
 import fr.epita.filrouge.domain.entity.serie.SerieRepository;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
 import fr.epita.filrouge.domain.exception.NotFoundException;
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.DisplayName;
 
 
@@ -34,7 +33,7 @@ public class SerieTest {
     private SerieRepository serieRepositoryMock;
 
     @MockBean
-    private MapperSerieDto mapperSerieDto;
+    private SerieDtoMapper serieDtoMapper;
 
 
     @Test()
@@ -62,8 +61,8 @@ public class SerieTest {
 
 
         /** Mock sur Mapper */
-        when (mapperSerieDto.mapDtoToDomain (serieDto)).thenReturn (serieMock);
-        when (mapperSerieDto.mapDomainToDto (serieMock)).thenReturn (serieDto);
+        when (serieDtoMapper.mapDtoToDomain (serieDto)).thenReturn (serieMock);
+        when (serieDtoMapper.mapDomainToDto (serieMock)).thenReturn (serieDto);
 
         /** Mock sur Repository */
         when (serieRepositoryMock.findById (serieDto.getImdbId ())).thenReturn (null);
@@ -103,8 +102,8 @@ public class SerieTest {
         serieMock.setEndYear (1969);
 
         /** Mock sur Mapper */
-        when (mapperSerieDto.mapDtoToDomain (serieDto)).thenReturn (serieMock);
-        when (mapperSerieDto.mapDomainToDto (serieMock)).thenReturn (serieDto);
+        when (serieDtoMapper.mapDtoToDomain (serieDto)).thenReturn (serieMock);
+        when (serieDtoMapper.mapDomainToDto (serieMock)).thenReturn (serieDto);
 
         /** Mock sur Repository */
         when (serieRepositoryMock.findById (serieDto.getImdbId ())).thenReturn (serieMock);
@@ -142,8 +141,8 @@ public class SerieTest {
         serieMock.setEndYear (1969);
 
         /** Mock sur Mapper */
-        when (mapperSerieDto.mapDtoToDomain (serieDto)).thenReturn (serieMock);
-        when (mapperSerieDto.mapDomainToDto (serieMock)).thenReturn (serieDto);
+        when (serieDtoMapper.mapDtoToDomain (serieDto)).thenReturn (serieMock);
+        when (serieDtoMapper.mapDomainToDto (serieMock)).thenReturn (serieDto);
 
         /** Mock sur Repository */
         when (serieRepositoryMock.findById (serieDto.getImdbId ())).thenReturn (serieMock);
@@ -175,8 +174,8 @@ public class SerieTest {
         serieMock.setEndYear (1969);
 
         /** Mock sur Mapper */
-        when (mapperSerieDto.mapDtoToDomain (serieDto)).thenReturn (serieMock);
-        when (mapperSerieDto.mapDomainToDto (serieMock)).thenReturn (serieDto);
+        when (serieDtoMapper.mapDtoToDomain (serieDto)).thenReturn (serieMock);
+        when (serieDtoMapper.mapDomainToDto (serieMock)).thenReturn (serieDto);
 
         /** Mock sur Repository */
         when (serieRepositoryMock.findById (serieDto.getImdbId ())).thenReturn (null);
@@ -214,8 +213,8 @@ public class SerieTest {
         serieMock.setEndYear (1969);
 
         /** Mock sur Mapper */
-        when (mapperSerieDto.mapDtoToDomain (serieDto)).thenReturn (serieMock);
-        when (mapperSerieDto.mapDomainToDto (serieMock)).thenReturn (serieDto);
+        when (serieDtoMapper.mapDtoToDomain (serieDto)).thenReturn (serieMock);
+        when (serieDtoMapper.mapDomainToDto (serieMock)).thenReturn (serieDto);
 
         /** Mock sur Repository */
         when (serieRepositoryMock.findById (serieDto.getImdbId ())).thenReturn (serieMock);
@@ -248,8 +247,8 @@ public class SerieTest {
         serieMock.setEndYear (1969);
 
         /** Mock sur Mapper */
-        when (mapperSerieDto.mapDtoToDomain (serieDto)).thenReturn (serieMock);
-        when (mapperSerieDto.mapDomainToDto (serieMock)).thenReturn (serieDto);
+        when (serieDtoMapper.mapDtoToDomain (serieDto)).thenReturn (serieMock);
+        when (serieDtoMapper.mapDomainToDto (serieMock)).thenReturn (serieDto);
 
         /** Mock sur Repository */
         when (serieRepositoryMock.findById (serieDto.getImdbId ())).thenReturn (null);

@@ -12,12 +12,14 @@ public class Serie {
     private Integer numberOfSeason;
     private Integer numberOfEpisode;
     private Category category; // Attention, on gère une seul Category ici
+    private StatusSerie statusSerie;
 
     //default constructor
     public Serie() {
     }
 
-    public Serie(String imdbId, String title, String description, Integer startYear, Integer endYear, Integer numberOfSeason, Integer numberOfEpisode, Category category) {
+    public Serie(String imdbId, String title, String description, Integer startYear, Integer endYear,
+                 Integer numberOfSeason, Integer numberOfEpisode, Category category, StatusSerie statusSerie) {
         this.imdbId = imdbId;
         this.title = title;
         this.description = description;
@@ -26,6 +28,7 @@ public class Serie {
         this.numberOfSeason = numberOfSeason;
         this.numberOfEpisode = numberOfEpisode;
         this.category = category;
+        this.statusSerie = statusSerie;
     }
 
     public String getImdbId() {
@@ -92,6 +95,13 @@ public class Serie {
         this.category = category;
     }
 
+    public StatusSerie getStatusSerie() {
+        return statusSerie;
+    }
+
+    public void setStatusSerie(StatusSerie statusSerie) {
+        this.statusSerie = statusSerie;
+    }
 
     public static final class Builder {
         private String imdbId;
@@ -102,6 +112,7 @@ public class Serie {
         private Integer numberOfSeason;
         private Integer numberOfEpisode;
         private Category category; // Attention, on gère Serie est dans une seule Category
+        private StatusSerie statusSerie;
 
         private Builder() {
         }
@@ -149,6 +160,10 @@ public class Serie {
             this.category = category;
             return this;
         }
+        public Builder withStatusSerie(StatusSerie statusSerie) {
+            this.statusSerie = statusSerie;
+            return this;
+        }
 
         public Serie build() {
             Serie serie = new Serie();
@@ -160,6 +175,7 @@ public class Serie {
             serie.setNumberOfSeason(numberOfSeason);
             serie.setNumberOfEpisode(numberOfEpisode);
             serie.setCategory(category);
+            serie.setStatusSerie (statusSerie);
             return serie;
         }
     }

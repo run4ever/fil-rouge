@@ -1,7 +1,7 @@
 package fr.epita.filrouge.application.viewingserie;
 
 import fr.epita.filrouge.application.common.PageDTO;
-import fr.epita.filrouge.application.mapper.MapperSerieDto;
+import fr.epita.filrouge.application.mapper.SerieDtoMapper;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
 import fr.epita.filrouge.domain.entity.serie.SerieRepository;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
@@ -35,7 +35,7 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     private ViewingSerieRepository viewingSerieRepository;
 
     @Autowired
-    private MapperSerieDto mapperSerieDto;
+    private SerieDtoMapper serieDtoMapper;
 
 
     /**
@@ -161,7 +161,7 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
         viewingSerieRestitDto.setCurrentEpisode (viewingSerie.getCurrentEpisode ());
         viewingSerieRestitDto.setCurrentSeason (viewingSerie.getCurrentSeason ());
         viewingSerieRestitDto.setEmail (viewingSerie.getAppUser ().getEmail ());
-        viewingSerieRestitDto.setSerieDto (mapperSerieDto.mapDomainToDto (viewingSerie.getSerie ()));
+        viewingSerieRestitDto.setSerieDto (serieDtoMapper.mapDomainToDto (viewingSerie.getSerie ()));
         viewingSerieRestitDto.setStatus (viewingSerie.getStatus ());
         return viewingSerieRestitDto;
     }

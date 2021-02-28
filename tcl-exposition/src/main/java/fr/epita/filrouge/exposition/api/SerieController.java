@@ -1,5 +1,7 @@
 package fr.epita.filrouge.exposition.api;
 
+import fr.epita.filrouge.application.common.PageDTO;
+import fr.epita.filrouge.application.serie.SearchSerieDto;
 import fr.epita.filrouge.application.serie.SerieDto;
 import fr.epita.filrouge.application.serie.SerieService;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
@@ -16,6 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/serie")
@@ -68,7 +73,7 @@ public class SerieController {
 
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/delete/{id}")
     @ApiOperation (value = "Suppression unitaire d'une série", nickname = "getSerie", notes ="création d'une série à partir l'IHM")
     @ApiResponses (value = {
             @ApiResponse (code = 204, message = "Série supprimée avec succès"),
@@ -90,5 +95,71 @@ public class SerieController {
         catch (TechnicalException technicalException){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, technicalException.getExceptionMessage ().toString ());
         }
+    }
+
+    @GetMapping("/list/all")
+    @ApiOperation (value = "restitution complète de la liste des séries ", nickname = "getAllSeriesByUser",
+            notes ="Resitution de la liste complète des séries selon l'intervalle fourni en entrée")
+    @ApiResponses (value = {
+            @ApiResponse (code = 200, message = "Restitution de la liste des séries", response = PageDTO.class),
+            @ApiResponse (code = 404, message = "Aucune série trouvée", response = PageDTO.class),
+            @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = PageDTO.class)
+    })
+    public ResponseEntity<List<SerieDto>> getAllSeries() {
+        try {
+            return new ResponseEntity<List<SerieDto>>(iSerieManagement.findAllSeries(), HttpStatus.OK);
+        }
+        catch (NotFoundException notFoundException) {
+            throw new ResponseStatusException (HttpStatus.NOT_FOUND, notFoundException.getErrorCode ());
+        }
+        catch (TechnicalException technicalException){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, technicalException.getExceptionMessage ().toString ());
+        }
+    }
+
+    @GetMapping("/list/{offset}/{limit}")
+    @ApiOperation (value = "restitution paginée de la liste des séries ", nickname = "getAllSeriesByUser",
+            notes ="Resitution de la liste complète des séries selon l'intervalle fourni en entrée")
+    @ApiResponses (value = {
+            @ApiResponse (code = 200, message = "Restitution complète de la liste des séries", response = PageDTO.class),
+            @ApiResponse (code = 206, message = "Restitution partielle de la liste des séries", response = PageDTO.class),
+            @ApiResponse (code = 404, message = "Aucune série trouvée", response = PageDTO.class),
+            @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = PageDTO.class)
+    })
+    public ResponseEntity<PageDTO> getAllSeriesByPage(@PathVariable("offset") int offset, @PathVariable("limit") int limit) {
+
+        if (offset > limit) {
+            throw new ResponseStatusException (HttpStatus.BAD_REQUEST, "limit supérieur à offset");
+        }
+        try {
+            PageDTO pageDTO = iSerieManagement.findAllSeriesByPage(offset, limit);
+            if (pageDTO.getTotal () <= pageDTO.getLimit () && (pageDTO.getOffset () ==0 )) {
+                return new ResponseEntity<PageDTO>(pageDTO, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<PageDTO>(pageDTO, HttpStatus.PARTIAL_CONTENT);
+            }
+
+        }
+        catch (NotFoundException notFoundException) {
+            throw new ResponseStatusException (HttpStatus.NOT_FOUND, notFoundException.getErrorCode ());
+        }
+        catch (TechnicalException technicalException){
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, technicalException.getExceptionMessage ().toString ());
+        }
+    }
+
+    @PostMapping("/list/search")
+    @ApiOperation (value = "Recherche d'une série à partir de critères", nickname = "searchSerie",
+            notes ="Recherche multi-critères d'une série existante dans la base")
+    @ApiResponses (value = {
+            @ApiResponse (code = 200, message = "Séries trouvées suite à la recherche, restitution complète", response = PageDTO.class),
+            @ApiResponse (code = 206, message = "Séries trouvées suite à la recherche, restitution partielle", response = PageDTO.class),
+            @ApiResponse (code = 404, message = "Aucune série trouvée", response = PageDTO.class),
+            @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = PageDTO.class)
+    })
+    public ResponseEntity<PageDTO> searchSerie(@RequestBody SearchSerieDto searchSerieDto) {
+
+
+        return new ResponseEntity<PageDTO> (iSerieManagement.searchAllSeries(searchSerieDto), HttpStatus.PARTIAL_CONTENT);
     }
 }
