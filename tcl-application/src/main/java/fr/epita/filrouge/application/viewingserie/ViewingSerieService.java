@@ -1,14 +1,17 @@
 package fr.epita.filrouge.application.viewingserie;
 
-import fr.epita.filrouge.domain.entity.serie.ViewingSerie;
+import fr.epita.filrouge.application.common.PageDTO;
 
 import java.util.List;
 
 public interface ViewingSerieService {
 
-    void create(ViewingSerie serieView);
+    ViewingSerieCreateDto create(ViewingSerieCreateDto serieViewDto);
 
-    List<ViewingSerie> findAllVievingSerie();
+    List<ViewingSerieRestitDto> findByUserAllVievingSerieDto(String email);
 
-    ViewingSerie findById (String id);
+    PageDTO findByUserAllVievingSerieDtoByPage(String email, int offset, int limit, String sortAttribute, boolean sortAsc);
+
+    ViewingSerieRestitDto findViewing (String email, String imdb);
+
 }

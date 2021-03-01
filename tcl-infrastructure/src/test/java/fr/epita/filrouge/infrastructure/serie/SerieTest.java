@@ -3,6 +3,7 @@ package fr.epita.filrouge.infrastructure.serie;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.serie.Serie;
 import fr.epita.filrouge.domain.entity.serie.SerieRepository;
+import fr.epita.filrouge.domain.entity.serie.StatusSerie;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,8 @@ public class SerieTest {
             2019,
             5,
             20,
-            Category.ROMANCE
+            Category.ROMANCE,
+            StatusSerie.FINISH
     );
 
     private static final Serie serie5 = new Serie ("tt0005",
@@ -38,9 +40,10 @@ public class SerieTest {
             2019,
             5,
             20,
-            Category.ROMANCE
+            Category.ROMANCE,
+            StatusSerie.FINISH
     );
-    private static final Serie serie9 = new Serie ("tt0001", "UJA", "serie9", 2018, 2019, 5, 20, Category.ROMANCE);
+    private static final Serie serie9 = new Serie ("tt0001", "UJA", "serie9", 2018, 2019, 5, 20, Category.ROMANCE, StatusSerie.FINISH);
 
     private static final Serie serie10 = new Serie ("tt0002",
             "UJA",
@@ -49,7 +52,8 @@ public class SerieTest {
             2019,
             5,
             20,
-            Category.ROMANCE
+            Category.ROMANCE,
+            StatusSerie.FINISH
     );
 
     private static final Serie serie11 = new Serie ("tt0005",
@@ -59,7 +63,8 @@ public class SerieTest {
             2019,
             5,
             20,
-            Category.ROMANCE
+            Category.ROMANCE,
+            StatusSerie.FINISH
     );
     @Test
     @DisplayName("Vérifier la création et récupération d'une série")
@@ -72,7 +77,8 @@ public class SerieTest {
                 2019,
                 5,
                 20,
-                Category.ROMANCE
+                Category.ROMANCE,
+                StatusSerie.FINISH
         );
 
         serieDomaine.create (serie1);
