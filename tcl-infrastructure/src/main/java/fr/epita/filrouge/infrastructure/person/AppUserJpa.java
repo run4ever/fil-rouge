@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-//@Table(name="app_user")
+@Table(name="app_user")
 public class AppUserJpa {
 
     @Id
