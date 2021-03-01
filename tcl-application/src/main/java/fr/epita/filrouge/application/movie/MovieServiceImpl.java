@@ -6,9 +6,11 @@ import fr.epita.filrouge.domain.entity.movie.MovieRepository;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
 import fr.epita.filrouge.domain.exception.ErrorCodes;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MovieServiceImpl implements MovieService {
 
     @Autowired
@@ -34,6 +36,11 @@ public class MovieServiceImpl implements MovieService {
             return null;
         }
         return movieDtoMapper.mapDomainToDto(movieRepository.findMovieFromApiId(apiMovieId));
+    }
+
+    @Override
+    public List<MovieDto> listAllMoviesService() {
+        return  movieDtoMapper.mapDomainToDto(movieRepository.findAllMovies());
     }
 
 }

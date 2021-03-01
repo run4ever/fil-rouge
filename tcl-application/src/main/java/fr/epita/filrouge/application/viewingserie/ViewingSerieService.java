@@ -1,7 +1,5 @@
 package fr.epita.filrouge.application.viewingserie;
 
-
-
 import fr.epita.filrouge.application.common.PageDTO;
 
 import java.util.List;
