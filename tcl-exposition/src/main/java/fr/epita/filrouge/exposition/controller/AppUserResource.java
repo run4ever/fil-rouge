@@ -3,11 +3,15 @@ package fr.epita.filrouge.exposition.controller;
 import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.application.person.AppUserLightDto;
 import fr.epita.filrouge.application.person.AppUserService;
+import fr.epita.filrouge.domain.exception.AlreadyExistingException;
+import fr.epita.filrouge.domain.exception.ErrorCodes;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -39,10 +43,13 @@ public class AppUserResource {
     @ApiOperation(value = "Create one user")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "AppUser is created", response = AppUserDto.class),
+            @ApiResponse(code = 400, message ="Bad request, email exitings", response = AppUserDto.class),
             @ApiResponse (code = 500, message = "Impossible to create AppUser", response = AppUserDto.class)
     })
     public ResponseEntity<?> addAppUser(@RequestBody final AppUserDto appUserDto){
+
         appUserService.create(appUserDto);
+
         final URI location = ServletUriComponentsBuilder
                                 .fromCurrentRequest()
                                 .path("/{email}")

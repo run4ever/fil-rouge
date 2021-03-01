@@ -129,7 +129,7 @@ public class AppUserTest {
 
           /** Mock findByEmail, on recherche AnyString et on return appUser */
           when(appUserRepositoryMock.findbyEmail(anyString())).thenReturn(appUser);
-        when(appUserDtoMapper.mapDomaineToLightDto(appUser)).thenReturn(appUserLightDto);
+        when(appUserDtoMapper.mapDomainToLightDto(appUser)).thenReturn(appUserLightDto);
 
         //When
         AppUserLightDto appUserFound =  appUserService.getAppUser("test@test.fr");

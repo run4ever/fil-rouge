@@ -12,6 +12,6 @@ public interface AppUserDtoMapper {
   
     AppUser mapDtoToDomain(AppUserDto appUserDto);
     AppUserDto mapDomainToDto(AppUser appUser);
-    AppUserLightDto mapDomaineToLightDto(AppUser appUser);
+    AppUserLightDto mapDomainToLightDto(AppUser appUser);
 
 }
