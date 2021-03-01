@@ -1,10 +1,14 @@
 package fr.epita.filrouge.infrastructure.mapper;
 
-import fr.epita.filrouge.domain.entity.serie.ViewingSerie;
-import fr.epita.filrouge.infrastructure.serie.ViewingSerieJpa;
+import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
+import fr.epita.filrouge.infrastructure.viewingserie.ViewingSerieJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +37,7 @@ public class ViewingSerieJpaMapper {
 
     public List<ViewingSerieJpa> mapToJpa(List<ViewingSerie> entities) {
         if (entities == null) {
-            return null;
+            return Collections.emptyList ();
         }
         final List<ViewingSerieJpa> viewingSeriesJpa = new ArrayList<ViewingSerieJpa> ();
         for (ViewingSerie item : entities) {
@@ -53,14 +57,15 @@ public class ViewingSerieJpaMapper {
                 .withCurrentEpisode (jpa.getCurrentEpisode ())
                 .withStatus (jpa.getStatus ())
                 .withSerie (serieJpaMapper.mapToDomain(jpa.getSerieJpa()))
-                .withAppUser (appUserJpaMapper.mapToEntity (jpa.getAppUserjpa()))
+                .withAppUser (appUserJpaMapper.mapToEntity (jpa.getAppUserJpa ()))
+                .withDateLastAction (convertToLocalDateViaInstant(jpa.getDateLastAction ()))
                 .build();
 
     }
 
     public List<ViewingSerie> mapToDomain(List<ViewingSerieJpa> jpas){
         if (jpas == null) {
-            return null;
+            return Collections.emptyList ();
         }
 
         final List<ViewingSerie> viewingSeries = new ArrayList<ViewingSerie>();
@@ -69,4 +74,11 @@ public class ViewingSerieJpaMapper {
         }
         return viewingSeries;
     }
+
+  private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+
 }

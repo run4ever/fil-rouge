@@ -6,6 +6,7 @@ import fr.epita.filrouge.domain.entity.person.Role;
 import java.time.LocalDate;
 
 public class AppUserDto {
+
     @JsonProperty("lastname")
     private String lastname;
 

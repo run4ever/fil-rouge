@@ -7,7 +7,8 @@ import fr.epita.filrouge.application.serie.SerieDto;
 
 @Component
 @Mapper(componentModel = "spring")
-public interface MapperSerieDto {
+
+public interface SerieDtoMapper {
 
         Serie mapDtoToDomain(SerieDto serieDto);
         SerieDto mapDomainToDto (Serie serie);

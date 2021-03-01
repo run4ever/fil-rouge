@@ -10,6 +10,7 @@ public class BusinessException extends RuntimeException {
     }
 
     public String getErrorCode() {
+
         return errorCode;
     }
 }

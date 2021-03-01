@@ -1,9 +1,13 @@
-package fr.epita.filrouge.infrastructure.serie;
+package fr.epita.filrouge.infrastructure.viewingserie;
 
 import fr.epita.filrouge.infrastructure.person.AppUserJpa;
 import fr.epita.filrouge.domain.entity.common.Status;
+import fr.epita.filrouge.infrastructure.serie.SerieJpa;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.Date;
+
 
 @Entity
 @Table(name="serie_viewing")
@@ -20,14 +24,19 @@ public class ViewingSerieJpa {
     private Integer currentSeason;
     private Integer currentEpisode;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private AppUserJpa appUserjpa;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private AppUserJpa appUserJpa;
 
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private SerieJpa serieJpa;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
+    private Date dateLastAction;
+
     public ViewingSerieJpa() {
+        //default constructor
     }
 
     public Long getId() {
@@ -62,12 +71,12 @@ public class ViewingSerieJpa {
         this.currentEpisode = currentEpisode;
     }
 
-    public AppUserJpa getAppUserjpa() {
-        return appUserjpa;
+    public AppUserJpa getAppUserJpa() {
+        return appUserJpa;
     }
 
-    public void setAppUserjpa(AppUserJpa appUserjpa) {
-        this.appUserjpa = appUserjpa;
+    public void setAppUserJpa(AppUserJpa appUserjpa) {
+        this.appUserJpa = appUserjpa;
     }
 
     public SerieJpa getSerieJpa() {
@@ -78,6 +87,14 @@ public class ViewingSerieJpa {
         this.serieJpa = serieJpa;
     }
 
+    public Date getDateLastAction() {
+        return dateLastAction;
+    }
+
+    public void setDateLastAction(Date dateLastAction) {
+        this.dateLastAction = dateLastAction;
+    }
+
     public static final class Builder {
         private Long idViewSerie;
         private Status status;
@@ -85,6 +102,7 @@ public class ViewingSerieJpa {
         private Integer currentEpisode;
         private AppUserJpa appUserjpa;
         private SerieJpa serieJpa;
+        private Date dateLastAction;
 
         private Builder() {
         }
@@ -122,14 +140,20 @@ public class ViewingSerieJpa {
             return this;
         }
 
+        public Builder withDateLastAction(Date dateLastAction) {
+            this.dateLastAction = dateLastAction;
+            return this;
+        }
+
         public ViewingSerieJpa build() {
             ViewingSerieJpa viewingSerieJpa = new ViewingSerieJpa ();
             viewingSerieJpa.setId (idViewSerie);
             viewingSerieJpa.setStatus (status);
             viewingSerieJpa.setCurrentSeason (currentSeason);
             viewingSerieJpa.setCurrentEpisode (currentEpisode);
-            viewingSerieJpa.setAppUserjpa (appUserjpa);
+            viewingSerieJpa.setAppUserJpa (appUserjpa);
             viewingSerieJpa.setSerieJpa (serieJpa);
+            viewingSerieJpa.setDateLastAction (dateLastAction);
             return viewingSerieJpa;
         }
     }
