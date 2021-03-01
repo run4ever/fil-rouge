@@ -1,4 +1,4 @@
-package fr.epita.filrouge.application.serie;
+package fr.epita.filrouge.application.viewingserie;
 
 import fr.epita.filrouge.domain.entity.serie.ViewingSerie;
 
