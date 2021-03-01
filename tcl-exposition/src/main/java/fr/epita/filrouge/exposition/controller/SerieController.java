@@ -22,7 +22,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/serie")
+@RequestMapping("/api/v1/serie")
 @Api(value = "Controller REST pour les series")
 public class SerieController {
 

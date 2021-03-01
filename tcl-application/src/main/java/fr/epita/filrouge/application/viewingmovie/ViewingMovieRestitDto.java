@@ -5,7 +5,7 @@ import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.domain.entity.common.Status;
 
-public class ViewingMovieDto {
+public class ViewingMovieRestitDto {
 
     @JsonProperty("status")
     private Status status;
@@ -68,12 +68,12 @@ public class ViewingMovieDto {
             return this;
         }
 
-        public ViewingMovieDto build() {
-            ViewingMovieDto viewingMovieDto = new ViewingMovieDto();
-            viewingMovieDto.setStatus(status);
-            viewingMovieDto.setAppUserDto(appUserDto);
-            viewingMovieDto.setMovieDto(movieDto);
-            return viewingMovieDto;
+        public ViewingMovieRestitDto build() {
+            ViewingMovieRestitDto viewingMovieRestitDto = new ViewingMovieRestitDto();
+            viewingMovieRestitDto.setStatus(status);
+            viewingMovieRestitDto.setAppUserDto(appUserDto);
+            viewingMovieRestitDto.setMovieDto(movieDto);
+            return viewingMovieRestitDto;
         }
     }
 }

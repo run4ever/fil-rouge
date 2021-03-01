@@ -61,7 +61,7 @@ public class ViewingMovieTest {
 
         //Then
         assertThat(viewingMovieRepository.findAllViewingMovie()).isNotEmpty();
-        assertThat(viewingMovieRepository.findViewingMovieFromUserLastname(user1.getLastname())).isNotEmpty();
+        assertThat(viewingMovieRepository.findViewingMovieFromUserEmail(user1.getEmail())).isNotEmpty();
     }
 
     @Test

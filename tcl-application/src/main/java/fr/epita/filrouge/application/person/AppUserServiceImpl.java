@@ -36,6 +36,6 @@ public class AppUserServiceImpl implements AppUserService {
             return null;
         }
 
-        return appUserDtoMapper.mapDomaineToLightDto(appUserRepository.findbyEmail(email));
+        return appUserDtoMapper.mapDomainToLightDto(appUserRepository.findbyEmail(email));
     }
 }

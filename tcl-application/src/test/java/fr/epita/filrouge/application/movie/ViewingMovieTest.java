@@ -4,6 +4,8 @@ import fr.epita.filrouge.application.mapper.AppUserDtoMapper;
 import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.application.mapper.ViewingMovieDtoMapper;
 import fr.epita.filrouge.application.person.AppUserDto;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieRestitDto;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieService;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieServiceImpl;
 import fr.epita.filrouge.domain.entity.common.Category;
@@ -99,9 +101,13 @@ public class ViewingMovieTest {
     public void createViewingMovie_should_fail_when_movie_already_in_viewingMovie() {
         //Given
         AppUser appUser = getAppUserTest();
-        AppUserDto appUserDto = getAppUserDtoTest();
         Movie movie = getMovieTest();
-        MovieDto movieDto =getMovieDtoTest();
+
+        ViewingMovieCreateDto viewingMovieCreateDto = ViewingMovieCreateDto.Builder.aViewingMovieCreateDto()
+                .withEmail(appUser.getEmail())
+                .withImdbId(movie.getImdbId())
+                .withStatus(Status.TO_WATCH)
+                .build();
 
         ViewingMovie viewingMovie = ViewingMovie.Builder.aViewingMovie()
                 .withAppUser(appUser)
@@ -113,13 +119,12 @@ public class ViewingMovieTest {
         listViewingMovie.add(viewingMovie);
 
         /** Mock sur create de ViewingMovieRepository (accès à la base de la couche Infra) */
-        /* Mockito.doNothing().when(viewingMovieRepositoryMock).create(viewingMovie); */
         when(viewingMovieRepositoryMock.findViewingMovieFromUser(appUser)).thenReturn(listViewingMovie);
 
 
         //When
         try {
-            viewingMovieService.addMovieToViewingMovie(appUserDto,movieDto);
+            viewingMovieService.addMovieToViewingMovie(viewingMovieCreateDto);
         } catch (final Exception e) {
             assertThat(e).isInstanceOf(AlreadyExistingException.class);
         }
@@ -134,9 +139,13 @@ public class ViewingMovieTest {
     public void createViewingMovie_should_sucess_when_movie_not_exist() {
         //Given
         AppUser appUser = getAppUserTest();
-        AppUserDto appUserDto = getAppUserDtoTest();
         Movie movie = getMovieTest();
-        MovieDto movieDto =getMovieDtoTest();
+
+        ViewingMovieCreateDto viewingMovieCreateDto = ViewingMovieCreateDto.Builder.aViewingMovieCreateDto()
+                .withStatus(Status.TO_WATCH)
+                .withImdbId(movie.getImdbId())
+                .withEmail(appUser.getEmail())
+                .build();
 
         ViewingMovie viewingMovie = ViewingMovie.Builder.aViewingMovie()
                 .withStatus(Status.TO_WATCH) //à la création on met par défaut Movie à regarder
@@ -149,12 +158,12 @@ public class ViewingMovieTest {
 
         /** Mock sur create de ViewingMovieRepository (accès à la base de la couche Infra) */
         when(viewingMovieRepositoryMock.findViewingMovieFromUser(appUser)).thenReturn(null);
-        when(appUserDtoMapper.mapDtoToDomain(appUserDto)).thenReturn(appUser);
-        when(movieDtoMapper.mapDtoToDomain(movieDto)).thenReturn(movie);
+//        when(appUserDtoMapper.mapDtoToDomain(appUserDto)).thenReturn(appUser);
+//        when(movieDtoMapper.mapDtoToDomain(movieDto)).thenReturn(movie);
 
 
         //When
-        viewingMovieService.addMovieToViewingMovie(appUserDto,movieDto);
+        viewingMovieService.addMovieToViewingMovie(viewingMovieCreateDto);
 
         //Then
         /** Vérifier que create de ViewingMovieRepository appelé 1 fois dans ce cas */
@@ -181,6 +190,12 @@ public class ViewingMovieTest {
                 .withReleaseDate(LocalDate.now())
                 .build();
 
+        ViewingMovieCreateDto viewingMovieCreateDto = ViewingMovieCreateDto.Builder.aViewingMovieCreateDto()
+                .withStatus(Status.TO_WATCH)
+                .withImdbId(movie.getImdbId())
+                .withEmail(appUser.getEmail())
+                .build();
+
         ViewingMovie viewingMovie = ViewingMovie.Builder.aViewingMovie()
                 .withStatus(Status.TO_WATCH) //à la création on met par défaut Movie à regarder
                 .withAppUser(appUser)
@@ -202,7 +217,7 @@ public class ViewingMovieTest {
         when(movieDtoMapper.mapDtoToDomain(movieDto)).thenReturn(movie);
 
         //When
-        viewingMovieService.addMovieToViewingMovie(appUserDto,movieDto);
+        viewingMovieService.addMovieToViewingMovie(viewingMovieCreateDto);
 
         //Then
         /** Vérifier que create de ViewingMovieRepository appelé 1 fois dans ce cas */
