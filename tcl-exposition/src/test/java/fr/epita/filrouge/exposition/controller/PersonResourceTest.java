@@ -19,20 +19,20 @@ public class PersonResourceTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Test
-    public void show_appuser_by_email() throws Exception {
-        //Given
-        //Cette adresse email est dans le fichier import.sql qui sera chargé à l'initialisation de l'application
-        String emailTest ="superman@world.com";
-
-        //When
-        ResponseEntity<AppUserLightDto> response = restTemplate.getForEntity("/api/v1/appuser/"+emailTest, AppUserLightDto.class);
-
-        //Then
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody().getEmail()).isEqualTo(emailTest);
-        assertThat(response.getBody().getLastname()).isEqualTo("man");
-    }
+//    @Test
+//    public void show_appuser_by_email() throws Exception {
+//        //Given
+//        //Cette adresse email est dans le fichier import.sql qui sera chargé à l'initialisation de l'application
+//        String emailTest ="superman@world.com";
+//
+//        //When
+//        ResponseEntity<AppUserLightDto> response = restTemplate.getForEntity("/api/v1/appuser/"+emailTest, AppUserLightDto.class);
+//
+//        //Then
+//        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+//        assertThat(response.getBody().getEmail()).isEqualTo(emailTest);
+//        assertThat(response.getBody().getLastname()).isEqualTo("man");
+//    }
 
 
 }

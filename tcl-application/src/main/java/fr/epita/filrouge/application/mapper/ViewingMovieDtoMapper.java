@@ -1,6 +1,6 @@
 package fr.epita.filrouge.application.mapper;
 
-import fr.epita.filrouge.application.movie.ViewingMovieDto;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieDto;
 import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
 import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
