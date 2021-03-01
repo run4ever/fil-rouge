@@ -1,4 +1,4 @@
-package fr.epita.filrouge.exposition.api.person;
+package fr.epita.filrouge.exposition.controller;
 
 
 import fr.epita.filrouge.application.person.AppUserLightDto;
