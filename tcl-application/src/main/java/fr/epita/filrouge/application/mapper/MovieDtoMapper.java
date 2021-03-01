@@ -10,8 +10,10 @@ import java.util.List;
 
 
 public interface MovieDtoMapper {
-        public Movie mapDtoToDomain(MovieDto movieDto);
-        public List<Movie> mapDtoToDomain(List<MovieDto> movieDtoList);
-        public MovieDto mapDomainToDto(Movie movie);
-        public List<MovieDto> mapDomainToDto(List<Movie> movieList);
+
+        Movie mapDtoToDomain(MovieDto movieDto);
+        List<Movie> mapDtoToDomain(List<MovieDto> movieDtoList);
+        MovieDto mapDomainToDto(Movie movie);
+        List<MovieDto> mapDomainToDto(List<Movie> movieList);
+
 }
