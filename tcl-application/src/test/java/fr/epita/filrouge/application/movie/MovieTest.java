@@ -4,6 +4,7 @@ import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.movie.Movie;
 import fr.epita.filrouge.domain.entity.movie.MovieRepository;
+import fr.epita.filrouge.domain.entity.movie.MovieRepositoryExternal;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class MovieTest {
 
     @Autowired
     private MovieService movieService;
+
+    @MockBean
+    private MovieRepositoryExternal movieRepositoryExternal;
 
     @MockBean
     private MovieDtoMapper movieDtoMapper;
