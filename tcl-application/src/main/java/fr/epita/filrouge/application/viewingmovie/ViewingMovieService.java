@@ -1,5 +1,6 @@
-package fr.epita.filrouge.application.movie;
+package fr.epita.filrouge.application.viewingmovie;
 
+import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.person.AppUserDto;
 
 
