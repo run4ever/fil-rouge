@@ -1,9 +1,12 @@
-package fr.epita.filrouge.application.movie;
+package fr.epita.filrouge.application.viewingmovie;
 
 import fr.epita.filrouge.application.mapper.AppUserDtoMapper;
 import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.application.mapper.ViewingMovieDtoMapper;
+import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.person.AppUserDto;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieDto;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieService;
 import fr.epita.filrouge.domain.entity.common.Status;
 import fr.epita.filrouge.domain.entity.movie.Movie;
 import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
@@ -17,7 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ViewingMovieServiceImpl implements ViewingMovieService{
+public class ViewingMovieServiceImpl implements ViewingMovieService {
 
     @Autowired
     private ViewingMovieRepository viewingMovieRepository;

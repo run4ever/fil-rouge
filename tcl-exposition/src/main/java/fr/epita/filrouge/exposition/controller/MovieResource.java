@@ -2,7 +2,7 @@ package fr.epita.filrouge.exposition.controller;
 
 import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.movie.MovieService;
-import fr.epita.filrouge.application.movie.ViewingMovieService;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieService;
 import fr.epita.filrouge.application.person.AppUserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

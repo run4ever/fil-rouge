@@ -1,10 +1,9 @@
-package fr.epita.filrouge.application.movie;
+package fr.epita.filrouge.application.viewingmovie;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.domain.entity.common.Status;
-import fr.epita.filrouge.domain.entity.movie.Movie;
-import fr.epita.filrouge.domain.entity.person.AppUser;
 
 public class ViewingMovieDto {
 

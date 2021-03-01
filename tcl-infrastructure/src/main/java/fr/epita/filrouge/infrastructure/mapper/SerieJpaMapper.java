@@ -5,6 +5,7 @@ import fr.epita.filrouge.infrastructure.serie.SerieJpa;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -26,13 +27,14 @@ public class SerieJpaMapper {
                 .withNumberOfSeason (entity.getNumberOfSeason ())
                 .withNumberOfEpisode (entity.getNumberOfEpisode ())
                 .withCategory (entity.getCategory ())
+                .withStatusSerie (entity.getStatusSerie ())
                 .build ();
 
     }
 
     public List<SerieJpa> mapToJpa(List<Serie> entities) {
         if (entities == null) {
-            return null;
+            return Collections.emptyList ();
         }
         final List<SerieJpa> seriesJpa = new ArrayList<SerieJpa> ();
         for (Serie item : entities) {
@@ -55,13 +57,14 @@ public class SerieJpaMapper {
                 .withNumberOfSeason (jpa.getNumberOfSeason ())
                 .withNumberOfEpisode (jpa.getNumberOfEpisode ())
                 .withCategory (jpa.getCategory ())
+                .withStatusSerie (jpa.getStatusSerie ())
                 .build ();
 
     }
 
     public List<Serie> mapToDomain(List<SerieJpa> jpas) {
         if (jpas == null) {
-            return null;
+            return Collections.emptyList ();
         }
         final List<Serie> series = new ArrayList<Serie> ();
         for (SerieJpa item : jpas) {
