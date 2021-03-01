@@ -22,6 +22,6 @@ public interface SerieService {
 
     List<SerieDto> findAllSeries();
 
-    PageDTO searchAllSeries(SearchSerieDto searchSerieDto);
+ //   PageDTO searchAllSeries(SearchSerieDto searchSerieDto);
 }
 

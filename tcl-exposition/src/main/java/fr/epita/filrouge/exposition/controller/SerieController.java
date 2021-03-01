@@ -147,18 +147,18 @@ public class SerieController {
         }
     }
 
-    @PostMapping("/list/search")
-    @ApiOperation (value = "Recherche d'une série à partir de critères", nickname = "searchSerie",
-            notes ="Recherche multi-critères d'une série existante dans la base")
-    @ApiResponses (value = {
-            @ApiResponse (code = 200, message = "Séries trouvées suite à la recherche, restitution complète", response = PageDTO.class),
-            @ApiResponse (code = 206, message = "Séries trouvées suite à la recherche, restitution partielle", response = PageDTO.class),
-            @ApiResponse (code = 404, message = "Aucune série trouvée", response = PageDTO.class),
-            @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = PageDTO.class)
-    })
-    public ResponseEntity<PageDTO> searchSerie(@RequestBody SearchSerieDto searchSerieDto) {
-
-
-        return new ResponseEntity<PageDTO> (iSerieManagement.searchAllSeries(searchSerieDto), HttpStatus.PARTIAL_CONTENT);
-    }
+//    @PostMapping("/list/search")
+//    @ApiOperation (value = "Recherche d'une série à partir de critères", nickname = "searchSerie",
+//            notes ="Recherche multi-critères d'une série existante dans la base")
+//    @ApiResponses (value = {
+//            @ApiResponse (code = 200, message = "Séries trouvées suite à la recherche, restitution complète", response = PageDTO.class),
+//            @ApiResponse (code = 206, message = "Séries trouvées suite à la recherche, restitution partielle", response = PageDTO.class),
+//            @ApiResponse (code = 404, message = "Aucune série trouvée", response = PageDTO.class),
+//            @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = PageDTO.class)
+//    })
+//    public ResponseEntity<PageDTO> searchSerie(@RequestBody SearchSerieDto searchSerieDto) {
+//
+//
+//        return new ResponseEntity<PageDTO> (iSerieManagement.searchAllSeries(searchSerieDto), HttpStatus.PARTIAL_CONTENT);
+//    }
 }

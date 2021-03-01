@@ -1,7 +1,7 @@
 ######## Fichier configuration de l'application ######
 spring:
   application:
-    name: tcly
+    name: tcl
   profiles:
     active: local
   jta:

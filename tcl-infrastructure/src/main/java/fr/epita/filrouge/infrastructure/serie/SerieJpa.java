@@ -6,7 +6,7 @@ import fr.epita.filrouge.domain.entity.serie.StatusSerie;
 import javax.persistence.*;
 
 @Entity
-//@Table(name="serie")
+@Table(name="serie")
 public class SerieJpa {
 
     @Id
