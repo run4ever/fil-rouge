@@ -29,7 +29,7 @@ public class AppUserJpaMapper {
         if (entities == null) {
             return null;
         }
-        final List<AppUserJpa> appUsersJpa = new ArrayList<AppUserJpa>();
+        final List<AppUserJpa> appUsersJpa = new ArrayList<>();
         for( AppUser item : entities ) {
             appUsersJpa.add(mapToJpa(item));
         }
@@ -41,7 +41,7 @@ public class AppUserJpaMapper {
             return null;
         }
 
-        final AppUser entity = AppUser.Builder.anAppUser()
+        return AppUser.Builder.anAppUser()
                 .withId(jpa.getId())
                 .withFirstname(jpa.getFirstname())
                 .withLastname(jpa.getLastname())
@@ -50,16 +50,14 @@ public class AppUserJpaMapper {
                 .withPassword(jpa.getPassword())
                 .withRole(jpa.getRole())
                 .build();
-
-        return entity;
     }
 
-    public List<AppUser> mapToEntity(List<AppUserJpa> jpas){
-        if (jpas == null) {
+    public List<AppUser> mapToEntity(List<AppUserJpa> jpa){
+        if (jpa == null) {
             return null;
         }
-        final List<AppUser> appUsers = new ArrayList<AppUser>();
-        for( AppUserJpa item : jpas ) {
+        final List<AppUser> appUsers = new ArrayList<>();
+        for( AppUserJpa item : jpa ) {
             appUsers.add(mapToEntity(item));
         }
         return appUsers;

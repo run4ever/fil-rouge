@@ -1,5 +1,8 @@
 package fr.epita.filrouge.domain.entity.person;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.time.LocalDate;
 
 public class AppUser extends Person {
@@ -34,6 +37,21 @@ public class AppUser extends Person {
         this.role = role;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        AppUser appUser = (AppUser) o;
+
+        return new EqualsBuilder().append(email, appUser.email).append(password, appUser.password).append(role, appUser.role).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37).append(email).append(password).append(role).toHashCode();
+    }
 
     public static final class Builder {
         private Long id;

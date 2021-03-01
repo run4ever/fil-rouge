@@ -52,7 +52,6 @@ public class ViewingSerieJpaMapper {
         }
 
         return ViewingSerie.Builder.aViewingSerie ()
-
                 .withStatus(jpa.getStatus())
                 .withCurrentSeason (jpa.getCurrentSeason ())
                 .withCurrentEpisode (jpa.getCurrentEpisode ())
@@ -61,7 +60,6 @@ public class ViewingSerieJpaMapper {
                 .withAppUser (appUserJpaMapper.mapToEntity (jpa.getAppUserJpa ()))
                 .withDateLastAction (convertToLocalDateViaInstant(jpa.getDateLastAction ()))
                 .build();
-
 
     }
 
@@ -77,13 +75,10 @@ public class ViewingSerieJpaMapper {
         return viewingSeries;
     }
 
-    private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+  private LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
         return dateToConvert.toInstant()
                 .atZone(ZoneId.systemDefault())
                 .toLocalDate();
     }
 
-
 }
-
-

@@ -48,9 +48,7 @@ public class SerieJpaMapper {
             return null;
         }
 
-
         return Serie.Builder.aSerie ()
-
                 .withImdbId (jpa.getImdbId ())
                 .withTitle (jpa.getTitle ())
                 .withDescription (jpa.getDescription ())
@@ -61,8 +59,6 @@ public class SerieJpaMapper {
                 .withCategory (jpa.getCategory ())
                 .withStatusSerie (jpa.getStatusSerie ())
                 .build ();
-
-
 
     }
 
@@ -78,12 +74,3 @@ public class SerieJpaMapper {
     }
 
 }
-
-
-
-
-
-
-
-
-
