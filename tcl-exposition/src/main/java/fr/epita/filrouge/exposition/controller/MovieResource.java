@@ -53,9 +53,9 @@ public class MovieResource {
         return movieDto;
     }
 
-    @GetMapping("/external/save")
+    @GetMapping("/external/addexternal")
     @ResponseStatus(HttpStatus.OK)
-    public void saveExternalMovie(@RequestParam("externalId") final String apiMovieId) {
+    public void createExternalMovie(@RequestParam("externalId") final String apiMovieId) {
         final MovieDto movieDto = movieService.getExternalMovie(apiMovieId);
         movieService.createMovieService(movieDto);
     }
