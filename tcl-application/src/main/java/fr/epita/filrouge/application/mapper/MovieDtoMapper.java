@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public interface MovieDtoMapper {
 
         Movie mapDtoToDomain(MovieDto movieDto);

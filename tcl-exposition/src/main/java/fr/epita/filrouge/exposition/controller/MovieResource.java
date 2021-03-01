@@ -46,5 +46,25 @@ public class MovieResource {
         return movieService.getOneMovieService(idMovie);
     }
 
+    @GetMapping("/external/show")
+    @ResponseStatus(HttpStatus.OK)
+    public MovieDto getMovieByExternalId(@RequestParam("externalId") final String apiMovieId) {
+        final MovieDto movieDto = movieService.getExternalMovie(apiMovieId);
+        return movieDto;
+    }
+
+    @GetMapping("/external/addexternal")
+    @ResponseStatus(HttpStatus.OK)
+    public void createExternalMovie(@RequestParam("externalId") final String apiMovieId) {
+        final MovieDto movieDto = movieService.getExternalMovie(apiMovieId);
+        movieService.createMovieService(movieDto);
+    }
+
+    @GetMapping("/external/search")
+    @ResponseStatus(HttpStatus.OK)
+    public List<MovieDto> searchExternalMovie(@RequestParam("title") final String title) {
+        return movieService.searchExternalMovie(title);
+    }
+
 
 }
