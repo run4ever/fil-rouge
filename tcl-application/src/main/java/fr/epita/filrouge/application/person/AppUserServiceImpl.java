@@ -31,11 +31,11 @@ public class AppUserServiceImpl implements AppUserService {
     }
 
     @Override
-    public AppUserDto getAppUser(String email) {
+    public AppUserLightDto getAppUser(String email) {
         if(email == null) {
             return null;
         }
 
-        return appUserDtoMapper.mapDomainToDto(appUserRepository.findbyEmail(email));
+        return appUserDtoMapper.mapDomaineToLightDto(appUserRepository.findbyEmail(email));
     }
 }
