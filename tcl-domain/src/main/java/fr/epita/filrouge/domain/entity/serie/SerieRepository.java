@@ -11,4 +11,10 @@ public interface SerieRepository {
     boolean deleteSerie(String imdbId);
 
     List<Serie> findAllSeries();
+
+    List<Serie> findAllSeriesByPage(int numPage, int sizePage);
+
+    long countTotalSerie();
+
+    List<Serie> searchSerieByCriteria(SearchSerie mapDtoToDomain);
 }

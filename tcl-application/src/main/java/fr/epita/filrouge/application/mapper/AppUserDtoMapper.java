@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Mapper(componentModel="spring")
 public interface AppUserDtoMapper {
+  
     AppUser mapDtoToDomain(AppUserDto appUserDto);
     AppUserDto mapDomainToDto(AppUser appUser);
+  
 }

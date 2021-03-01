@@ -5,8 +5,8 @@ import fr.epita.filrouge.domain.entity.common.Status;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.entity.person.Role;
 import fr.epita.filrouge.domain.entity.serie.Serie;
-import fr.epita.filrouge.domain.entity.serie.ViewingSerie;
-import fr.epita.filrouge.domain.entity.serie.ViewingSerieRepository;
+import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
+import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerieRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +66,7 @@ public class ViewingSerieTest {
             .withSerie (serie14)
             .withCurrentEpisode (60)
             .withCurrentSeason (10)
-            .withStatus (Status.IN_PROGESS)
+            .withStatus (Status.IN_PROGRESS)
             .build ();
 
     ViewingSerie viewingSerie15 = ViewingSerie.Builder.aViewingSerie ()
@@ -74,7 +74,7 @@ public class ViewingSerieTest {
             .withSerie (serie15)
             .withCurrentEpisode (60)
             .withCurrentSeason (10)
-            .withStatus (Status.IN_PROGESS)
+            .withStatus (Status.IN_PROGRESS)
             .build ();
 
     @Test

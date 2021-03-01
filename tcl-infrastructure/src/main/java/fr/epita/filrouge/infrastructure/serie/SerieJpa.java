@@ -1,6 +1,7 @@
 package fr.epita.filrouge.infrastructure.serie;
 
 import fr.epita.filrouge.domain.entity.common.Category;
+import fr.epita.filrouge.domain.entity.serie.StatusSerie;
 
 import javax.persistence.*;
 
@@ -27,6 +28,9 @@ public class SerieJpa {
 
     @Enumerated(EnumType.STRING)
     private Category category; // Attention, on gère une seul Category ici
+
+    @Enumerated(EnumType.STRING)
+    private StatusSerie statusSerie;
 
     public SerieJpa() {
     }
@@ -114,6 +118,13 @@ public class SerieJpa {
         this.category = category;
     }
 
+    public StatusSerie getStatusSerie() {
+        return statusSerie;
+    }
+
+    public void setStatusSerie(StatusSerie statusSerie) {
+        this.statusSerie = statusSerie;
+    }
 
     public static final class Builder {
         private Long idSerie;
@@ -127,6 +138,9 @@ public class SerieJpa {
 
         @Enumerated(EnumType.STRING)
         private Category category; // Attention, on gère une seul Category ici
+
+        @Enumerated(EnumType.STRING)
+        private StatusSerie statusSerie;
 
         private Builder() {
         }
@@ -179,6 +193,10 @@ public class SerieJpa {
             this.category = category;
             return this;
         }
+        public Builder withStatusSerie(StatusSerie statusSerie) {
+            this.statusSerie = statusSerie;
+            return this;
+        }
 
         public SerieJpa build() {
             SerieJpa serieJpa = new SerieJpa ();
@@ -191,6 +209,7 @@ public class SerieJpa {
             serieJpa.setNumberOfSeason (numberOfSeason);
             serieJpa.setNumberOfEpisode (numberOfEpisode);
             serieJpa.setCategory (category);
+            serieJpa.setStatusSerie (statusSerie);
             return serieJpa;
         }
     }
