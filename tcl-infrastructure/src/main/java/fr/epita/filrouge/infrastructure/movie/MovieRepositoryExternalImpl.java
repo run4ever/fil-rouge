@@ -53,12 +53,20 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
                 movieCategory = Category.valueOf(movieInfo.getCategory().toUpperCase());
             }
 
+            final Integer movieDuration;
+            if(movieInfo.getDuration().equals("N/A")){
+                movieDuration = null;
+            }
+            else{
+                movieDuration = Integer.valueOf(movieInfo.getDuration().replace(" min", ""));
+            }
+
             return Movie.Builder.aMovie()
                     .withImdbId(movieInfo.getImdbID())
                     .withTitle(movieInfo.getTitle())
                     .withDescription(movieInfo.getDescription())
-                    .withDuration(Integer.valueOf(movieInfo.getDuration().replace(" min", "")))
-                    .withReleaseDate(LocalDate.of(Integer.valueOf(movieInfo.getYear()), 1, 1))
+                    .withDuration(movieDuration)
+                    .withReleaseDate(LocalDate.of(Integer.valueOf(movieInfo.getYear().substring(0,3)), 1, 1))
                     .withPublicNotation(new PublicNotation(Double.valueOf(movieInfo.getImdbRating()), Integer.valueOf(movieInfo.getImdbVotes().replace(",", ""))))
                     .withActors(movieInfo.getActors())
                     .withImageUrl(movieInfo.getImageUrl())
@@ -78,7 +86,7 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
     @Override
     public List<Movie> searchByTitle(String title) {
 
-        final ResponseEntity<MovieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&apikey=" + PropertiesReader.getProperty("OMDB_API_KEY"),
+        final ResponseEntity<MovieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&type=movie&apikey=" + PropertiesReader.getProperty("OMDB_API_KEY"),
                 MovieSearchInfo.class);
 
         MovieSearchInfo movieSearchInfo = response.getBody();
