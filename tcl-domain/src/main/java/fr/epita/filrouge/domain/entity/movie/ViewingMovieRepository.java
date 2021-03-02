@@ -6,10 +6,11 @@ import java.util.List;
 
 public interface ViewingMovieRepository {
 
-    void create(ViewingMovie vm);
+    ViewingMovie create(ViewingMovie vm);
+    ViewingMovie findViewingMovieFromUserEmailAndMovieId(String email, String movieId);
     List<ViewingMovie> findViewingMovieFromUser(AppUser appUser);
-    List<ViewingMovie> findViewingMovieFromUserLastname(String lastname);
+    List<ViewingMovie> findViewingMovieFromUserEmail(String email);
     List<ViewingMovie> findAllViewingMovie();
     void delete(ViewingMovie vm);
-
+    ViewingMovie update(ViewingMovie vm);
 }

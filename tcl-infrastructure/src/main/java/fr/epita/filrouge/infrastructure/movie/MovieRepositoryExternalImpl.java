@@ -95,12 +95,16 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
 
         logger.debug(movieSearchInfo.toString());
 
-        for(MovieInfo m : movieSearchInfo.getSearch()) {
-            final String movieId = m.getImdbID();
-            final Movie movieToAdd = searchByApiMovieId(movieId);
-            results.add(movieToAdd);
+        if(movieSearchInfo.getSearch() != null){
+            for(MovieInfo m : movieSearchInfo.getSearch()) {
+                final String movieId = m.getImdbID();
+                final Movie movieToAdd = searchByApiMovieId(movieId);
+                results.add(movieToAdd);
+            }
         }
-
+        else{
+            throw new NotFoundException("No movie match this search",ErrorCodes.MOVIE_NOT_FOUND);
+        }
         return results;
 
     }
