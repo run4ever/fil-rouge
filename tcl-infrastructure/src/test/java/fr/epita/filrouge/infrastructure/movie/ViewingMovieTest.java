@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -92,32 +93,13 @@ public class ViewingMovieTest {
     @Test
     public void list_all_viewing_movies_should_success(){
         //Given
-        appUserRepository.create(user1);
-        movieRepository.create(movie2);
-        movieRepository.create(movie3);
-
-        final ViewingMovie wm2 = ViewingMovie.Builder.aViewingMovie()
-                .withAppUser(user1)
-                .withMovie(movie2)
-                .withStatus(Status.TO_WATCH)
-                .build();
-
-        final ViewingMovie wm3 = ViewingMovie.Builder.aViewingMovie()
-                .withAppUser(user1)
-                .withMovie(movie3)
-                .withStatus(Status.TO_WATCH)
-                .build();
-
-        int wmNb = viewingMovieRepository.findAllViewingMovie().size();
-
+        //dans import.sql nous avons injecté 2 lignes dans
+        //  insert into movie_viewing values(1000,'2021-03-01','TO_WATCH',4,1);
+        //  insert into movie_viewing values(1001,'2021-03-01','TO_WATCH',4,2);
         //When
-        //viewingMovieRepository.create(wm1);
-        viewingMovieRepository.create(wm2);
-        viewingMovieRepository.create(wm3);
-
+        List<ViewingMovie> visonnagesMovie = viewingMovieRepository.findAllViewingMovie();
         //Then
-        assertThat(viewingMovieRepository.findAllViewingMovie()).size().isEqualTo(wmNb+2);
-
+        assertThat(visonnagesMovie).isNotNull();
+        assertThat(visonnagesMovie.size()).isEqualTo(2);
     }
-
 }
