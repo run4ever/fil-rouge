@@ -10,6 +10,7 @@ import java.util.List;
 @Component
 @Mapper(componentModel="spring")
 public interface ViewingMovieDtoMapper {
+
     ViewingMovie mapDtoToDomain(ViewingMovieDto viewingMovieDto);
     List<ViewingMovie> mapDtoToDomain(List<ViewingMovieDto> viewingMovieDtos);
     ViewingMovieDto mapDomainToDto(ViewingMovie viewingMovie);

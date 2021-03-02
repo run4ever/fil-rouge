@@ -5,6 +5,7 @@ import fr.epita.filrouge.application.serie.SearchSerieDto;
 import fr.epita.filrouge.application.serie.SerieDto;
 import fr.epita.filrouge.application.serie.SerieService;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
+import fr.epita.filrouge.domain.exception.BusinessException;
 import fr.epita.filrouge.domain.exception.NotFoundException;
 import fr.epita.filrouge.infrastructure.exception.TechnicalException;
 import io.swagger.annotations.Api;
@@ -22,7 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/serie")
+@RequestMapping("api/v1/serie")
 @Api(value = "Controller REST pour les series")
 public class SerieController {
 
@@ -122,14 +123,12 @@ public class SerieController {
     @ApiResponses (value = {
             @ApiResponse (code = 200, message = "Restitution complète de la liste des séries", response = PageDTO.class),
             @ApiResponse (code = 206, message = "Restitution partielle de la liste des séries", response = PageDTO.class),
+            @ApiResponse (code = 400, message = "Valeurs d'offset et de limite incohérentes", response = PageDTO.class),
             @ApiResponse (code = 404, message = "Aucune série trouvée", response = PageDTO.class),
             @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = PageDTO.class)
     })
     public ResponseEntity<PageDTO> getAllSeriesByPage(@PathVariable("offset") int offset, @PathVariable("limit") int limit) {
 
-        if (offset > limit) {
-            throw new ResponseStatusException (HttpStatus.BAD_REQUEST, "limit supérieur à offset");
-        }
         try {
             PageDTO pageDTO = iSerieManagement.findAllSeriesByPage(offset, limit);
             if (pageDTO.getTotal () <= pageDTO.getLimit () && (pageDTO.getOffset () ==0 )) {
@@ -137,28 +136,30 @@ public class SerieController {
             } else {
                 return new ResponseEntity<PageDTO>(pageDTO, HttpStatus.PARTIAL_CONTENT);
             }
-
         }
         catch (NotFoundException notFoundException) {
             throw new ResponseStatusException (HttpStatus.NOT_FOUND, notFoundException.getErrorCode ());
+        }
+        catch (BusinessException businessException) {
+            throw new ResponseStatusException (HttpStatus.BAD_REQUEST, businessException.getErrorCode ());
         }
         catch (TechnicalException technicalException){
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, technicalException.getExceptionMessage ().toString ());
         }
     }
 
-//    @PostMapping("/list/search")
-//    @ApiOperation (value = "Recherche d'une série à partir de critères", nickname = "searchSerie",
-//            notes ="Recherche multi-critères d'une série existante dans la base")
-//    @ApiResponses (value = {
-//            @ApiResponse (code = 200, message = "Séries trouvées suite à la recherche, restitution complète", response = PageDTO.class),
-//            @ApiResponse (code = 206, message = "Séries trouvées suite à la recherche, restitution partielle", response = PageDTO.class),
-//            @ApiResponse (code = 404, message = "Aucune série trouvée", response = PageDTO.class),
-//            @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = PageDTO.class)
-//    })
-//    public ResponseEntity<PageDTO> searchSerie(@RequestBody SearchSerieDto searchSerieDto) {
-//
-//
-//        return new ResponseEntity<PageDTO> (iSerieManagement.searchAllSeries(searchSerieDto), HttpStatus.PARTIAL_CONTENT);
-//    }
+    @PostMapping("/list/search")
+    @ApiOperation (value = "Recherche d'une série à partir de critères", nickname = "searchSerie",
+            notes ="Recherche multi-critères d'une série existante dans la base")
+    @ApiResponses (value = {
+            @ApiResponse (code = 200, message = "Séries trouvées suite à la recherche, restitution complète", response = PageDTO.class),
+            @ApiResponse (code = 206, message = "Séries trouvées suite à la recherche, restitution partielle", response = PageDTO.class),
+            @ApiResponse (code = 404, message = "Aucune série trouvée", response = PageDTO.class),
+            @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = PageDTO.class)
+    })
+    public ResponseEntity<PageDTO> searchSerie(@RequestBody SearchSerieDto searchSerieDto) {
+
+
+        return new ResponseEntity<PageDTO> (iSerieManagement.searchAllSeries(searchSerieDto), HttpStatus.PARTIAL_CONTENT);
+    }
 }

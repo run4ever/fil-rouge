@@ -6,9 +6,8 @@ import fr.epita.filrouge.application.mapper.SearchSerieDtoMapper;
 import fr.epita.filrouge.application.mapper.SerieDtoMapper;
 import fr.epita.filrouge.domain.entity.serie.Serie;
 import fr.epita.filrouge.domain.entity.serie.SerieRepository;
+import fr.epita.filrouge.domain.exception.*;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
-import fr.epita.filrouge.domain.exception.ErrorCodes;
-import fr.epita.filrouge.domain.exception.NotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ import java.util.List;
 @Transactional
 public class SerieServiceImpl implements SerieService {
 
-//    private static Logger logger = LoggerFactory.getLogger(SerieServiceImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(SerieServiceImpl.class);
 
     @Autowired
     private SerieRepository serieRepository;
@@ -30,8 +29,8 @@ public class SerieServiceImpl implements SerieService {
     @Autowired
     private SerieDtoMapper serieDtoMapper;
 
-//    @Autowired
-//    private SearchSerieDtoMapper searchSerieDtoMapper;
+    @Autowired
+    private SearchSerieDtoMapper searchSerieDtoMapper;
 
 
     @Override
@@ -73,6 +72,8 @@ public class SerieServiceImpl implements SerieService {
     public PageDTO findAllSeriesByPage(int offset, int limit) {
 
         List<SerieDto> serieDtoList = new ArrayList<SerieDto> ();
+        logger.info ("numéro de page : " + Integer.toString (calculPage (offset, limit)));
+        logger.info ("taille de la page : " + Integer.toString (limit-offset));
         for (Serie serie: serieRepository.findAllSeriesByPage (calculPage (offset, limit),limit-offset)){
             serieDtoList.add (serieDtoMapper.mapDomainToDto (serie));
         }
@@ -83,6 +84,7 @@ public class SerieServiceImpl implements SerieService {
         pageDTO.setTotal (serieRepository.countTotalSerie());
         pageDTO.setListViewingOrSerieOrVideo (serieDtoList);
         pageDTO.setSortAsc (true);
+        logger.info ("taille de la liste retournée : " + Integer.toString(pageDTO.getListViewingOrSerieOrVideo ().size ()));
         return pageDTO;
     }
 
@@ -91,7 +93,7 @@ public class SerieServiceImpl implements SerieService {
 
         List<Serie> serieList = serieRepository.findAllSeries ();
         List<SerieDto> serieDtoList = new ArrayList<SerieDto> ();
-        if (serieList.size () == 0) {
+        if (serieList.isEmpty ()) {
             throw new NotFoundException ("Aucune série présente en base", ErrorCodes.SERIE_NOT_FOUND);
         }else {
             for (Serie serie: serieList){
@@ -101,35 +103,40 @@ public class SerieServiceImpl implements SerieService {
         return serieDtoList;
     }
 
-//    @Override
-//    public PageDTO searchAllSeries(SearchSerieDto searchSerieDto) {
-//
-//        List<SerieDto> serieDtoList = new ArrayList<SerieDto> ();
-//        List<Serie> serieList = serieRepository.searchSerieByCriteria(searchSerieDtoMapper.mapDtoToDomain (searchSerieDto));
-//        if (serieList.size () == 0) {
-//            throw new NotFoundException ("Aucune série trouvée suite à la recherche en base", ErrorCodes.SERIE_NOT_FOUND);
-//        }else {
-//            for (Serie serie: serieList){
-//                serieDtoList.add (serieDtoMapper.mapDomainToDto (serie));
-//            }
-//        }
-//        PageDTO pageDTO = new PageDTO ();
-//        pageDTO.setLimit (searchSerieDto.getLimit ());
-//        pageDTO.setOffset (searchSerieDto.getOffset ());
-//        pageDTO.setSortAttribute ("title");
-//        pageDTO.setTotal (serieRepository.countTotalSerie());
-//        pageDTO.setListViewingOrSerieOrVideo (serieDtoList);
-//        pageDTO.setSortAsc (true);
-//        return pageDTO;
-//    }
+    @Override
+    public PageDTO searchAllSeries(SearchSerieDto searchSerieDto) {
+
+        List<SerieDto> serieDtoList = new ArrayList<SerieDto> ();
+        List<Serie> serieList = serieRepository.searchSerieByCriteria(searchSerieDtoMapper.mapDtoToDomain (searchSerieDto));
+        if (serieList.isEmpty ()) {
+            throw new NotFoundException ("Aucune série trouvée suite à la recherche en base", ErrorCodes.SERIE_NOT_FOUND);
+        }else {
+            for (Serie serie: serieList){
+                serieDtoList.add (serieDtoMapper.mapDomainToDto (serie));
+            }
+        }
+        PageDTO pageDTO = new PageDTO ();
+        pageDTO.setLimit (searchSerieDto.getLimit ());
+        pageDTO.setOffset (searchSerieDto.getOffset ());
+        pageDTO.setSortAttribute ("title");
+        pageDTO.setTotal (serieRepository.countTotalSerie());
+        pageDTO.setListViewingOrSerieOrVideo (serieDtoList);
+        pageDTO.setSortAsc (true);
+        return pageDTO;
+    }
 
     private int calculPage(int offset, int limit) {
-        if (limit == offset) return offset;
+
+        if (offset == 0) return 0;
+        if (limit <= offset)  {
+            throw new PaginationException ("offset supérieur ou égal à limit", ErrorCodes.PAGINATION_ERROR);
+        }
+        if (offset%(limit-offset) != 0) {
+            throw new PaginationException ("offset incohérent", ErrorCodes.PAGINATION_ERROR);
+        }
         else return offset/(limit-offset);
     }
 }
-
-
 
 
 
