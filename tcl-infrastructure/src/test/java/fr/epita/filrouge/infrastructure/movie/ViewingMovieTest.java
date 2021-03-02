@@ -84,7 +84,6 @@ public class ViewingMovieTest {
         //When
         viewingMovieRepository.create(wm1);
         viewingMovieRepository.create(wm2);
-
         //Then
         assertThat(viewingMovieRepository.findAllViewingMovie()).size().isEqualTo(wmNb+2);
 
