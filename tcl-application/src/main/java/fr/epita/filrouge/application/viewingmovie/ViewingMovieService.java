@@ -13,4 +13,8 @@ public interface ViewingMovieService {
     /** Retourne la liste des Movie dans Visonnage(ViewingMovie) de AppUser */
     List<ViewingMovieRestitDto> getViewingMovie(AppUserDto appUserDto);
     List<ViewingMovieRestitDto> getViewingMovieByUserEmail(String email);
+
+    ViewingMovieCreateDto updateViewingMovieStatus(ViewingMovieCreateDto viewingMovieCreateDto);
+    void deleteViewingMovie(ViewingMovieCreateDto viewingMovieCreateDto);
+
 }

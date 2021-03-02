@@ -74,4 +74,28 @@ public class ViewingMovieResource {
         }
     }
 
+    @PostMapping("/update")
+    @ApiOperation(value = "Update status of a viewing movie")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Success", response = ErrorModel.class),
+            @ApiResponse (code = 400, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
+    })
+    public ResponseEntity<ViewingMovieCreateDto> updateViewingMovie(@RequestBody final ViewingMovieCreateDto viewingMovieCreateDto) {
+        return new ResponseEntity<> (viewingMovieService.updateViewingMovieStatus(viewingMovieCreateDto), HttpStatus.CREATED);
+
+    }
+
+    @PostMapping("/delete")
+    @ApiOperation(value = "Delete a viewing movie")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Success", response = ErrorModel.class),
+            @ApiResponse (code = 400, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
+    })
+    public void deleteViewingMovie(@RequestBody final ViewingMovieCreateDto viewingMovieCreateDto) {
+        viewingMovieService.deleteViewingMovie(viewingMovieCreateDto);
+    }
+
+
 }

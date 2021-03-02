@@ -52,4 +52,10 @@ public class ViewingMovieRepositoryImpl implements ViewingMovieRepository {
     public void delete(ViewingMovie vm) {
         viewingMovieJpaRepository.delete(viewingMovieJpaMapper.mapToJpa(vm));
     }
+
+    @Override
+    public ViewingMovie update(ViewingMovie vm) {
+        viewingMovieJpaRepository.save(viewingMovieJpaMapper.mapToJpa(vm));
+        return vm;
+    }
 }

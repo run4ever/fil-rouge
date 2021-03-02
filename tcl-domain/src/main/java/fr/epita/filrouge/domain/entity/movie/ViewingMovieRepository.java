@@ -12,4 +12,5 @@ public interface ViewingMovieRepository {
     List<ViewingMovie> findViewingMovieFromUserEmail(String email);
     List<ViewingMovie> findAllViewingMovie();
     void delete(ViewingMovie vm);
+    ViewingMovie update(ViewingMovie vm);
 }

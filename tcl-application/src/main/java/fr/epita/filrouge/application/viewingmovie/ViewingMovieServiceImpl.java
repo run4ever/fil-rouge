@@ -4,6 +4,7 @@ import fr.epita.filrouge.application.mapper.AppUserDtoMapper;
 import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.application.mapper.ViewingMovieDtoMapper;
 import fr.epita.filrouge.application.person.AppUserDto;
+import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
 import fr.epita.filrouge.domain.entity.movie.ViewingMovieRepository;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
@@ -59,6 +60,28 @@ public class ViewingMovieServiceImpl implements ViewingMovieService {
         }
 
         return viewingMovieDtoMapper.mapDomainToDto(viewingMovieRepository.findViewingMovieFromUserEmail(email));
+    }
+
+    @Override
+    public ViewingMovieCreateDto updateViewingMovieStatus(ViewingMovieCreateDto viewingMovieCreateDto) {
+
+        final ViewingMovie vm = viewingMovieRepository.findViewingMovieFromUserEmailAndMovieId(
+                viewingMovieCreateDto.getEmail(), viewingMovieCreateDto.getImdbId());
+
+        vm.setStatus(viewingMovieCreateDto.getStatus());
+
+        viewingMovieRepository.update(vm);
+
+        return null;
+    }
+
+    @Override
+    public void deleteViewingMovie(ViewingMovieCreateDto viewingMovieCreateDto) {
+
+        final ViewingMovie vm = viewingMovieRepository.findViewingMovieFromUserEmailAndMovieId(
+                viewingMovieCreateDto.getEmail(), viewingMovieCreateDto.getImdbId());
+
+        viewingMovieRepository.delete(vm);
     }
 
 }
