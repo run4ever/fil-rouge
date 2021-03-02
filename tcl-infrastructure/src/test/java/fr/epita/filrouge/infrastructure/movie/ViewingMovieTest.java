@@ -8,11 +8,13 @@ import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
 import fr.epita.filrouge.domain.entity.movie.ViewingMovieRepository;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.entity.person.Role;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -66,27 +68,18 @@ public class ViewingMovieTest {
 
     @Test
     public void list_all_viewing_movies_should_success(){
-        //Given
-        final ViewingMovie wm1 = ViewingMovie.Builder.aViewingMovie()
-                .withAppUser(user1)
-                .withMovie(movie1)
-                .withStatus(Status.TO_WATCH)
-                .build();
+            //Given
+            //dans import.sql nous avons injecté 2 lignes dans
+            //  insert into movie_viewing values(1000,'2021-03-01','TO_WATCH',4,1);
+            //  insert into movie_viewing values(1001,'2021-03-01','TO_WATCH',4,2);
 
-        final ViewingMovie wm2 = ViewingMovie.Builder.aViewingMovie()
-                .withAppUser(user1)
-                .withMovie(movie2)
-                .withStatus(Status.TO_WATCH)
-                .build();
+            //When
+            List<ViewingMovie> visonnagesMovie = viewingMovieRepository.findAllViewingMovie();
 
-        int wmNb = viewingMovieRepository.findAllViewingMovie().size();
+            //Then
+            assertThat(visonnagesMovie).isNotNull();
+            assertThat(visonnagesMovie.size()).isEqualTo(2);
 
-        //When
-        viewingMovieRepository.create(wm1);
-        viewingMovieRepository.create(wm2);
-        //Then
-        assertThat(viewingMovieRepository.findAllViewingMovie()).size().isEqualTo(wmNb+2);
-
-    }
+        }
 
 }

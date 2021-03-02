@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 @CrossOrigin
@@ -48,7 +49,7 @@ public class AppUserResource {
             @ApiResponse(code = 409, message = "Conflict", response = ErrorModel.class),
             @ApiResponse(code = 500, message = "Impossible to create AppUser", response = ErrorModel.class)
     })
-    public ResponseEntity<?> addAppUser(@RequestBody final AppUserDto appUserDto){
+    public ResponseEntity<?> addAppUser(@Valid @RequestBody final AppUserDto appUserDto){
 
         appUserService.create(appUserDto);
 

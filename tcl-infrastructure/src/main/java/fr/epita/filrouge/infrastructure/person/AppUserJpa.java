@@ -17,6 +17,7 @@ public class AppUserJpa {
     private String lastname;
     private String firstname;
     private LocalDate birthdayDate;
+    @Column(unique = true)
     private String email;
     private String password;
 
