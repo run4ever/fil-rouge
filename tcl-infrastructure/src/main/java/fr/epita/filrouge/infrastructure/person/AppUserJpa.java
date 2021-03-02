@@ -14,10 +14,12 @@ public class AppUserJpa {
     @Column(name="user_id")
     private Long id;
 
+    @Column(unique = true)
+    private String email;
+
     private String lastname;
     private String firstname;
     private LocalDate birthdayDate;
-    private String email;
     private String password;
 
     @Enumerated(EnumType.STRING)

@@ -1,10 +1,8 @@
-package fr.epita.filrouge.infrastructure.movie;
+package fr.epita.filrouge.infrastructure.viewingmovie;
 
 import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
 import fr.epita.filrouge.domain.entity.movie.ViewingMovieRepository;
 import fr.epita.filrouge.domain.entity.person.AppUser;
-import fr.epita.filrouge.domain.exception.ErrorCodes;
-import fr.epita.filrouge.domain.exception.NotFoundException;
 import fr.epita.filrouge.infrastructure.mapper.AppUserJpaMapper;
 import fr.epita.filrouge.infrastructure.mapper.ViewingMovieJpaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +23,14 @@ public class ViewingMovieRepositoryImpl implements ViewingMovieRepository {
     private AppUserJpaMapper appUserJpaMapper;
 
     @Override
-    public void create(ViewingMovie vm) {
+    public ViewingMovie create(ViewingMovie vm) {
         viewingMovieJpaRepository.save(viewingMovieJpaMapper.mapToJpa(vm));
+        return vm;
+    }
+
+    @Override
+    public ViewingMovie findViewingMovieFromUserEmailAndMovieId(String email, String movieId) {
+        return viewingMovieJpaMapper.mapToEntity(viewingMovieJpaRepository.findByAppUserJpaEmailAndMovieJpaImdbId(email, movieId));
     }
 
     @Override
@@ -35,8 +39,8 @@ public class ViewingMovieRepositoryImpl implements ViewingMovieRepository {
     }
 
     @Override
-    public List<ViewingMovie> findViewingMovieFromUserLastname(String lastname) {
-        return viewingMovieJpaMapper.mapToEntity(viewingMovieJpaRepository.findByAppUserJpaLastname(lastname));
+    public List<ViewingMovie> findViewingMovieFromUserEmail(String email) {
+        return viewingMovieJpaMapper.mapToEntity(viewingMovieJpaRepository.findByAppUserJpaEmail(email));
     }
 
     @Override
@@ -47,5 +51,11 @@ public class ViewingMovieRepositoryImpl implements ViewingMovieRepository {
     @Override
     public void delete(ViewingMovie vm) {
         viewingMovieJpaRepository.delete(viewingMovieJpaMapper.mapToJpa(vm));
+    }
+
+    @Override
+    public ViewingMovie update(ViewingMovie vm) {
+        viewingMovieJpaRepository.save(viewingMovieJpaMapper.mapToJpa(vm));
+        return vm;
     }
 }

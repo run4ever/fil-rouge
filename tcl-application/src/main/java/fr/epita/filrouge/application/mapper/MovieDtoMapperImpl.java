@@ -16,19 +16,17 @@ public class MovieDtoMapperImpl implements MovieDtoMapper {
             return null;
         }
 
-        Movie movie = new Movie();
-
-        movie.setTitle( movieDto.getTitle() );
-        movie.setDescription( movieDto.getDescription() );
-        movie.setImageUrl( movieDto.getImageUrl() );
-        movie.setImdbId( movieDto.getImdbId() );
-        movie.setDuration( movieDto.getDuration() );
-        movie.setReleaseDate( movieDto.getReleaseDate() );
-        movie.setActors( movieDto.getActors() );
-        movie.setCategory( movieDto.getCategory() );
-        movie.setPublicNotation(new PublicNotation(movieDto.getAverageRating(), movieDto.getNumberOfVotes()));
-
-        return movie;
+        return Movie.Builder.aMovie()
+                .withTitle(movieDto.getTitle())
+                .withDescription(movieDto.getDescription())
+                .withImageUrl(movieDto.getImageUrl())
+                .withImdbId(movieDto.getImdbId())
+                .withDuration(movieDto.getDuration())
+                .withReleaseDate(movieDto.getReleaseDate())
+                .withActors(movieDto.getActors())
+                .withCategory(movieDto.getCategory())
+                .withPublicNotation(new PublicNotation(movieDto.getAverageRating(), movieDto.getNumberOfVotes()))
+                .build();
     }
 
     public List<Movie> mapDtoToDomain(List<MovieDto> movieDtoList) {
@@ -36,9 +34,9 @@ public class MovieDtoMapperImpl implements MovieDtoMapper {
             return null;
         }
 
-        List<Movie> list = new ArrayList<>( movieDtoList.size() );
+        List<Movie> list = new ArrayList<>( movieDtoList.size());
         for ( MovieDto movieDto : movieDtoList ) {
-            list.add( mapDtoToDomain( movieDto ) );
+            list.add( mapDtoToDomain( movieDto ));
         }
 
         return list;
@@ -49,20 +47,18 @@ public class MovieDtoMapperImpl implements MovieDtoMapper {
             return null;
         }
 
-        MovieDto movieDto = new MovieDto();
-
-        movieDto.setImdbId( movie.getImdbId() );
-        movieDto.setDuration( movie.getDuration() );
-        movieDto.setReleaseDate( movie.getReleaseDate() );
-        movieDto.setActors( movie.getActors() );
-        movieDto.setCategory( movie.getCategory() );
-        movieDto.setTitle( movie.getTitle() );
-        movieDto.setDescription( movie.getDescription() );
-        movieDto.setImageUrl( movie.getImageUrl() );
-        movieDto.setAverageRating(movie.getPublicNotation().getAverageRating());
-        movieDto.setNumberOfVotes(movie.getPublicNotation().getNumberOfVotes());
-
-        return movieDto;
+        return MovieDto.Builder.aMovieDto()
+                .withImdbId(movie.getImdbId())
+                .withDuration(movie.getDuration())
+                .withReleaseDate(movie.getReleaseDate())
+                .withActors(movie.getActors())
+                .withCategory(movie.getCategory())
+                .withTitle(movie.getTitle())
+                .withDescription(movie.getDescription())
+                .withImageUrl(movie.getImageUrl())
+                .withAverageRating(movie.getPublicNotation().getAverageRating())
+                .withNumberOfVotes(movie.getPublicNotation().getNumberOfVotes())
+                .build();
     }
 
     public List<MovieDto> mapDomainToDto(List<Movie> movieList) {
@@ -70,9 +66,9 @@ public class MovieDtoMapperImpl implements MovieDtoMapper {
             return null;
         }
 
-        List<MovieDto> list = new ArrayList<>( movieList.size() );
+        List<MovieDto> list = new ArrayList<>( movieList.size());
         for ( Movie movie : movieList ) {
-            list.add( mapDomainToDto( movie ) );
+            list.add( mapDomainToDto( movie ));
         }
 
         return list;

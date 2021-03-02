@@ -4,6 +4,8 @@ import fr.epita.filrouge.application.mapper.AppUserDtoMapper;
 import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.application.mapper.ViewingMovieDtoMapper;
 import fr.epita.filrouge.application.person.AppUserDto;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieRestitDto;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieService;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieServiceImpl;
 import fr.epita.filrouge.domain.entity.common.Category;
@@ -76,7 +78,7 @@ public class ViewingMovieTest {
                 .withActors("Harrison Ford, Karen Allen, Paul Freeman, Ronald Lacey")
                 .withDuration(115)
                 .withCategory(Category.ACTION)
-                .withDescription("In 1936, archaeologist and adventurer Indiana Jones is hired by the U.S. government to find the Ark of the Covenant before Adolf Hitler's Nazis can obtain its awesome powers.")
+                .withDescription("In 1936, archaeologist and adventurer Indiana Jones is hired by the U.S. government to find the Ark of the Covenant...")
                 .withReleaseDate(LocalDate.now())
                 .build();
     }
@@ -88,7 +90,7 @@ public class ViewingMovieTest {
                 .withActors("Harrison Ford, Karen Allen, Paul Freeman, Ronald Lacey")
                 .withDuration(115)
                 .withCategory(Category.ACTION)
-                .withDescription("In 1936, archaeologist and adventurer Indiana Jones is hired by the U.S. government to find the Ark of the Covenant before Adolf Hitler's Nazis can obtain its awesome powers.")
+                .withDescription("In 1936, archaeologist and adventurer Indiana Jones is hired by the U.S. government to find the Ark of the Covenant...")
                 .withReleaseDate(LocalDate.now())
                 .build();
     }
@@ -99,9 +101,13 @@ public class ViewingMovieTest {
     public void createViewingMovie_should_fail_when_movie_already_in_viewingMovie() {
         //Given
         AppUser appUser = getAppUserTest();
-        AppUserDto appUserDto = getAppUserDtoTest();
         Movie movie = getMovieTest();
-        MovieDto movieDto =getMovieDtoTest();
+
+        ViewingMovieCreateDto viewingMovieCreateDto = ViewingMovieCreateDto.Builder.aViewingMovieCreateDto()
+                .withEmail(appUser.getEmail())
+                .withImdbId(movie.getImdbId())
+                .withStatus(Status.TO_WATCH)
+                .build();
 
         ViewingMovie viewingMovie = ViewingMovie.Builder.aViewingMovie()
                 .withAppUser(appUser)
@@ -113,13 +119,12 @@ public class ViewingMovieTest {
         listViewingMovie.add(viewingMovie);
 
         /** Mock sur create de ViewingMovieRepository (accès à la base de la couche Infra) */
-        /* Mockito.doNothing().when(viewingMovieRepositoryMock).create(viewingMovie); */
         when(viewingMovieRepositoryMock.findViewingMovieFromUser(appUser)).thenReturn(listViewingMovie);
 
 
         //When
         try {
-            viewingMovieService.addMovieToViewingMovie(appUserDto,movieDto);
+            viewingMovieService.addMovieToViewingMovie(viewingMovieCreateDto);
         } catch (final Exception e) {
             assertThat(e).isInstanceOf(AlreadyExistingException.class);
         }
@@ -131,30 +136,31 @@ public class ViewingMovieTest {
 
     @Test
     @DisplayName("Création d'un ViewingMovie en sucess si Movie n'est pas présent dans ViewingMovie pour User")
-    public void createViewingMovie_should_sucess_when_movie_not_exist() {
+    public void createViewingMovie_should_sucess_when_movie_not_in_user_list() {
         //Given
         AppUser appUser = getAppUserTest();
-        AppUserDto appUserDto = getAppUserDtoTest();
         Movie movie = getMovieTest();
-        MovieDto movieDto =getMovieDtoTest();
 
-        ViewingMovie viewingMovie = ViewingMovie.Builder.aViewingMovie()
-                .withStatus(Status.TO_WATCH) //à la création on met par défaut Movie à regarder
-                .withAppUser(appUser)
-                .withMovie(movie)
+        ViewingMovieCreateDto viewingMovieCreateDto = ViewingMovieCreateDto.Builder.aViewingMovieCreateDto()
+                .withEmail(appUser.getEmail())
+                .withImdbId(movie.getImdbId())
+                .withStatus(Status.TO_WATCH)
                 .build();
+
+        final ViewingMovie viewingMovie = viewingMovieDtoMapper.mapCreateDtoToDomain(viewingMovieCreateDto);
 
         List<ViewingMovie> listViewingMovie = new ArrayList<>();
         listViewingMovie.add(viewingMovie);
 
         /** Mock sur create de ViewingMovieRepository (accès à la base de la couche Infra) */
-        when(viewingMovieRepositoryMock.findViewingMovieFromUser(appUser)).thenReturn(null);
-        when(appUserDtoMapper.mapDtoToDomain(appUserDto)).thenReturn(appUser);
-        when(movieDtoMapper.mapDtoToDomain(movieDto)).thenReturn(movie);
-
+        when(viewingMovieRepositoryMock
+                .findViewingMovieFromUserEmailAndMovieId(
+                        viewingMovieCreateDto.getEmail(),
+                        viewingMovieCreateDto.getImdbId())
+        ).thenReturn(null);
 
         //When
-        viewingMovieService.addMovieToViewingMovie(appUserDto,movieDto);
+        viewingMovieService.addMovieToViewingMovie(viewingMovieCreateDto);
 
         //Then
         /** Vérifier que create de ViewingMovieRepository appelé 1 fois dans ce cas */
@@ -162,8 +168,8 @@ public class ViewingMovieTest {
     }
 
     @Test
-    @DisplayName("Création d'un ViewingMovie en sucess ViewingMovie contient autres Movie")
-    public void createViewingMovie_should_sucess_when_ViewingMovie_not_null() {
+    @DisplayName("Création d'un ViewingMovie en sucess dans une liste contenant d'autres viewing movie")
+    public void createViewingMovie_should_sucess_when_ViewingMovieList_not_null() {
         //Given
         AppUser appUser = getAppUserTest();
         AppUserDto appUserDto = getAppUserDtoTest();
@@ -171,27 +177,23 @@ public class ViewingMovieTest {
         MovieDto movieDto =getMovieDtoTest();
 
         Movie m1 =  Movie.Builder.aMovie()
-                .withTitle("Test movie 1")
+                .withTitle("Indiana Jones and the Raiders of the Lost Ark")
                 .withImdbId("tb999")
                 .withPublicNotation(new PublicNotation(4.0,1234))
                 .withActors("Harrison Ford, Karen Allen, Paul Freeman, Ronald Lacey")
                 .withDuration(115)
                 .withCategory(Category.ACTION)
-                .withDescription("Bla bla bla")
+                .withDescription("In 1936, archaeologist and adventurer Indiana Jones is hired by the U.S. government to find the Ark of the Covenant...")
                 .withReleaseDate(LocalDate.now())
                 .build();
 
-        ViewingMovie viewingMovie = ViewingMovie.Builder.aViewingMovie()
-                .withStatus(Status.TO_WATCH) //à la création on met par défaut Movie à regarder
-                .withAppUser(appUser)
-                .withMovie(m1)
+        ViewingMovieCreateDto viewingMovieCreateDto = ViewingMovieCreateDto.Builder.aViewingMovieCreateDto()
+                .withEmail(appUser.getEmail())
+                .withImdbId(movie.getImdbId())
+                .withStatus(Status.TO_WATCH)
                 .build();
 
-        ViewingMovie vmTocreate = ViewingMovie.Builder.aViewingMovie()
-                .withStatus(Status.TO_WATCH) //à la création on met par défaut Movie à regarder
-                .withAppUser(appUser)
-                .withMovie(movie)
-                .build();
+        final ViewingMovie viewingMovie = viewingMovieDtoMapper.mapCreateDtoToDomain(viewingMovieCreateDto);
 
         List<ViewingMovie> listViewingMovie = new ArrayList<>();
         listViewingMovie.add(viewingMovie);
@@ -202,16 +204,16 @@ public class ViewingMovieTest {
         when(movieDtoMapper.mapDtoToDomain(movieDto)).thenReturn(movie);
 
         //When
-        viewingMovieService.addMovieToViewingMovie(appUserDto,movieDto);
+        viewingMovieService.addMovieToViewingMovie(viewingMovieCreateDto);
 
         //Then
         /** Vérifier que create de ViewingMovieRepository appelé 1 fois dans ce cas */
-        verify(viewingMovieRepositoryMock,times(1)).create(vmTocreate);
+        verify(viewingMovieRepositoryMock,times(1)).create(viewingMovie);
     }
 
 
     @Test
-    @DisplayName("Appel getViewingMovie délenche un appel de findViewingMovieFromUser de Repository")
+    @DisplayName("Appel getViewingMovie déclenche un appel de findViewingMovieFromUser de Repository")
     public void getViewingMovie_should_call_findViewingMovieFromUser_1_time() {
         //Given
         AppUser appUser = getAppUserTest();
