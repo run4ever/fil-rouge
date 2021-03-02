@@ -44,15 +44,7 @@ public class ViewingMovieResource {
             @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
     })
     public ResponseEntity<List<ViewingMovieRestitDto>> getAllViewingMovieOfUser(@RequestBody final String email){
-        try{
             return new ResponseEntity<> (viewingMovieService.getViewingMovieByUserEmail(email), HttpStatus.OK);
-        }
-        catch (NotFoundException notFoundException){
-            throw new ResponseStatusException (HttpStatus.BAD_REQUEST, notFoundException.getErrorCode ());
-        }
-        catch (TechnicalException technicalException){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, technicalException.getExceptionMessage ().toString ());
-        }
     }
 
     @PostMapping("/create")
@@ -63,15 +55,7 @@ public class ViewingMovieResource {
             @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
     })
     public ResponseEntity<ViewingMovieCreateDto> createViewingMovie(@RequestBody final ViewingMovieCreateDto viewingMovieCreateDto) {
-        try {
             return new ResponseEntity<> (viewingMovieService.addMovieToViewingMovie(viewingMovieCreateDto), HttpStatus.CREATED);
-        }
-        catch (AlreadyExistingException alreadyExistingException){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, alreadyExistingException.getErrorCode ());
-        }
-        catch (TechnicalException technicalException){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, technicalException.getExceptionMessage ().toString ());
-        }
     }
 
     @PostMapping("/update")

@@ -73,8 +73,8 @@ public class SerieResourceTest {
 
         //Then
         //** TODO on devait avoir NOT_FOUND
-       // assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+       // assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
 
     }
 
