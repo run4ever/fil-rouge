@@ -55,4 +55,55 @@ public class ViewingSerieCreateDto {
     public void setEmail(String email) {
         this.email = email;
     }
+
+
+    public static final class Builder {
+        private Status status;
+        private Integer currentSeason;
+        private Integer currentEpisode;
+        private String imdb;
+        private String email;
+
+        private Builder() {
+        }
+
+        public static Builder aViewingSerieCreateDto() {
+            return new Builder();
+        }
+
+        public Builder withStatus(Status status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder withCurrentSeason(Integer currentSeason) {
+            this.currentSeason = currentSeason;
+            return this;
+        }
+
+        public Builder withCurrentEpisode(Integer currentEpisode) {
+            this.currentEpisode = currentEpisode;
+            return this;
+        }
+
+        public Builder withImdb(String imdb) {
+            this.imdb = imdb;
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public ViewingSerieCreateDto build() {
+            ViewingSerieCreateDto viewingSerieCreateDto = new ViewingSerieCreateDto();
+            viewingSerieCreateDto.setStatus(status);
+            viewingSerieCreateDto.setCurrentSeason(currentSeason);
+            viewingSerieCreateDto.setCurrentEpisode(currentEpisode);
+            viewingSerieCreateDto.setImdb(imdb);
+            viewingSerieCreateDto.setEmail(email);
+            return viewingSerieCreateDto;
+        }
+    }
 }

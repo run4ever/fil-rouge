@@ -3,6 +3,7 @@ package fr.epita.filrouge.infrastructure.person;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
 import fr.epita.filrouge.domain.entity.person.Role;
+import fr.epita.filrouge.domain.exception.NotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,14 +49,16 @@ public class AppUserTest {
     @DisplayName("AppUser non trouvé avec email inexistant")
     public void email_not_exists_should_return_error() {
         //Given
-            String email = "ko_ko_ko";
+            String email = "ko_ko_ko@gmail.com";
 
         //When
-        AppUser appUser = appUserRepository.findbyEmail(email);
-
+        try {
+            AppUser appUser = appUserRepository.findbyEmail(email);
+        } catch (Exception e) {
         //Then
-        //**** Il faut avoir un retour AppUserNotFoundException c'est mieux
-        assertThat(appUser).isNull();
+            assertThat(e).isInstanceOf(NotFoundException.class);
+        }
+
     }
 
     @Test

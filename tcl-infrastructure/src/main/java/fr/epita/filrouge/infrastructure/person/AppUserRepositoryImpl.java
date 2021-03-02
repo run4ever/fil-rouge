@@ -2,6 +2,8 @@ package fr.epita.filrouge.infrastructure.person;
 
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
+import fr.epita.filrouge.domain.exception.ErrorCodes;
+import fr.epita.filrouge.domain.exception.NotFoundException;
 import fr.epita.filrouge.infrastructure.mapper.AppUserJpaMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +24,11 @@ public class AppUserRepositoryImpl implements AppUserRepository {
     @Override
     public AppUser findbyEmail(String email) {
         logger.info("AppUserRepository impl, findByEmail : " + email);
-        //TODO : Ici il faut gérer le cas AppUserJpa non trouvé par email NotFoundException
+        AppUserJpa appUserJpa = appUserJpaRepository.findByEmail(email);
+        if(appUserJpa == null) {
+            logger.info("AppUserRepository impl, AppUser not exists : " + email);
+            throw new NotFoundException("AppUser not exists with "+email, ErrorCodes.USER_NOT_FOUND);
+        }
         return appUserJpaMapper.mapToEntity(appUserJpaRepository.findByEmail(email));
     }
 
