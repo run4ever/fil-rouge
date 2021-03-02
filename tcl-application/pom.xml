@@ -33,6 +33,11 @@
             <version>2.4.3</version>
             <scope>test</scope>
         </dependency>
+        <!-- Spring security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
 
     </dependencies>
     <build>

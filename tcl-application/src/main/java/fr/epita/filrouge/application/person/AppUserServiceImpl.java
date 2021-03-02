@@ -8,6 +8,7 @@ import fr.epita.filrouge.domain.exception.ErrorCodes;
 import fr.epita.filrouge.domain.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class AppUserServiceImpl implements AppUserService {
@@ -17,6 +18,9 @@ public class AppUserServiceImpl implements AppUserService {
 
     @Autowired
     private AppUserDtoMapper appUserDtoMapper;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void create(AppUserDto appUserDto) {
@@ -30,6 +34,9 @@ public class AppUserServiceImpl implements AppUserService {
             }
         } catch (NotFoundException e) {
             //si on n'a pas trouvé AppUser avec email en question alors on peut créer Appuser
+            //crypter le mot de passe avant
+            appUserDto.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
+            System.out.println("Password crypted=>"+appUserDto.getPassword());
             appUserRepository.create(appUserDtoMapper.mapDtoToDomain(appUserDto));
         }
 

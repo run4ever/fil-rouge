@@ -20,3 +20,6 @@ spring:
   cache:
     jcache:
       config: classpath:cache/ehcache.xml
+### security used to verify this hash if you have the secret key.
+jwt:
+  secret: tcl-in-force
