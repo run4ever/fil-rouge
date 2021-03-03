@@ -129,7 +129,7 @@ public class SerieServiceImpl implements SerieService {
 
         if (offset == 0) return 0;
         if (limit <= offset)  {
-            throw new PaginationException ("offset supérieur ou égal à limit", ErrorCodes.PAGINATION_ERROR);
+            throw new PaginationException ("offset supérieur ou 1égal à limit", ErrorCodes.PAGINATION_ERROR);
         }
         if (offset%(limit-offset) != 0) {
             throw new PaginationException ("offset incohérent", ErrorCodes.PAGINATION_ERROR);
