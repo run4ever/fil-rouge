@@ -23,7 +23,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/v1/viewingmovie")
+@RequestMapping("/api/v1/viewing-movie")
 @Validated
 public class ViewingMovieResource {
 
@@ -58,7 +58,7 @@ public class ViewingMovieResource {
             return new ResponseEntity<> (viewingMovieService.addMovieToViewingMovie(viewingMovieCreateDto), HttpStatus.CREATED);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ApiOperation(value = "Update status of a viewing movie")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Success", response = ErrorModel.class),
@@ -70,14 +70,14 @@ public class ViewingMovieResource {
 
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     @ApiOperation(value = "Delete a viewing movie")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Success", response = ErrorModel.class),
             @ApiResponse (code = 400, message = "Not found", response = ErrorModel.class),
             @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
     })
-    public void deleteViewingMovie(@RequestBody final ViewingMovieCreateDto viewingMovieCreateDto) {
+    public void  deleteViewingMovie(@RequestBody final ViewingMovieCreateDto viewingMovieCreateDto) {
         viewingMovieService.deleteViewingMovie(viewingMovieCreateDto);
     }
 

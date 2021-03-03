@@ -8,6 +8,9 @@ import java.time.LocalDate;
 
 public class MovieDto {
 
+    @JsonProperty("id")
+    private Long id;
+
     @JsonProperty("apiMovieId")
     @NotNull
     private String imdbId;
@@ -42,6 +45,14 @@ public class MovieDto {
     private String imageUrl;
 
     public MovieDto() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getImdbId() {
@@ -125,6 +136,7 @@ public class MovieDto {
     }
 
     public static final class Builder {
+        private Long id;
         private String imdbId;
         private Integer duration;
         private LocalDate releaseDate;
@@ -141,6 +153,11 @@ public class MovieDto {
 
         public static Builder aMovieDto() {
             return new Builder();
+        }
+
+        public Builder withId(Long id) {
+            this.id = id;
+            return this;
         }
 
         public Builder withImdbId(String imdbId) {
@@ -195,6 +212,7 @@ public class MovieDto {
 
         public MovieDto build() {
             MovieDto movieDto = new MovieDto();
+            movieDto.setId(id);
             movieDto.setImdbId(imdbId);
             movieDto.setDuration(duration);
             movieDto.setReleaseDate(releaseDate);
