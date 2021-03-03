@@ -34,7 +34,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     private static Collection<? extends GrantedAuthority> getAuthorities(final AppUser appUser) {
+        //si on a une liste des Roles pour User
         //final String[] userRoles = appUser.getRoles().stream().map((role) -> role.name()).toArray(String[]::new);
+        //ici on gère un seul Role pour User
         final String userRoles = appUser.getRole().toString();
         logger.debug("With User Roles {}", userRoles);
         final Collection<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList(userRoles);

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import static org.mockito.Mockito.*;
@@ -18,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 //@SpringBootTest(classes = {AppUserServiceImpl.class, AppUserDtoMapperImpl.class})
-@SpringBootTest(classes = {AppUserServiceImpl.class})
+@SpringBootTest(classes = {AppUserServiceImpl.class })
 public class AppUserTest {
 
     @Autowired
@@ -26,6 +27,9 @@ public class AppUserTest {
 
     @MockBean
     private AppUserDtoMapper appUserDtoMapper;
+
+    @MockBean
+    private PasswordEncoder passwordEncoder;
 
     //AppUserRepository fait l'accès à la base de données (couche Infrastructure).
     //L'accès à la base de données est testé dans la couche infra, il faut mocker ici.
@@ -131,7 +135,7 @@ public class AppUserTest {
 
           /** Mock findByEmail, on recherche AnyString et on return appUser */
           when(appUserRepositoryMock.findbyEmail(anyString())).thenReturn(appUser);
-        when(appUserDtoMapper.mapDomainToLightDto(appUser)).thenReturn(appUserLightDto);
+          when(appUserDtoMapper.mapDomainToLightDto(appUser)).thenReturn(appUserLightDto);
 
         //When
         AppUserLightDto appUserFound =  appUserService.getAppUser("test@test.fr");

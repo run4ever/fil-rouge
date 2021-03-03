@@ -25,7 +25,8 @@ import fr.epita.filrouge.exposition.security.jwt.JwtRequestFilter;
 @EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String UNAUTHENTICATED_WHITE_LIST[] = { "/authenticate" };
+    //Une liste URL qu'on autorise à appeler sans authentifier
+    private static final String UNAUTHENTICATED_WHITE_LIST[] = { "/authenticate","/" };
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -60,8 +61,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.csrf().disable()
                 // dont authenticate this authentication request
                 .authorizeRequests().antMatchers(UNAUTHENTICATED_WHITE_LIST).permitAll()
-                // and authorize everybody create a customer
-                .antMatchers(HttpMethod.POST, "/api/v1/appuser/add").permitAll()
+                // autoriser Get sur AppUser
+                .antMatchers(HttpMethod.GET, "/api/*/appuser/**").permitAll()
+                //autorisé get sur movie
+                .antMatchers(HttpMethod.GET, "/api/*/movie/**").permitAll()
+                //autorisé get sur Serie
+                .antMatchers(HttpMethod.GET, "/api/*/serie/**").permitAll()
                 // and authorize swagger-ui
                 .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**").permitAll()
                 // all other requests need to be authenticated
