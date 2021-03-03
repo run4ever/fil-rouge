@@ -1,15 +1,19 @@
 package fr.epita.filrouge.exposition.controller;
 
 
+import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.application.serie.SerieDto;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.serie.StatusSerie;
+import fr.epita.filrouge.exposition.controller.common.TokenGenerator;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -22,10 +26,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SerieResourceTest {
 
     @Autowired
+    private TokenGenerator tokenGenerator;
+
+    @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
-    @Disabled("désactiver tempo à cause de la sécurité JWT => TODO")
     public void add_serie_should_be_success() throws Exception {
         //Given
         SerieDto serieDto = SerieDto.Builder.aSerieDto()
@@ -40,8 +46,14 @@ public class SerieResourceTest {
                 .withStatusSerie(StatusSerie.FINISH)
                 .build();
 
+        //initialiser un toke JWT et le mettre dans header ****************
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("superman@world.com");
+        //*****************************************************************
+
+        HttpEntity<SerieDto> request = new HttpEntity<>(serieDto,headers);
+
         //When
-        ResponseEntity<SerieDto> response = restTemplate.postForEntity("/api/v1/serie/create",serieDto, SerieDto.class);
+        ResponseEntity<SerieDto> response = restTemplate.postForEntity("/api/v1/serie/create",request, SerieDto.class);
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -65,7 +77,7 @@ public class SerieResourceTest {
     }
 
     @Test
-    @Disabled("désactiver tempo correction en cours de l'API par Youssra")
+    @Disabled("désactiver provisoirement en attente de correction API par Youssra")
     public void serie_not_found_should_return_code404() throws Exception {
         //Given
         // cette idSerie ttXXXXXXXX n'existe pas
@@ -75,7 +87,6 @@ public class SerieResourceTest {
         ResponseEntity<SerieDto> response = restTemplate.getForEntity("/api/v1/serie/"+idSerie,SerieDto.class);
 
         //Then
-        //** TODO on devait avoir NOT_FOUND
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
        // assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
 
