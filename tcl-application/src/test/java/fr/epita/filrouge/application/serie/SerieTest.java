@@ -1,5 +1,6 @@
 package fr.epita.filrouge.application.serie;
 
+import fr.epita.filrouge.application.mapper.SearchSerieDtoMapper;
 import fr.epita.filrouge.application.mapper.SerieDtoMapper;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.serie.Serie;
@@ -35,6 +36,8 @@ public class SerieTest {
     @MockBean
     private SerieDtoMapper serieDtoMapper;
 
+    @MockBean
+    private SearchSerieDtoMapper searchSerieDtoMapper;
 
     @Test()
     @DisplayName("tester la bonne création d'une série")

@@ -16,6 +16,7 @@ public class ErrorCodes {
     public static final String SERIE_ALREADY_EXISTING = "ERR_0014";
     public static final String VIEWVING_SERIE_ALREADY_EXISTING = "ERR_0015";
     public static final String VIEWING_SERIE_ALREADY_EXISTING = "ERR_0016";
+    public static final String PAGINATION_ERROR = "ERR_0017";
 
 
 }
