@@ -7,10 +7,10 @@ import fr.epita.filrouge.domain.entity.movie.MovieRepositoryExternal;
 import fr.epita.filrouge.domain.exception.ErrorCodes;
 import fr.epita.filrouge.domain.exception.ExternalApiTechnicalException;
 import fr.epita.filrouge.domain.exception.NotFoundException;
-import fr.epita.filrouge.infrastructure.common.PropertiesReader;
 import fr.epita.filrouge.infrastructure.http.MovieInfo;
 import fr.epita.filrouge.infrastructure.http.MovieSearchInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
@@ -30,6 +30,9 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
 
     private static final Logger logger = LoggerFactory.getLogger(MovieRepositoryExternalImpl.class);
 
+    @Value("${OMDB_API_KEY}")
+    private String omdbApiKey;
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -37,7 +40,7 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
     public Movie searchByApiMovieId(String apiMovieId) {
 
         try {
-            final ResponseEntity<MovieInfo> response = restTemplate.getForEntity("/?i=" + apiMovieId + "&apikey=" + PropertiesReader.getProperty("OMDB_API_KEY"),
+            final ResponseEntity<MovieInfo> response = restTemplate.getForEntity("/?i=" + apiMovieId + "&apikey=" + omdbApiKey,
                     MovieInfo.class);
 
             MovieInfo movieInfo = response.getBody();
@@ -86,7 +89,7 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
     @Override
     public List<Movie> searchByTitle(String title) {
 
-        final ResponseEntity<MovieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&type=movie&apikey=" + PropertiesReader.getProperty("OMDB_API_KEY"),
+        final ResponseEntity<MovieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&type=movie&apikey=" + omdbApiKey,
                 MovieSearchInfo.class);
 
         MovieSearchInfo movieSearchInfo = response.getBody();

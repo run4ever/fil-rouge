@@ -1,22 +1,23 @@
 package fr.epita.filrouge.exposition.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieRestitDto;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieService;
 import fr.epita.filrouge.domain.entity.common.Status;
+import fr.epita.filrouge.exposition.controller.common.TokenGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.setAllowComparingPrivateFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -32,6 +33,9 @@ public class ViewingMovieResourceTest {
     @Autowired
     private ViewingMovieService viewingMovieService;
 
+    @Autowired
+    private TokenGenerator tokenGenerator;
+
     private final ObjectMapper mapper = new ObjectMapper();
 
 
@@ -46,8 +50,13 @@ public class ViewingMovieResourceTest {
 
         final int nbViewingMovieBefore = viewingMovieService.getViewingMovieByUserEmail("arnaud@tcl.com").size();
 
+        //initialiser un toke JWT et le mettre dans header ****************
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("arnaud@tcl.com");
+        //*****************************************************************
+        HttpEntity<ViewingMovieCreateDto> request = new HttpEntity<>(viewingMovieCreateDto,headers);
+
         //When
-        ResponseEntity<ViewingMovieCreateDto> response = restTemplate.postForEntity("/api/v1/viewing-movie/create",viewingMovieCreateDto, ViewingMovieCreateDto.class);
+        ResponseEntity<ViewingMovieCreateDto> response = restTemplate.postForEntity("/api/v1/viewing-movie/create",request, ViewingMovieCreateDto.class);
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -63,10 +72,15 @@ public class ViewingMovieResourceTest {
                 .withStatus(Status.TO_WATCH)
                 .build();
 
+        //initialiser un toke JWT et le mettre dans header ****************
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("fabien@tcl.com");
+        //*****************************************************************
+        HttpEntity<ViewingMovieCreateDto> request = new HttpEntity<>(viewingMovieCreateDto,headers);
+
         final Integer nbViewingMovieBefore = viewingMovieService.getViewingMovieByUserEmail("fabien@tcl.com").size();
 
         //When
-        ResponseEntity<ViewingMovieCreateDto> response = restTemplate.postForEntity("/api/v1/viewing-movie/create",viewingMovieCreateDto, ViewingMovieCreateDto.class);
+        ResponseEntity<ViewingMovieCreateDto> response = restTemplate.postForEntity("/api/v1/viewing-movie/create",request, ViewingMovieCreateDto.class);
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
@@ -79,12 +93,23 @@ public class ViewingMovieResourceTest {
         //Given
         String userEmail = "fabien@tcl.com";
 
+        //initialiser un toke JWT et le mettre dans header ****************
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("fabien@tcl.com");
+        //*****************************************************************
+        HttpEntity<String> request = new HttpEntity<>(userEmail,headers);
+
         //When
-        ResponseEntity<ViewingMovieRestitDto[]> response = restTemplate.postForEntity("/api/v1/viewing-movie/list", userEmail, ViewingMovieRestitDto[].class);
+        ResponseEntity<ViewingMovieRestitDto[]> response = restTemplate.postForEntity("/api/v1/viewing-movie/list", request, ViewingMovieRestitDto[].class);
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull().doesNotHaveDuplicates();
+
+        ViewingMovieRestitDto[] results = response.getBody();
+
+        for (int i = 0; i < results.length; i++) {
+            System.out.println(results[i].getMovieDto().getImdbId());
+        }
     }
 
     @Test
@@ -96,8 +121,13 @@ public class ViewingMovieResourceTest {
                 .withStatus(Status.WATCHED)
                 .build();
 
+        //initialiser un toke JWT et le mettre dans header ****************
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("fabien@tcl.com");
+        //*****************************************************************
+
         // When
         mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/viewing-movie/update")
+                .headers(headers)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(updatedViewingMovie)))
                 // Then
@@ -113,8 +143,13 @@ public class ViewingMovieResourceTest {
                 .withStatus(Status.TO_WATCH)
                 .build();
 
+        //initialiser un toke JWT et le mettre dans header ****************
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("fabien@tcl.com");
+        //*****************************************************************
+
         // When
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/viewing-movie/delete")
+                .headers(headers)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(mapper.writeValueAsString(vmToDelete)))
                  //Then
