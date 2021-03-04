@@ -10,10 +10,13 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 
 @CrossOrigin
@@ -34,7 +37,14 @@ public class MovieResource {
     @ApiOperation(value = "Create a new Movie")
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createMovie(@Valid @RequestBody final MovieDto movieDto){movieService.createMovieService(movieDto);}
+    public ResponseEntity<?> createMovie(@Valid @RequestBody final MovieDto movieDto){
+        movieService.createMovieService(movieDto);
+
+        final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(movieDto.getId()).toUri();
+
+        return ResponseEntity.created(location).build();
+    }
 
     @ApiOperation(value = "List All Movies")
     @GetMapping(value = "/list")
