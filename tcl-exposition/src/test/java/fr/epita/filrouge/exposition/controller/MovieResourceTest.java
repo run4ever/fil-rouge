@@ -3,12 +3,17 @@ package fr.epita.filrouge.exposition.controller;
 import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.domain.entity.common.Category;
 
-import org.junit.jupiter.api.Disabled;
+//import fr.epita.filrouge.exposition.controller.common.TokenAuthenticationService;
+import fr.epita.filrouge.exposition.controller.common.TokenGenerator;
+import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -21,10 +26,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MovieResourceTest {
 
     @Autowired
+    private TokenGenerator tokenGenerator;
+
+    @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
-    @Disabled("désactiver tempo à cause de la sécurité JWT => TODO")
     public void add_Movie_should_be_success() throws Exception {
         //Given
         MovieDto movieDto = MovieDto.Builder.aMovieDto()
@@ -39,8 +46,13 @@ public class MovieResourceTest {
                 .withReleaseDate(LocalDate.now())
                 .build();
 
+        //récupérer headers avec Jwt
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("superman@world.com");
+
+        HttpEntity<MovieDto> request = new HttpEntity<>(movieDto,headers);
+
         //When
-        ResponseEntity<MovieDto> response = restTemplate.postForEntity("/api/v1/movie/add",movieDto, MovieDto.class);
+        ResponseEntity<MovieDto> response = restTemplate.postForEntity("/api/v1/movie/add",request, MovieDto.class);
 
 
         //Then

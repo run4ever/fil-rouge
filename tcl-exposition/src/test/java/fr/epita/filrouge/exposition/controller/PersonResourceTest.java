@@ -1,37 +1,34 @@
 package fr.epita.filrouge.exposition.controller;
 
-
 import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.application.person.AppUserLightDto;
 import fr.epita.filrouge.domain.entity.person.Role;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
-import org.junit.jupiter.api.Disabled;
+import fr.epita.filrouge.exposition.controller.common.TokenGenerator;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.jwt;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 public class PersonResourceTest {
 
     @Autowired
-    private TestRestTemplate restTemplate;
+    private TokenGenerator tokenGenerator;
 
     @Autowired
-    private MockMvc mvc;
+    private TestRestTemplate restTemplate;
+
 
     @Test
     public void show_appuser_with_email_existing_should_be_sucess() throws Exception {
@@ -52,7 +49,7 @@ public class PersonResourceTest {
     public void email_not_exists_should_return_not_found404() throws Exception {
         //Given
         //Cette adresse email ne devait pas exister
-        String emailTest ="zzzzzzzzzzzzzzzzzyyyyyyyyy@test.test";
+        String emailTest ="zzzzzzzzzzzzzzzzzyyyyyyyyyyyyyyyyy@test.test";
 
         //When
         ResponseEntity<AppUserLightDto> response = restTemplate.getForEntity("/api/v1/appuser/"+emailTest, AppUserLightDto.class);
@@ -62,8 +59,6 @@ public class PersonResourceTest {
     }
 
     @Test
-    @WithMockUser
-    @Disabled("désactiver tempo à cause de la sécurité JWT => TODO")
     public void add_exiting_email_should_return_AlreadyExistingException() {
         //Given
         //"superman@world.com" est dans le fichier import.sql qui sera chargé à l'initialisation de l'application
@@ -77,10 +72,15 @@ public class PersonResourceTest {
                 .withBirthdayDate(LocalDate.of(2000,12,25))
                 .withRole(Role.ROLE_USER)
                 .build();
+        //initialiser un toke JWT et le mettre dans header ****************
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("superman@world.com");
+        //*****************************************************************
+
+        HttpEntity<AppUserDto> request = new HttpEntity<>(appUser,headers);
 
         //When
         try {
-            ResponseEntity<AppUserDto> response = restTemplate.postForEntity("/api/v1/appuser/add", appUser, AppUserDto.class);
+            ResponseEntity<AppUserDto> response = restTemplate.postForEntity("/api/v1/appuser/add", request, AppUserDto.class);
         } catch (Exception e) {
         //Then
             assertThat(e).isInstanceOf(AlreadyExistingException.class);
@@ -88,8 +88,6 @@ public class PersonResourceTest {
     }
 
     @Test
-    @WithMockUser
-    @Disabled("désactiver tempo à cause de la sécurité JWT => TODO")
     public void add_appUser_should_be_sucess() throws Exception {
         //Given
         AppUserDto appUser = AppUserDto.Builder.anAppUserDto()
@@ -101,15 +99,17 @@ public class PersonResourceTest {
                 .withRole(Role.ROLE_USER)
                 .build();
 
+        //initialiser un toke JWT et le mettre dans header ****************
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("superman@world.com");
+        //*****************************************************************
+
+        HttpEntity<AppUserDto> request = new HttpEntity<>(appUser,headers);
+
         //When
-        ///ResponseEntity<AppUserDto> response = restTemplate.postForEntity("/api/v1/appuser/add", appUser, AppUserDto.class);
+        ResponseEntity<AppUserDto> response = restTemplate.postForEntity("/api/v1/appuser/add", request, AppUserDto.class);
 
 
-        mvc
-                .perform(MockMvcRequestBuilders.post("/api/v1/appuser/add",appUser,AppUserDto.class)
-                        .with(jwt()))
-                .andExpect(status().isUnauthorized());
         //Then
-        ///assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
     }
 }
