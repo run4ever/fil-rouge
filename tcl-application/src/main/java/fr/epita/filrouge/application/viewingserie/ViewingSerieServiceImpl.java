@@ -134,36 +134,4 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
         return false;
     }
 
-//    private ViewingSerieCreateDto mapToDtoCreate(ViewingSerie viewingSerie) {
-//        ViewingSerieCreateDto viewingSerieCreateDto = new ViewingSerieCreateDto ();
-//        viewingSerieCreateDto.setStatus (viewingSerie.getStatus ());
-//        viewingSerieCreateDto.setImdb (viewingSerie.getSerie ().getImdbId ());
-//        viewingSerieCreateDto.setEmail (viewingSerie.getAppUser ().getEmail ());
-//        viewingSerieCreateDto.setCurrentSeason (viewingSerie.getCurrentSeason ());
-//        viewingSerieCreateDto.setCurrentEpisode (viewingSerie.getCurrentEpisode ());
-//        return viewingSerieCreateDto;
-//    }
-//
-//    private ViewingSerie mapToDomainCreate(ViewingSerieCreateDto viewingSerieCreateDto) {
-//        ViewingSerie viewingSerie = new ViewingSerie ();
-//        viewingSerie.setStatus (viewingSerieCreateDto.getStatus ());
-//        viewingSerie.setSerie (serieRepository.findById (viewingSerieCreateDto.getImdb ()));
-//        viewingSerie.setCurrentSeason (viewingSerieCreateDto.getCurrentSeason ());
-//        viewingSerie.setCurrentEpisode (viewingSerieCreateDto.getCurrentEpisode ());
-//        viewingSerie.setAppUser (appUserRepository.findbyEmail (viewingSerieCreateDto.getEmail ()));
-//        return viewingSerie;
-//    }
-//
-//    private ViewingSerieRestitDto mapToDtoRestit(ViewingSerie viewingSerie) {
-//        ViewingSerieRestitDto viewingSerieRestitDto = new ViewingSerieRestitDto ();
-//        viewingSerieRestitDto.setCurrentEpisode (viewingSerie.getCurrentEpisode ());
-//        viewingSerieRestitDto.setCurrentSeason (viewingSerie.getCurrentSeason ());
-//        viewingSerieRestitDto.setEmail (viewingSerie.getAppUser ().getEmail ());
-//        viewingSerieRestitDto.setSerieDto (serieDtoMapper.mapDomainToDto (viewingSerie.getSerie ()));
-//        viewingSerieRestitDto.setStatus (viewingSerie.getStatus ());
-//        return viewingSerieRestitDto;
-//    }
-
-
-
 }

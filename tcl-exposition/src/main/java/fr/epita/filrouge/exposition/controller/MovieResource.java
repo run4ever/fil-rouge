@@ -40,8 +40,8 @@ public class MovieResource {
     public ResponseEntity<?> createMovie(@Valid @RequestBody final MovieDto movieDto){
         movieService.createMovieService(movieDto);
 
-        final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(movieDto.getId()).toUri();
+        final URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{imbdId}")
+                .buildAndExpand(movieDto.getImdbId()).toUri();
 
         return ResponseEntity.created(location).build();
     }

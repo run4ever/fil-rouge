@@ -3,6 +3,7 @@ package fr.epita.filrouge.application.person;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.epita.filrouge.domain.entity.person.Role;
 
+import javax.validation.constraints.Email;
 import java.time.LocalDate;
 
 public class AppUserLightDto {
@@ -16,6 +17,7 @@ public class AppUserLightDto {
     private LocalDate birthdayDate;
 
     @JsonProperty("email")
+    @Email
     private String email;
 
     @JsonProperty("role")

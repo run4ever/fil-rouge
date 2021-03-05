@@ -18,7 +18,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/v1/viewingserie")
+@RequestMapping("/api/v1/viewing-serie")
 @Api(value = "Controller REST pour les visionnages de série")
 public class ViewingSerieResource {
 
@@ -26,14 +26,14 @@ public class ViewingSerieResource {
     @Autowired
     private ViewingSerieService viewingSerieService;
 
-    @GetMapping("/{id}")
-    @ApiOperation(value = "récupération de la liste de visonnage d'un utilisateur", nickname = "getViewingSerieByUser", notes ="Liste de visionnage d'une série pour un utilisateur donné")
+    @GetMapping("/{userEmail}")
+    @ApiOperation(value = "récupération de la liste de visonnage de Série d'un utilisateur", nickname = "getViewingSerieByUser", notes ="Liste de visionnage d'une série pour un utilisateur donné")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Visionnage trouvé à partir de l'identifiant user", response = ErrorModel.class),
             @ApiResponse (code = 400, message = "Visionnage absent en base", response = SerieDto.class),
             @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = SerieDto.class)
     })
-    public ResponseEntity<List<ViewingSerieRestitDto>> getViewingSerieByUser(@PathVariable("id") String email){
+    public ResponseEntity<List<ViewingSerieRestitDto>> getViewingSerieByUser(@PathVariable("userEmail") String email){
 
 
             return new ResponseEntity<List<ViewingSerieRestitDto>> (viewingSerieService.findByUserAllVievingSerieDto (email), HttpStatus.OK);

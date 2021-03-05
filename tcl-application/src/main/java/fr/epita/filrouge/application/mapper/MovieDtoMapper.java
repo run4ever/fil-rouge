@@ -1,9 +1,7 @@
 package fr.epita.filrouge.application.mapper;
 
 import fr.epita.filrouge.application.movie.MovieDto;
-import fr.epita.filrouge.domain.entity.common.PublicNotation;
 import fr.epita.filrouge.domain.entity.movie.Movie;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;

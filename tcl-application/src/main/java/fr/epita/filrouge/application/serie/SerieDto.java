@@ -2,6 +2,7 @@ package fr.epita.filrouge.application.serie;
 
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.serie.StatusSerie;
 
@@ -14,17 +15,47 @@ public class SerieDto {
     //id unique de série (et aussi de film)
     //il commence par "tt"
 
+    @JsonProperty("imdbId")
     @Pattern(regexp = "^tt")
     private String imdbId;
+
+    @JsonProperty("title")
     @NotNull
     private String title;
+
+    @JsonProperty("description")
     @NotNull
     private String description;
-    private Integer startYear;
-    private Integer endYear;
-    private Integer numberOfSeason;
-    private Integer numberOfEpisode;
+
+    @JsonProperty("category")
     private Category category; // Attention, on gère une seul Category ici
+
+    @JsonProperty("startYear")
+    private Integer startYear;
+
+    @JsonProperty("imdbRating")
+    private Double averageRating;
+
+    @JsonProperty("imdbVotes")
+    private Integer numberOfVotes;
+
+    @JsonProperty("actors")
+    private String actors;
+
+    @JsonProperty("imageUrl")
+    private String imageUrl;
+
+    //données spécifique de Série
+    @JsonProperty("endYear")
+    private Integer endYear;
+
+    @JsonProperty("numberOfSeason")
+    private Integer numberOfSeason;
+
+    @JsonProperty("numberOfEpisode")
+    private Integer numberOfEpisode;
+
+    @JsonProperty("statusSerie")
     private StatusSerie statusSerie;
 
 
@@ -52,12 +83,52 @@ public class SerieDto {
         this.description = description;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public Integer getStartYear() {
         return startYear;
     }
 
     public void setStartYear(Integer startYear) {
         this.startYear = startYear;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public Integer getNumberOfVotes() {
+        return numberOfVotes;
+    }
+
+    public void setNumberOfVotes(Integer numberOfVotes) {
+        this.numberOfVotes = numberOfVotes;
+    }
+
+    public String getActors() {
+        return actors;
+    }
+
+    public void setActors(String actors) {
+        this.actors = actors;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public Integer getEndYear() {
@@ -84,14 +155,6 @@ public class SerieDto {
         this.numberOfEpisode = numberOfEpisode;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
     public StatusSerie getStatusSerie() {
         return statusSerie;
     }
@@ -105,11 +168,16 @@ public class SerieDto {
         private String imdbId;
         private String title;
         private String description;
+        private Category category; // Attention, on gère une seul Category ici
         private Integer startYear;
+        private Double averageRating;
+        private Integer numberOfVotes;
+        private String actors;
+        private String imageUrl;
+        //données spécifique de Série
         private Integer endYear;
         private Integer numberOfSeason;
         private Integer numberOfEpisode;
-        private Category category; // Attention, on gère une seul Category ici
         private StatusSerie statusSerie;
 
         private Builder() {
@@ -134,8 +202,33 @@ public class SerieDto {
             return this;
         }
 
+        public Builder withCategory(Category category) {
+            this.category = category;
+            return this;
+        }
+
         public Builder withStartYear(Integer startYear) {
             this.startYear = startYear;
+            return this;
+        }
+
+        public Builder withAverageRating(Double averageRating) {
+            this.averageRating = averageRating;
+            return this;
+        }
+
+        public Builder withNumberOfVotes(Integer numberOfVotes) {
+            this.numberOfVotes = numberOfVotes;
+            return this;
+        }
+
+        public Builder withActors(String actors) {
+            this.actors = actors;
+            return this;
+        }
+
+        public Builder withImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
             return this;
         }
 
@@ -154,11 +247,6 @@ public class SerieDto {
             return this;
         }
 
-        public Builder withCategory(Category category) {
-            this.category = category;
-            return this;
-        }
-
         public Builder withStatusSerie(StatusSerie statusSerie) {
             this.statusSerie = statusSerie;
             return this;
@@ -169,11 +257,15 @@ public class SerieDto {
             serieDto.setImdbId(imdbId);
             serieDto.setTitle(title);
             serieDto.setDescription(description);
+            serieDto.setCategory(category);
             serieDto.setStartYear(startYear);
+            serieDto.setAverageRating(averageRating);
+            serieDto.setNumberOfVotes(numberOfVotes);
+            serieDto.setActors(actors);
+            serieDto.setImageUrl(imageUrl);
             serieDto.setEndYear(endYear);
             serieDto.setNumberOfSeason(numberOfSeason);
             serieDto.setNumberOfEpisode(numberOfEpisode);
-            serieDto.setCategory(category);
             serieDto.setStatusSerie(statusSerie);
             return serieDto;
         }
