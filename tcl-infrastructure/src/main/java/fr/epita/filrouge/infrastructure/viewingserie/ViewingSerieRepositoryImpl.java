@@ -85,4 +85,15 @@ public class ViewingSerieRepositoryImpl implements ViewingSerieRepository{
     public long countTotalViewingSerieByUser(String email) {
         return viewingSerieJpaRepository.countByAppUserJpa_Email (email);
     }
+
+    @Override
+    public void delete(ViewingSerie vs) {
+        viewingSerieJpaRepository.delete (viewingSerieJpaMapper.mapToJpa (vs));
+    }
+
+    @Override
+    public ViewingSerie update(ViewingSerie vs) {
+        viewingSerieJpaRepository.save (viewingSerieJpaMapper.mapToJpa (vs));
+        return vs;
+    }
 }

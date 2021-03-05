@@ -96,11 +96,11 @@ public class SerieResourceTest {
         //Given
 
         //When
-        ResponseEntity<SerieDto[]> response = restTemplate.getForEntity("/api/v1/movie/list", SerieDto[].class);
+        ResponseEntity<SerieDto[]> response = restTemplate.getForEntity("/api/v1/serie/list/all", SerieDto[].class);
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        //résultat ne doit pas être nul et pas de duplication Movie
+        //résultat ne doit pas être nul et pas de duplication Serie
         assertThat(response.getBody()).isNotNull().doesNotHaveDuplicates();
 
 
