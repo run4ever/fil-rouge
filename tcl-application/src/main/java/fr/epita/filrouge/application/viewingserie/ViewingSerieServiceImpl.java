@@ -2,6 +2,8 @@ package fr.epita.filrouge.application.viewingserie;
 
 import fr.epita.filrouge.application.common.PageDTO;
 import fr.epita.filrouge.application.mapper.ViewingSerieDtoMapper;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
+import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerieRepository;
@@ -35,8 +37,11 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     @Autowired
     private ViewingSerieDtoMapper viewingSerieDtoMapper;
 
+
+
     /**
      * Création d'un nouveau visionnage
+     *
      * @param serieViewDto
      */
     @Override
@@ -52,9 +57,9 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     }
 
     /**
-     *
      * Récupération de la liste des visionnages pour un user donné.
      * Méthode sans pagination.
+     *
      * @param email
      * @return liste de visionnage
      */
@@ -65,7 +70,7 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
             throw new NotFoundException ("User inconnu : " + email, ErrorCodes.USER_NOT_FOUND);
         }
         List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<ViewingSerieRestitDto> ();
-        for (ViewingSerie viewingSerie : viewingSerieRepository.findallViewingSerieByUser(email)) {
+        for (ViewingSerie viewingSerie : viewingSerieRepository.findallViewingSerieByUser (email)) {
             viewingSerieRestitDtos.add (viewingSerieDtoMapper.mapToDtoRestit (viewingSerie));
         }
         return viewingSerieRestitDtos;
@@ -74,6 +79,7 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     /**
      * Récupération de la liste des visionnages pour un user donné.
      * Méthode avec pagination.
+     *
      * @param email
      * @param offset
      * @param limit
@@ -87,24 +93,24 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
         List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<ViewingSerieRestitDto> ();
         String attributeVerify = "";
         if (controlSortAttribute (sortAttribute)) {
-            attributeVerify= "".concat (sortAttribute);
+            attributeVerify = "".concat (sortAttribute);
+        } else {
+            attributeVerify = "".concat ("DateLastAction");
         }
-        else {
-            attributeVerify = "".concat("DateLastAction");
-        }
-        for (ViewingSerie viewingSerie : viewingSerieRepository.findallViewingSerieByUserByPage(email, offset, limit, attributeVerify, sortAsc)) {
+        for (ViewingSerie viewingSerie : viewingSerieRepository.findallViewingSerieByUserByPage (email, offset, limit, attributeVerify, sortAsc)) {
             viewingSerieRestitDtos.add (viewingSerieDtoMapper.mapToDtoRestit (viewingSerie));
         }
         pageDTO.setLimit (limit);
         pageDTO.setOffset (offset);
         pageDTO.setSortAttribute (sortAttribute);
-        pageDTO.setTotal (viewingSerieRepository.countTotalViewingSerieByUser(email));
+        pageDTO.setTotal (viewingSerieRepository.countTotalViewingSerieByUser (email));
         pageDTO.setListViewingOrSerieOrVideo (viewingSerieRestitDtos);
         return pageDTO;
     }
 
     /**
      * Affichage d'un visionnage donné
+     *
      * @param idUser
      * @param imdb
      * @return
@@ -116,17 +122,38 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
 
     }
 
+    @Override
+    public ViewingSerieCreateDto updateViewingSerieStatus(ViewingSerieCreateDto viewingSerieCreateDto) {
+
+        final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (viewingSerieCreateDto.getEmail (),
+                viewingSerieCreateDto.getImdb ());
+
+        viewingSerieRepository.update(vs);
+       return null;
+    }
+
+    @Override
+    public void deleteViewingSerie(ViewingSerieCreateDto ViewingSerieCreateDto) {
+
+        final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (ViewingSerieCreateDto.getEmail ()
+        ,ViewingSerieCreateDto.getImdb ());
+
+        viewingSerieRepository.delete(vs);
+    }
+
+
 
 
     /**
      * Controle par introspection d'un critère de tri.
      * La méthode vérifie la présence de l'attribut
+     *
      * @param attribute
      * @return
      */
     private boolean controlSortAttribute(String attribute) {
 
-        for (Field field: ViewingSerie.class.getFields ()) {
+        for (Field field : ViewingSerie.class.getFields ()) {
             if (field.getName ().equalsIgnoreCase (attribute)) {
                 return true;
             }
@@ -134,36 +161,8 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
         return false;
     }
 
-//    private ViewingSerieCreateDto mapToDtoCreate(ViewingSerie viewingSerie) {
-//        ViewingSerieCreateDto viewingSerieCreateDto = new ViewingSerieCreateDto ();
-//        viewingSerieCreateDto.setStatus (viewingSerie.getStatus ());
-//        viewingSerieCreateDto.setImdb (viewingSerie.getSerie ().getImdbId ());
-//        viewingSerieCreateDto.setEmail (viewingSerie.getAppUser ().getEmail ());
-//        viewingSerieCreateDto.setCurrentSeason (viewingSerie.getCurrentSeason ());
-//        viewingSerieCreateDto.setCurrentEpisode (viewingSerie.getCurrentEpisode ());
-//        return viewingSerieCreateDto;
-//    }
-//
-//    private ViewingSerie mapToDomainCreate(ViewingSerieCreateDto viewingSerieCreateDto) {
-//        ViewingSerie viewingSerie = new ViewingSerie ();
-//        viewingSerie.setStatus (viewingSerieCreateDto.getStatus ());
-//        viewingSerie.setSerie (serieRepository.findById (viewingSerieCreateDto.getImdb ()));
-//        viewingSerie.setCurrentSeason (viewingSerieCreateDto.getCurrentSeason ());
-//        viewingSerie.setCurrentEpisode (viewingSerieCreateDto.getCurrentEpisode ());
-//        viewingSerie.setAppUser (appUserRepository.findbyEmail (viewingSerieCreateDto.getEmail ()));
-//        return viewingSerie;
-//    }
-//
-//    private ViewingSerieRestitDto mapToDtoRestit(ViewingSerie viewingSerie) {
-//        ViewingSerieRestitDto viewingSerieRestitDto = new ViewingSerieRestitDto ();
-//        viewingSerieRestitDto.setCurrentEpisode (viewingSerie.getCurrentEpisode ());
-//        viewingSerieRestitDto.setCurrentSeason (viewingSerie.getCurrentSeason ());
-//        viewingSerieRestitDto.setEmail (viewingSerie.getAppUser ().getEmail ());
-//        viewingSerieRestitDto.setSerieDto (serieDtoMapper.mapDomainToDto (viewingSerie.getSerie ()));
-//        viewingSerieRestitDto.setStatus (viewingSerie.getStatus ());
-//        return viewingSerieRestitDto;
-//    }
-
-
-
 }
+
+
+
+

@@ -1,5 +1,7 @@
 package fr.epita.filrouge.domain.entity.viewingserie;
 
+import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
+
 import java.util.List;
 
 public interface ViewingSerieRepository {
@@ -18,4 +20,8 @@ public interface ViewingSerieRepository {
     List<ViewingSerie> findallViewingSerieByUserByPage(String email, int offset, int limit, String sortAttribute, boolean sortAsc);
 
     long countTotalViewingSerieByUser(String email);
+
+    void delete(ViewingSerie vs);
+
+    ViewingSerie update(ViewingSerie vs);
 }

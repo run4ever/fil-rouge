@@ -77,7 +77,6 @@ public class SerieResourceTest {
     }
 
     @Test
-    @Disabled("désactiver provisoirement en attente de correction API par Youssra")
     public void serie_not_found_should_return_code404() throws Exception {
         //Given
         // cette idSerie ttXXXXXXXX n'existe pas
@@ -97,11 +96,11 @@ public class SerieResourceTest {
         //Given
 
         //When
-        ResponseEntity<SerieDto[]> response = restTemplate.getForEntity("/api/v1/movie/list", SerieDto[].class);
+        ResponseEntity<SerieDto[]> response = restTemplate.getForEntity("/api/v1/serie/list/all", SerieDto[].class);
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        //résultat ne doit pas être nul et pas de duplication Movie
+        //résultat ne doit pas être nul et pas de duplication Serie
         assertThat(response.getBody()).isNotNull().doesNotHaveDuplicates();
 
 

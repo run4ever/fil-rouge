@@ -1,6 +1,7 @@
 package fr.epita.filrouge.application.viewingserie;
 
 import fr.epita.filrouge.application.common.PageDTO;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
 
 import java.util.List;
 
@@ -14,4 +15,7 @@ public interface ViewingSerieService {
 
     ViewingSerieRestitDto findViewing (String email, String imdb);
 
+    void deleteViewingSerie(ViewingSerieCreateDto ViewingSerieCreateDto);
+
+    ViewingSerieCreateDto updateViewingSerieStatus(ViewingSerieCreateDto viewingSerieCreateDto);
 }
