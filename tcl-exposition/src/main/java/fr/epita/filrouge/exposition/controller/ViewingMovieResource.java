@@ -23,7 +23,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/${current_version}/viewing-movie")
+@RequestMapping("/api/v1/viewing-movie")
 @Validated
 public class ViewingMovieResource {
 

@@ -18,7 +18,7 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/${current_version}/viewingserie")
+@RequestMapping("/api/v1/viewingserie")
 @Api(value = "Controller REST pour les visionnages de série")
 public class ViewingSerieResource {
 

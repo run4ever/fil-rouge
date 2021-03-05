@@ -23,7 +23,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @Validated
 @RestController
-@RequestMapping("/api/${current_version}/serie")
+@RequestMapping("/api/v1/serie")
 @Api(value = "Controller REST pour les series")
 public class SerieResource {
 

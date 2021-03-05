@@ -22,7 +22,7 @@ import java.net.URI;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/api/${current_version}/appuser")
+@RequestMapping("/api/v1/appuser")
 @Api(value="Controller REST for AppUser")
 @Validated
 public class AppUserResource {

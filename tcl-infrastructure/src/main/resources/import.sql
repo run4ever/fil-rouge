@@ -8,5 +8,6 @@ insert into movie(imdb_id, title, description, image_url, category, actors, rele
 insert into serie(imdb_id,title,description,start_year,end_year,number_of_season,number_of_episode,status_serie,category) values('tt00test000','friends','Hi Firends','1990','2000','10','150','FINISH','ANIMATION');
 insert into serie(imdb_id,title,description,start_year,end_year,number_of_season,number_of_episode,status_serie,category) values('tt00test999','Game of thrones','Neuf familles nobles rivalisent pour le contrôle du Trône de Fer dans les sept royaumes de Westeros','2005',null,'8','150','FINISH','ANIMATION');
 insert into serie_viewing(app_user_jpa_user_id,serie_jpa_serie_id,status,current_season,current_episode,date_last_action) values (1,1,'WATCHED',5,2,'2021-03-01 21:36:15.108');
+insert into serie_viewing(app_user_jpa_user_id,serie_jpa_serie_id,status,current_season,current_episode,date_last_action) values (1,2,'TO_WATCH',2,1,'2021-03-01 21:36:15.108');
 insert into movie_viewing values(1000,'2021-03-01','TO_WATCH',4,1)
 insert into movie_viewing values(1001,'2021-03-01','TO_WATCH',4,2)
