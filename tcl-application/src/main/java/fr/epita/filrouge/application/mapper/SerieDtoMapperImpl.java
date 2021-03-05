@@ -1,9 +1,14 @@
 package fr.epita.filrouge.application.mapper;
 
+import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.serie.SerieDto;
 import fr.epita.filrouge.domain.entity.common.PublicNotation;
+import fr.epita.filrouge.domain.entity.movie.Movie;
 import fr.epita.filrouge.domain.entity.serie.Serie;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class SerieDtoMapperImpl implements SerieDtoMapper {
@@ -52,5 +57,19 @@ public class SerieDtoMapperImpl implements SerieDtoMapper {
                 .withNumberOfVotes(serie.getPublicNotation().getNumberOfVotes())
                 .build();
 
+    }
+
+    @Override
+    public List<SerieDto> mapDomainToDto(List<Serie> serieList) {
+        if ( serieList == null ) {
+            return null;
+        }
+
+        List<SerieDto> list = new ArrayList<>( serieList.size());
+        for ( Serie serie : serieList ) {
+            list.add(mapDomainToDto(serie));
+        }
+
+        return list;
     }
 }
