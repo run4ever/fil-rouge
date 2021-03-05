@@ -75,5 +75,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // store user's state.
                         exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint) //
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        httpSecurity.cors();//cette ligne permet de résoudre le pb CORS policy
     }
 }

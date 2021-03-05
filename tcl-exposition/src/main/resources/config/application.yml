@@ -25,3 +25,5 @@ jwt:
   secret: tcl-in-force
 ### OMDB Api Key
 OMDB_API_KEY: 551b096d
+### Version API
+current_version: v1
