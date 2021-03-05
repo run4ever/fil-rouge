@@ -77,7 +77,6 @@ public class SerieResourceTest {
     }
 
     @Test
-    @Disabled("désactiver provisoirement en attente de correction API par Youssra")
     public void serie_not_found_should_return_code404() throws Exception {
         //Given
         // cette idSerie ttXXXXXXXX n'existe pas

@@ -36,7 +36,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 		final String requestTokenHeader = request.getHeader("Authorization");
 		String username = null;
 		String jwtToken = null;
-
+		logger.warn("jwt token=>"+requestTokenHeader);
 		// JWT Token is in the form "Bearer token". Remove Bearer word and get
 		// only the Token
 		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
@@ -49,7 +49,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 				logger.error("JWT Token has expired");
 			}
 		} else {
-			logger.warn("JWT Token does not begin with Bearer String");
+			logger.warn("JWT Token does not begin with Bearer String=>"+jwtToken);
 		}
 
 		// Once we get the token validate it.
