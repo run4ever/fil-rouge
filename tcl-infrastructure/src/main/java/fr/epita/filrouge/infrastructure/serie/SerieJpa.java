@@ -32,10 +32,15 @@ public class SerieJpa {
     @Enumerated(EnumType.STRING)
     private StatusSerie statusSerie;
 
+    private Double averageRating;
+    private Integer numberOfVotes;
+    private String imageUrl;
+    private String actors;
+
     public SerieJpa() {
     }
 
-    public SerieJpa(Long idSerie, String imdbId, String title, String description, Integer startYear, Integer endYear, Integer numberOfSeason, Integer numberOfEpisode, Category category) {
+    public SerieJpa(Long idSerie, String imdbId, String title, String description, Integer startYear, Integer endYear, Integer numberOfSeason, Integer numberOfEpisode, Category category, StatusSerie statusSerie, Double averageRating, Integer numberOfVotes, String imageUrl, String actors) {
         this.idSerie = idSerie;
         this.imdbId = imdbId;
         this.title = title;
@@ -45,14 +50,19 @@ public class SerieJpa {
         this.numberOfSeason = numberOfSeason;
         this.numberOfEpisode = numberOfEpisode;
         this.category = category;
+        this.statusSerie = statusSerie;
+        this.averageRating = averageRating;
+        this.numberOfVotes = numberOfVotes;
+        this.imageUrl = imageUrl;
+        this.actors = actors;
     }
 
-    public Long getId() {
+    public Long getIdSerie() {
         return idSerie;
     }
 
-    public void setId(Long id) {
-        this.idSerie = id;
+    public void setIdSerie(Long idSerie) {
+        this.idSerie = idSerie;
     }
 
     public String getImdbId() {
@@ -62,6 +72,7 @@ public class SerieJpa {
     public void setImdbId(String imdbId) {
         this.imdbId = imdbId;
     }
+
     public String getTitle() {
         return title;
     }
@@ -126,6 +137,39 @@ public class SerieJpa {
         this.statusSerie = statusSerie;
     }
 
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
+    }
+
+    public Integer getNumberOfVotes() {
+        return numberOfVotes;
+    }
+
+    public void setNumberOfVotes(Integer numberOfVotes) {
+        this.numberOfVotes = numberOfVotes;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getActors() {
+        return actors;
+    }
+
+    public void setActors(String actors) {
+        this.actors = actors;
+    }
+
+
     public static final class Builder {
         private Long idSerie;
         private String imdbId;
@@ -135,22 +179,22 @@ public class SerieJpa {
         private Integer endYear;
         private Integer numberOfSeason;
         private Integer numberOfEpisode;
-
-        @Enumerated(EnumType.STRING)
         private Category category; // Attention, on gère une seul Category ici
-
-        @Enumerated(EnumType.STRING)
         private StatusSerie statusSerie;
+        private Double averageRating;
+        private Integer numberOfVotes;
+        private String imageUrl;
+        private String actors;
 
         private Builder() {
         }
 
         public static Builder aSerieJpa() {
-            return new Builder ();
+            return new Builder();
         }
 
-        public Builder withId(Long id) {
-            this.idSerie = id;
+        public Builder withIdSerie(Long idSerie) {
+            this.idSerie = idSerie;
             return this;
         }
 
@@ -193,23 +237,48 @@ public class SerieJpa {
             this.category = category;
             return this;
         }
+
         public Builder withStatusSerie(StatusSerie statusSerie) {
             this.statusSerie = statusSerie;
             return this;
         }
 
+        public Builder withAverageRating(Double averageRating) {
+            this.averageRating = averageRating;
+            return this;
+        }
+
+        public Builder withNumberOfVotes(Integer numberOfVotes) {
+            this.numberOfVotes = numberOfVotes;
+            return this;
+        }
+
+        public Builder withImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+            return this;
+        }
+
+        public Builder withActors(String actors) {
+            this.actors = actors;
+            return this;
+        }
+
         public SerieJpa build() {
-            SerieJpa serieJpa = new SerieJpa ();
-            serieJpa.setImdbId (imdbId);
-            serieJpa.setId (idSerie);
-            serieJpa.setTitle (title);
-            serieJpa.setDescription (description);
-            serieJpa.setStartYear (startYear);
-            serieJpa.setEndYear (endYear);
-            serieJpa.setNumberOfSeason (numberOfSeason);
-            serieJpa.setNumberOfEpisode (numberOfEpisode);
-            serieJpa.setCategory (category);
-            serieJpa.setStatusSerie (statusSerie);
+            SerieJpa serieJpa = new SerieJpa();
+            serieJpa.setIdSerie(idSerie);
+            serieJpa.setImdbId(imdbId);
+            serieJpa.setTitle(title);
+            serieJpa.setDescription(description);
+            serieJpa.setStartYear(startYear);
+            serieJpa.setEndYear(endYear);
+            serieJpa.setNumberOfSeason(numberOfSeason);
+            serieJpa.setNumberOfEpisode(numberOfEpisode);
+            serieJpa.setCategory(category);
+            serieJpa.setStatusSerie(statusSerie);
+            serieJpa.setAverageRating(averageRating);
+            serieJpa.setNumberOfVotes(numberOfVotes);
+            serieJpa.setImageUrl(imageUrl);
+            serieJpa.setActors(actors);
             return serieJpa;
         }
     }

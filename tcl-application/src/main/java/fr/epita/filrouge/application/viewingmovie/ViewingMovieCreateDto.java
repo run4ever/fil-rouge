@@ -8,8 +8,9 @@ public class ViewingMovieCreateDto {
 
     @NotNull
     private Status status = Status.TO_WATCH;
-
+    @NotNull
     private String imdbId;
+    @NotNull
     private String email;
 
     public ViewingMovieCreateDto() {

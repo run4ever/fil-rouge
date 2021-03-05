@@ -36,14 +36,14 @@ public class ViewingMovieResource {
     @Autowired
     private MovieService movieService;
 
-    @PostMapping("/list")
-    @ApiOperation(value = "List viewing movies of user")
+    @GetMapping("/{userEmail}")
+    @ApiOperation(value = "récupération de la liste de visonnage de Movie d'un utilisateur", nickname = "getAllViewingMovieOfUser", notes ="Liste de visionnage de movie pour un utilisateur donné")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = ErrorModel.class),
             @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
             @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
     })
-    public ResponseEntity<List<ViewingMovieRestitDto>> getAllViewingMovieOfUser(@RequestBody final String email){
+    public ResponseEntity<List<ViewingMovieRestitDto>> getAllViewingMovieOfUser(@PathVariable("userEmail") final String email){
             return new ResponseEntity<> (viewingMovieService.getViewingMovieByUserEmail(email), HttpStatus.OK);
     }
 

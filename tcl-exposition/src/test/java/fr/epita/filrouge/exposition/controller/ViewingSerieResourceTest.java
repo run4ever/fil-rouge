@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class ViewingSerieTest {
+public class ViewingSerieResourceTest {
 
     @Autowired
     private TokenGenerator tokenGenerator;
@@ -29,7 +29,7 @@ public class ViewingSerieTest {
         //Given
         ViewingSerieCreateDto viewingSerieCreateDto = ViewingSerieCreateDto.Builder.aViewingSerieCreateDto()
                 .withEmail("fabien@tcl.com")
-                .withImdb("tt00test999")
+                .withImdb("tt0455275")
                 .withCurrentSeason(3)
                 .withCurrentEpisode(1)
                 .withStatus(Status.TO_WATCH)
@@ -42,7 +42,7 @@ public class ViewingSerieTest {
         HttpEntity<ViewingSerieCreateDto> request = new HttpEntity<>(viewingSerieCreateDto,headers);
 
         //When
-        ResponseEntity<ViewingSerieCreateDto> response = restTemplate.postForEntity("/api/v1/viewingserie/create",request, ViewingSerieCreateDto.class);
+        ResponseEntity<ViewingSerieCreateDto> response = restTemplate.postForEntity("/api/v1/viewing-serie/create",request, ViewingSerieCreateDto.class);
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
@@ -54,10 +54,10 @@ public class ViewingSerieTest {
         //Pour superman@world.com on a déjà injecté la série tt00test000 via import.sql
         ViewingSerieCreateDto viewingSerieCreateDto = ViewingSerieCreateDto.Builder.aViewingSerieCreateDto()
                 .withEmail("superman@world.com")
-                .withImdb("tt00test000")
+                .withImdb("tt0455275")
                 .withCurrentSeason(3)
                 .withCurrentEpisode(1)
-                .withStatus(Status.FINISHED)
+                .withStatus(Status.TO_WATCH)
                 .build();
 
         //initialiser un toke JWT et le mettre dans header ****************
@@ -68,7 +68,7 @@ public class ViewingSerieTest {
 
         //When
         try {
-            ResponseEntity<ViewingSerieCreateDto> response = restTemplate.postForEntity("/api/v1/viewingserie/create",request, ViewingSerieCreateDto.class);
+            ResponseEntity<ViewingSerieCreateDto> response = restTemplate.postForEntity("/api/v1/viewing-serie/create",request, ViewingSerieCreateDto.class);
         } catch (Exception e) {
 
             //Then
@@ -95,7 +95,7 @@ public class ViewingSerieTest {
         //ResponseEntity<ViewingSerieRestitDto[]> response = restTemplate.getForEntity("/api/v1/viewingserie/"+email,ViewingSerieRestitDto[].class);
         // HTTP Get request with headers
         ResponseEntity<ViewingSerieRestitDto[]> response = restTemplate.exchange(
-                "/api/v1/viewingserie/"+email,
+                "/api/v1/viewing-serie/"+email,
                 HttpMethod.GET,
                 request,
                 ViewingSerieRestitDto[].class);

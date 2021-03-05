@@ -5,16 +5,31 @@ import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.domain.entity.common.Status;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+
 public class ViewingMovieRestitDto {
 
+    @Email
+    private String email;
+
     @JsonProperty("status")
+    @NotNull
     private Status status;
 
-    @JsonProperty("appUser")
-    private AppUserDto appUserDto;
-
-    @JsonProperty("movie")
+    @JsonProperty("movieDto")
     private MovieDto movieDto;
+
+    private LocalDate dateLastAction;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public Status getStatus() {
         return status;
@@ -22,14 +37,6 @@ public class ViewingMovieRestitDto {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public AppUserDto getAppUserDto() {
-        return appUserDto;
-    }
-
-    public void setAppUserDto(AppUserDto appUserDto) {
-        this.appUserDto = appUserDto;
     }
 
     public MovieDto getMovieDto() {
@@ -40,26 +47,35 @@ public class ViewingMovieRestitDto {
         this.movieDto = movieDto;
     }
 
+    public LocalDate getDateLastAction() {
+        return dateLastAction;
+    }
+
+    public void setDateLastAction(LocalDate dateLastAction) {
+        this.dateLastAction = dateLastAction;
+    }
+
 
     public static final class Builder {
+        private String email;
         private Status status;
-        private AppUserDto appUserDto;
         private MovieDto movieDto;
+        private LocalDate dateLastAction;
 
         private Builder() {
         }
 
-        public static Builder aViewingMovieDto() {
+        public static Builder aViewingMovieRestitDto() {
             return new Builder();
+        }
+
+        public Builder withEmail(String email) {
+            this.email = email;
+            return this;
         }
 
         public Builder withStatus(Status status) {
             this.status = status;
-            return this;
-        }
-
-        public Builder withAppUserDto(AppUserDto appUserDto) {
-            this.appUserDto = appUserDto;
             return this;
         }
 
@@ -68,11 +84,17 @@ public class ViewingMovieRestitDto {
             return this;
         }
 
+        public Builder withDateLastAction(LocalDate dateLastAction) {
+            this.dateLastAction = dateLastAction;
+            return this;
+        }
+
         public ViewingMovieRestitDto build() {
             ViewingMovieRestitDto viewingMovieRestitDto = new ViewingMovieRestitDto();
+            viewingMovieRestitDto.setEmail(email);
             viewingMovieRestitDto.setStatus(status);
-            viewingMovieRestitDto.setAppUserDto(appUserDto);
             viewingMovieRestitDto.setMovieDto(movieDto);
+            viewingMovieRestitDto.setDateLastAction(dateLastAction);
             return viewingMovieRestitDto;
         }
     }

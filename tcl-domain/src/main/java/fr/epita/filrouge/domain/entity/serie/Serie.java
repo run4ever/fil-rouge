@@ -1,6 +1,7 @@
 package fr.epita.filrouge.domain.entity.serie;
 
 import fr.epita.filrouge.domain.entity.common.Category;
+import fr.epita.filrouge.domain.entity.common.PublicNotation;
 
 public class Serie {
 
@@ -13,13 +14,15 @@ public class Serie {
     private Integer numberOfEpisode;
     private Category category; // Attention, on gère une seul Category ici
     private StatusSerie statusSerie;
+    private PublicNotation publicNotation;
+    private String actors;
+    private String imageUrl;
 
     //default constructor
     public Serie() {
     }
 
-    public Serie(String imdbId, String title, String description, Integer startYear, Integer endYear,
-                 Integer numberOfSeason, Integer numberOfEpisode, Category category, StatusSerie statusSerie) {
+    public Serie(String imdbId, String title, String description, Integer startYear, Integer endYear, Integer numberOfSeason, Integer numberOfEpisode, Category category, StatusSerie statusSerie, PublicNotation publicNotation, String actors, String imageUrl) {
         this.imdbId = imdbId;
         this.title = title;
         this.description = description;
@@ -29,7 +32,11 @@ public class Serie {
         this.numberOfEpisode = numberOfEpisode;
         this.category = category;
         this.statusSerie = statusSerie;
+        this.publicNotation = publicNotation;
+        this.actors = actors;
+        this.imageUrl = imageUrl;
     }
+
 
     public String getImdbId() {
         return imdbId;
@@ -103,6 +110,48 @@ public class Serie {
         this.statusSerie = statusSerie;
     }
 
+    public PublicNotation getPublicNotation() {
+        return publicNotation;
+    }
+
+    public void setPublicNotation(PublicNotation publicNotation) {
+        this.publicNotation = publicNotation;
+    }
+
+    public String getActors() {
+        return actors;
+    }
+
+    public void setActors(String actors) {
+        this.actors = actors;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+
+
+    @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder ("Builder{");
+            sb.append ("imdbId='").append (imdbId).append ('\'');
+            sb.append (", title='").append (title).append ('\'');
+            sb.append (", description='").append (description).append ('\'');
+            sb.append (", startYear=").append (startYear);
+            sb.append (", endYear=").append (endYear);
+            sb.append (", numberOfSeason=").append (numberOfSeason);
+            sb.append (", numberOfEpisode=").append (numberOfEpisode);
+            sb.append (", category=").append (category);
+            sb.append (", statusSerie=").append (statusSerie);
+            sb.append ('}');
+            return sb.toString ();
+        }
+
     public static final class Builder {
         private String imdbId;
         private String title;
@@ -111,8 +160,11 @@ public class Serie {
         private Integer endYear;
         private Integer numberOfSeason;
         private Integer numberOfEpisode;
-        private Category category; // Attention, on gère Serie est dans une seule Category
+        private Category category; // Attention, on gère une seul Category ici
         private StatusSerie statusSerie;
+        private PublicNotation publicNotation;
+        private String actors;
+        private String imageUrl;
 
         private Builder() {
         }
@@ -160,14 +212,30 @@ public class Serie {
             this.category = category;
             return this;
         }
+
         public Builder withStatusSerie(StatusSerie statusSerie) {
             this.statusSerie = statusSerie;
             return this;
         }
 
+        public Builder withPublicNotation(PublicNotation publicNotation) {
+            this.publicNotation = publicNotation;
+            return this;
+        }
+
+        public Builder withActors(String actors) {
+            this.actors = actors;
+            return this;
+        }
+
+        public Builder withImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
+            return this;
+        }
+
         public Serie build() {
             Serie serie = new Serie();
-            serie.setImdbId (imdbId);
+            serie.setImdbId(imdbId);
             serie.setTitle(title);
             serie.setDescription(description);
             serie.setStartYear(startYear);
@@ -175,24 +243,11 @@ public class Serie {
             serie.setNumberOfSeason(numberOfSeason);
             serie.setNumberOfEpisode(numberOfEpisode);
             serie.setCategory(category);
-            serie.setStatusSerie (statusSerie);
+            serie.setStatusSerie(statusSerie);
+            serie.setPublicNotation(publicNotation);
+            serie.setActors(actors);
+            serie.setImageUrl(imageUrl);
             return serie;
-        }
-
-        @Override
-        public String toString() {
-            final StringBuilder sb = new StringBuilder ("Builder{");
-            sb.append ("imdbId='").append (imdbId).append ('\'');
-            sb.append (", title='").append (title).append ('\'');
-            sb.append (", description='").append (description).append ('\'');
-            sb.append (", startYear=").append (startYear);
-            sb.append (", endYear=").append (endYear);
-            sb.append (", numberOfSeason=").append (numberOfSeason);
-            sb.append (", numberOfEpisode=").append (numberOfEpisode);
-            sb.append (", category=").append (category);
-            sb.append (", statusSerie=").append (statusSerie);
-            sb.append ('}');
-            return sb.toString ();
         }
     }
 }

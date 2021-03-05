@@ -64,7 +64,7 @@ public class SerieResourceTest {
     public void find_existing_serie_should_be_success() throws Exception {
         //Given
         // tt00test000 est dans import.sql
-        String idSerie = "tt00test000";
+        String idSerie = "tt0108778";
 
         //When
         ResponseEntity<SerieDto> response = restTemplate.getForEntity("/api/v1/serie/"+idSerie,SerieDto.class);
@@ -72,7 +72,7 @@ public class SerieResourceTest {
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody().getImdbId()).isEqualTo(idSerie);
-        assertThat(response.getBody().getTitle()).isEqualTo("friends");
+        assertThat(response.getBody().getTitle()).isEqualTo("Friends");
 
     }
 
