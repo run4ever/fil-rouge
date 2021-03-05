@@ -1,0 +1,17 @@
+#### Fichier config pour exécution en local #######
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tcl
+    username: postgres
+    password: admin
+    ## forcer exécution import.sql
+    initialization-mode: always
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    #org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.web: DEBUG
+
