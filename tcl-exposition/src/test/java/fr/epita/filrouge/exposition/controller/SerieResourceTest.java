@@ -100,7 +100,7 @@ public class SerieResourceTest {
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        //résultat ne doit pas être nul et pas de duplication Movie
+        //résultat ne doit pas être nul et pas de duplication Serie
         assertThat(response.getBody()).isNotNull().doesNotHaveDuplicates();
 
 

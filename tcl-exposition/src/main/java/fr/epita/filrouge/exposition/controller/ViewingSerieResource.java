@@ -1,6 +1,7 @@
 package fr.epita.filrouge.exposition.controller;
 
 import fr.epita.filrouge.application.serie.SerieDto;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieCreateDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieRestitDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieService;
@@ -52,5 +53,26 @@ public class ViewingSerieResource {
             return new ResponseEntity<ViewingSerieCreateDto> (viewingSerieService.create (viewingSerieCreateDto), HttpStatus.CREATED);
         }
 
+    @PutMapping("/update")
+    @ApiOperation(value = "Update status of a viewing serie")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Success", response = ErrorModel.class),
+            @ApiResponse (code = 400, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
+    })
+    public ResponseEntity<ViewingSerieCreateDto> updateViewingSerie(@RequestBody final ViewingSerieCreateDto viewingSerieCreateDto) {
+        return new ResponseEntity<> (viewingSerieService.updateViewingSerieStatus(viewingSerieCreateDto), HttpStatus.CREATED);
 
+    }
+
+    @DeleteMapping("/delete")
+    @ApiOperation(value = "Delete a viewing serie")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Success", response = ErrorModel.class),
+            @ApiResponse (code = 400, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
+    })
+    public void  deleteViewingSerie(@RequestBody final ViewingSerieCreateDto viewingSerieCreateDto) {
+         viewingSerieService.deleteViewingSerie (viewingSerieCreateDto);
+    }
 }
