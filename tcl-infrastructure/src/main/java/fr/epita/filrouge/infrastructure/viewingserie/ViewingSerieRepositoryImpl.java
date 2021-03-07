@@ -88,12 +88,22 @@ public class ViewingSerieRepositoryImpl implements ViewingSerieRepository{
 
     @Override
     public void delete(ViewingSerie vs) {
-        viewingSerieJpaRepository.delete (viewingSerieJpaMapper.mapToJpa (vs));
+        ViewingSerieJpa viewingSerieJpa = viewingSerieJpaRepository.findByAppUserJpa_EmailAndSerieJpa_ImdbId (
+                vs.getAppUser ().getEmail (), vs.getSerie ().getImdbId ());
+        ViewingSerieJpa viewingSerieJpaDeleted = viewingSerieJpaMapper.mapToJpa (vs);
+        viewingSerieJpaDeleted.setId (viewingSerieJpa.getId ());
+       viewingSerieJpaRepository.delete (viewingSerieJpaDeleted);
     }
 
     @Override
     public ViewingSerie update(ViewingSerie vs) {
-        viewingSerieJpaRepository.save (viewingSerieJpaMapper.mapToJpa (vs));
+        ViewingSerieJpa viewingSerieJpa = viewingSerieJpaRepository.findByAppUserJpa_EmailAndSerieJpa_ImdbId (
+                vs.getAppUser ().getEmail (), vs.getSerie ().getImdbId ());
+        ViewingSerieJpa viewingSerieJpaUpdated = viewingSerieJpaMapper.mapToJpa (vs);
+        viewingSerieJpaUpdated.setId (viewingSerieJpa.getId ());
+        viewingSerieJpaUpdated.setAppUserJpa (viewingSerieJpa.getAppUserJpa ());
+        viewingSerieJpaUpdated.setSerieJpa (viewingSerieJpa.getSerieJpa ());
+        viewingSerieJpaRepository.save(viewingSerieJpaUpdated);
         return vs;
     }
 }

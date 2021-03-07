@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1/movie")
 @Validated

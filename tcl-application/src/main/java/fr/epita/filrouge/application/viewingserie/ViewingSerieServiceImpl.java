@@ -127,9 +127,8 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
 
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (viewingSerieCreateDto.getEmail (),
                 viewingSerieCreateDto.getImdb ());
-
-        viewingSerieRepository.update(vs);
-       return null;
+        vs.setStatus(viewingSerieCreateDto.getStatus());
+       return viewingSerieDtoMapper.mapToDtoCreate(viewingSerieRepository.update(vs));
     }
 
     @Override
