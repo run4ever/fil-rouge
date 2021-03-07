@@ -13,7 +13,7 @@ public class ViewingSerieCreateDto {
     @NotNull
     private Integer currentEpisode;
 
-    private String imdb;
+    private String imdbId;
     private String email;
 
     public Status getStatus() {
@@ -40,12 +40,12 @@ public class ViewingSerieCreateDto {
         this.currentEpisode = currentEpisode;
     }
 
-    public String getImdb() {
-        return imdb;
+    public String getImdbId() {
+        return imdbId;
     }
 
-    public void setImdb(String imdb) {
-        this.imdb = imdb;
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
     public String getEmail() {
@@ -61,7 +61,7 @@ public class ViewingSerieCreateDto {
         private Status status;
         private Integer currentSeason;
         private Integer currentEpisode;
-        private String imdb;
+        private String imdbId;
         private String email;
 
         private Builder() {
@@ -86,8 +86,8 @@ public class ViewingSerieCreateDto {
             return this;
         }
 
-        public Builder withImdb(String imdb) {
-            this.imdb = imdb;
+        public Builder withImdbId(String imdbId) {
+            this.imdbId = imdbId;
             return this;
         }
 
@@ -101,7 +101,7 @@ public class ViewingSerieCreateDto {
             viewingSerieCreateDto.setStatus(status);
             viewingSerieCreateDto.setCurrentSeason(currentSeason);
             viewingSerieCreateDto.setCurrentEpisode(currentEpisode);
-            viewingSerieCreateDto.setImdb(imdb);
+            viewingSerieCreateDto.setImdbId(imdbId);
             viewingSerieCreateDto.setEmail(email);
             return viewingSerieCreateDto;
         }
