@@ -1,11 +1,7 @@
 package fr.epita.filrouge.exposition.controller;
 
-import fr.epita.filrouge.application.movie.MovieDto;
-import fr.epita.filrouge.application.movie.MovieService;
 import fr.epita.filrouge.application.serie.SerieDto;
 import fr.epita.filrouge.application.serie.SerieService;
-import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
-import fr.epita.filrouge.application.viewingmovie.ViewingMovieRestitDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieCreateDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieRestitDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieService;
@@ -47,7 +43,7 @@ public class ViewingSerieResource {
     public ResponseEntity<List<ViewingSerieRestitDto>> getViewingSerieByUser(@PathVariable("userEmail") String email){
 
 
-            return new ResponseEntity<List<ViewingSerieRestitDto>> (viewingSerieService.findByUserAllVievingSerieDto (email), HttpStatus.OK);
+            return new ResponseEntity<> (viewingSerieService.findByUserAllVievingSerieDto (email), HttpStatus.OK);
 
     }
 
@@ -60,7 +56,7 @@ public class ViewingSerieResource {
     })
     public ResponseEntity<ViewingSerieCreateDto> createSerie(@RequestBody ViewingSerieCreateDto viewingSerieCreateDto) {
 
-            return new ResponseEntity<ViewingSerieCreateDto> (viewingSerieService.create (viewingSerieCreateDto), HttpStatus.CREATED);
+            return new ResponseEntity<> (viewingSerieService.create (viewingSerieCreateDto), HttpStatus.CREATED);
         }
 
     @PutMapping("/update")
@@ -121,14 +117,14 @@ public class ViewingSerieResource {
                     .withEmail(email)
                     .withDateLastAction(LocalDate.now())
                     .withStatus(status)
-                    .withAlReadyInUserList(alReadyInUserList)
+                    .withAlreadyInUserList(alReadyInUserList)
                     .build();
 
             searchResults.add(vsToAdd);
         }
 
         //sort results beginning with element already in list
-        Collections.sort(searchResults, (s1, s2) -> Boolean.compare(s2.getAlReadyInUserList(),s1.getAlReadyInUserList()));
+        Collections.sort(searchResults, (s1, s2) -> Boolean.compare(s2.getAlreadyInUserList(),s1.getAlreadyInUserList()));
 
         return new ResponseEntity<> (searchResults, HttpStatus.CREATED);
 

@@ -11,6 +11,7 @@ public enum Category {
     DRAMA,
     FAMILY,
     FANTASY,
+    GAME_SHOW,
     HORROR,
     MYSTERY,
     NONE,

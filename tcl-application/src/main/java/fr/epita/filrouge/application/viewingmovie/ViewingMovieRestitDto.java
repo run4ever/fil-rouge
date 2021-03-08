@@ -22,7 +22,7 @@ public class ViewingMovieRestitDto {
 
     private LocalDate dateLastAction;
 
-    private Boolean alReadyInUserList;
+    private Boolean alreadyInUserList;
 
     public String getEmail() {
         return email;
@@ -56,12 +56,12 @@ public class ViewingMovieRestitDto {
         this.dateLastAction = dateLastAction;
     }
 
-    public Boolean getAlReadyInUserList() {
-        return alReadyInUserList;
+    public Boolean getAlreadyInUserList() {
+        return alreadyInUserList;
     }
 
-    public void setAlReadyInUserList(Boolean alReadyInUserList) {
-        this.alReadyInUserList = alReadyInUserList;
+    public void setAlreadyInUserList(Boolean alReadyInUserList) {
+        this.alreadyInUserList = alReadyInUserList;
     }
 
     public static final class Builder {
@@ -69,7 +69,7 @@ public class ViewingMovieRestitDto {
         private Status status;
         private MovieDto movieDto;
         private LocalDate dateLastAction;
-        private Boolean alReadyInUserList = false;
+        private Boolean alreadyInUserList = false;
 
         private Builder() {
         }
@@ -98,8 +98,8 @@ public class ViewingMovieRestitDto {
             return this;
         }
 
-        public Builder withAlReadyInUserList(Boolean alReadyInUserList) {
-            this.alReadyInUserList = alReadyInUserList;
+        public Builder withAlreadyInUserList(Boolean alReadyInUserList) {
+            this.alreadyInUserList = alReadyInUserList;
             return this;
         }
 
@@ -109,7 +109,7 @@ public class ViewingMovieRestitDto {
             viewingMovieRestitDto.setStatus(status);
             viewingMovieRestitDto.setMovieDto(movieDto);
             viewingMovieRestitDto.setDateLastAction(dateLastAction);
-            viewingMovieRestitDto.setAlReadyInUserList(alReadyInUserList);
+            viewingMovieRestitDto.setAlreadyInUserList(alreadyInUserList);
             return viewingMovieRestitDto;
         }
     }

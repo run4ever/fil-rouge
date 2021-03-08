@@ -22,7 +22,7 @@ public class ViewingSerieRestitDto {
 
     private LocalDate dateLastAction;
 
-    private Boolean alReadyInUserList;
+    private Boolean alreadyInUserList;
 
     public String getEmail() {
         return email;
@@ -72,12 +72,12 @@ public class ViewingSerieRestitDto {
         this.dateLastAction = dateLastAction;
     }
 
-    public Boolean getAlReadyInUserList() {
-        return alReadyInUserList;
+    public Boolean getAlreadyInUserList() {
+        return alreadyInUserList;
     }
 
-    public void setAlReadyInUserList(Boolean alReadyInUserList) {
-        this.alReadyInUserList = alReadyInUserList;
+    public void setAlreadyInUserList(Boolean alreadyInUserList) {
+        this.alreadyInUserList = alreadyInUserList;
     }
 
     public static final class Builder {
@@ -87,7 +87,7 @@ public class ViewingSerieRestitDto {
         private Integer currentEpisode;
         private SerieDto serieDto;
         private LocalDate dateLastAction;
-        private Boolean alReadyInUserList = false;
+        private Boolean alreadyInUserList = false;
 
         private Builder() {
         }
@@ -126,8 +126,8 @@ public class ViewingSerieRestitDto {
             return this;
         }
 
-        public Builder withAlReadyInUserList(Boolean alReadyInUserList) {
-            this.alReadyInUserList = alReadyInUserList;
+        public Builder withAlreadyInUserList(Boolean alreadyInUserList) {
+            this.alreadyInUserList = alreadyInUserList;
             return this;
         }
 
@@ -139,7 +139,7 @@ public class ViewingSerieRestitDto {
             viewingSerieRestitDto.setCurrentEpisode(currentEpisode);
             viewingSerieRestitDto.setSerieDto(serieDto);
             viewingSerieRestitDto.setDateLastAction(dateLastAction);
-            viewingSerieRestitDto.setAlReadyInUserList(alReadyInUserList);
+            viewingSerieRestitDto.setAlreadyInUserList(alreadyInUserList);
             return viewingSerieRestitDto;
         }
     }

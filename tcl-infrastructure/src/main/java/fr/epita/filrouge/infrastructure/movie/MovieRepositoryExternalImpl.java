@@ -75,7 +75,7 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
                 date = null;
             }
             else{
-                date = LocalDate.of(Integer.valueOf(movieInfo.getYear().substring(0,3)), 1, 1);
+                date = LocalDate.of(Integer.valueOf(movieInfo.getYear().substring(0,4)), 1, 1);
             }
 
             Double notation;

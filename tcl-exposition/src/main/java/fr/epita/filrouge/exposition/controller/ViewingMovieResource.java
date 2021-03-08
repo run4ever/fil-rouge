@@ -118,14 +118,14 @@ public class ViewingMovieResource {
                     .withEmail(email)
                     .withDateLastAction(LocalDate.now())
                     .withStatus(status)
-                    .withAlReadyInUserList(alReadyInUserList)
+                    .withAlreadyInUserList(alReadyInUserList)
                     .build();
 
             searchResults.add(vmToAdd);
         }
 
         //sort results beginning with element already in list
-        Collections.sort(searchResults, (s1, s2) -> Boolean.compare(s2.getAlReadyInUserList(),s1.getAlReadyInUserList()));
+        Collections.sort(searchResults, (s1, s2) -> Boolean.compare(s2.getAlreadyInUserList(),s1.getAlreadyInUserList()));
 
         return new ResponseEntity<> (searchResults, HttpStatus.CREATED);
 
