@@ -2,6 +2,7 @@ package fr.epita.filrouge.application.viewingserie;
 
 import fr.epita.filrouge.application.common.PageDTO;
 import fr.epita.filrouge.application.mapper.ViewingSerieDtoMapper;
+import fr.epita.filrouge.application.serie.SerieDto;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerieRepository;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author : Yoss
+ * Author : Yoss
  * Classe pour manipuler les visionnages de série
  */
 @Service
@@ -67,7 +68,7 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
         if (appUserRepository.findbyEmail (email) == null) {
             throw new NotFoundException ("User inconnu : " + email, ErrorCodes.USER_NOT_FOUND);
         }
-        List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<ViewingSerieRestitDto> ();
+        List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<> ();
         for (ViewingSerie viewingSerie : viewingSerieRepository.findallViewingSerieByUser (email)) {
             viewingSerieRestitDtos.add (viewingSerieDtoMapper.mapToDtoRestit (viewingSerie));
         }
@@ -88,8 +89,8 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     public PageDTO findByUserAllVievingSerieDtoByPage(String email, int offset, int limit, String sortAttribute, boolean sortAsc) {
 
         PageDTO pageDTO = new PageDTO ();
-        List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<ViewingSerieRestitDto> ();
-        String attributeVerify = "";
+        List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<> ();
+        String attributeVerify;
         if (controlSortAttribute (sortAttribute)) {
             attributeVerify = "".concat (sortAttribute);
         } else {
@@ -134,6 +135,11 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
             vs.setCurrentEpisode(viewingSerieCreateDto.getCurrentEpisode());
         }
        return viewingSerieDtoMapper.mapToDtoCreate(viewingSerieRepository.update(vs));
+    }
+
+    @Override
+    public ViewingSerieRestitDto verifyViewingSerieExistence(SerieDto serie, String email) {
+        return viewingSerieDtoMapper.mapToDtoRestit(viewingSerieRepository.findViewingSerieFromUserEmailAndSerieId(email, serie.getImdbId()));
     }
 
     @Override

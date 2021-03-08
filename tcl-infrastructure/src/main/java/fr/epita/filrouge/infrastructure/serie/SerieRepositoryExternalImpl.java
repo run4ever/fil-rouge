@@ -80,6 +80,22 @@ public class SerieRepositoryExternalImpl implements SerieRepositoryExternal {
                 }
             }
 
+            Double notation;
+            if(serieInfo.getImdbRating().equals("N/A")){
+                notation = null;
+            }
+            else{
+                notation = Double.valueOf(serieInfo.getImdbRating());
+            }
+
+            Integer votes;
+            if(serieInfo.getImdbVotes().equals("N/A")){
+                votes = null;
+            }
+            else{
+                votes = Integer.valueOf(serieInfo.getImdbVotes().replace(",", ""));
+            }
+
             return Serie.Builder.aSerie()
                     .withImdbId(serieInfo.getImdbID())
                     .withTitle(serieInfo.getTitle())
@@ -87,7 +103,7 @@ public class SerieRepositoryExternalImpl implements SerieRepositoryExternal {
                     .withNumberOfSeason(totalSeasons)
                     .withStartYear(startYear)
                     .withEndYear(endYear)
-                    .withPublicNotation(new PublicNotation(Double.valueOf(serieInfo.getImdbRating()), Integer.valueOf(serieInfo.getImdbVotes().replace(",", ""))))
+                    .withPublicNotation(new PublicNotation(notation, votes))
                     .withActors(serieInfo.getActors())
                     .withImageUrl(serieInfo.getImageUrl())
                     .withCategory(serieCategory)

@@ -2,7 +2,6 @@ package fr.epita.filrouge.application.viewingmovie;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.epita.filrouge.application.movie.MovieDto;
-import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.domain.entity.common.Status;
 
 import javax.validation.constraints.Email;
@@ -22,6 +21,8 @@ public class ViewingMovieRestitDto {
     private MovieDto movieDto;
 
     private LocalDate dateLastAction;
+
+    private Boolean alReadyInUserList;
 
     public String getEmail() {
         return email;
@@ -55,12 +56,20 @@ public class ViewingMovieRestitDto {
         this.dateLastAction = dateLastAction;
     }
 
+    public Boolean getAlReadyInUserList() {
+        return alReadyInUserList;
+    }
+
+    public void setAlReadyInUserList(Boolean alReadyInUserList) {
+        this.alReadyInUserList = alReadyInUserList;
+    }
 
     public static final class Builder {
         private String email;
         private Status status;
         private MovieDto movieDto;
         private LocalDate dateLastAction;
+        private Boolean alReadyInUserList = false;
 
         private Builder() {
         }
@@ -89,12 +98,18 @@ public class ViewingMovieRestitDto {
             return this;
         }
 
+        public Builder withAlReadyInUserList(Boolean alReadyInUserList) {
+            this.alReadyInUserList = alReadyInUserList;
+            return this;
+        }
+
         public ViewingMovieRestitDto build() {
             ViewingMovieRestitDto viewingMovieRestitDto = new ViewingMovieRestitDto();
             viewingMovieRestitDto.setEmail(email);
             viewingMovieRestitDto.setStatus(status);
             viewingMovieRestitDto.setMovieDto(movieDto);
             viewingMovieRestitDto.setDateLastAction(dateLastAction);
+            viewingMovieRestitDto.setAlReadyInUserList(alReadyInUserList);
             return viewingMovieRestitDto;
         }
     }

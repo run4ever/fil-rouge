@@ -3,6 +3,7 @@ package fr.epita.filrouge.application.viewingmovie;
 import fr.epita.filrouge.application.mapper.AppUserDtoMapper;
 import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.application.mapper.ViewingMovieDtoMapper;
+import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovie;
 import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovieRepository;
@@ -82,6 +83,11 @@ public class ViewingMovieServiceImpl implements ViewingMovieService {
                 viewingMovieCreateDto.getEmail(), viewingMovieCreateDto.getImdbId());
 
         viewingMovieRepository.delete(vm);
+    }
+
+    @Override
+    public ViewingMovieRestitDto verifyViewingMovieExistence(MovieDto movie, String email) {
+        return viewingMovieDtoMapper.mapDomainToDto(viewingMovieRepository.findViewingMovieFromUserEmailAndMovieId(email, movie.getImdbId()));
     }
 
 }

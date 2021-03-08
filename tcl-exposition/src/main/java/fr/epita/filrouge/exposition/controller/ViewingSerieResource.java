@@ -1,10 +1,15 @@
 package fr.epita.filrouge.exposition.controller;
 
+import fr.epita.filrouge.application.movie.MovieDto;
+import fr.epita.filrouge.application.movie.MovieService;
 import fr.epita.filrouge.application.serie.SerieDto;
+import fr.epita.filrouge.application.serie.SerieService;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
+import fr.epita.filrouge.application.viewingmovie.ViewingMovieRestitDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieCreateDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieRestitDto;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieService;
+import fr.epita.filrouge.domain.entity.common.Status;
 import fr.epita.filrouge.exposition.exception.ErrorModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -15,6 +20,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
@@ -23,9 +31,11 @@ import java.util.List;
 @Api(value = "Controller REST pour les visionnages de série")
 public class ViewingSerieResource {
 
-
     @Autowired
     private ViewingSerieService viewingSerieService;
+
+    @Autowired
+    private SerieService serieService;
 
     @GetMapping("/{userEmail}")
     @ApiOperation(value = "récupération de la liste de visonnage de Série d'un utilisateur", nickname = "getViewingSerieByUser", notes ="Liste de visionnage d'une série pour un utilisateur donné")
@@ -75,4 +85,54 @@ public class ViewingSerieResource {
     public void  deleteViewingSerie(@RequestBody final ViewingSerieCreateDto viewingSerieCreateDto) {
          viewingSerieService.deleteViewingSerie (viewingSerieCreateDto);
     }
+
+    @PostMapping("/search")
+    @ApiOperation(value = "List series from external API and user viewing list containing searched text in title")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = ErrorModel.class),
+            @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
+    })
+    public ResponseEntity<List<ViewingSerieRestitDto>> getSeriesFromApiAndUserViewingList(@RequestBody final String email, final String searchText){
+
+        //search title in API
+        final List<SerieDto> apiResults = serieService.searchExternalSerie(searchText);
+
+        //build results list with type of button to display
+        List<ViewingSerieRestitDto> searchResults = new ArrayList<>();
+        boolean alReadyInUserList;
+        Status status;
+
+        for (SerieDto item : apiResults) {
+            //if SerieDto is already in user list
+            final ViewingSerieRestitDto result = viewingSerieService.verifyViewingSerieExistence(item, email);
+            if(result != null){
+                alReadyInUserList = true;
+                status = result.getStatus();
+            }
+            //else
+            else{
+                alReadyInUserList = false;
+                status = Status.TO_WATCH;
+            }
+
+            ViewingSerieRestitDto vsToAdd = ViewingSerieRestitDto.Builder.aViewingSerieRestitDto()
+                    .withSerieDto(item)
+                    .withEmail(email)
+                    .withDateLastAction(LocalDate.now())
+                    .withStatus(status)
+                    .withAlReadyInUserList(alReadyInUserList)
+                    .build();
+
+            searchResults.add(vsToAdd);
+        }
+
+        //sort results beginning with element already in list
+        Collections.sort(searchResults, (s1, s2) -> Boolean.compare(s2.getAlReadyInUserList(),s1.getAlReadyInUserList()));
+
+        return new ResponseEntity<> (searchResults, HttpStatus.CREATED);
+
+    }
+
+
 }

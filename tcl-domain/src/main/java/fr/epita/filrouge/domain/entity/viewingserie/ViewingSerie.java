@@ -10,8 +10,8 @@ import java.time.LocalDate;
 public class ViewingSerie {
 
     private Status status;
-    private Integer currentSeason;
-    private Integer currentEpisode;
+    private Integer currentSeason = 1;
+    private Integer currentEpisode = 1;
     private AppUser appUser;
     private Serie serie;
     private LocalDate dateLastAction;

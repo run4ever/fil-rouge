@@ -9,6 +9,7 @@ import fr.epita.filrouge.domain.exception.ExternalApiTechnicalException;
 import fr.epita.filrouge.domain.exception.NotFoundException;
 import fr.epita.filrouge.infrastructure.http.MovieInfo;
 import fr.epita.filrouge.infrastructure.http.MovieSearchInfo;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -61,7 +62,7 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
                 }
             }
 
-            final Integer movieDuration;
+            Integer movieDuration;
             if(movieInfo.getDuration().equals("N/A")){
                 movieDuration = null;
             }
@@ -69,13 +70,37 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
                 movieDuration = Integer.valueOf(movieInfo.getDuration().replace(" min", ""));
             }
 
+            LocalDate date;
+            if(movieInfo.getYear().equals("N/A")){
+                date = null;
+            }
+            else{
+                date = LocalDate.of(Integer.valueOf(movieInfo.getYear().substring(0,3)), 1, 1);
+            }
+
+            Double notation;
+            if(movieInfo.getImdbRating().equals("N/A")){
+                notation = null;
+            }
+            else{
+                notation = Double.valueOf(movieInfo.getImdbRating());
+            }
+
+            Integer votes;
+            if(movieInfo.getImdbVotes().equals("N/A")){
+                votes = null;
+            }
+            else{
+                votes = Integer.valueOf(movieInfo.getImdbVotes().replace(",", ""));
+            }
+
             return Movie.Builder.aMovie()
                     .withImdbId(movieInfo.getImdbID())
                     .withTitle(movieInfo.getTitle())
                     .withDescription(movieInfo.getDescription())
                     .withDuration(movieDuration)
-                    .withReleaseDate(LocalDate.of(Integer.valueOf(movieInfo.getYear().substring(0,3)), 1, 1))
-                    .withPublicNotation(new PublicNotation(Double.valueOf(movieInfo.getImdbRating()), Integer.valueOf(movieInfo.getImdbVotes().replace(",", ""))))
+                    .withReleaseDate(date)
+                    .withPublicNotation(new PublicNotation(notation, votes))
                     .withActors(movieInfo.getActors())
                     .withImageUrl(movieInfo.getImageUrl())
                     .withCategory(movieCategory)

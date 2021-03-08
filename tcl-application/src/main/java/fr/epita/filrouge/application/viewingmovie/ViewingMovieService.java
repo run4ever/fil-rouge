@@ -1,5 +1,6 @@
 package fr.epita.filrouge.application.viewingmovie;
 
+import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.person.AppUserDto;
 
 
@@ -16,5 +17,6 @@ public interface ViewingMovieService {
 
     ViewingMovieCreateDto updateViewingMovieStatus(ViewingMovieCreateDto viewingMovieCreateDto);
     void deleteViewingMovie(ViewingMovieCreateDto viewingMovieCreateDto);
+    ViewingMovieRestitDto verifyViewingMovieExistence(MovieDto movie, String email);
 
 }

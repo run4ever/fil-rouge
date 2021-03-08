@@ -6,6 +6,7 @@ public enum Category {
     ANIMATION,
     BIOGRAPHY,
     COMEDY,
+    CRIME,
     DOCUMENTARY,
     DRAMA,
     FAMILY,
