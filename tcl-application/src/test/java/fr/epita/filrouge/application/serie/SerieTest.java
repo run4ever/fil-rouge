@@ -5,6 +5,7 @@ import fr.epita.filrouge.application.mapper.SerieDtoMapper;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.serie.Serie;
 import fr.epita.filrouge.domain.entity.serie.SerieRepository;
+import fr.epita.filrouge.domain.entity.serie.SerieRepositoryExternal;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
 import fr.epita.filrouge.domain.exception.NotFoundException;
 import org.junit.jupiter.api.DisplayName;
@@ -38,6 +39,9 @@ public class SerieTest {
 
     @MockBean
     private SearchSerieDtoMapper searchSerieDtoMapper;
+
+    @MockBean
+    private SerieRepositoryExternal serieRepositoryExternal;
 
     @Test()
     @DisplayName("tester la bonne création d'une série")
