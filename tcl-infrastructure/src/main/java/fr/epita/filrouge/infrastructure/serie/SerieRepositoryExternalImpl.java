@@ -55,7 +55,7 @@ public class SerieRepositoryExternalImpl implements SerieRepositoryExternal {
                     serieCategory = Category.NONE;
                 }
                 else{
-                    serieCategory = Category.valueOf(serieInfo.getCategory().toUpperCase());
+                    serieCategory = Category.valueOf(serieInfo.getCategory().replace("-","_").toUpperCase());
                 }
             }
 

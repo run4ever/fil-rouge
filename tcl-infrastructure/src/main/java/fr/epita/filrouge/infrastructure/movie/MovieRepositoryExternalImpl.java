@@ -57,7 +57,7 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
                     movieCategory = Category.NONE;
                 }
                 else{
-                    movieCategory = Category.valueOf(movieInfo.getCategory().toUpperCase());
+                    movieCategory = Category.valueOf(movieInfo.getCategory().replace("-","_") .toUpperCase());
                 }
             }
 

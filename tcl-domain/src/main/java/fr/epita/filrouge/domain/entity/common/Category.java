@@ -13,6 +13,7 @@ public enum Category {
     HORROR,
     MYSTERY,
     NONE,
+    REALITY_TV,
     ROMANCE,
     SHORT,
     THRILLER
