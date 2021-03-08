@@ -16,6 +16,7 @@ import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovieRepository;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.entity.person.Role;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class ViewingMovieTest {
 
     @Autowired
     private ViewingMovieService viewingMovieService;
+
+    @MockBean
+    private MovieService movieService;
 
     @MockBean
     private ViewingMovieDtoMapper viewingMovieDtoMapper;

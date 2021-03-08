@@ -2,6 +2,8 @@ package fr.epita.filrouge.application.viewingserie;
 
 import fr.epita.filrouge.application.common.PageDTO;
 import fr.epita.filrouge.application.mapper.ViewingSerieDtoMapper;
+import fr.epita.filrouge.application.serie.SerieDto;
+import fr.epita.filrouge.application.serie.SerieService;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerieRepository;
@@ -21,7 +23,7 @@ import java.util.List;
  * Classe pour manipuler les visionnages de série
  */
 @Service
-@Transactional
+//@Transactional  //ça empeche de créer viewingSerie
 public class ViewingSerieServiceImpl implements ViewingSerieService {
 
     @Autowired
@@ -35,7 +37,8 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     @Autowired
     private ViewingSerieDtoMapper viewingSerieDtoMapper;
 
-
+    @Autowired
+    private SerieService serieService;
 
     /**
      * Création d'un nouveau visionnage
@@ -50,8 +53,16 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
                     + " user : " + serieViewDto.getEmail (), ErrorCodes.VIEWVING_SERIE_ALREADY_EXISTING);
         }
 
+        //vérifier si Serie existe ou pas dans la table Serie avant la création ViewingSerie
+       try {
+           serieService.getSerieById(serieViewDto.getImdbId());
+       } catch(NotFoundException e) {
+            //serie n'est pas dans la table Serie alors il faut la créer avant la création de ViewingSerie
+           System.out.println("Serie non trouvé!!! donc création");
+           serieService.createSerie(serieService.getExternalSerie(serieViewDto.getImdbId()));
+        }
+        //puis création viewing serie
         return viewingSerieDtoMapper.mapToDtoCreate (viewingSerieRepository.create (viewingSerieDtoMapper.mapToDomainCreate (serieViewDto)));
-
     }
 
     /**
