@@ -2,8 +2,6 @@ package fr.epita.filrouge.application.viewingserie;
 
 import fr.epita.filrouge.application.common.PageDTO;
 import fr.epita.filrouge.application.mapper.ViewingSerieDtoMapper;
-import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
-import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerieRepository;
@@ -47,8 +45,8 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     @Override
     public ViewingSerieCreateDto create(ViewingSerieCreateDto serieViewDto) {
 
-        if (viewingSerieRepository.findByIdUserAndIdSerie (serieViewDto.getEmail (), serieViewDto.getImdb ()) != null) {
-            throw new AlreadyExistingException ("ViewingSerie existing : Id imdb : " + serieViewDto.getImdb ()
+        if (viewingSerieRepository.findByIdUserAndIdSerie (serieViewDto.getEmail (), serieViewDto.getImdbId()) != null) {
+            throw new AlreadyExistingException ("ViewingSerie existing : Id imdb : " + serieViewDto.getImdbId()
                     + " user : " + serieViewDto.getEmail (), ErrorCodes.VIEWVING_SERIE_ALREADY_EXISTING);
         }
 
@@ -126,17 +124,23 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     public ViewingSerieCreateDto updateViewingSerieStatus(ViewingSerieCreateDto viewingSerieCreateDto) {
 
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (viewingSerieCreateDto.getEmail (),
-                viewingSerieCreateDto.getImdb ());
-
-        viewingSerieRepository.update(vs);
-       return null;
+                viewingSerieCreateDto.getImdbId());
+        vs.setStatus(viewingSerieCreateDto.getStatus());
+        //ACH : set saison et episode si les données ne sont pas null
+        if(viewingSerieCreateDto.getCurrentSeason() != null) {
+            vs.setCurrentSeason(viewingSerieCreateDto.getCurrentSeason());
+        }
+        if(viewingSerieCreateDto.getCurrentEpisode()!= null) {
+            vs.setCurrentEpisode(viewingSerieCreateDto.getCurrentEpisode());
+        }
+       return viewingSerieDtoMapper.mapToDtoCreate(viewingSerieRepository.update(vs));
     }
 
     @Override
     public void deleteViewingSerie(ViewingSerieCreateDto ViewingSerieCreateDto) {
 
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (ViewingSerieCreateDto.getEmail ()
-        ,ViewingSerieCreateDto.getImdb ());
+        ,ViewingSerieCreateDto.getImdbId());
 
         viewingSerieRepository.delete(vs);
     }

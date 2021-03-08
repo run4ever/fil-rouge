@@ -1,7 +1,5 @@
 package fr.epita.filrouge.domain.entity.viewingserie;
 
-import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
-
 import java.util.List;
 
 public interface ViewingSerieRepository {

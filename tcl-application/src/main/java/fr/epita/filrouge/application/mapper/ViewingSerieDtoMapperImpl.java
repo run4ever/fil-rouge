@@ -25,7 +25,7 @@ public class ViewingSerieDtoMapperImpl implements ViewingSerieDtoMapper{
     public ViewingSerieCreateDto mapToDtoCreate(ViewingSerie viewingSerie) {
         ViewingSerieCreateDto viewingSerieCreateDto = new ViewingSerieCreateDto ();
         viewingSerieCreateDto.setStatus (viewingSerie.getStatus ());
-        viewingSerieCreateDto.setImdb (viewingSerie.getSerie ().getImdbId ());
+        viewingSerieCreateDto.setImdbId (viewingSerie.getSerie ().getImdbId ());
         viewingSerieCreateDto.setEmail (viewingSerie.getAppUser ().getEmail ());
         viewingSerieCreateDto.setCurrentSeason (viewingSerie.getCurrentSeason ());
         viewingSerieCreateDto.setCurrentEpisode (viewingSerie.getCurrentEpisode ());
@@ -35,7 +35,7 @@ public class ViewingSerieDtoMapperImpl implements ViewingSerieDtoMapper{
     public ViewingSerie mapToDomainCreate(ViewingSerieCreateDto viewingSerieCreateDto) {
         ViewingSerie viewingSerie = new ViewingSerie ();
         viewingSerie.setStatus (viewingSerieCreateDto.getStatus ());
-        viewingSerie.setSerie (serieRepository.findById (viewingSerieCreateDto.getImdb ()));
+        viewingSerie.setSerie (serieRepository.findById (viewingSerieCreateDto.getImdbId ()));
         viewingSerie.setCurrentSeason (viewingSerieCreateDto.getCurrentSeason ());
         viewingSerie.setCurrentEpisode (viewingSerieCreateDto.getCurrentEpisode ());
         viewingSerie.setAppUser (appUserRepository.findbyEmail (viewingSerieCreateDto.getEmail ()));
