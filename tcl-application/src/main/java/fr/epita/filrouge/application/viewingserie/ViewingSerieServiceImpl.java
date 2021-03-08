@@ -126,6 +126,13 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (viewingSerieCreateDto.getEmail (),
                 viewingSerieCreateDto.getImdbId());
         vs.setStatus(viewingSerieCreateDto.getStatus());
+        //ACH : set saison et episode si les données ne sont pas null
+        if(viewingSerieCreateDto.getCurrentSeason() != null) {
+            vs.setCurrentSeason(viewingSerieCreateDto.getCurrentSeason());
+        }
+        if(viewingSerieCreateDto.getCurrentEpisode()!= null) {
+            vs.setCurrentEpisode(viewingSerieCreateDto.getCurrentEpisode());
+        }
        return viewingSerieDtoMapper.mapToDtoCreate(viewingSerieRepository.update(vs));
     }
 
