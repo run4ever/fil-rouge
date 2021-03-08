@@ -51,7 +51,12 @@ public class SerieRepositoryExternalImpl implements SerieRepositoryExternal {
                 serieCategory = Category.valueOf(serieInfo.getCategory().substring(0,virguleIndex).toUpperCase());
             }
             else{
-                serieCategory = Category.valueOf(serieInfo.getCategory().toUpperCase());
+                if(serieInfo.getCategory().equals("N/A")){
+                    serieCategory = Category.NONE;
+                }
+                else{
+                    serieCategory = Category.valueOf(serieInfo.getCategory().toUpperCase());
+                }
             }
 
             Integer totalSeasons = null;

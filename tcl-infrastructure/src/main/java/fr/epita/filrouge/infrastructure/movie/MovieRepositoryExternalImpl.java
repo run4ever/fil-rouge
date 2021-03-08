@@ -53,7 +53,12 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
                 movieCategory = Category.valueOf(movieInfo.getCategory().substring(0,virguleIndex).toUpperCase());
             }
             else{
-                movieCategory = Category.valueOf(movieInfo.getCategory().toUpperCase());
+                if(movieInfo.getCategory().equals("N/A")){
+                    movieCategory = Category.NONE;
+                }
+                else{
+                    movieCategory = Category.valueOf(movieInfo.getCategory().toUpperCase());
+                }
             }
 
             final Integer movieDuration;

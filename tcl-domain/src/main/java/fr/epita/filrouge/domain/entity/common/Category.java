@@ -6,11 +6,13 @@ public enum Category {
     ANIMATION,
     BIOGRAPHY,
     COMEDY,
+    DOCUMENTARY,
     DRAMA,
     FAMILY,
     FANTASY,
     HORROR,
     MYSTERY,
+    NONE,
     ROMANCE,
     SHORT,
     THRILLER
