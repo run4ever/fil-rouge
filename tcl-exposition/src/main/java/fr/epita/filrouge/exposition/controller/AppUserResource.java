@@ -20,7 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1/appuser")
 @Api(value="Controller REST for AppUser")

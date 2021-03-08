@@ -21,7 +21,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins="http://localhost:4200", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1/viewing-movie")
 @Validated

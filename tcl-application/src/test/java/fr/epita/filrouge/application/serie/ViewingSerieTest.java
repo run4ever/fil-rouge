@@ -90,7 +90,7 @@ public class ViewingSerieTest {
         Serie serie = getSerieTest();
         ViewingSerieCreateDto viewingSerieCreateDto = ViewingSerieCreateDto.Builder.aViewingSerieCreateDto()
                 .withEmail(appUser.getEmail())
-                .withImdb(serie.getImdbId())
+                .withImdbId(serie.getImdbId())
                 .withStatus(TO_WATCH)
                 .withCurrentSeason(2)
                 .withCurrentEpisode(14)
@@ -128,7 +128,7 @@ public class ViewingSerieTest {
         Serie serie = getSerieTest();
         ViewingSerieCreateDto viewingSerieCreateDto = ViewingSerieCreateDto.Builder.aViewingSerieCreateDto()
                 .withEmail(appUser.getEmail())
-                .withImdb(serie.getImdbId())
+                .withImdbId(serie.getImdbId())
                 .withStatus(TO_WATCH)
                 .withCurrentSeason(2)
                 .withCurrentEpisode(14)

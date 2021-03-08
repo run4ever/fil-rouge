@@ -1,6 +1,7 @@
-package fr.epita.filrouge.domain.entity.movie;
+package fr.epita.filrouge.domain.entity.viewingmovie;
 
 import fr.epita.filrouge.domain.entity.person.AppUser;
+import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovie;
 
 import java.util.List;
 

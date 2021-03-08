@@ -29,7 +29,7 @@ public class ViewingSerieResourceTest {
         //Given
         ViewingSerieCreateDto viewingSerieCreateDto = ViewingSerieCreateDto.Builder.aViewingSerieCreateDto()
                 .withEmail("fabien@tcl.com")
-                .withImdb("tt0455275")
+                .withImdbId("tt0455275")
                 .withCurrentSeason(3)
                 .withCurrentEpisode(1)
                 .withStatus(Status.TO_WATCH)
@@ -54,7 +54,7 @@ public class ViewingSerieResourceTest {
         //Pour superman@world.com on a déjà injecté la série tt00test000 via import.sql
         ViewingSerieCreateDto viewingSerieCreateDto = ViewingSerieCreateDto.Builder.aViewingSerieCreateDto()
                 .withEmail("superman@world.com")
-                .withImdb("tt0455275")
+                .withImdbId("tt0455275")
                 .withCurrentSeason(3)
                 .withCurrentEpisode(1)
                 .withStatus(Status.TO_WATCH)
