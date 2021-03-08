@@ -1,6 +1,7 @@
 package fr.epita.filrouge.exposition.controller;
 
 import fr.epita.filrouge.application.common.PageDTO;
+import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.serie.SearchSerieDto;
 import fr.epita.filrouge.application.serie.SerieDto;
 import fr.epita.filrouge.application.serie.SerieService;
@@ -125,4 +126,24 @@ public class SerieResource {
 
         return new ResponseEntity<PageDTO> (iSerieManagement.searchAllSeries(searchSerieDto), HttpStatus.PARTIAL_CONTENT);
     }
+
+    @GetMapping("/external/addexternal")
+    @ResponseStatus(HttpStatus.OK)
+    public void createExternalSerie(@RequestParam("externalId") final String apiSerieId) {
+        final SerieDto serieDto = iSerieManagement.getExternalSerie(apiSerieId);
+        iSerieManagement.createSerie(serieDto);
+    }
+
+    @GetMapping("/external/search")
+    @ApiOperation(value = "Search a serie in Api DB, by its title")
+    @ApiResponses(value = {
+            @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal Server Error", response = ErrorModel.class)
+    })
+    @ResponseStatus(HttpStatus.OK)
+    public List<SerieDto> searchExternalSerie(@RequestParam("title") final String title) {
+        return iSerieManagement.searchExternalSerie(title);
+    }
+
+
 }
