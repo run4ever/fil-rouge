@@ -6,6 +6,7 @@ import fr.epita.filrouge.application.mapper.SearchSerieDtoMapper;
 import fr.epita.filrouge.application.mapper.SerieDtoMapper;
 import fr.epita.filrouge.domain.entity.serie.Serie;
 import fr.epita.filrouge.domain.entity.serie.SerieRepository;
+import fr.epita.filrouge.domain.entity.serie.SerieRepositoryExternal;
 import fr.epita.filrouge.domain.exception.*;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
 import org.slf4j.Logger;
@@ -32,6 +33,8 @@ public class SerieServiceImpl implements SerieService {
     @Autowired
     private SearchSerieDtoMapper searchSerieDtoMapper;
 
+    @Autowired
+    private SerieRepositoryExternal serieRepositoryExternal;
 
     @Override
     public SerieDto getSerieById(String id) {
@@ -136,6 +139,17 @@ public class SerieServiceImpl implements SerieService {
         }
         else return offset/(limit-offset);
     }
+
+    @Override
+    public List<SerieDto> searchExternalSerie(String title) {
+        return serieDtoMapper.mapDomainToDto(serieRepositoryExternal.searchByTitle(title));
+    }
+
+    @Override
+    public SerieDto getExternalSerie(String apiSerieId) {
+        return serieDtoMapper.mapDomainToDto(serieRepositoryExternal.searchByApiSerieId(apiSerieId));
+    }
+
 }
 
 

@@ -2,7 +2,7 @@ package fr.epita.filrouge.infrastructure.http;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MovieInfo {
+public class SerieInfo {
 
     // conversion tool : https://json2csharp.com/json-to-pojo
 
@@ -13,10 +13,7 @@ public class MovieInfo {
     public String year;
 
     @JsonProperty("Released")
-    public String releaseDate;
-
-    @JsonProperty("Runtime")
-    public String duration;
+    public String released;
 
     @JsonProperty("Genre")
     public String category;
@@ -45,7 +42,9 @@ public class MovieInfo {
     @JsonProperty("Type")
     public String type;
 
-    public MovieInfo() {
+    public String totalSeasons;
+
+    public SerieInfo() {
     }
 
     public String getTitle() {
@@ -64,20 +63,12 @@ public class MovieInfo {
         this.year = year;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public String getReleased() {
+        return released;
     }
 
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
+    public void setReleased(String released) {
+        this.released = released;
     }
 
     public String getCategory() {
@@ -160,13 +151,20 @@ public class MovieInfo {
         this.type = type;
     }
 
+    public String getTotalSeasons() {
+        return totalSeasons;
+    }
+
+    public void setTotalSeasons(String totalSeasons) {
+        this.totalSeasons = totalSeasons;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("MovieInfo{");
+        final StringBuilder sb = new StringBuilder("SerieInfo{");
         sb.append("title='").append(title).append('\'');
         sb.append(", year='").append(year).append('\'');
-        sb.append(", releaseDate='").append(releaseDate).append('\'');
-        sb.append(", duration='").append(duration).append('\'');
+        sb.append(", released='").append(released).append('\'');
         sb.append(", category='").append(category).append('\'');
         sb.append(", director='").append(director).append('\'');
         sb.append(", writer='").append(writer).append('\'');
@@ -177,6 +175,7 @@ public class MovieInfo {
         sb.append(", imdbVotes='").append(imdbVotes).append('\'');
         sb.append(", imdbID='").append(imdbID).append('\'');
         sb.append(", type='").append(type).append('\'');
+        sb.append(", totalSeasons='").append(totalSeasons).append('\'');
         sb.append('}');
         return sb.toString();
     }

@@ -4,17 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class MovieSearchInfo {
+public class SerieSearchInfo {
 
     // conversion tool : https://json2csharp.com/json-to-pojo
 
     @JsonProperty("Search")
-    public List<MovieInfo> search;
+    public List<SerieInfo> search;
     public String totalResults;
     @JsonProperty("Response")
     public String response;
 
-    public List<MovieInfo> getSearch() {
+    public List<SerieInfo> getSearch() {
         return search;
     }
 
@@ -25,8 +25,4 @@ public class MovieSearchInfo {
     public String getResponse() {
         return response;
     }
-
-//    public void setResponse(String response) {
-//        this.response = response;
-//    }
 }

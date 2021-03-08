@@ -23,5 +23,9 @@ public interface SerieService {
     List<SerieDto> findAllSeries();
 
     PageDTO searchAllSeries(SearchSerieDto searchSerieDto);
+
+    SerieDto getExternalSerie(String apiSerieId);
+
+    List<SerieDto> searchExternalSerie(String title);
 }
 
