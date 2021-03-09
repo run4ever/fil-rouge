@@ -4,6 +4,7 @@ import fr.epita.filrouge.application.mapper.AppUserDtoMapper;
 import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.application.mapper.ViewingMovieDtoMapper;
 import fr.epita.filrouge.application.movie.MovieDto;
+import fr.epita.filrouge.application.movie.MovieService;
 import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovie;
 import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovieRepository;
@@ -30,6 +31,9 @@ public class ViewingMovieServiceImpl implements ViewingMovieService {
     @Autowired
     private MovieDtoMapper movieDtoMapper;
 
+    @Autowired
+    private MovieService movieService;
+
     @Override
     public ViewingMovieCreateDto addMovieToViewingMovie(ViewingMovieCreateDto viewingMovieCreateDto) {
         // si un AppUser a déjà le Movie dans son visionnage,
@@ -38,6 +42,12 @@ public class ViewingMovieServiceImpl implements ViewingMovieService {
                 viewingMovieCreateDto.getEmail(), viewingMovieCreateDto.getImdbId()) != null) {
             throw new AlreadyExistingException ("This movie " + viewingMovieCreateDto.getImdbId()
                     + " is already in list of user " + viewingMovieCreateDto.getEmail(), ErrorCodes.MOVIE_ALREADY_EXISTING_IN_VIEWINGMOVIE);
+        }
+        //vérifier si Movie est présent ou pas dans la table Movie si absent alors il faut ajouter Movie avant create viewingMovie
+        MovieDto movieDto = movieService.getOneMovieService(viewingMovieCreateDto.getImdbId());
+        if(movieDto == null) {
+            //movie est absent de la table Movie, donc appel API externe pour avoir les infos puis le crée dans la table Movie
+            movieService.createMovieService(movieService.getExternalMovie(viewingMovieCreateDto.getImdbId()));
         }
 
         return viewingMovieDtoMapper.mapDomainToCreateDto(viewingMovieRepository.create(viewingMovieDtoMapper.mapCreateDtoToDomain(viewingMovieCreateDto)));

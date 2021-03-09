@@ -40,9 +40,11 @@ public class ViewingSerieTest {
     @MockBean
     private AppUserRepository appUserRepositoryMock;
 
-
     @MockBean
     private ViewingSerieDtoMapper viewingSerieDtoMapper;
+
+    @MockBean
+    private SerieService serieService;
 
     private final static AppUser getAppUserTest() {
         return AppUser.Builder.anAppUser()
