@@ -48,8 +48,13 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<MovieDto> searchExternalMovie(String title) {
-        return movieDtoMapper.mapDomainToDto(movieRepositoryExternal.searchByTitle(title));
+    public Integer searchExternalMovieNbResults(String title) {
+        return movieRepositoryExternal.getApiSearchNbResults(title);
+    }
+
+    @Override
+    public List<MovieDto> searchExternalMovie(String title, Integer pageNum) {
+        return movieDtoMapper.mapDomainToDto(movieRepositoryExternal.searchByTitle(title, pageNum));
     }
 
     @Override

@@ -81,8 +81,19 @@ public class MovieResource {
             @ApiResponse (code = 500, message = "Internal Server Error", response = ErrorModel.class)
     })
     @ResponseStatus(HttpStatus.OK)
-    public List<MovieDto> searchExternalMovie(@RequestParam("title") final String title) {
-        return movieService.searchExternalMovie(title);
+    public List<MovieDto> searchExternalMovie(@RequestParam("title") final String title, final Integer pageNum) {
+        return movieService.searchExternalMovie(title, pageNum);
+    }
+
+    @GetMapping("/external/search-nb-results")
+    @ApiOperation(value = "Get results number of a movie search in Api DB, by its title")
+    @ApiResponses(value = {
+            @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal Server Error", response = ErrorModel.class)
+    })
+    @ResponseStatus(HttpStatus.OK)
+    public Integer searchExternalMovieNbResults(@RequestParam("title") final String title) {
+        return movieService.searchExternalMovieNbResults(title);
     }
 
 

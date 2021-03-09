@@ -90,10 +90,14 @@ public class ViewingMovieResource {
             @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
             @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
     })
-    public ResponseEntity<List<ViewingMovieRestitDto>> getMoviesFromApiAndUserViewingList(@RequestBody final String email, final String searchText){
+    public ResponseEntity<List<ViewingMovieRestitDto>> getMoviesFromApiAndUserViewingList(@RequestBody final String email, final String searchText, Integer pageNum){
+
+        if(pageNum == null){
+            pageNum = 1;
+        }
 
         //search title in API
-        final List<MovieDto> apiResults = movieService.searchExternalMovie(searchText);
+        final List<MovieDto> apiResults = movieService.searchExternalMovie(searchText, pageNum);
 
         //build results list with type of button to display
         List<ViewingMovieRestitDto> searchResults = new ArrayList<>();

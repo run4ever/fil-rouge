@@ -141,9 +141,19 @@ public class SerieResource {
             @ApiResponse (code = 500, message = "Internal Server Error", response = ErrorModel.class)
     })
     @ResponseStatus(HttpStatus.OK)
-    public List<SerieDto> searchExternalSerie(@RequestParam("title") final String title) {
-        return iSerieManagement.searchExternalSerie(title);
+    public List<SerieDto> searchExternalSerie(@RequestParam("title") final String title, final Integer pageNum) {
+        return iSerieManagement.searchExternalSerie(title, pageNum);
     }
 
+    @GetMapping("/external/search-nb-results")
+    @ApiOperation(value = "Get results number of a serie search in Api DB, by its title")
+    @ApiResponses(value = {
+            @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal Server Error", response = ErrorModel.class)
+    })
+    @ResponseStatus(HttpStatus.OK)
+    public Integer searchExternalSerieNbResults(@RequestParam("title") final String title) {
+        return iSerieManagement.searchExternalSerieNbResults(title);
+    }
 
 }

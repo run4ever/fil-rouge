@@ -26,6 +26,8 @@ public interface SerieService {
 
     SerieDto getExternalSerie(String apiSerieId);
 
-    List<SerieDto> searchExternalSerie(String title);
+    List<SerieDto> searchExternalSerie(String title, Integer pageNum);
+
+    Integer searchExternalSerieNbResults(String title);
 }
 

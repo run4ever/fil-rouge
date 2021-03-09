@@ -89,10 +89,14 @@ public class ViewingSerieResource {
             @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
             @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
     })
-    public ResponseEntity<List<ViewingSerieRestitDto>> getSeriesFromApiAndUserViewingList(@RequestBody final String email, final String searchText){
+    public ResponseEntity<List<ViewingSerieRestitDto>> getSeriesFromApiAndUserViewingList(@RequestBody final String email, final String searchText, Integer pageNum){
+
+        if(pageNum == null){
+            pageNum = 1;
+        }
 
         //search title in API
-        final List<SerieDto> apiResults = serieService.searchExternalSerie(searchText);
+        final List<SerieDto> apiResults = serieService.searchExternalSerie(searchText, pageNum);
 
         //build results list with type of button to display
         List<ViewingSerieRestitDto> searchResults = new ArrayList<>();

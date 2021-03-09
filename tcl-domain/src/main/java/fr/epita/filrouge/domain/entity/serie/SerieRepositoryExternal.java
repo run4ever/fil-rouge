@@ -4,5 +4,6 @@ import java.util.List;
 
 public interface SerieRepositoryExternal {
     Serie searchByApiSerieId(String apiSerieId);
-    List<Serie> searchByTitle(String title);
+    Integer getApiSearchNbResults(String title);
+    List<Serie> searchByTitle(String title, Integer pageNum);
 }

@@ -9,7 +9,6 @@ import fr.epita.filrouge.domain.exception.ExternalApiTechnicalException;
 import fr.epita.filrouge.domain.exception.NotFoundException;
 import fr.epita.filrouge.infrastructure.http.MovieInfo;
 import fr.epita.filrouge.infrastructure.http.MovieSearchInfo;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -117,27 +116,46 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
     }
 
     @Override
-    public List<Movie> searchByTitle(String title) {
-
+    public Integer getApiSearchNbResults(String title) {
         final ResponseEntity<MovieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&type=movie&apikey=" + omdbApiKey,
                 MovieSearchInfo.class);
 
         MovieSearchInfo movieSearchInfo = response.getBody();
 
+        if(movieSearchInfo.getSearch() == null){
+            return 0;
+        }
+
+        return Integer.valueOf(movieSearchInfo.getTotalResults());
+    }
+
+    @Override
+    public List<Movie> searchByTitle(String title, Integer pageNum) {
+
+        final ResponseEntity<MovieSearchInfo> firstResponse = restTemplate.getForEntity("/?s=" + title + "&type=movie&apikey=" + omdbApiKey,
+                MovieSearchInfo.class);
+
+        MovieSearchInfo movieFirstSearchInfo = firstResponse.getBody();
+
+        final int nbApiResultsPages = (int) Math.ceil((double) Integer.valueOf(movieFirstSearchInfo.getTotalResults()) / 10);
+
         final List<Movie> results = new ArrayList<>();
 
-        logger.debug(movieSearchInfo.toString());
+        final ResponseEntity<MovieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&type=movie&page=" + pageNum + "&apikey=" + omdbApiKey,
+                MovieSearchInfo.class);
 
-        if(movieSearchInfo.getSearch() != null){
-            for(MovieInfo m : movieSearchInfo.getSearch()) {
-                final String movieId = m.getImdbID();
-                final Movie movieToAdd = searchByApiMovieId(movieId);
-                results.add(movieToAdd);
-            }
-        }
-        else{
+        MovieSearchInfo movieSearchInfo = response.getBody();
+
+        if(movieFirstSearchInfo.getSearch() == null || movieSearchInfo.getSearch() == null){
             throw new NotFoundException("No movie match this search",ErrorCodes.MOVIE_NOT_FOUND);
         }
+
+        for(MovieInfo m : movieSearchInfo.getSearch()) {
+            final String movieId = m.getImdbID();
+            final Movie movieToAdd = searchByApiMovieId(movieId);
+            results.add(movieToAdd);
+        }
+
         return results;
 
     }
