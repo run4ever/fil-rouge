@@ -137,7 +137,13 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
 
         MovieSearchInfo movieFirstSearchInfo = firstResponse.getBody();
 
-        final int nbApiResultsPages = (int) Math.ceil((double) Integer.valueOf(movieFirstSearchInfo.getTotalResults()) / 10);
+        int nbApiResultsPages;
+        if(movieFirstSearchInfo.getTotalResults() != null){
+            nbApiResultsPages = (int) Math.ceil((double) Integer.valueOf(movieFirstSearchInfo.getTotalResults()) / 10);
+        }
+        else{
+            nbApiResultsPages=0;
+        }
 
         final List<Movie> results = new ArrayList<>();
 
