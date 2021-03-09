@@ -1,5 +1,6 @@
 package fr.epita.filrouge.exposition.controller;
 
+import fr.epita.filrouge.application.common.ViewingFrontSearchDto;
 import fr.epita.filrouge.application.serie.SerieDto;
 import fr.epita.filrouge.application.serie.SerieService;
 import fr.epita.filrouge.application.viewingserie.ViewingSerieCreateDto;
@@ -82,21 +83,26 @@ public class ViewingSerieResource {
          viewingSerieService.deleteViewingSerie (viewingSerieCreateDto);
     }
 
-    @PostMapping("/search")
+    @PostMapping(value = "/search", produces = { "application/json" }, consumes = { "application/json" })
     @ApiOperation(value = "List series from external API and user viewing list containing searched text in title")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Success", response = ErrorModel.class),
             @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
             @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
     })
-    public ResponseEntity<List<ViewingSerieRestitDto>> getSeriesFromApiAndUserViewingList(@RequestBody final String email, final String searchText, Integer pageNum){
+    public ResponseEntity<List<ViewingSerieRestitDto>> getSeriesFromApiAndUserViewingList(@RequestBody final ViewingFrontSearchDto viewingFrontSearchDto){
 
-        if(pageNum == null){
+        int pageNum;
+
+        if(viewingFrontSearchDto.getPage() == null){
             pageNum = 1;
+        }
+        else{
+            pageNum = Integer.valueOf(viewingFrontSearchDto.getPage());
         }
 
         //search title in API
-        final List<SerieDto> apiResults = serieService.searchExternalSerie(searchText, pageNum);
+        final List<SerieDto> apiResults = serieService.searchExternalSerie(viewingFrontSearchDto.getTitle(), pageNum);
 
         //build results list with type of button to display
         List<ViewingSerieRestitDto> searchResults = new ArrayList<>();
@@ -105,7 +111,7 @@ public class ViewingSerieResource {
 
         for (SerieDto item : apiResults) {
             //if SerieDto is already in user list
-            final ViewingSerieRestitDto result = viewingSerieService.verifyViewingSerieExistence(item, email);
+            final ViewingSerieRestitDto result = viewingSerieService.verifyViewingSerieExistence(item, viewingFrontSearchDto.getEmail());
             if(result != null){
                 alReadyInUserList = true;
                 status = result.getStatus();
@@ -118,7 +124,7 @@ public class ViewingSerieResource {
 
             ViewingSerieRestitDto vsToAdd = ViewingSerieRestitDto.Builder.aViewingSerieRestitDto()
                     .withSerieDto(item)
-                    .withEmail(email)
+                    .withEmail(viewingFrontSearchDto.getEmail())
                     .withDateLastAction(LocalDate.now())
                     .withStatus(status)
                     .withAlreadyInUserList(alReadyInUserList)
