@@ -80,6 +80,22 @@ public class SerieRepositoryExternalImpl implements SerieRepositoryExternal {
                 }
             }
 
+            Double notation;
+            if(serieInfo.getImdbRating().equals("N/A")){
+                notation = null;
+            }
+            else{
+                notation = Double.valueOf(serieInfo.getImdbRating());
+            }
+
+            Integer votes;
+            if(serieInfo.getImdbVotes().equals("N/A")){
+                votes = null;
+            }
+            else{
+                votes = Integer.valueOf(serieInfo.getImdbVotes().replace(",", ""));
+            }
+
             return Serie.Builder.aSerie()
                     .withImdbId(serieInfo.getImdbID())
                     .withTitle(serieInfo.getTitle())
@@ -87,7 +103,7 @@ public class SerieRepositoryExternalImpl implements SerieRepositoryExternal {
                     .withNumberOfSeason(totalSeasons)
                     .withStartYear(startYear)
                     .withEndYear(endYear)
-                    .withPublicNotation(new PublicNotation(Double.valueOf(serieInfo.getImdbRating()), Integer.valueOf(serieInfo.getImdbVotes().replace(",", ""))))
+                    .withPublicNotation(new PublicNotation(notation, votes))
                     .withActors(serieInfo.getActors())
                     .withImageUrl(serieInfo.getImageUrl())
                     .withCategory(serieCategory)
@@ -103,26 +119,45 @@ public class SerieRepositoryExternalImpl implements SerieRepositoryExternal {
     }
 
     @Override
-    public List<Serie> searchByTitle(String title) {
-        final ResponseEntity<SerieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&type=series&apikey=" + omdbApiKey,
+    public Integer getApiSearchNbResults(String title) {
+        final ResponseEntity<SerieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&type=series" + "&apikey=" + omdbApiKey,
                 SerieSearchInfo.class);
 
         SerieSearchInfo serieSearchInfo = response.getBody();
 
+        if(serieSearchInfo.getSearch() == null){
+            return 0;
+        }
+
+        return Integer.valueOf(serieSearchInfo.getTotalResults());
+    }
+
+    @Override
+    public List<Serie> searchByTitle(String title, Integer pageNum) {
+        final ResponseEntity<SerieSearchInfo> firstResponse = restTemplate.getForEntity("/?s=" + title + "&type=series&apikey=" + omdbApiKey,
+                SerieSearchInfo.class);
+
+        SerieSearchInfo serieFirstSearchInfo = firstResponse.getBody();
+
+        final int nbApiResultsPages = (int) Math.ceil((double) Integer.valueOf(serieFirstSearchInfo.getTotalResults()) / 10);
+
         final List<Serie> results = new ArrayList<>();
 
-        logger.debug(serieSearchInfo.toString());
+        final ResponseEntity<SerieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&type=series&page=" + pageNum + "&apikey=" + omdbApiKey,
+                SerieSearchInfo.class);
 
-        if(serieSearchInfo.getSearch() != null){
-            for(SerieInfo m : serieSearchInfo.getSearch()) {
-                final String serieId = m.getImdbID();
-                final Serie serieToAdd = searchByApiSerieId(serieId);
-                results.add(serieToAdd);
-            }
+        SerieSearchInfo serieSearchInfo = response.getBody();
+
+        if(serieFirstSearchInfo.getSearch() == null || serieSearchInfo.getSearch() == null){
+            throw new NotFoundException("No movie match this search",ErrorCodes.MOVIE_NOT_FOUND);
         }
-        else{
-            throw new NotFoundException("No serie match this search",ErrorCodes.SERIE_NOT_FOUND);
+
+        for(SerieInfo m : serieSearchInfo.getSearch()) {
+            final String serieId = m.getImdbID();
+            final Serie serieToAdd = searchByApiSerieId(serieId);
+            results.add(serieToAdd);
         }
+
         return results;
     }
 

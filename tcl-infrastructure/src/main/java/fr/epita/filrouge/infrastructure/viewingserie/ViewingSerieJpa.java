@@ -21,8 +21,8 @@ public class ViewingSerieJpa {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    private Integer currentSeason;
-    private Integer currentEpisode;
+    private Integer currentSeason = 1;
+    private Integer currentEpisode = 1;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private AppUserJpa appUserJpa;

@@ -95,4 +95,9 @@ public class ViewingMovieServiceImpl implements ViewingMovieService {
         viewingMovieRepository.delete(vm);
     }
 
+    @Override
+    public ViewingMovieRestitDto verifyViewingMovieExistence(MovieDto movie, String email) {
+        return viewingMovieDtoMapper.mapDomainToDto(viewingMovieRepository.findViewingMovieFromUserEmailAndMovieId(email, movie.getImdbId()));
+    }
+
 }

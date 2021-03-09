@@ -22,4 +22,6 @@ public interface ViewingSerieRepository {
     void delete(ViewingSerie vs);
 
     ViewingSerie update(ViewingSerie vs);
+
+    ViewingSerie findViewingSerieFromUserEmailAndSerieId(String email, String serieId);
 }

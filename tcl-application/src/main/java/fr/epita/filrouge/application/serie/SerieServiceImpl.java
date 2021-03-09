@@ -141,13 +141,18 @@ public class SerieServiceImpl implements SerieService {
     }
 
     @Override
-    public List<SerieDto> searchExternalSerie(String title) {
-        return serieDtoMapper.mapDomainToDto(serieRepositoryExternal.searchByTitle(title));
+    public List<SerieDto> searchExternalSerie(String title, Integer pageNum) {
+        return serieDtoMapper.mapDomainToDto(serieRepositoryExternal.searchByTitle(title, pageNum));
     }
 
     @Override
     public SerieDto getExternalSerie(String apiSerieId) {
         return serieDtoMapper.mapDomainToDto(serieRepositoryExternal.searchByApiSerieId(apiSerieId));
+    }
+
+    @Override
+    public Integer searchExternalSerieNbResults(String title) {
+        return serieRepositoryExternal.getApiSearchNbResults(title);
     }
 
 }

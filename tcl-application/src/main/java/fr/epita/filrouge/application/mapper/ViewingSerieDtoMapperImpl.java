@@ -23,6 +23,11 @@ public class ViewingSerieDtoMapperImpl implements ViewingSerieDtoMapper{
 
 
     public ViewingSerieCreateDto mapToDtoCreate(ViewingSerie viewingSerie) {
+
+        if(viewingSerie == null){
+            return null;
+        }
+
         ViewingSerieCreateDto viewingSerieCreateDto = new ViewingSerieCreateDto ();
         viewingSerieCreateDto.setStatus (viewingSerie.getStatus ());
         viewingSerieCreateDto.setImdbId (viewingSerie.getSerie ().getImdbId ());
@@ -33,6 +38,11 @@ public class ViewingSerieDtoMapperImpl implements ViewingSerieDtoMapper{
     }
 
     public ViewingSerie mapToDomainCreate(ViewingSerieCreateDto viewingSerieCreateDto) {
+
+        if(viewingSerieCreateDto == null){
+            return null;
+        }
+
         ViewingSerie viewingSerie = new ViewingSerie ();
         viewingSerie.setStatus (viewingSerieCreateDto.getStatus ());
         viewingSerie.setSerie (serieRepository.findById (viewingSerieCreateDto.getImdbId ()));
@@ -43,6 +53,11 @@ public class ViewingSerieDtoMapperImpl implements ViewingSerieDtoMapper{
     }
 
     public ViewingSerieRestitDto mapToDtoRestit(ViewingSerie viewingSerie) {
+
+        if(viewingSerie == null){
+            return null;
+        }
+
         ViewingSerieRestitDto viewingSerieRestitDto = new ViewingSerieRestitDto ();
         viewingSerieRestitDto.setCurrentEpisode (viewingSerie.getCurrentEpisode ());
         viewingSerieRestitDto.setCurrentSeason (viewingSerie.getCurrentSeason ());
