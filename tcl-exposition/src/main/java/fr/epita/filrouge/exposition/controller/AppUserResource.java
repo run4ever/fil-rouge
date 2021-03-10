@@ -56,12 +56,5 @@ public class AppUserResource {
     })
     public AppUserLightDto addAppUser(@Valid @RequestBody final AppUserDto appUserDto){
         return appUserDtoMapper.mapDomainToLightDto(appUserDtoMapper.mapDtoToDomain(appUserService.create(appUserDto)));
-
-//        final URI location = ServletUriComponentsBuilder
-//                                .fromCurrentRequest()
-//                                .path("/{email}")
-//                                .buildAndExpand(appUserDto.getEmail())
-//                                .toUri();
-//        return ResponseEntity.created(location).build();
     }
 }

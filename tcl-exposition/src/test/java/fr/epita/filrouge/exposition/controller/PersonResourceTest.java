@@ -109,6 +109,6 @@ public class PersonResourceTest {
 
 
         //Then
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }
