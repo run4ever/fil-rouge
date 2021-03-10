@@ -66,6 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers(UNAUTHENTICATED_WHITE_LIST).permitAll()
                 // autoriser Get sur AppUser
                 .antMatchers(HttpMethod.GET, "/api/*/appuser/**").permitAll()
+                // autoriser Post sur AppUser
+                .antMatchers(HttpMethod.POST, "/api/*/appuser/add").permitAll()
                 //autorisé get sur movie
                 .antMatchers(HttpMethod.GET, "/api/*/movie/**").permitAll()
                 //autorisé get sur Serie

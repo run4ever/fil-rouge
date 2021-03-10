@@ -33,9 +33,9 @@ public class AppUserRepositoryImpl implements AppUserRepository {
     }
 
     @Override
-    public void create(AppUser appUser) {
+    public AppUser create(AppUser appUser) {
         logger.info("AppUserRepository impl, create : " + appUser.getEmail());
-        appUserJpaRepository.save(appUserJpaMapper.mapToJpa(appUser));
+        return appUserJpaMapper.mapToEntity(appUserJpaRepository.save(appUserJpaMapper.mapToJpa(appUser)));
     }
 
     @Override

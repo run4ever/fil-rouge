@@ -1,5 +1,6 @@
 package fr.epita.filrouge.exposition.controller;
 
+import fr.epita.filrouge.application.mapper.AppUserDtoMapper;
 import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.application.person.AppUserLightDto;
 import fr.epita.filrouge.application.person.AppUserService;
@@ -30,6 +31,9 @@ public class AppUserResource {
     @Autowired
     private AppUserService appUserService;
 
+    @Autowired
+    private AppUserDtoMapper appUserDtoMapper;
+
 
     @GetMapping(value = "/{email}", produces = {"application/json"})
     @ApiOperation(value = "Show one user detail by email")
@@ -42,7 +46,6 @@ public class AppUserResource {
         return appUserService.getAppUser(emailAppUser);
     }
 
-
     @PostMapping(value = "/add",produces = {"application/json"}, consumes = {"application/json"})
     @ApiOperation(value = "Create one user")
     @ApiResponses(value = {
@@ -51,15 +54,14 @@ public class AppUserResource {
             @ApiResponse(code = 409, message = "Conflict", response = ErrorModel.class),
             @ApiResponse(code = 500, message = "Impossible to create AppUser", response = ErrorModel.class)
     })
-    public ResponseEntity<?> addAppUser(@Valid @RequestBody final AppUserDto appUserDto){
+    public AppUserLightDto addAppUser(@Valid @RequestBody final AppUserDto appUserDto){
+        return appUserDtoMapper.mapDomainToLightDto(appUserDtoMapper.mapDtoToDomain(appUserService.create(appUserDto)));
 
-        appUserService.create(appUserDto);
-
-        final URI location = ServletUriComponentsBuilder
-                                .fromCurrentRequest()
-                                .path("/{email}")
-                                .buildAndExpand(appUserDto.getEmail())
-                                .toUri();
-        return ResponseEntity.created(location).build();
+//        final URI location = ServletUriComponentsBuilder
+//                                .fromCurrentRequest()
+//                                .path("/{email}")
+//                                .buildAndExpand(appUserDto.getEmail())
+//                                .toUri();
+//        return ResponseEntity.created(location).build();
     }
 }
