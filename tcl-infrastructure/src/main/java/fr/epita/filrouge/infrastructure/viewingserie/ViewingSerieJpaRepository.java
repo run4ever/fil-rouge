@@ -21,7 +21,7 @@ public interface ViewingSerieJpaRepository extends JpaRepository<ViewingSerieJpa
 
     ViewingSerieJpa findByAppUserJpaEmailAndSerieJpaImdbId(String email, String imdb);
 
-    List<ViewingSerieJpa> findByAppUserJpa_Email(String email);
+    List<ViewingSerieJpa> findByAppUserJpaEmailOrderBySerieJpaTitle(String email);
 
     Long countByAppUserJpa_Email(String email);
 }
