@@ -127,6 +127,13 @@ public class SerieResource {
         return new ResponseEntity<PageDTO> (iSerieManagement.searchAllSeries(searchSerieDto), HttpStatus.PARTIAL_CONTENT);
     }
 
+    @GetMapping("/external/show")
+    @ResponseStatus(HttpStatus.OK)
+    public SerieDto getSerieByExternalId(@RequestParam("externalId") final String apiSerieId) {
+        final SerieDto serieDto = iSerieManagement.getExternalSerie(apiSerieId);
+        return serieDto;
+    }
+
     @GetMapping("/external/addexternal")
     @ResponseStatus(HttpStatus.OK)
     public void createExternalSerie(@RequestParam("externalId") final String apiSerieId) {
