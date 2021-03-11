@@ -47,16 +47,16 @@ public class SerieRepositoryExternalImpl implements SerieRepositoryExternal {
 
             final Integer virguleIndex = Math.max(0,serieInfo.getCategory().indexOf(","));
             Category serieCategory;
-            if(virguleIndex>0){
-                serieCategory = Category.valueOf(serieInfo.getCategory().substring(0,virguleIndex).toUpperCase());
+            String catLabel = serieInfo.getCategory().toUpperCase();
+
+            if(catLabel.equals("N/A")){
+                serieCategory = Category.NONE;
             }
             else{
-                if(serieInfo.getCategory().equals("N/A")){
-                    serieCategory = Category.NONE;
+                if(virguleIndex>0){
+                    catLabel = catLabel.substring(0,virguleIndex);
                 }
-                else{
-                    serieCategory = Category.valueOf(serieInfo.getCategory().replace("-","_").toUpperCase());
-                }
+                serieCategory = Category.valueOf(catLabel.replace(' ','_').replace('-','_'));
             }
 
             Integer totalSeasons = null;
@@ -149,7 +149,7 @@ public class SerieRepositoryExternalImpl implements SerieRepositoryExternal {
         SerieSearchInfo serieSearchInfo = response.getBody();
 
         if(serieFirstSearchInfo.getSearch() == null || serieSearchInfo.getSearch() == null){
-            throw new NotFoundException("No movie match this search",ErrorCodes.MOVIE_NOT_FOUND);
+            throw new NotFoundException("No serie match this search",ErrorCodes.MOVIE_NOT_FOUND);
         }
 
         for(SerieInfo m : serieSearchInfo.getSearch()) {

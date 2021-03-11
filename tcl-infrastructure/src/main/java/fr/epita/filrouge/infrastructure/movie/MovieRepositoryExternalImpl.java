@@ -49,16 +49,16 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
 
             final Integer virguleIndex = Math.max(0,movieInfo.getCategory().indexOf(","));
             Category movieCategory;
-            if(virguleIndex>0){
-                movieCategory = Category.valueOf(movieInfo.getCategory().substring(0,virguleIndex).toUpperCase());
+            String catLabel = movieInfo.getCategory().toUpperCase();
+
+            if(catLabel.equals("N/A")){
+                movieCategory = Category.NONE;
             }
             else{
-                if(movieInfo.getCategory().equals("N/A")){
-                    movieCategory = Category.NONE;
+                if(virguleIndex>0){
+                    catLabel = catLabel.substring(0,virguleIndex);
                 }
-                else{
-                    movieCategory = Category.valueOf(movieInfo.getCategory().replace("-","_") .toUpperCase());
-                }
+                movieCategory = Category.valueOf(catLabel.replace(' ','_').replace('-','_'));
             }
 
             Integer movieDuration;
