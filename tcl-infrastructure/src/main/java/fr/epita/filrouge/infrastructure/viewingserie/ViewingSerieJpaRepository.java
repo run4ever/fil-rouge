@@ -19,9 +19,9 @@ public interface ViewingSerieJpaRepository extends JpaRepository<ViewingSerieJpa
 
     List<ViewingSerieJpa> findByIdViewSerieIsNotNull();
 
-    ViewingSerieJpa findByAppUserJpa_EmailAndSerieJpa_ImdbId(String email, String imdb);
+    ViewingSerieJpa findByAppUserJpaEmailAndSerieJpaImdbId(String email, String imdb);
 
-    List<ViewingSerieJpa> findByAppUserJpa_Email(String email);
+    List<ViewingSerieJpa> findByAppUserJpaEmailOrderBySerieJpaTitle(String email);
 
     Long countByAppUserJpa_Email(String email);
 }

@@ -5,18 +5,18 @@ import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.application.mapper.ViewingMovieDtoMapper;
 import fr.epita.filrouge.application.person.AppUserDto;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
-import fr.epita.filrouge.application.viewingmovie.ViewingMovieRestitDto;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieService;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieServiceImpl;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.common.PublicNotation;
 import fr.epita.filrouge.domain.entity.common.Status;
 import fr.epita.filrouge.domain.entity.movie.Movie;
-import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
-import fr.epita.filrouge.domain.entity.movie.ViewingMovieRepository;
+import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovie;
+import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovieRepository;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.entity.person.Role;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,9 @@ public class ViewingMovieTest {
 
     @Autowired
     private ViewingMovieService viewingMovieService;
+
+    @MockBean
+    private MovieService movieService;
 
     @MockBean
     private ViewingMovieDtoMapper viewingMovieDtoMapper;

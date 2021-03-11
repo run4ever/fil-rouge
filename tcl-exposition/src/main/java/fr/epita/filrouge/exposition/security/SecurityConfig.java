@@ -58,11 +58,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // Add a filter to validate the tokens with every request
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
-        httpSecurity.csrf().disable()
+        httpSecurity
+                //Voilà ce qu'il fallait rajouter
+                .cors ().and ()
+                .csrf().disable()
                 // dont authenticate this authentication request
                 .authorizeRequests().antMatchers(UNAUTHENTICATED_WHITE_LIST).permitAll()
                 // autoriser Get sur AppUser
                 .antMatchers(HttpMethod.GET, "/api/*/appuser/**").permitAll()
+                // autoriser Post sur AppUser
+                .antMatchers(HttpMethod.POST, "/api/*/appuser/add").permitAll()
                 //autorisé get sur movie
                 .antMatchers(HttpMethod.GET, "/api/*/movie/**").permitAll()
                 //autorisé get sur Serie
@@ -75,6 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // store user's state.
                         exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint) //
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        httpSecurity.cors();//cette ligne permet de résoudre le pb CORS policy
+       // httpSecurity.cors();//cette ligne permet de résoudre le pb CORS policy
     }
 }

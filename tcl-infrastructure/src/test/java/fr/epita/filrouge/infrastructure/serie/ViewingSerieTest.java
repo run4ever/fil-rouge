@@ -95,7 +95,6 @@ public class ViewingSerieTest {
 
 
     @Test
-
     @DisplayName("Vérifier la récupération des visionnages")
     public void VerifyGetAllViewingSerie (){
 

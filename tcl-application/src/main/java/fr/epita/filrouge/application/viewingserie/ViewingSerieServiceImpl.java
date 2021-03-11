@@ -2,8 +2,8 @@ package fr.epita.filrouge.application.viewingserie;
 
 import fr.epita.filrouge.application.common.PageDTO;
 import fr.epita.filrouge.application.mapper.ViewingSerieDtoMapper;
-import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
-import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
+import fr.epita.filrouge.application.serie.SerieDto;
+import fr.epita.filrouge.application.serie.SerieService;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerieRepository;
@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @Author : Yoss
+ * Author : Yoss
  * Classe pour manipuler les visionnages de série
  */
 @Service
-@Transactional
+//@Transactional  //ça empeche de créer viewingSerie
 public class ViewingSerieServiceImpl implements ViewingSerieService {
 
     @Autowired
@@ -37,7 +37,8 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     @Autowired
     private ViewingSerieDtoMapper viewingSerieDtoMapper;
 
-
+    @Autowired
+    private SerieService serieService;
 
     /**
      * Création d'un nouveau visionnage
@@ -47,13 +48,21 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     @Override
     public ViewingSerieCreateDto create(ViewingSerieCreateDto serieViewDto) {
 
-        if (viewingSerieRepository.findByIdUserAndIdSerie (serieViewDto.getEmail (), serieViewDto.getImdb ()) != null) {
-            throw new AlreadyExistingException ("ViewingSerie existing : Id imdb : " + serieViewDto.getImdb ()
+        if (viewingSerieRepository.findByIdUserAndIdSerie (serieViewDto.getEmail (), serieViewDto.getImdbId()) != null) {
+            throw new AlreadyExistingException ("ViewingSerie existing : Id imdb : " + serieViewDto.getImdbId()
                     + " user : " + serieViewDto.getEmail (), ErrorCodes.VIEWVING_SERIE_ALREADY_EXISTING);
         }
 
+        //vérifier si Serie existe ou pas dans la table Serie avant la création ViewingSerie
+       try {
+           serieService.getSerieById(serieViewDto.getImdbId());
+       } catch(NotFoundException e) {
+            //serie n'est pas dans la table Serie alors il faut la créer avant la création de ViewingSerie
+           System.out.println("Serie non trouvé!!! donc création");
+           serieService.createSerie(serieService.getExternalSerie(serieViewDto.getImdbId()));
+        }
+        //puis création viewing serie
         return viewingSerieDtoMapper.mapToDtoCreate (viewingSerieRepository.create (viewingSerieDtoMapper.mapToDomainCreate (serieViewDto)));
-
     }
 
     /**
@@ -69,7 +78,7 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
         if (appUserRepository.findbyEmail (email) == null) {
             throw new NotFoundException ("User inconnu : " + email, ErrorCodes.USER_NOT_FOUND);
         }
-        List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<ViewingSerieRestitDto> ();
+        List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<> ();
         for (ViewingSerie viewingSerie : viewingSerieRepository.findallViewingSerieByUser (email)) {
             viewingSerieRestitDtos.add (viewingSerieDtoMapper.mapToDtoRestit (viewingSerie));
         }
@@ -90,8 +99,8 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     public PageDTO findByUserAllVievingSerieDtoByPage(String email, int offset, int limit, String sortAttribute, boolean sortAsc) {
 
         PageDTO pageDTO = new PageDTO ();
-        List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<ViewingSerieRestitDto> ();
-        String attributeVerify = "";
+        List<ViewingSerieRestitDto> viewingSerieRestitDtos = new ArrayList<> ();
+        String attributeVerify;
         if (controlSortAttribute (sortAttribute)) {
             attributeVerify = "".concat (sortAttribute);
         } else {
@@ -126,17 +135,28 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     public ViewingSerieCreateDto updateViewingSerieStatus(ViewingSerieCreateDto viewingSerieCreateDto) {
 
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (viewingSerieCreateDto.getEmail (),
-                viewingSerieCreateDto.getImdb ());
+                viewingSerieCreateDto.getImdbId());
+        vs.setStatus(viewingSerieCreateDto.getStatus());
+        //ACH : set saison et episode si les données ne sont pas null
+        if(viewingSerieCreateDto.getCurrentSeason() != null) {
+            vs.setCurrentSeason(viewingSerieCreateDto.getCurrentSeason());
+        }
+        if(viewingSerieCreateDto.getCurrentEpisode()!= null) {
+            vs.setCurrentEpisode(viewingSerieCreateDto.getCurrentEpisode());
+        }
+       return viewingSerieDtoMapper.mapToDtoCreate(viewingSerieRepository.update(vs));
+    }
 
-        viewingSerieRepository.update(vs);
-       return null;
+    @Override
+    public ViewingSerieRestitDto verifyViewingSerieExistence(SerieDto serie, String email) {
+        return viewingSerieDtoMapper.mapToDtoRestit(viewingSerieRepository.findViewingSerieFromUserEmailAndSerieId(email, serie.getImdbId()));
     }
 
     @Override
     public void deleteViewingSerie(ViewingSerieCreateDto ViewingSerieCreateDto) {
 
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (ViewingSerieCreateDto.getEmail ()
-        ,ViewingSerieCreateDto.getImdb ());
+        ,ViewingSerieCreateDto.getImdbId());
 
         viewingSerieRepository.delete(vs);
     }
@@ -162,7 +182,3 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     }
 
 }
-
-
-
-

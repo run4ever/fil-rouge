@@ -1,7 +1,5 @@
 package fr.epita.filrouge.domain.entity.viewingserie;
 
-import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
-
 import java.util.List;
 
 public interface ViewingSerieRepository {
@@ -24,4 +22,6 @@ public interface ViewingSerieRepository {
     void delete(ViewingSerie vs);
 
     ViewingSerie update(ViewingSerie vs);
+
+    ViewingSerie findViewingSerieFromUserEmailAndSerieId(String email, String serieId);
 }

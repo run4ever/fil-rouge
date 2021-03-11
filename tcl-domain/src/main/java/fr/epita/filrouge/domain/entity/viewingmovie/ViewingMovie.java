@@ -1,7 +1,8 @@
-package fr.epita.filrouge.domain.entity.movie;
+package fr.epita.filrouge.domain.entity.viewingmovie;
 
 
 import fr.epita.filrouge.domain.entity.common.Status;
+import fr.epita.filrouge.domain.entity.movie.Movie;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 
 public class ViewingMovie {

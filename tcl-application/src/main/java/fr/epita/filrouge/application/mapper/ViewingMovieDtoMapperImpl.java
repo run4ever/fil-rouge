@@ -3,7 +3,7 @@ package fr.epita.filrouge.application.mapper;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
 import fr.epita.filrouge.application.viewingmovie.ViewingMovieRestitDto;
 import fr.epita.filrouge.domain.entity.movie.MovieRepository;
-import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
+import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovie;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,8 +35,10 @@ public class ViewingMovieDtoMapperImpl implements ViewingMovieDtoMapper {
         return ViewingMovie.Builder.aViewingMovie()
                 .withStatus(viewingMovieRestitDto.getStatus())
                 .withMovie(movieService.findMovieFromApiId(viewingMovieRestitDto.getMovieDto().getImdbId()))
-                .withAppUser(appUserService.findbyEmail(viewingMovieRestitDto.getAppUserDto().getEmail()))
+                .withAppUser(appUserService.findbyEmail(viewingMovieRestitDto.getEmail()))
                 .build();
+
+
     }
 
     @Override
@@ -58,9 +60,9 @@ public class ViewingMovieDtoMapperImpl implements ViewingMovieDtoMapper {
             return null;
         }
 
-        return ViewingMovieRestitDto.Builder.aViewingMovieDto()
+        return ViewingMovieRestitDto.Builder.aViewingMovieRestitDto()
                 .withStatus(viewingMovie.getStatus())
-                .withAppUserDto(appUserDtoMapper.mapDomainToDto(viewingMovie.getAppUser()))
+                .withEmail(viewingMovie.getAppUser().getEmail())
                 .withMovieDto(movieDtoMapper.mapDomainToDto(viewingMovie.getMovie()))
                 .build();
     }

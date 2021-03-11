@@ -4,7 +4,6 @@ import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerie;
 import fr.epita.filrouge.domain.entity.viewingserie.ViewingSerieRepository;
 import fr.epita.filrouge.infrastructure.mapper.ViewingSerieJpaMapper;
 import fr.epita.filrouge.infrastructure.person.AppUserJpaRepository;
-import fr.epita.filrouge.infrastructure.serie.SerieJpa;
 import fr.epita.filrouge.infrastructure.serie.SerieJpaRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,7 @@ import java.util.List;
 @Repository
 public class ViewingSerieRepositoryImpl implements ViewingSerieRepository{
 
-    private static Logger logger = LoggerFactory.getLogger(ViewingSerieRepositoryImpl.class);
+    final static Logger logger = LoggerFactory.getLogger(ViewingSerieRepositoryImpl.class);
 
     @Autowired
 
@@ -58,13 +57,13 @@ public class ViewingSerieRepositoryImpl implements ViewingSerieRepository{
 
     @Override
     public ViewingSerie findByIdUserAndIdSerie(String email, String imdb) {
-        return viewingSerieJpaMapper.mapToDomain (viewingSerieJpaRepository.findByAppUserJpa_EmailAndSerieJpa_ImdbId (email, imdb));
+        return viewingSerieJpaMapper.mapToDomain (viewingSerieJpaRepository.findByAppUserJpaEmailAndSerieJpaImdbId (email, imdb));
 
     }
 
     @Override
     public List<ViewingSerie> findallViewingSerieByUser(String email) {
-        return viewingSerieJpaMapper.mapToDomain (viewingSerieJpaRepository.findByAppUserJpa_Email (email));
+        return viewingSerieJpaMapper.mapToDomain (viewingSerieJpaRepository.findByAppUserJpaEmailOrderBySerieJpaTitle(email));
     }
 
     @Override
@@ -88,12 +87,27 @@ public class ViewingSerieRepositoryImpl implements ViewingSerieRepository{
 
     @Override
     public void delete(ViewingSerie vs) {
-        viewingSerieJpaRepository.delete (viewingSerieJpaMapper.mapToJpa (vs));
+        ViewingSerieJpa viewingSerieJpa = viewingSerieJpaRepository.findByAppUserJpaEmailAndSerieJpaImdbId (
+                vs.getAppUser ().getEmail (), vs.getSerie ().getImdbId ());
+        ViewingSerieJpa viewingSerieJpaDeleted = viewingSerieJpaMapper.mapToJpa (vs);
+        viewingSerieJpaDeleted.setId (viewingSerieJpa.getId ());
+       viewingSerieJpaRepository.delete (viewingSerieJpaDeleted);
     }
 
     @Override
     public ViewingSerie update(ViewingSerie vs) {
-        viewingSerieJpaRepository.save (viewingSerieJpaMapper.mapToJpa (vs));
+        ViewingSerieJpa viewingSerieJpa = viewingSerieJpaRepository.findByAppUserJpaEmailAndSerieJpaImdbId (
+                vs.getAppUser ().getEmail (), vs.getSerie ().getImdbId ());
+        ViewingSerieJpa viewingSerieJpaUpdated = viewingSerieJpaMapper.mapToJpa (vs);
+        viewingSerieJpaUpdated.setId (viewingSerieJpa.getId ());
+        viewingSerieJpaUpdated.setAppUserJpa (viewingSerieJpa.getAppUserJpa ());
+        viewingSerieJpaUpdated.setSerieJpa (viewingSerieJpa.getSerieJpa ());
+        viewingSerieJpaRepository.save(viewingSerieJpaUpdated);
         return vs;
+    }
+
+    @Override
+    public ViewingSerie findViewingSerieFromUserEmailAndSerieId(String email, String serieId) {
+        return viewingSerieJpaMapper.mapToDomain(viewingSerieJpaRepository.findByAppUserJpaEmailAndSerieJpaImdbId(email, serieId));
     }
 }

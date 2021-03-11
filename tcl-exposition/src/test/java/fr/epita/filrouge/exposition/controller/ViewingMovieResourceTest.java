@@ -96,20 +96,19 @@ public class ViewingMovieResourceTest {
         //initialiser un toke JWT et le mettre dans header ****************
         HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("fabien@tcl.com");
         //*****************************************************************
-        HttpEntity<String> request = new HttpEntity<>(userEmail,headers);
+        HttpEntity request = new HttpEntity(headers);
 
         //When
-        ResponseEntity<ViewingMovieRestitDto[]> response = restTemplate.postForEntity("/api/v1/viewing-movie/list", request, ViewingMovieRestitDto[].class);
+        ResponseEntity<ViewingMovieRestitDto[]> response = restTemplate.exchange(
+                                        "/api/v1/viewing-movie/"+userEmail,
+                                        HttpMethod.GET,
+                                        request,
+                                        ViewingMovieRestitDto[].class);
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(response.getBody()).isNotNull().doesNotHaveDuplicates();
 
-        ViewingMovieRestitDto[] results = response.getBody();
-
-        for (int i = 0; i < results.length; i++) {
-            System.out.println(results[i].getMovieDto().getImdbId());
-        }
     }
 
     @Test

@@ -49,14 +49,19 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
 
             final Integer virguleIndex = Math.max(0,movieInfo.getCategory().indexOf(","));
             Category movieCategory;
-            if(virguleIndex>0){
-                movieCategory = Category.valueOf(movieInfo.getCategory().substring(0,virguleIndex).toUpperCase());
+            String catLabel = movieInfo.getCategory().toUpperCase();
+
+            if(catLabel.equals("N/A")){
+                movieCategory = Category.NONE;
             }
             else{
-                movieCategory = Category.valueOf(movieInfo.getCategory().toUpperCase());
+                if(virguleIndex>0){
+                    catLabel = catLabel.substring(0,virguleIndex);
+                }
+                movieCategory = Category.valueOf(catLabel.replace(' ','_').replace('-','_'));
             }
 
-            final Integer movieDuration;
+            Integer movieDuration;
             if(movieInfo.getDuration().equals("N/A")){
                 movieDuration = null;
             }
@@ -64,13 +69,37 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
                 movieDuration = Integer.valueOf(movieInfo.getDuration().replace(" min", ""));
             }
 
+            LocalDate date;
+            if(movieInfo.getYear().equals("N/A")){
+                date = null;
+            }
+            else{
+                date = LocalDate.of(Integer.valueOf(movieInfo.getYear().substring(0,4)), 1, 1);
+            }
+
+            Double notation;
+            if(movieInfo.getImdbRating().equals("N/A")){
+                notation = null;
+            }
+            else{
+                notation = Double.valueOf(movieInfo.getImdbRating());
+            }
+
+            Integer votes;
+            if(movieInfo.getImdbVotes().equals("N/A")){
+                votes = null;
+            }
+            else{
+                votes = Integer.valueOf(movieInfo.getImdbVotes().replace(",", ""));
+            }
+
             return Movie.Builder.aMovie()
                     .withImdbId(movieInfo.getImdbID())
                     .withTitle(movieInfo.getTitle())
                     .withDescription(movieInfo.getDescription())
                     .withDuration(movieDuration)
-                    .withReleaseDate(LocalDate.of(Integer.valueOf(movieInfo.getYear().substring(0,3)), 1, 1))
-                    .withPublicNotation(new PublicNotation(Double.valueOf(movieInfo.getImdbRating()), Integer.valueOf(movieInfo.getImdbVotes().replace(",", ""))))
+                    .withReleaseDate(date)
+                    .withPublicNotation(new PublicNotation(notation, votes))
                     .withActors(movieInfo.getActors())
                     .withImageUrl(movieInfo.getImageUrl())
                     .withCategory(movieCategory)
@@ -87,27 +116,52 @@ public class MovieRepositoryExternalImpl implements MovieRepositoryExternal {
     }
 
     @Override
-    public List<Movie> searchByTitle(String title) {
-
+    public Integer getApiSearchNbResults(String title) {
         final ResponseEntity<MovieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&type=movie&apikey=" + omdbApiKey,
                 MovieSearchInfo.class);
 
         MovieSearchInfo movieSearchInfo = response.getBody();
 
-        final List<Movie> results = new ArrayList<>();
+        if(movieSearchInfo.getSearch() == null){
+            return 0;
+        }
 
-        logger.debug(movieSearchInfo.toString());
+        return Integer.valueOf(movieSearchInfo.getTotalResults());
+    }
 
-        if(movieSearchInfo.getSearch() != null){
-            for(MovieInfo m : movieSearchInfo.getSearch()) {
-                final String movieId = m.getImdbID();
-                final Movie movieToAdd = searchByApiMovieId(movieId);
-                results.add(movieToAdd);
-            }
+    @Override
+    public List<Movie> searchByTitle(String title, Integer pageNum) {
+
+        final ResponseEntity<MovieSearchInfo> firstResponse = restTemplate.getForEntity("/?s=" + title + "&type=movie&apikey=" + omdbApiKey,
+                MovieSearchInfo.class);
+
+        MovieSearchInfo movieFirstSearchInfo = firstResponse.getBody();
+
+        int nbApiResultsPages;
+        if(movieFirstSearchInfo.getTotalResults() != null){
+            nbApiResultsPages = (int) Math.ceil((double) Integer.valueOf(movieFirstSearchInfo.getTotalResults()) / 10);
         }
         else{
+            nbApiResultsPages=0;
+        }
+
+        final List<Movie> results = new ArrayList<>();
+
+        final ResponseEntity<MovieSearchInfo> response = restTemplate.getForEntity("/?s=" + title + "&type=movie&page=" + pageNum + "&apikey=" + omdbApiKey,
+                MovieSearchInfo.class);
+
+        MovieSearchInfo movieSearchInfo = response.getBody();
+
+        if(movieFirstSearchInfo.getSearch() == null || movieSearchInfo.getSearch() == null){
             throw new NotFoundException("No movie match this search",ErrorCodes.MOVIE_NOT_FOUND);
         }
+
+        for(MovieInfo m : movieSearchInfo.getSearch()) {
+            final String movieId = m.getImdbID();
+            final Movie movieToAdd = searchByApiMovieId(movieId);
+            results.add(movieToAdd);
+        }
+
         return results;
 
     }

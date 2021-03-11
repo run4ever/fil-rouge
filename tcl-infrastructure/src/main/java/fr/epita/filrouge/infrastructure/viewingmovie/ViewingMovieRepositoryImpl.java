@@ -1,7 +1,7 @@
 package fr.epita.filrouge.infrastructure.viewingmovie;
 
-import fr.epita.filrouge.domain.entity.movie.ViewingMovie;
-import fr.epita.filrouge.domain.entity.movie.ViewingMovieRepository;
+import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovie;
+import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovieRepository;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.infrastructure.mapper.AppUserJpaMapper;
 import fr.epita.filrouge.infrastructure.mapper.ViewingMovieJpaMapper;
@@ -40,7 +40,7 @@ public class ViewingMovieRepositoryImpl implements ViewingMovieRepository {
 
     @Override
     public List<ViewingMovie> findViewingMovieFromUserEmail(String email) {
-        return viewingMovieJpaMapper.mapToEntity(viewingMovieJpaRepository.findByAppUserJpaEmail(email));
+        return viewingMovieJpaMapper.mapToEntity(viewingMovieJpaRepository.findByAppUserJpaEmailOrderByMovieJpaTitle(email));
     }
 
     @Override

@@ -7,6 +7,7 @@ public interface MovieService {
     void createMovieService(MovieDto movieDto);
     MovieDto getOneMovieService(String apiMovieId);
     List<MovieDto> listAllMoviesService();
-    List<MovieDto> searchExternalMovie(String title);
+    Integer searchExternalMovieNbResults(String title);
+    List<MovieDto> searchExternalMovie(String title, Integer pageNum);
     MovieDto getExternalMovie(String apiMovieId);
 }

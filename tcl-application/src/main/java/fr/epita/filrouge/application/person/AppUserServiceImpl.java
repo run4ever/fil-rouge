@@ -23,9 +23,10 @@ public class AppUserServiceImpl implements AppUserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public void create(AppUserDto appUserDto) {
+    public AppUserDto create(AppUserDto appUserDto) {
             //RG : si appUser existe déjà alors pas possible de le recréer.
             // le contrôle est basé sur l'adresse email.
+        AppUserDto user = new AppUserDto();
         try {
             final AppUser appUserFound = appUserRepository.findbyEmail(appUserDto.getEmail());
             if(appUserFound != null) {
@@ -37,9 +38,9 @@ public class AppUserServiceImpl implements AppUserService {
             //crypter le mot de passe avant
             appUserDto.setPassword(passwordEncoder.encode(appUserDto.getPassword()));
             System.out.println("Password crypted=>"+appUserDto.getPassword());
-            appUserRepository.create(appUserDtoMapper.mapDtoToDomain(appUserDto));
+            user = appUserDtoMapper.mapDomainToDto(appUserRepository.create(appUserDtoMapper.mapDtoToDomain(appUserDto)));
         }
-
+        return user;
     }
 
     @Override

@@ -8,17 +8,22 @@ import java.time.LocalDate;
 
 public class MovieDto {
 
-    @JsonProperty("id")
-    private Long id;
-
-    @JsonProperty("apiMovieId")
+    @JsonProperty("imdbId")
     @NotNull
     private String imdbId;
 
-    @JsonProperty("Runtime")
-    private Integer duration;
+    @JsonProperty("title")
+    @NotNull
+    private String title;
 
-    @JsonProperty("Released")
+    @JsonProperty("description")
+    private String description;
+
+    @JsonProperty("category")
+    @NotNull
+    private Category category;
+
+    @JsonProperty("startYear")
     private LocalDate releaseDate;
 
     @JsonProperty("imdbRating")
@@ -30,37 +35,14 @@ public class MovieDto {
     @JsonProperty("actors")
     private String actors;
 
-    @JsonProperty("genre")
-    @NotNull
-    private Category category;
-
-    @JsonProperty("title")
-    @NotNull
-    private String title;
-
-    @JsonProperty("synopsis")
-    private String description;
-
     @JsonProperty("imageUrl")
     private String imageUrl;
 
+    //données spécifique de Movie
+    @JsonProperty("runtime")
+    private Integer duration;
+
     public MovieDto() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getImdbId() {
-        return imdbId;
-    }
-
-    public void setImdbId(String imdbId) {
-        this.imdbId = imdbId;
     }
 
     public Integer getDuration() {
@@ -69,6 +51,14 @@ public class MovieDto {
 
     public void setDuration(Integer duration) {
         this.duration = duration;
+    }
+
+    public String getImdbId() {
+        return imdbId;
+    }
+
+    public void setImdbId(String imdbId) {
+        this.imdbId = imdbId;
     }
 
     public LocalDate getReleaseDate() {
@@ -135,10 +125,9 @@ public class MovieDto {
         this.imageUrl = imageUrl;
     }
 
+
     public static final class Builder {
-        private Long id;
         private String imdbId;
-        private Integer duration;
         private LocalDate releaseDate;
         private Double averageRating;
         private Integer numberOfVotes;
@@ -147,6 +136,7 @@ public class MovieDto {
         private String title;
         private String description;
         private String imageUrl;
+        private Integer duration;
 
         private Builder() {
         }
@@ -155,18 +145,8 @@ public class MovieDto {
             return new Builder();
         }
 
-        public Builder withId(Long id) {
-            this.id = id;
-            return this;
-        }
-
         public Builder withImdbId(String imdbId) {
             this.imdbId = imdbId;
-            return this;
-        }
-
-        public Builder withDuration(Integer duration) {
-            this.duration = duration;
             return this;
         }
 
@@ -210,11 +190,14 @@ public class MovieDto {
             return this;
         }
 
+        public Builder withDuration(Integer duration) {
+            this.duration = duration;
+            return this;
+        }
+
         public MovieDto build() {
             MovieDto movieDto = new MovieDto();
-            movieDto.setId(id);
             movieDto.setImdbId(imdbId);
-            movieDto.setDuration(duration);
             movieDto.setReleaseDate(releaseDate);
             movieDto.setAverageRating(averageRating);
             movieDto.setNumberOfVotes(numberOfVotes);
@@ -223,6 +206,7 @@ public class MovieDto {
             movieDto.setTitle(title);
             movieDto.setDescription(description);
             movieDto.setImageUrl(imageUrl);
+            movieDto.setDuration(duration);
             return movieDto;
         }
     }
