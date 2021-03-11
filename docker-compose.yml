@@ -1,0 +1,27 @@
+version: "3"
+ 
+services:
+  myapp:
+    #nom d'image de notre application : créé dans Dockerfile
+    image: 'mytcllist'
+    # notre image mytcllist est dépendante de la base base postgres
+    depends_on :
+        - db
+    # ports docker er ports pour user localhost:8080
+    ports :
+        - "8080:8080"
+    # varibles pour 
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+  db:
+  # nom de l'image de base base postgres : image officiel de Docker Hub => https://hub.docker.com/_/postgres
+    image: 'postgres'
+  #port de démarrage de postgresql
+    ports:
+      - "5432:5432"
+    # user et mot de passe de postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
