@@ -63,7 +63,7 @@ public class ViewingSerieRepositoryImpl implements ViewingSerieRepository{
 
     @Override
     public List<ViewingSerie> findallViewingSerieByUser(String email) {
-        return viewingSerieJpaMapper.mapToDomain (viewingSerieJpaRepository.findByAppUserJpa_Email (email));
+        return viewingSerieJpaMapper.mapToDomain (viewingSerieJpaRepository.findByAppUserJpaEmailOrderBySerieJpaTitle(email));
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 public interface ViewingMovieJpaRepository extends JpaRepository<ViewingMovieJpa, Long> {
 
     List<ViewingMovieJpa> findByAppUserJpa(AppUserJpa appUserJpa);
-    List<ViewingMovieJpa> findByAppUserJpaEmail(String email);
+    List<ViewingMovieJpa> findByAppUserJpaEmailOrderByMovieJpaTitle(String email);
     ViewingMovieJpa findByAppUserJpaEmailAndMovieJpaImdbId(String email, String movieId);
 
 }

@@ -40,7 +40,7 @@ public class ViewingMovieRepositoryImpl implements ViewingMovieRepository {
 
     @Override
     public List<ViewingMovie> findViewingMovieFromUserEmail(String email) {
-        return viewingMovieJpaMapper.mapToEntity(viewingMovieJpaRepository.findByAppUserJpaEmail(email));
+        return viewingMovieJpaMapper.mapToEntity(viewingMovieJpaRepository.findByAppUserJpaEmailOrderByMovieJpaTitle(email));
     }
 
     @Override
