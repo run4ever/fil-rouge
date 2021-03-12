@@ -15,6 +15,8 @@ public class ViewingSerieCreateDto {
 
     private String imdbId;
     private String email;
+    @NotNull
+    private Boolean likeOrNot = false;
 
     public Status getStatus() {
         return status;
@@ -56,6 +58,13 @@ public class ViewingSerieCreateDto {
         this.email = email;
     }
 
+    public Boolean getLikeOrNot() {
+        return likeOrNot;
+    }
+
+    public void setLikeOrNot(Boolean likeOrNot) {
+        this.likeOrNot = likeOrNot;
+    }
 
     public static final class Builder {
         private Status status;
@@ -63,6 +72,7 @@ public class ViewingSerieCreateDto {
         private Integer currentEpisode;
         private String imdbId;
         private String email;
+        private Boolean likeOrNot = false;
 
         private Builder() {
         }
@@ -96,6 +106,11 @@ public class ViewingSerieCreateDto {
             return this;
         }
 
+        public Builder withLikeOrNot(Boolean likeOrNot) {
+            this.likeOrNot = likeOrNot;
+            return this;
+        }
+
         public ViewingSerieCreateDto build() {
             ViewingSerieCreateDto viewingSerieCreateDto = new ViewingSerieCreateDto();
             viewingSerieCreateDto.setStatus(status);
@@ -103,6 +118,7 @@ public class ViewingSerieCreateDto {
             viewingSerieCreateDto.setCurrentEpisode(currentEpisode);
             viewingSerieCreateDto.setImdbId(imdbId);
             viewingSerieCreateDto.setEmail(email);
+            viewingSerieCreateDto.setLikeOrNot(likeOrNot);
             return viewingSerieCreateDto;
         }
     }

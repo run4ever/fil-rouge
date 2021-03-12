@@ -68,7 +68,7 @@ public class ViewingMovieResource {
             @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
     })
     public ResponseEntity<ViewingMovieCreateDto> updateViewingMovie(@RequestBody final ViewingMovieCreateDto viewingMovieCreateDto) {
-        return new ResponseEntity<> (viewingMovieService.updateViewingMovieStatus(viewingMovieCreateDto), HttpStatus.CREATED);
+        return new ResponseEntity<> (viewingMovieService.updateViewingMovieStatusOrLike(viewingMovieCreateDto), HttpStatus.CREATED);
 
     }
 
@@ -108,6 +108,7 @@ public class ViewingMovieResource {
         //build results list with type of button to display
         List<ViewingMovieRestitDto> searchResults = new ArrayList<>();
         boolean alReadyInUserList;
+        boolean like = false;
         Status status;
 
         for (MovieDto item : apiResults) {
@@ -116,6 +117,7 @@ public class ViewingMovieResource {
             if(result != null){
                 alReadyInUserList = true;
                 status = result.getStatus();
+                like = result.getLikeOrNot();
             }
             //else
             else{
@@ -129,6 +131,7 @@ public class ViewingMovieResource {
                     .withDateLastAction(LocalDate.now())
                     .withStatus(status)
                     .withAlreadyInUserList(alReadyInUserList)
+                    .withLikeOrNot(like)
                     .build();
 
             searchResults.add(vmToAdd);

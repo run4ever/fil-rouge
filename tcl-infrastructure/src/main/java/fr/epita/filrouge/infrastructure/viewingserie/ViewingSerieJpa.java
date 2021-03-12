@@ -27,13 +27,14 @@ public class ViewingSerieJpa {
     @ManyToOne(fetch = FetchType.EAGER)
     private AppUserJpa appUserJpa;
 
-
     @ManyToOne(fetch = FetchType.EAGER)
     private SerieJpa serieJpa;
 
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Date dateLastAction;
+
+    private Boolean likeOrNot;
 
     public ViewingSerieJpa() {
         //default constructor
@@ -95,24 +96,42 @@ public class ViewingSerieJpa {
         this.dateLastAction = dateLastAction;
     }
 
+    public Long getIdViewSerie() {
+        return idViewSerie;
+    }
+
+    public void setIdViewSerie(Long idViewSerie) {
+        this.idViewSerie = idViewSerie;
+    }
+
+    public Boolean getLikeOrNot() {
+        return likeOrNot;
+    }
+
+    public void setLikeOrNot(Boolean likeOrNot) {
+        this.likeOrNot = likeOrNot;
+    }
+
     public static final class Builder {
         private Long idViewSerie;
         private Status status;
-        private Integer currentSeason;
-        private Integer currentEpisode;
-        private AppUserJpa appUserjpa;
+        private Integer currentSeason = 1;
+        private Integer currentEpisode = 1;
+        private AppUserJpa appUserJpa;
         private SerieJpa serieJpa;
         private Date dateLastAction;
+        private Boolean likeOrNot;
 
         private Builder() {
         }
 
         public static Builder aViewingSerieJpa() {
-            return new Builder ();
+            return new Builder();
         }
 
-        public Builder(Long idViewSerie) {
+        public Builder withIdViewSerie(Long idViewSerie) {
             this.idViewSerie = idViewSerie;
+            return this;
         }
 
         public Builder withStatus(Status status) {
@@ -130,8 +149,8 @@ public class ViewingSerieJpa {
             return this;
         }
 
-        public Builder withAppUserjpa(AppUserJpa appUserjpa) {
-            this.appUserjpa = appUserjpa;
+        public Builder withAppUserJpa(AppUserJpa appUserJpa) {
+            this.appUserJpa = appUserJpa;
             return this;
         }
 
@@ -145,15 +164,21 @@ public class ViewingSerieJpa {
             return this;
         }
 
+        public Builder withLikeOrNot(Boolean likeOrNot) {
+            this.likeOrNot = likeOrNot;
+            return this;
+        }
+
         public ViewingSerieJpa build() {
-            ViewingSerieJpa viewingSerieJpa = new ViewingSerieJpa ();
-            viewingSerieJpa.setId (idViewSerie);
-            viewingSerieJpa.setStatus (status);
-            viewingSerieJpa.setCurrentSeason (currentSeason);
-            viewingSerieJpa.setCurrentEpisode (currentEpisode);
-            viewingSerieJpa.setAppUserJpa (appUserjpa);
-            viewingSerieJpa.setSerieJpa (serieJpa);
-            viewingSerieJpa.setDateLastAction (dateLastAction);
+            ViewingSerieJpa viewingSerieJpa = new ViewingSerieJpa();
+            viewingSerieJpa.setIdViewSerie(idViewSerie);
+            viewingSerieJpa.setStatus(status);
+            viewingSerieJpa.setCurrentSeason(currentSeason);
+            viewingSerieJpa.setCurrentEpisode(currentEpisode);
+            viewingSerieJpa.setAppUserJpa(appUserJpa);
+            viewingSerieJpa.setSerieJpa(serieJpa);
+            viewingSerieJpa.setDateLastAction(dateLastAction);
+            viewingSerieJpa.setLikeOrNot(likeOrNot);
             return viewingSerieJpa;
         }
     }

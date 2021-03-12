@@ -61,7 +61,7 @@ public class SerieRepositoryExternalImpl implements SerieRepositoryExternal {
 
             Integer totalSeasons = null;
             if(serieInfo.getTotalSeasons().equals("N/A")){
-                totalSeasons = null;
+                totalSeasons = 1;
             }
             else{
                 totalSeasons = Integer.valueOf(serieInfo.getTotalSeasons());

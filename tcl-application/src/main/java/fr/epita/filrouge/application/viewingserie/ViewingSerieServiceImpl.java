@@ -132,11 +132,12 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     }
 
     @Override
-    public ViewingSerieCreateDto updateViewingSerieStatus(ViewingSerieCreateDto viewingSerieCreateDto) {
+    public ViewingSerieCreateDto updateViewingSerieStatusOrLike(ViewingSerieCreateDto viewingSerieCreateDto) {
 
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (viewingSerieCreateDto.getEmail (),
                 viewingSerieCreateDto.getImdbId());
         vs.setStatus(viewingSerieCreateDto.getStatus());
+        vs.setLikeOrNot(viewingSerieCreateDto.getLikeOrNot());
         //ACH : set saison et episode si les données ne sont pas null
         if(viewingSerieCreateDto.getCurrentSeason() != null) {
             vs.setCurrentSeason(viewingSerieCreateDto.getCurrentSeason());
@@ -160,9 +161,6 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
 
         viewingSerieRepository.delete(vs);
     }
-
-
-
 
     /**
      * Controle par introspection d'un critère de tri.

@@ -26,26 +26,26 @@ INSERT INTO public.serie ( actors, average_rating, category, description, end_ye
 INSERT INTO public.serie ( actors, average_rating, category, description, end_year, image_url, imdb_id, number_of_episode, number_of_season, number_of_votes, start_year, status_serie, title) VALUES ('Christopher Daniel Barnes, Sara Ballantine, Edward Asner, Roscoe Lee Browne', 8.4, 'ANIMATION', 'A young man with spider-like abilities fights crime as a superhero in New York City while trying to have a normal personal life.', 1998, 'https://m.media-amazon.com/images/M/MV5BMmQ1NzBlYmItNmZkZi00OTZkLTg5YTEtNTI5YjczZjk3Yjc1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg', 'tt0112175', NULL, 5, 26761, 1994, NULL, 'Spider-Man: The Animated Series');
 INSERT INTO public.serie ( actors, average_rating, category, description, end_year, image_url, imdb_id, number_of_episode, number_of_season, number_of_votes, start_year, status_serie, title) VALUES ('Zooey Deschanel, Alan Cumming, Neal McDonough, Kathleen Robertson', 7.2, 'ADVENTURE', 'A re-imagining of L. Frank Baum''s classic "The Wizard of Oz".', NULL, 'https://m.media-amazon.com/images/M/MV5BMzdhODdmMDktYWNmMi00MWYwLWFiZWUtMGM2YzIyYjk0MjA4XkEyXkFqcGdeQXVyMTk3NDAwMzI@._V1_SX300.jpg', 'tt0910812', NULL, 1, 13182, 2007, NULL, 'Tin Man');
 INSERT INTO public.serie ( actors, average_rating, category, description, end_year, image_url, imdb_id, number_of_episode, number_of_season, number_of_votes, start_year, status_serie, title) VALUES ('Bear Grylls', 8.1, 'ADVENTURE', 'Bear Grylls travels the world in search of challenges to his survival skills.', 2020, 'https://m.media-amazon.com/images/M/MV5BNjMyMTVmYTAtODkxZC00NDhmLWJkOTUtZWZmMDI0Y2Q3NTI4XkEyXkFqcGdeQXVyNTg3NDkzMzM@._V1_SX300.jpg', 'tt0883772', NULL, 7, 21806, 2006, NULL, 'Man vs. Wild');
-INSERT INTO public.serie ( actors, average_rating, category, description, end_year, image_url, imdb_id, number_of_episode, number_of_season, number_of_votes, start_year, status_serie, title) VALUES ('Claudine Vallerand', NULL, 'FAMILY', 'N/A', 1962, NULL, 'tt0808083', NULL, NULL, NULL, 1955, NULL, 'Maman Fonfon');
+INSERT INTO public.serie ( actors, average_rating, category, description, end_year, image_url, imdb_id, number_of_episode, number_of_season, number_of_votes, start_year, status_serie, title) VALUES ('Claudine Vallerand', NULL, 'FAMILY', 'N/A', 1962, NULL, 'tt0808083', NULL, 1, NULL, 1955, NULL, 'Maman Fonfon');
 
 -- Visionnage Serie
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (1, 2, '2021-03-01 21:36:15.108', 'TO_WATCH', 1, 2);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (1, 10, '2021-03-08 14:43:46.494', 'WATCHED', 4, 1);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (1, 8, '2021-03-08 14:43:57.731', 'WATCHED', 4, 2);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (1, 5, '2021-03-08 14:44:54.166', 'IN_PROGRESS', 4, 4);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (0, 0, '2021-03-08 14:47:47.671', 'TO_WATCH', 4, 5);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (0, 0, '2021-03-08 14:48:31.535', 'TO_WATCH', 4, 6);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (0, 0, '2021-03-08 14:49:35.314', 'TO_WATCH', 4, 7);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (0, 0, '2021-03-08 14:50:29.333', 'TO_WATCH', 4, 8);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (0, 0, '2021-03-08 14:50:29.333', 'TO_WATCH', 4, 9);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, like_or_not) VALUES (1, 2, '2021-03-01 21:36:15.108', 'TO_WATCH', 1, 2, false);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, like_or_not) VALUES (1, 10, '2021-03-08 14:43:46.494', 'WATCHED', 4, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, like_or_not) VALUES (1, 8, '2021-03-08 14:43:57.731', 'WATCHED', 4, 2, false);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, like_or_not) VALUES (1, 5, '2021-03-08 14:44:54.166', 'IN_PROGRESS', 4, 4, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, like_or_not) VALUES (1, 1, '2021-03-08 14:47:47.671', 'TO_WATCH', 4, 5, false);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, like_or_not) VALUES (1, 1, '2021-03-08 14:48:31.535', 'TO_WATCH', 4, 6, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, like_or_not) VALUES (1, 1, '2021-03-08 14:49:35.314', 'TO_WATCH', 4, 7, false);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, like_or_not) VALUES (1, 1, '2021-03-08 14:50:29.333', 'TO_WATCH', 4, 8, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, like_or_not) VALUES (1, 1, '2021-03-08 14:50:29.333', 'TO_WATCH', 4, 9, false);
 
 -- Visionnage Movie
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 4, 1);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 4, 2);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 1, 1);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 1, 2);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-06 14:13:19.678', 'TO_WATCH', 4, 3);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-06 14:15:08.196', 'TO_WATCH', 4, 4);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-06 14:24:07.894', 'TO_WATCH', 4, 9);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-06 14:30:16.53', 'TO_WATCH', 4, 11);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-06 14:30:16.53', 'TO_WATCH', 4, 12);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, like_or_not) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 4, 1, false);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, like_or_not) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 4, 2, true);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, like_or_not) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 1, 1, false);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, like_or_not) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 1, 2, true);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, like_or_not) VALUES ('2021-03-06 14:13:19.678', 'TO_WATCH', 4, 3, false);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, like_or_not) VALUES ('2021-03-06 14:15:08.196', 'TO_WATCH', 4, 4, true);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, like_or_not) VALUES ('2021-03-06 14:24:07.894', 'TO_WATCH', 4, 9, false);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, like_or_not) VALUES ('2021-03-06 14:30:16.53', 'TO_WATCH', 4, 11, true);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, like_or_not) VALUES ('2021-03-06 14:30:16.53', 'TO_WATCH', 4, 12, false);

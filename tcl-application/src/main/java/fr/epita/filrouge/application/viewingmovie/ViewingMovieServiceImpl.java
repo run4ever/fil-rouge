@@ -74,12 +74,13 @@ public class ViewingMovieServiceImpl implements ViewingMovieService {
     }
 
     @Override
-    public ViewingMovieCreateDto updateViewingMovieStatus(ViewingMovieCreateDto viewingMovieCreateDto) {
+    public ViewingMovieCreateDto updateViewingMovieStatusOrLike(ViewingMovieCreateDto viewingMovieCreateDto) {
 
         final ViewingMovie vm = viewingMovieRepository.findViewingMovieFromUserEmailAndMovieId(
                 viewingMovieCreateDto.getEmail(), viewingMovieCreateDto.getImdbId());
 
         vm.setStatus(viewingMovieCreateDto.getStatus());
+        vm.setLikeOrNot(viewingMovieCreateDto.getLikeOrNot());
 
         viewingMovieRepository.update(vm);
 

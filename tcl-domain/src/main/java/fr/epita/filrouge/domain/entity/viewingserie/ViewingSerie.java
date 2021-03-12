@@ -15,6 +15,7 @@ public class ViewingSerie {
     private AppUser appUser;
     private Serie serie;
     private LocalDate dateLastAction;
+    private Boolean likeOrNot;
 
     @Override
     public String toString() {
@@ -29,11 +30,9 @@ public class ViewingSerie {
         return sb.toString ();
     }
 
-
     public ViewingSerie() {
         //default constructor
     }
-
 
     public Status getStatus() {
         return status;
@@ -83,14 +82,22 @@ public class ViewingSerie {
         this.dateLastAction = dateLastAction;
     }
 
-    public static final class Builder {
+    public Boolean getLikeOrNot() {
+        return likeOrNot;
+    }
 
+    public void setLikeOrNot(Boolean likeOrNot) {
+        this.likeOrNot = likeOrNot;
+    }
+
+    public static final class Builder {
         private Status status;
-        private Integer currentSeason;
-        private Integer currentEpisode;
+        private Integer currentSeason = 1;
+        private Integer currentEpisode = 1;
         private AppUser appUser;
         private Serie serie;
         private LocalDate dateLastAction;
+        private Boolean likeOrNot;
 
         private Builder() {
         }
@@ -98,7 +105,6 @@ public class ViewingSerie {
         public static Builder aViewingSerie() {
             return new Builder();
         }
-
 
         public Builder withStatus(Status status) {
             this.status = status;
@@ -125,8 +131,13 @@ public class ViewingSerie {
             return this;
         }
 
-        public Builder withDateLastAction(LocalDate date) {
-            this.dateLastAction = date;
+        public Builder withDateLastAction(LocalDate dateLastAction) {
+            this.dateLastAction = dateLastAction;
+            return this;
+        }
+
+        public Builder withLikeOrNot(Boolean likeOrNot) {
+            this.likeOrNot = likeOrNot;
             return this;
         }
 
@@ -137,7 +148,8 @@ public class ViewingSerie {
             viewingSerie.setCurrentEpisode(currentEpisode);
             viewingSerie.setAppUser(appUser);
             viewingSerie.setSerie(serie);
-            viewingSerie.setDateLastAction (dateLastAction);
+            viewingSerie.setDateLastAction(dateLastAction);
+            viewingSerie.setLikeOrNot(likeOrNot);
             return viewingSerie;
         }
     }

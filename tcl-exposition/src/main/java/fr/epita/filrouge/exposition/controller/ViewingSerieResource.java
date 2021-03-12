@@ -68,7 +68,7 @@ public class ViewingSerieResource {
             @ApiResponse (code = 500, message = "Internal error", response = ErrorModel.class)
     })
     public ResponseEntity<ViewingSerieCreateDto> updateViewingSerie(@RequestBody final ViewingSerieCreateDto viewingSerieCreateDto) {
-        return new ResponseEntity<> (viewingSerieService.updateViewingSerieStatus(viewingSerieCreateDto), HttpStatus.CREATED);
+        return new ResponseEntity<> (viewingSerieService.updateViewingSerieStatusOrLike(viewingSerieCreateDto), HttpStatus.CREATED);
 
     }
 
@@ -107,7 +107,9 @@ public class ViewingSerieResource {
         //build results list with type of button to display
         List<ViewingSerieRestitDto> searchResults = new ArrayList<>();
         boolean alReadyInUserList;
+        boolean like = false;
         Status status;
+        Integer currSeason = 1;
 
         for (SerieDto item : apiResults) {
             //if SerieDto is already in user list
@@ -115,6 +117,8 @@ public class ViewingSerieResource {
             if(result != null){
                 alReadyInUserList = true;
                 status = result.getStatus();
+                like = result.getLikeOrNot();
+                currSeason = result.getCurrentSeason();
             }
             //else
             else{
@@ -128,6 +132,8 @@ public class ViewingSerieResource {
                     .withDateLastAction(LocalDate.now())
                     .withStatus(status)
                     .withAlreadyInUserList(alReadyInUserList)
+                    .withLikeOrNot(like)
+                    .withCurrentSeason(currSeason)
                     .build();
 
             searchResults.add(vsToAdd);

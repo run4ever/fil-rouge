@@ -33,6 +33,8 @@ public class ViewingMovieJpa {
     @UpdateTimestamp
     private Date dateModified;
 
+    private Boolean likeOrNot;
+
     public ViewingMovieJpa() {
     }
 
@@ -76,6 +78,14 @@ public class ViewingMovieJpa {
         this.dateModified = dateModified;
     }
 
+    public Boolean getLikeOrNot() {
+        return likeOrNot;
+    }
+
+    public void setLikeOrNot(Boolean likeOrNot) {
+        this.likeOrNot = likeOrNot;
+    }
+
 
     public static final class Builder {
         private Long id;
@@ -83,6 +93,7 @@ public class ViewingMovieJpa {
         private AppUserJpa appUserJpa;
         private MovieJpa movieJpa;
         private Date dateModified;
+        private Boolean likeOrNot;
 
         private Builder() {
         }
@@ -116,6 +127,11 @@ public class ViewingMovieJpa {
             return this;
         }
 
+        public Builder withLikeOrNot(Boolean likeOrNot) {
+            this.likeOrNot = likeOrNot;
+            return this;
+        }
+
         public ViewingMovieJpa build() {
             ViewingMovieJpa viewingMovieJpa = new ViewingMovieJpa();
             viewingMovieJpa.setId(id);
@@ -123,6 +139,7 @@ public class ViewingMovieJpa {
             viewingMovieJpa.setAppUserJpa(appUserJpa);
             viewingMovieJpa.setMovieJpa(movieJpa);
             viewingMovieJpa.setDateModified(dateModified);
+            viewingMovieJpa.setLikeOrNot(likeOrNot);
             return viewingMovieJpa;
         }
     }
