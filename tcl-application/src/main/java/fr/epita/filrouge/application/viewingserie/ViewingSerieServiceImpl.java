@@ -154,6 +154,11 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     }
 
     @Override
+    public Integer searchViewingSerieNbLikes(String idSerie) {
+        return viewingSerieRepository.countViewingSerieLikesBySerieid(idSerie);
+    }
+
+    @Override
     public void deleteViewingSerie(ViewingSerieCreateDto ViewingSerieCreateDto) {
 
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (ViewingSerieCreateDto.getEmail ()

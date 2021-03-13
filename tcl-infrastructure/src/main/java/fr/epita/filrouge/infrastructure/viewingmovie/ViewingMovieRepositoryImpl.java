@@ -58,4 +58,9 @@ public class ViewingMovieRepositoryImpl implements ViewingMovieRepository {
         viewingMovieJpaRepository.save(viewingMovieJpaMapper.mapToJpa(vm));
         return vm;
     }
+
+    @Override
+    public Integer countViewingMovieLikesByMovieid(String idMovie) {
+        return viewingMovieJpaRepository.findByMovieJpaImdbIdAndLove(idMovie, true).size();
+    }
 }

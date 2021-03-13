@@ -101,4 +101,9 @@ public class ViewingMovieServiceImpl implements ViewingMovieService {
         return viewingMovieDtoMapper.mapDomainToDto(viewingMovieRepository.findViewingMovieFromUserEmailAndMovieId(email, movie.getImdbId()));
     }
 
+    @Override
+    public Integer searchViewingMovieNbLikes(String idMovie) {
+        return viewingMovieRepository.countViewingMovieLikesByMovieid(idMovie);
+    }
+
 }

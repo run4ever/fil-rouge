@@ -143,7 +143,6 @@ public class ViewingSerieResource {
         Collections.sort(searchResults, (s1, s2) -> Boolean.compare(s2.getAlreadyInUserList(),s1.getAlreadyInUserList()));
 
         return new ResponseEntity<> (searchResults, HttpStatus.CREATED);
-
     }
 
 

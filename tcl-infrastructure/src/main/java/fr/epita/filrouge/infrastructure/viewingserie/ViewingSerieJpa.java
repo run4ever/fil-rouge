@@ -34,7 +34,7 @@ public class ViewingSerieJpa {
     @UpdateTimestamp
     private Date dateLastAction;
 
-    private Boolean likeOrNot;
+    private Boolean love;
 
     public ViewingSerieJpa() {
         //default constructor
@@ -104,12 +104,12 @@ public class ViewingSerieJpa {
         this.idViewSerie = idViewSerie;
     }
 
-    public Boolean getLikeOrNot() {
-        return likeOrNot;
+    public Boolean getLove() {
+        return love;
     }
 
-    public void setLikeOrNot(Boolean likeOrNot) {
-        this.likeOrNot = likeOrNot;
+    public void setLove(Boolean love) {
+        this.love = love;
     }
 
     public static final class Builder {
@@ -120,7 +120,7 @@ public class ViewingSerieJpa {
         private AppUserJpa appUserJpa;
         private SerieJpa serieJpa;
         private Date dateLastAction;
-        private Boolean likeOrNot;
+        private Boolean love;
 
         private Builder() {
         }
@@ -164,8 +164,8 @@ public class ViewingSerieJpa {
             return this;
         }
 
-        public Builder withLikeOrNot(Boolean likeOrNot) {
-            this.likeOrNot = likeOrNot;
+        public Builder withLove(Boolean love) {
+            this.love = love;
             return this;
         }
 
@@ -178,7 +178,7 @@ public class ViewingSerieJpa {
             viewingSerieJpa.setAppUserJpa(appUserJpa);
             viewingSerieJpa.setSerieJpa(serieJpa);
             viewingSerieJpa.setDateLastAction(dateLastAction);
-            viewingSerieJpa.setLikeOrNot(likeOrNot);
+            viewingSerieJpa.setLove(love);
             return viewingSerieJpa;
         }
     }

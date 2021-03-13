@@ -21,4 +21,6 @@ public interface ViewingSerieService {
     ViewingSerieCreateDto updateViewingSerieStatusOrLike(ViewingSerieCreateDto viewingSerieCreateDto);
 
     ViewingSerieRestitDto verifyViewingSerieExistence(SerieDto item, String email);
+
+    Integer searchViewingSerieNbLikes(String idSerie);
 }

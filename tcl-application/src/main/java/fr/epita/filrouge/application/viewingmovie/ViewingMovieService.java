@@ -19,4 +19,5 @@ public interface ViewingMovieService {
     void deleteViewingMovie(ViewingMovieCreateDto viewingMovieCreateDto);
     ViewingMovieRestitDto verifyViewingMovieExistence(MovieDto movie, String email);
 
+    Integer searchViewingMovieNbLikes(String idMovie);
 }
