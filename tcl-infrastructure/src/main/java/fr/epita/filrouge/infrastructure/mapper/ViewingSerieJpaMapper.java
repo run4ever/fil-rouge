@@ -32,7 +32,7 @@ public class ViewingSerieJpaMapper {
                 .withStatus(entity.getStatus ())
                 .withSerieJpa(serieJpaMapper.mapToJpa (entity.getSerie ()))
                 .withAppUserJpa(appUserJpaMapper.mapToJpa (entity.getAppUser ()))
-                .withLove(entity.getLikeOrNot())
+                .withLove(entity.getLove())
                 .build ();
     }
 
@@ -60,7 +60,7 @@ public class ViewingSerieJpaMapper {
                 .withSerie (serieJpaMapper.mapToDomain(jpa.getSerieJpa()))
                 .withAppUser (appUserJpaMapper.mapToEntity (jpa.getAppUserJpa ()))
                 .withDateLastAction (convertToLocalDateViaInstant(jpa.getDateLastAction ()))
-                .withLikeOrNot(jpa.getLove())
+                .withLove(jpa.getLove())
                 .build();
 
     }

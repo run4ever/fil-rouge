@@ -12,7 +12,6 @@ import fr.epita.filrouge.domain.exception.ErrorCodes;
 import fr.epita.filrouge.domain.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -137,7 +136,7 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (viewingSerieCreateDto.getEmail (),
                 viewingSerieCreateDto.getImdbId());
         vs.setStatus(viewingSerieCreateDto.getStatus());
-        vs.setLikeOrNot(viewingSerieCreateDto.getLikeOrNot());
+        vs.setLove(viewingSerieCreateDto.getLove());
         //ACH : set saison et episode si les données ne sont pas null
         if(viewingSerieCreateDto.getCurrentSeason() != null) {
             vs.setCurrentSeason(viewingSerieCreateDto.getCurrentSeason());

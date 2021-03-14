@@ -1,12 +1,11 @@
-package fr.epita.filrouge.application.movie;
+package fr.epita.filrouge.application.viewingmovie;
 
 import fr.epita.filrouge.application.mapper.AppUserDtoMapper;
 import fr.epita.filrouge.application.mapper.MovieDtoMapper;
 import fr.epita.filrouge.application.mapper.ViewingMovieDtoMapper;
+import fr.epita.filrouge.application.movie.MovieDto;
+import fr.epita.filrouge.application.movie.MovieService;
 import fr.epita.filrouge.application.person.AppUserDto;
-import fr.epita.filrouge.application.viewingmovie.ViewingMovieCreateDto;
-import fr.epita.filrouge.application.viewingmovie.ViewingMovieService;
-import fr.epita.filrouge.application.viewingmovie.ViewingMovieServiceImpl;
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.common.PublicNotation;
 import fr.epita.filrouge.domain.entity.common.Status;
@@ -16,7 +15,6 @@ import fr.epita.filrouge.domain.entity.viewingmovie.ViewingMovieRepository;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.entity.person.Role;
 import fr.epita.filrouge.domain.exception.AlreadyExistingException;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +96,6 @@ public class ViewingMovieTest {
                 .build();
     }
 
-
     @Test
     @DisplayName("Création d'un ViewingMovie en échec si Movie est déjà présent dans ViewingMovie pour User")
     public void createViewingMovie_should_fail_when_movie_already_in_viewingMovie() {
@@ -123,7 +120,6 @@ public class ViewingMovieTest {
 
         /** Mock sur create de ViewingMovieRepository (accès à la base de la couche Infra) */
         when(viewingMovieRepositoryMock.findViewingMovieFromUser(appUser)).thenReturn(listViewingMovie);
-
 
         //When
         try {
@@ -222,7 +218,6 @@ public class ViewingMovieTest {
         AppUser appUser = getAppUserTest();
         AppUserDto appUserDto = getAppUserDtoTest();
 
-
         when(viewingMovieRepositoryMock.findViewingMovieFromUser(appUser)).thenReturn(null);
         when(appUserDtoMapper.mapDtoToDomain(appUserDto)).thenReturn(appUser);
 
@@ -235,5 +230,24 @@ public class ViewingMovieTest {
         verify(viewingMovieRepositoryMock,times(1)).findViewingMovieFromUser(appUser);
     }
 
+    @Test
+    @DisplayName("Nombre de likes d'un movie")
+    public void count_movie_nb_likes_should_success(){
+        //Given
+        AppUser appUser = getAppUserTest();
+        Movie movie = getMovieTest();
+        ViewingMovie viewingMovie = ViewingMovie.Builder.aViewingMovie()
+                .withAppUser(appUser)
+                .withMovie(movie)
+                .withStatus(Status.WATCHED)
+                .withLove(true)
+                .build();
+
+        //When
+        viewingMovieService.searchViewingMovieNbLikes(movie.getImdbId());
+
+        //Then
+        verify(viewingMovieRepositoryMock,times(1)).countViewingMovieLikesByMovieid(movie.getImdbId());
+    }
 
 }

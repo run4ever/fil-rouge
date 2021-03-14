@@ -24,7 +24,7 @@ public class ViewingMovieRestitDto {
 
     private Boolean alreadyInUserList;
 
-    private Boolean likeOrNot;
+    private Boolean love;
 
     public String getEmail() {
         return email;
@@ -66,12 +66,12 @@ public class ViewingMovieRestitDto {
         this.alreadyInUserList = alReadyInUserList;
     }
 
-    public Boolean getLikeOrNot() {
-        return likeOrNot;
+    public Boolean getLove() {
+        return love;
     }
 
-    public void setLikeOrNot(Boolean likeOrNot) {
-        this.likeOrNot = likeOrNot;
+    public void setLove(Boolean love) {
+        this.love = love;
     }
 
     public static final class Builder {
@@ -80,7 +80,7 @@ public class ViewingMovieRestitDto {
         private MovieDto movieDto;
         private LocalDate dateLastAction;
         private Boolean alreadyInUserList;
-        private Boolean likeOrNot;
+        private Boolean love;
 
         private Builder() {
         }
@@ -114,8 +114,8 @@ public class ViewingMovieRestitDto {
             return this;
         }
 
-        public Builder withLikeOrNot(Boolean likeOrNot) {
-            this.likeOrNot = likeOrNot;
+        public Builder withLove(Boolean love) {
+            this.love = love;
             return this;
         }
 
@@ -126,7 +126,7 @@ public class ViewingMovieRestitDto {
             viewingMovieRestitDto.setMovieDto(movieDto);
             viewingMovieRestitDto.setDateLastAction(dateLastAction);
             viewingMovieRestitDto.setAlreadyInUserList(alreadyInUserList);
-            viewingMovieRestitDto.setLikeOrNot(likeOrNot);
+            viewingMovieRestitDto.setLove(love);
             return viewingMovieRestitDto;
         }
     }

@@ -15,7 +15,7 @@ public class ViewingSerie {
     private AppUser appUser;
     private Serie serie;
     private LocalDate dateLastAction;
-    private Boolean likeOrNot;
+    private Boolean love;
 
     @Override
     public String toString() {
@@ -82,13 +82,9 @@ public class ViewingSerie {
         this.dateLastAction = dateLastAction;
     }
 
-    public Boolean getLikeOrNot() {
-        return likeOrNot;
-    }
+    public Boolean getLove() {return love;}
 
-    public void setLikeOrNot(Boolean likeOrNot) {
-        this.likeOrNot = likeOrNot;
-    }
+    public void setLove(Boolean love) {this.love = love;}
 
     public static final class Builder {
         private Status status;
@@ -97,7 +93,7 @@ public class ViewingSerie {
         private AppUser appUser;
         private Serie serie;
         private LocalDate dateLastAction;
-        private Boolean likeOrNot;
+        private Boolean love;
 
         private Builder() {
         }
@@ -136,8 +132,8 @@ public class ViewingSerie {
             return this;
         }
 
-        public Builder withLikeOrNot(Boolean likeOrNot) {
-            this.likeOrNot = likeOrNot;
+        public Builder withLove(Boolean love) {
+            this.love = love;
             return this;
         }
 
@@ -149,7 +145,7 @@ public class ViewingSerie {
             viewingSerie.setAppUser(appUser);
             viewingSerie.setSerie(serie);
             viewingSerie.setDateLastAction(dateLastAction);
-            viewingSerie.setLikeOrNot(likeOrNot);
+            viewingSerie.setLove(love);
             return viewingSerie;
         }
     }

@@ -36,7 +36,7 @@ public class ViewingMovieDtoMapperImpl implements ViewingMovieDtoMapper {
                 .withStatus(viewingMovieRestitDto.getStatus())
                 .withMovie(movieService.findMovieFromApiId(viewingMovieRestitDto.getMovieDto().getImdbId()))
                 .withAppUser(appUserService.findbyEmail(viewingMovieRestitDto.getEmail()))
-                .withLikeOrNot(viewingMovieRestitDto.getLikeOrNot())
+                .withLove(viewingMovieRestitDto.getLove())
                 .build();
 
 
@@ -52,7 +52,7 @@ public class ViewingMovieDtoMapperImpl implements ViewingMovieDtoMapper {
                 .withStatus(viewingMovieCreateDto.getStatus())
                 .withMovie(movieService.findMovieFromApiId(viewingMovieCreateDto.getImdbId()))
                 .withAppUser(appUserService.findbyEmail(viewingMovieCreateDto.getEmail()))
-                .withLikeOrNot(viewingMovieCreateDto.getLikeOrNot())
+                .withLove(viewingMovieCreateDto.getLove())
                 .build();
     }
 
@@ -66,7 +66,7 @@ public class ViewingMovieDtoMapperImpl implements ViewingMovieDtoMapper {
                 .withStatus(viewingMovie.getStatus())
                 .withEmail(viewingMovie.getAppUser().getEmail())
                 .withMovieDto(movieDtoMapper.mapDomainToDto(viewingMovie.getMovie()))
-                .withLikeOrNot(viewingMovie.getLikeOrNot())
+                .withLove(viewingMovie.getLove())
                 .build();
     }
 
@@ -80,7 +80,7 @@ public class ViewingMovieDtoMapperImpl implements ViewingMovieDtoMapper {
                 .withStatus(viewingMovie.getStatus())
                 .withEmail(viewingMovie.getAppUser().getEmail())
                 .withImdbId(viewingMovie.getMovie().getImdbId())
-                .withLikeOrNot(viewingMovie.getLikeOrNot())
+                .withLove(viewingMovie.getLove())
                 .build();
     }
 

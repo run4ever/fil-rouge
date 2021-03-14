@@ -10,7 +10,7 @@ public class ViewingMovie {
     private Status status;
     private AppUser appUser;
     private Movie movie;
-    private Boolean likeOrNot;
+    private Boolean love;
 
     //default constructor
     public ViewingMovie() {
@@ -48,12 +48,12 @@ public class ViewingMovie {
         this.movie = movie;
     }
 
-    public Boolean getLikeOrNot() {
-        return likeOrNot;
+    public Boolean getLove() {
+        return love;
     }
 
-    public void setLikeOrNot(Boolean likeOrNot) {
-        this.likeOrNot = likeOrNot;
+    public void setLove(Boolean love) {
+        this.love = love;
     }
 
     @Override
@@ -77,7 +77,7 @@ public class ViewingMovie {
         private Status status;
         private AppUser appUser;
         private Movie movie;
-        private Boolean likeOrNot;
+        private Boolean love;
 
         private Builder() {
         }
@@ -106,8 +106,8 @@ public class ViewingMovie {
             return this;
         }
 
-        public Builder withLikeOrNot(Boolean likeOrNot) {
-            this.likeOrNot = likeOrNot;
+        public Builder withLove(Boolean love) {
+            this.love = love;
             return this;
         }
 
@@ -117,7 +117,7 @@ public class ViewingMovie {
             viewingMovie.setStatus(status);
             viewingMovie.setAppUser(appUser);
             viewingMovie.setMovie(movie);
-            viewingMovie.setLikeOrNot(likeOrNot);
+            viewingMovie.setLove(love);
             return viewingMovie;
         }
     }

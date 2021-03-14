@@ -26,7 +26,7 @@ public class ViewingMovieJpaMapper {
                 .withStatus(entity.getStatus())
                 .withAppUserJpa(appUserJpaMapper.mapToJpa(entity.getAppUser()))
                 .withMovieJpa(movieJpaMapper.mapToJpa(entity.getMovie()))
-                .withLove(entity.getLikeOrNot())
+                .withLove(entity.getLove())
                 .build();
     }
 
@@ -51,7 +51,7 @@ public class ViewingMovieJpaMapper {
                 .withStatus(jpa.getStatus())
                 .withAppUser(appUserJpaMapper.mapToEntity(jpa.getAppUserJpa()))
                 .withMovie(movieJpaMapper.mapToEntity(jpa.getMovieJpa()))
-                .withLikeOrNot(jpa.getLove())
+                .withLove(jpa.getLove())
                 .build();
     }
 

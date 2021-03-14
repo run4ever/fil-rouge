@@ -23,7 +23,7 @@ public class ViewingSerieRestitDto {
     private LocalDate dateLastAction;
 
     private Boolean alreadyInUserList;
-    private Boolean likeOrNot;
+    private Boolean love;
 
     public String getEmail() {
         return email;
@@ -81,12 +81,12 @@ public class ViewingSerieRestitDto {
         this.alreadyInUserList = alreadyInUserList;
     }
 
-    public Boolean getLikeOrNot() {
-        return likeOrNot;
+    public Boolean getLove() {
+        return love;
     }
 
-    public void setLikeOrNot(Boolean likeOrNot) {
-        this.likeOrNot = likeOrNot;
+    public void setLove(Boolean love) {
+        this.love = love;
     }
 
     public static final class Builder {
@@ -97,7 +97,7 @@ public class ViewingSerieRestitDto {
         private SerieDto serieDto;
         private LocalDate dateLastAction;
         private Boolean alreadyInUserList;
-        private Boolean likeOrNot;
+        private Boolean love;
 
         private Builder() {
         }
@@ -141,8 +141,8 @@ public class ViewingSerieRestitDto {
             return this;
         }
 
-        public Builder withLikeOrNot(Boolean likeOrNot) {
-            this.likeOrNot = likeOrNot;
+        public Builder withLove(Boolean love) {
+            this.love = love;
             return this;
         }
 
@@ -155,7 +155,7 @@ public class ViewingSerieRestitDto {
             viewingSerieRestitDto.setSerieDto(serieDto);
             viewingSerieRestitDto.setDateLastAction(dateLastAction);
             viewingSerieRestitDto.setAlreadyInUserList(alreadyInUserList);
-            viewingSerieRestitDto.setLikeOrNot(likeOrNot);
+            viewingSerieRestitDto.setLove(love);
             return viewingSerieRestitDto;
         }
     }

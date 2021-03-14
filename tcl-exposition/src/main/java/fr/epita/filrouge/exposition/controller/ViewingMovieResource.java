@@ -117,7 +117,7 @@ public class ViewingMovieResource {
             if(result != null){
                 alReadyInUserList = true;
                 status = result.getStatus();
-                like = result.getLikeOrNot();
+                like = result.getLove();
             }
             //else
             else{
@@ -131,7 +131,7 @@ public class ViewingMovieResource {
                     .withDateLastAction(LocalDate.now())
                     .withStatus(status)
                     .withAlreadyInUserList(alReadyInUserList)
-                    .withLikeOrNot(like)
+                    .withLove(like)
                     .build();
 
             searchResults.add(vmToAdd);

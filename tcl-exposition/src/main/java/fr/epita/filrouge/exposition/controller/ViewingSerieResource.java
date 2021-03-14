@@ -117,7 +117,7 @@ public class ViewingSerieResource {
             if(result != null){
                 alReadyInUserList = true;
                 status = result.getStatus();
-                like = result.getLikeOrNot();
+                like = result.getLove();
                 currSeason = result.getCurrentSeason();
             }
             //else
@@ -132,7 +132,7 @@ public class ViewingSerieResource {
                     .withDateLastAction(LocalDate.now())
                     .withStatus(status)
                     .withAlreadyInUserList(alReadyInUserList)
-                    .withLikeOrNot(like)
+                    .withLove(like)
                     .withCurrentSeason(currSeason)
                     .build();
 

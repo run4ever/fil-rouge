@@ -1,11 +1,10 @@
-package fr.epita.filrouge.application.serie;
+package fr.epita.filrouge.application.viewingserie;
 
 
 import fr.epita.filrouge.application.mapper.ViewingSerieDtoMapper;
 import fr.epita.filrouge.application.person.AppUserDto;
-import fr.epita.filrouge.application.viewingserie.ViewingSerieCreateDto;
-import fr.epita.filrouge.application.viewingserie.ViewingSerieService;
-import fr.epita.filrouge.application.viewingserie.ViewingSerieServiceImpl;
+import fr.epita.filrouge.application.serie.SerieDto;
+import fr.epita.filrouge.application.serie.SerieService;
 import fr.epita.filrouge.domain.entity.common.PublicNotation;
 import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
@@ -18,13 +17,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.epita.filrouge.domain.entity.common.Status.TO_WATCH;
+import fr.epita.filrouge.domain.entity.common.Status;
+
 import static org.mockito.Mockito.*;
 
 
@@ -93,7 +94,7 @@ public class ViewingSerieTest {
         ViewingSerieCreateDto viewingSerieCreateDto = ViewingSerieCreateDto.Builder.aViewingSerieCreateDto()
                 .withEmail(appUser.getEmail())
                 .withImdbId(serie.getImdbId())
-                .withStatus(TO_WATCH)
+                .withStatus(Status.TO_WATCH)
                 .withCurrentSeason(2)
                 .withCurrentEpisode(14)
                 .build();
@@ -101,7 +102,7 @@ public class ViewingSerieTest {
         ViewingSerie viewingSerie = ViewingSerie.Builder.aViewingSerie()
                 .withAppUser(appUser)
                 .withSerie(serie)
-                .withStatus(TO_WATCH)
+                .withStatus(Status.TO_WATCH)
                 .withCurrentSeason(2)
                 .withCurrentEpisode(14)
                 .build();
@@ -131,7 +132,7 @@ public class ViewingSerieTest {
         ViewingSerieCreateDto viewingSerieCreateDto = ViewingSerieCreateDto.Builder.aViewingSerieCreateDto()
                 .withEmail(appUser.getEmail())
                 .withImdbId(serie.getImdbId())
-                .withStatus(TO_WATCH)
+                .withStatus(Status.TO_WATCH)
                 .withCurrentSeason(2)
                 .withCurrentEpisode(14)
                 .build();
@@ -176,7 +177,7 @@ public class ViewingSerieTest {
         ViewingSerie viewingSerie = ViewingSerie.Builder.aViewingSerie()
                 .withAppUser(appUser)
                 .withSerie(serie)
-                .withStatus(TO_WATCH)
+                .withStatus(Status.TO_WATCH)
                 .withCurrentSeason(2)
                 .withCurrentEpisode(14)
                 .build();
@@ -195,6 +196,27 @@ public class ViewingSerieTest {
         /** vérifier viewingSerieRepository.findallViewingSerieByUse est appelé 1 fois  */
         verify(viewingSerieRepositoryMock,times(1)).findallViewingSerieByUser(appUser.getEmail());
 
+    }
+
+    @Test
+    public void count_serie_nb_likes_should_success(){
+        //Given
+        AppUser appUser = getAppUserTest();
+        Serie serie = getSerieTest();
+        ViewingSerie viewingSerie = ViewingSerie.Builder.aViewingSerie()
+                .withAppUser(appUser)
+                .withSerie(serie)
+                .withStatus(Status.WATCHED)
+                .withCurrentSeason(2)
+                .withCurrentEpisode(14)
+                .withLove(true)
+                .build();
+
+        //When
+        viewingSerieService.searchViewingSerieNbLikes(serie.getImdbId());
+
+        //Then
+        verify(viewingSerieRepositoryMock,times(1)).countViewingSerieLikesBySerieid(serie.getImdbId());
     }
 
 }

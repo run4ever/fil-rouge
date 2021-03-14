@@ -1,4 +1,4 @@
-package fr.epita.filrouge.infrastructure.serie;
+package fr.epita.filrouge.infrastructure.viewingserie;
 
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.common.Status;
@@ -23,7 +23,6 @@ public class ViewingSerieTest {
     @Autowired
     private ViewingSerieRepository viewingSerieDomaine;
 
-
     Serie serie15 = Serie.Builder.aSerie ()
             .withImdbId ("tt00015")
             .withTitle ("serie tt00015")
@@ -35,7 +34,6 @@ public class ViewingSerieTest {
             .withTitle ("serie tt00011")
             .withCategory (Category.ROMANCE)
             .build ();
-
 
     Serie serie14 = Serie.Builder.aSerie ()
             .withImdbId ("tt00014")
@@ -52,6 +50,14 @@ public class ViewingSerieTest {
             .withPassword("superman")
             .build();
 
+    AppUser appUserB = AppUser.Builder.anAppUser()
+            .withFirstname("Brad2")
+            .withLastname("Pitt2")
+            .withEmail("brad2@pitt.com")
+            .withBirthdayDate(LocalDate.of(1963, 12, 18))
+            .withRole(Role.ROLE_USER)
+            .withPassword("superman")
+            .build();
 
     ViewingSerie viewingSerie11 = ViewingSerie.Builder.aViewingSerie ()
             .withAppUser (appUser)
@@ -75,6 +81,7 @@ public class ViewingSerieTest {
             .withCurrentEpisode (60)
             .withCurrentSeason (10)
             .withStatus (Status.IN_PROGRESS)
+            .withLove(true)
             .build ();
 
     @Test
@@ -105,6 +112,14 @@ public class ViewingSerieTest {
 
         assertThat (viewingSerieDomaine.findAllVievingSerie ().size ()).isEqualTo (sizeListViewing);
 
+    }
+
+    @Test
+    @DisplayName("récupérer le nb de likes")
+    public void get_nb_likes_should_success(){
+        //Given the fact that we have inserted 15 vm for Friends Serie with love = true
+        //Then
+        assertThat(viewingSerieDomaine.countViewingSerieLikesBySerieid("tt0108778")).isEqualTo(15);
     }
 
 }

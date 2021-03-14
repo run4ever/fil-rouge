@@ -80,7 +80,7 @@ public class ViewingMovieServiceImpl implements ViewingMovieService {
                 viewingMovieCreateDto.getEmail(), viewingMovieCreateDto.getImdbId());
 
         vm.setStatus(viewingMovieCreateDto.getStatus());
-        vm.setLikeOrNot(viewingMovieCreateDto.getLikeOrNot());
+        vm.setLove(viewingMovieCreateDto.getLove());
 
         viewingMovieRepository.update(vm);
 
