@@ -67,34 +67,34 @@ public class ViewingMovieResourceTest {
     public void create_already_existing_vm_should_crash(){
         //Given
         ViewingMovieCreateDto viewingMovieCreateDto = ViewingMovieCreateDto.Builder.aViewingMovieCreateDto()
-                .withEmail("fabien@tcl.com")
+                .withEmail("demo@tcl.com")
                 .withImdbId("tt1856101")
                 .withStatus(Status.TO_WATCH)
                 .build();
 
         //initialiser un toke JWT et le mettre dans header ****************
-        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("fabien@tcl.com");
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("demo@tcl.com");
         //*****************************************************************
         HttpEntity<ViewingMovieCreateDto> request = new HttpEntity<>(viewingMovieCreateDto,headers);
 
-        final Integer nbViewingMovieBefore = viewingMovieService.getViewingMovieByUserEmail("fabien@tcl.com").size();
+        final Integer nbViewingMovieBefore = viewingMovieService.getViewingMovieByUserEmail("demo@tcl.com").size();
 
         //When
         ResponseEntity<ViewingMovieCreateDto> response = restTemplate.postForEntity("/api/v1/viewing-movie/create",request, ViewingMovieCreateDto.class);
 
         //Then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(viewingMovieService.getViewingMovieByUserEmail("fabien@tcl.com").size()).isEqualTo(nbViewingMovieBefore);
+        assertThat(viewingMovieService.getViewingMovieByUserEmail("demo@tcl.com").size()).isEqualTo(nbViewingMovieBefore);
 
     }
 
     @Test
     public void list_one_user_vms_should_success(){
         //Given
-        String userEmail = "fabien@tcl.com";
+        String userEmail = "demo@tcl.com";
 
         //initialiser un toke JWT et le mettre dans header ****************
-        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("fabien@tcl.com");
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("demo@tcl.com");
         //*****************************************************************
         HttpEntity request = new HttpEntity(headers);
 
@@ -115,13 +115,13 @@ public class ViewingMovieResourceTest {
     public void update_existing_vm_should_success() throws Exception {
         //Given
         ViewingMovieCreateDto updatedViewingMovie = ViewingMovieCreateDto.Builder.aViewingMovieCreateDto()
-                .withEmail("fabien@tcl.com")
+                .withEmail("demo@tcl.com")
                 .withImdbId("tt1856101")
                 .withStatus(Status.WATCHED)
                 .build();
 
         //initialiser un toke JWT et le mettre dans header ****************
-        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("fabien@tcl.com");
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("demo@tcl.com");
         //*****************************************************************
 
         // When
@@ -137,13 +137,13 @@ public class ViewingMovieResourceTest {
     public void delete_one_user_vm_should_success() throws Exception {
         //Given
         ViewingMovieCreateDto vmToDelete = ViewingMovieCreateDto.Builder.aViewingMovieCreateDto()
-                .withEmail("fabien@tcl.com")
+                .withEmail("demo@tcl.com")
                 .withImdbId("tt0083658")
                 .withStatus(Status.TO_WATCH)
                 .build();
 
         //initialiser un toke JWT et le mettre dans header ****************
-        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("fabien@tcl.com");
+        HttpHeaders headers = tokenGenerator.getHeadersWithJwtToken("demo@tcl.com");
         //*****************************************************************
 
         // When
