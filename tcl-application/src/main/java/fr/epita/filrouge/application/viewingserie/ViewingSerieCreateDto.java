@@ -15,6 +15,8 @@ public class ViewingSerieCreateDto {
 
     private String imdbId;
     private String email;
+    @NotNull
+    private Boolean love = false;
 
     public Status getStatus() {
         return status;
@@ -56,6 +58,13 @@ public class ViewingSerieCreateDto {
         this.email = email;
     }
 
+    public Boolean getLove() {
+        return love;
+    }
+
+    public void setLove(Boolean love) {
+        this.love = love;
+    }
 
     public static final class Builder {
         private Status status;
@@ -63,6 +72,7 @@ public class ViewingSerieCreateDto {
         private Integer currentEpisode;
         private String imdbId;
         private String email;
+        private Boolean love = false;
 
         private Builder() {
         }
@@ -96,6 +106,11 @@ public class ViewingSerieCreateDto {
             return this;
         }
 
+        public Builder withLove(Boolean love) {
+            this.love = love;
+            return this;
+        }
+
         public ViewingSerieCreateDto build() {
             ViewingSerieCreateDto viewingSerieCreateDto = new ViewingSerieCreateDto();
             viewingSerieCreateDto.setStatus(status);
@@ -103,6 +118,7 @@ public class ViewingSerieCreateDto {
             viewingSerieCreateDto.setCurrentEpisode(currentEpisode);
             viewingSerieCreateDto.setImdbId(imdbId);
             viewingSerieCreateDto.setEmail(email);
+            viewingSerieCreateDto.setLove(love);
             return viewingSerieCreateDto;
         }
     }

@@ -24,7 +24,7 @@ spring:
 jwt:
   secret: tcl-in-force
 ### OMDB Api Key
-OMDB_API_KEY: b4093047
-  ### 551b096d
+OMDB_API_KEY: 551b096d
+  ### b4093047
 ### Version API
 current_version: v1

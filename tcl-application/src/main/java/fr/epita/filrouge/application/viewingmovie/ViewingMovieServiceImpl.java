@@ -74,12 +74,13 @@ public class ViewingMovieServiceImpl implements ViewingMovieService {
     }
 
     @Override
-    public ViewingMovieCreateDto updateViewingMovieStatus(ViewingMovieCreateDto viewingMovieCreateDto) {
+    public ViewingMovieCreateDto updateViewingMovieStatusOrLike(ViewingMovieCreateDto viewingMovieCreateDto) {
 
         final ViewingMovie vm = viewingMovieRepository.findViewingMovieFromUserEmailAndMovieId(
                 viewingMovieCreateDto.getEmail(), viewingMovieCreateDto.getImdbId());
 
         vm.setStatus(viewingMovieCreateDto.getStatus());
+        vm.setLove(viewingMovieCreateDto.getLove());
 
         viewingMovieRepository.update(vm);
 
@@ -98,6 +99,11 @@ public class ViewingMovieServiceImpl implements ViewingMovieService {
     @Override
     public ViewingMovieRestitDto verifyViewingMovieExistence(MovieDto movie, String email) {
         return viewingMovieDtoMapper.mapDomainToDto(viewingMovieRepository.findViewingMovieFromUserEmailAndMovieId(email, movie.getImdbId()));
+    }
+
+    @Override
+    public Integer searchViewingMovieNbLikes(String idMovie) {
+        return viewingMovieRepository.countViewingMovieLikesByMovieid(idMovie);
     }
 
 }

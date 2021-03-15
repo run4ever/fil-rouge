@@ -1,4 +1,4 @@
-package fr.epita.filrouge.infrastructure.movie;
+package fr.epita.filrouge.infrastructure.viewingmovie;
 
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.common.PublicNotation;
@@ -11,6 +11,7 @@ import fr.epita.filrouge.domain.entity.person.AppUser;
 import fr.epita.filrouge.domain.entity.person.AppUserRepository;
 import fr.epita.filrouge.domain.entity.person.Role;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,6 +35,7 @@ public class ViewingMovieTest {
 
     final Movie movie1 = Movie.Builder.aMovie()
             .withId(1L)
+            .withImdbId("tt007")
             .withTitle("Movie Title 1")
             .withPublicNotation(new PublicNotation(4.0,1234))
             .withReleaseDate(LocalDate.now())
@@ -42,7 +44,7 @@ public class ViewingMovieTest {
             .build();
 
     final Movie movie2 = Movie.Builder.aMovie()
-            .withId(2L)
+            .withImdbId("tt008")
             .withTitle("Movie title 2")
             .withPublicNotation(new PublicNotation(4.0,1234))
             .withReleaseDate(LocalDate.now())
@@ -51,7 +53,7 @@ public class ViewingMovieTest {
             .build();
 
     final Movie movie3 = Movie.Builder.aMovie()
-            .withId(3L)
+            .withImdbId("tt009")
             .withTitle("Movie title 3")
             .withDescription("Movie description 3")
             .withPublicNotation(new PublicNotation(4.0,1234))
@@ -81,6 +83,7 @@ public class ViewingMovieTest {
                 .withAppUser(user1)
                 .withMovie(movie1)
                 .withStatus(Status.TO_WATCH)
+                .withLove(true)
                 .build();
 
         //When
@@ -101,5 +104,19 @@ public class ViewingMovieTest {
         List<ViewingMovie> visonnagesMovie = viewingMovieRepository.findAllViewingMovie();
         //Then
         assertThat(visonnagesMovie).isNotNull();
+    }
+
+    @Test
+    @DisplayName("récupérer le nb de likes")
+    public void get_nb_likes_should_success(){
+        //Given
+        //dans import.sql nous avons injecté 2 lignes dans
+        //INSERT INTO public.movie ( actors, average_rating, category, description, duration, image_url, imdb_id, number_of_votes, release_date, title)
+        // VALUES ('Harrison Ford, Rutger Hauer, Sean Young, Edward James Olmos', 8.1, 'ACTION', 'A blade runner ...', 117, 'SX300.jpg', 'tt0083658', 695428, '1982-01-01', 'Blade Runner');
+        //INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 4, 2, true);
+        //INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 1, 2, true);
+
+        //Then
+        assertThat(viewingMovieRepository.countViewingMovieLikesByMovieid("tt0083658")).isEqualTo(2);
     }
 }

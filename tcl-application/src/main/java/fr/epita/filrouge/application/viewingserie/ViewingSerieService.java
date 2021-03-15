@@ -18,7 +18,9 @@ public interface ViewingSerieService {
 
     void deleteViewingSerie(ViewingSerieCreateDto ViewingSerieCreateDto);
 
-    ViewingSerieCreateDto updateViewingSerieStatus(ViewingSerieCreateDto viewingSerieCreateDto);
+    ViewingSerieCreateDto updateViewingSerieStatusOrLike(ViewingSerieCreateDto viewingSerieCreateDto);
 
     ViewingSerieRestitDto verifyViewingSerieExistence(SerieDto item, String email);
+
+    Integer searchViewingSerieNbLikes(String idSerie);
 }

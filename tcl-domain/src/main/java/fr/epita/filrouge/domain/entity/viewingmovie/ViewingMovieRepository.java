@@ -14,4 +14,6 @@ public interface ViewingMovieRepository {
     List<ViewingMovie> findAllViewingMovie();
     void delete(ViewingMovie vm);
     ViewingMovie update(ViewingMovie vm);
+
+    Integer countViewingMovieLikesByMovieid(String idMovie);
 }

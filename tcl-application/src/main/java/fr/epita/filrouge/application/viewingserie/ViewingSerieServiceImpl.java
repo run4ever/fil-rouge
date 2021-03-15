@@ -12,7 +12,6 @@ import fr.epita.filrouge.domain.exception.ErrorCodes;
 import fr.epita.filrouge.domain.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -132,11 +131,12 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     }
 
     @Override
-    public ViewingSerieCreateDto updateViewingSerieStatus(ViewingSerieCreateDto viewingSerieCreateDto) {
+    public ViewingSerieCreateDto updateViewingSerieStatusOrLike(ViewingSerieCreateDto viewingSerieCreateDto) {
 
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (viewingSerieCreateDto.getEmail (),
                 viewingSerieCreateDto.getImdbId());
         vs.setStatus(viewingSerieCreateDto.getStatus());
+        vs.setLove(viewingSerieCreateDto.getLove());
         //ACH : set saison et episode si les données ne sont pas null
         if(viewingSerieCreateDto.getCurrentSeason() != null) {
             vs.setCurrentSeason(viewingSerieCreateDto.getCurrentSeason());
@@ -153,6 +153,11 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
     }
 
     @Override
+    public Integer searchViewingSerieNbLikes(String idSerie) {
+        return viewingSerieRepository.countViewingSerieLikesBySerieid(idSerie);
+    }
+
+    @Override
     public void deleteViewingSerie(ViewingSerieCreateDto ViewingSerieCreateDto) {
 
         final ViewingSerie vs = viewingSerieRepository.findByIdUserAndIdSerie (ViewingSerieCreateDto.getEmail ()
@@ -160,9 +165,6 @@ public class ViewingSerieServiceImpl implements ViewingSerieService {
 
         viewingSerieRepository.delete(vs);
     }
-
-
-
 
     /**
      * Controle par introspection d'un critère de tri.

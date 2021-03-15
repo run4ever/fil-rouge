@@ -5,6 +5,7 @@ import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.serie.SearchSerieDto;
 import fr.epita.filrouge.application.serie.SerieDto;
 import fr.epita.filrouge.application.serie.SerieService;
+import fr.epita.filrouge.application.viewingserie.ViewingSerieService;
 import fr.epita.filrouge.exposition.exception.ErrorModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,6 +33,9 @@ public class SerieResource {
 
     @Autowired
     private SerieService iSerieManagement;
+
+    @Autowired
+    private ViewingSerieService viewingSerieService;
 
     @GetMapping("/{id}")
     @ApiOperation (value = "récupération d'une série", nickname = "getSerie", notes ="création d'une série à partir de son id IMDB")
@@ -161,6 +165,17 @@ public class SerieResource {
     @ResponseStatus(HttpStatus.OK)
     public Integer searchExternalSerieNbResults(@RequestParam("title") final String title) {
         return iSerieManagement.searchExternalSerieNbResults(title);
+    }
+
+    @GetMapping("/loves/{id}")
+    @ApiOperation(value = "Get serie nb of likes")
+    @ApiResponses(value = {
+            @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal Server Error", response = ErrorModel.class)
+    })
+    @ResponseStatus(HttpStatus.OK)
+    public Integer exposeSerieNbLikes(@PathVariable("id") final String id) {
+        return viewingSerieService.searchViewingSerieNbLikes(id);
     }
 
 }

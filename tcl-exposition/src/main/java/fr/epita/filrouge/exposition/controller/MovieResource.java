@@ -96,5 +96,16 @@ public class MovieResource {
         return movieService.searchExternalMovieNbResults(title);
     }
 
+    @GetMapping("/loves/{id}")
+    @ApiOperation(value = "Get movie nb of likes")
+    @ApiResponses(value = {
+            @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal Server Error", response = ErrorModel.class)
+    })
+    @ResponseStatus(HttpStatus.OK)
+    public Integer exposeMovieNbLikes(@PathVariable("id") final String id) {
+        return viewingMovieService.searchViewingMovieNbLikes(id);
+    }
+
 
 }

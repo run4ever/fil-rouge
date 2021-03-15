@@ -24,4 +24,6 @@ public interface ViewingSerieRepository {
     ViewingSerie update(ViewingSerie vs);
 
     ViewingSerie findViewingSerieFromUserEmailAndSerieId(String email, String serieId);
+
+    Integer countViewingSerieLikesBySerieid(String idSerie);
 }

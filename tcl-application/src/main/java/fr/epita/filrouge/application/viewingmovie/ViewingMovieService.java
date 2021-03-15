@@ -15,8 +15,9 @@ public interface ViewingMovieService {
     List<ViewingMovieRestitDto> getViewingMovie(AppUserDto appUserDto);
     List<ViewingMovieRestitDto> getViewingMovieByUserEmail(String email);
 
-    ViewingMovieCreateDto updateViewingMovieStatus(ViewingMovieCreateDto viewingMovieCreateDto);
+    ViewingMovieCreateDto updateViewingMovieStatusOrLike(ViewingMovieCreateDto viewingMovieCreateDto);
     void deleteViewingMovie(ViewingMovieCreateDto viewingMovieCreateDto);
     ViewingMovieRestitDto verifyViewingMovieExistence(MovieDto movie, String email);
 
+    Integer searchViewingMovieNbLikes(String idMovie);
 }

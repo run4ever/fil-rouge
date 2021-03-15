@@ -12,6 +12,8 @@ public class ViewingMovieCreateDto {
     private String imdbId;
     @NotNull
     private String email;
+    @NotNull
+    private Boolean love = false;
 
     public ViewingMovieCreateDto() {
     }
@@ -40,10 +42,15 @@ public class ViewingMovieCreateDto {
         this.email = email;
     }
 
+    public Boolean getLove() {return love;}
+
+    public void setLove(Boolean love) {this.love = love;}
+
     public static final class Builder {
-        private Status status;
+        private Status status = Status.TO_WATCH;
         private String imdbId;
         private String email;
+        private Boolean love = false;
 
         private Builder() {
         }
@@ -67,11 +74,17 @@ public class ViewingMovieCreateDto {
             return this;
         }
 
+        public Builder withLove(Boolean love) {
+            this.love = love;
+            return this;
+        }
+
         public ViewingMovieCreateDto build() {
             ViewingMovieCreateDto viewingMovieCreateDto = new ViewingMovieCreateDto();
             viewingMovieCreateDto.setStatus(status);
             viewingMovieCreateDto.setImdbId(imdbId);
             viewingMovieCreateDto.setEmail(email);
+            viewingMovieCreateDto.setLove(love);
             return viewingMovieCreateDto;
         }
     }
