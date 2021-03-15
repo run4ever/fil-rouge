@@ -65,32 +65,6 @@ public class SerieServiceImpl implements SerieService {
         return serieRepository.deleteSerie (id);
     }
 
-    /**
-     * Méthode qui restitue par page la liste des séries.
-     * @param offset
-     * @param limit
-     * @return
-     */
-    @Override
-    public PageDTO findAllSeriesByPage(int offset, int limit) {
-
-        List<SerieDto> serieDtoList = new ArrayList<SerieDto> ();
-        logger.info ("numéro de page : " + Integer.toString (calculPage (offset, limit)));
-        logger.info ("taille de la page : " + Integer.toString (limit-offset));
-        for (Serie serie: serieRepository.findAllSeriesByPage (calculPage (offset, limit),limit-offset)){
-            serieDtoList.add (serieDtoMapper.mapDomainToDto (serie));
-        }
-        PageDTO pageDTO = new PageDTO ();
-        pageDTO.setLimit (limit);
-        pageDTO.setOffset (offset);
-        pageDTO.setSortAttribute ("title");
-        pageDTO.setTotal (serieRepository.countTotalSerie());
-        pageDTO.setListViewingOrSerieOrVideo (serieDtoList);
-        pageDTO.setSortAsc (true);
-        logger.info ("taille de la liste retournée : " + Integer.toString(pageDTO.getListViewingOrSerieOrVideo ().size ()));
-        return pageDTO;
-    }
-
     @Override
     public List<SerieDto> findAllSeries() {
 
@@ -126,18 +100,6 @@ public class SerieServiceImpl implements SerieService {
         pageDTO.setListViewingOrSerieOrVideo (serieDtoList);
         pageDTO.setSortAsc (true);
         return pageDTO;
-    }
-
-    private int calculPage(int offset, int limit) {
-
-        if (offset == 0) return 0;
-        if (limit <= offset)  {
-            throw new PaginationException ("offset supérieur ou 1égal à limit", ErrorCodes.PAGINATION_ERROR);
-        }
-        if (offset%(limit-offset) != 0) {
-            throw new PaginationException ("offset incohérent", ErrorCodes.PAGINATION_ERROR);
-        }
-        else return offset/(limit-offset);
     }
 
     @Override

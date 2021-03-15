@@ -94,28 +94,6 @@ public class SerieResource {
 
    }
 
-    @GetMapping("/list/{offset}/{limit}")
-    @ApiOperation (value = "restitution paginée de la liste des séries ", nickname = "getAllSeriesByUser",
-            notes ="Resitution de la liste complète des séries selon l'intervalle fourni en entrée")
-    @ApiResponses (value = {
-            @ApiResponse (code = 200, message = "Restitution complète de la liste des séries", response = ErrorModel.class),
-            @ApiResponse (code = 206, message = "Restitution partielle de la liste des séries", response = ErrorModel.class),
-            @ApiResponse (code = 400, message = "Valeurs d'offset et de limite incohérentes", response = ErrorModel.class),
-            @ApiResponse (code = 404, message = "Aucune série trouvée", response = ErrorModel.class),
-            @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = ErrorModel.class)
-    })
-    public ResponseEntity<PageDTO> getAllSeriesByPage(@PathVariable("offset") int offset, @PathVariable("limit") int limit) {
-
-
-            PageDTO pageDTO = iSerieManagement.findAllSeriesByPage(offset, limit);
-            if (pageDTO.getTotal () <= pageDTO.getLimit () && (pageDTO.getOffset () ==0 )) {
-                return new ResponseEntity<PageDTO>(pageDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<PageDTO>(pageDTO, HttpStatus.PARTIAL_CONTENT);
-            }
-        }
-
-
     @PostMapping("/list/search")
     @ApiOperation (value = "Recherche d'une série à partir de critères", nickname = "searchSerie",
             notes ="Recherche multi-critères d'une série existante dans la base")
@@ -126,8 +104,6 @@ public class SerieResource {
             @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = ErrorModel.class)
     })
     public ResponseEntity<PageDTO> searchSerie(@RequestBody SearchSerieDto searchSerieDto) {
-
-
         return new ResponseEntity<PageDTO> (iSerieManagement.searchAllSeries(searchSerieDto), HttpStatus.PARTIAL_CONTENT);
     }
 

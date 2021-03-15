@@ -2,17 +2,14 @@ package fr.epita.filrouge.domain.entity.movie;
 
 import fr.epita.filrouge.domain.entity.common.Category;
 import fr.epita.filrouge.domain.entity.common.PublicNotation;
-import fr.epita.filrouge.domain.entity.common.UserAppreciation;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class Movie extends Video {
 
     private String imdbId;
     private Integer duration;
     private LocalDate releaseDate;
-    private List<UserAppreciation> userAppreciations;
     private PublicNotation publicNotation;
     private String actors;  // on gère les acteurs comme une chaines de caractères
     private Category category;  // Attention, on gère une seul Category ici
@@ -45,14 +42,6 @@ public class Movie extends Video {
         this.releaseDate = releaseDate;
     }
 
-    public List<UserAppreciation> getUserAppreciations() {
-        return userAppreciations;
-    }
-
-    public void setUserAppreciations(List<UserAppreciation> userAppreciations) {
-        this.userAppreciations = userAppreciations;
-    }
-
     public PublicNotation getPublicNotation() {
         return publicNotation;
     }
@@ -77,12 +66,10 @@ public class Movie extends Video {
         this.category = category;
     }
 
-
     public static final class Builder {
         private String imdbId;
         private Integer duration;
         private LocalDate releaseDate;
-        private List<UserAppreciation> userAppreciations;
         private PublicNotation publicNotation;
         private String actors;  // on gère les acteurs comme une chaines de caractères
         private Category category;  // Attention, on gère une seul Category ici
@@ -91,7 +78,7 @@ public class Movie extends Video {
         private String description;
         private String imageUrl;
 
-        public Builder() {
+        private Builder() {
         }
 
         public static Builder aMovie() {
@@ -110,11 +97,6 @@ public class Movie extends Video {
 
         public Builder withReleaseDate(LocalDate releaseDate) {
             this.releaseDate = releaseDate;
-            return this;
-        }
-
-        public Builder withUserAppreciations(List<UserAppreciation> userAppreciations) {
-            this.userAppreciations = userAppreciations;
             return this;
         }
 
@@ -158,7 +140,6 @@ public class Movie extends Video {
             movie.setImdbId(imdbId);
             movie.setDuration(duration);
             movie.setReleaseDate(releaseDate);
-            movie.setUserAppreciations(userAppreciations);
             movie.setPublicNotation(publicNotation);
             movie.setActors(actors);
             movie.setCategory(category);
@@ -169,6 +150,4 @@ public class Movie extends Video {
             return movie;
         }
     }
-
-
 }
