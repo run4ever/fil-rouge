@@ -23,6 +23,7 @@ public class ViewingSerieRestitDto {
     private LocalDate dateLastAction;
 
     private Boolean alreadyInUserList;
+    private Boolean love;
 
     public String getEmail() {
         return email;
@@ -80,6 +81,14 @@ public class ViewingSerieRestitDto {
         this.alreadyInUserList = alreadyInUserList;
     }
 
+    public Boolean getLove() {
+        return love;
+    }
+
+    public void setLove(Boolean love) {
+        this.love = love;
+    }
+
     public static final class Builder {
         private String email;
         private Status status;
@@ -87,7 +96,8 @@ public class ViewingSerieRestitDto {
         private Integer currentEpisode;
         private SerieDto serieDto;
         private LocalDate dateLastAction;
-        private Boolean alreadyInUserList = false;
+        private Boolean alreadyInUserList;
+        private Boolean love;
 
         private Builder() {
         }
@@ -131,6 +141,11 @@ public class ViewingSerieRestitDto {
             return this;
         }
 
+        public Builder withLove(Boolean love) {
+            this.love = love;
+            return this;
+        }
+
         public ViewingSerieRestitDto build() {
             ViewingSerieRestitDto viewingSerieRestitDto = new ViewingSerieRestitDto();
             viewingSerieRestitDto.setEmail(email);
@@ -140,6 +155,7 @@ public class ViewingSerieRestitDto {
             viewingSerieRestitDto.setSerieDto(serieDto);
             viewingSerieRestitDto.setDateLastAction(dateLastAction);
             viewingSerieRestitDto.setAlreadyInUserList(alreadyInUserList);
+            viewingSerieRestitDto.setLove(love);
             return viewingSerieRestitDto;
         }
     }

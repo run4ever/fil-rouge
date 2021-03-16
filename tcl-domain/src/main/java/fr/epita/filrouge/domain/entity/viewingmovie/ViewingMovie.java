@@ -10,6 +10,7 @@ public class ViewingMovie {
     private Status status;
     private AppUser appUser;
     private Movie movie;
+    private Boolean love;
 
     //default constructor
     public ViewingMovie() {
@@ -47,12 +48,36 @@ public class ViewingMovie {
         this.movie = movie;
     }
 
+    public Boolean getLove() {
+        return love;
+    }
+
+    public void setLove(Boolean love) {
+        this.love = love;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ViewingMovie that = (ViewingMovie) o;
+
+        return new org.apache.commons.lang3.builder.EqualsBuilder().append(id, that.id).append(status, that.status).append(appUser, that.appUser).append(movie, that.movie).isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new org.apache.commons.lang3.builder.HashCodeBuilder(17, 37).append(id).append(status).append(appUser).append(movie).toHashCode();
+    }
 
     public static final class Builder {
         private Long id;
         private Status status;
         private AppUser appUser;
         private Movie movie;
+        private Boolean love;
 
         private Builder() {
         }
@@ -81,30 +106,19 @@ public class ViewingMovie {
             return this;
         }
 
+        public Builder withLove(Boolean love) {
+            this.love = love;
+            return this;
+        }
+
         public ViewingMovie build() {
             ViewingMovie viewingMovie = new ViewingMovie();
             viewingMovie.setId(id);
             viewingMovie.setStatus(status);
             viewingMovie.setAppUser(appUser);
             viewingMovie.setMovie(movie);
+            viewingMovie.setLove(love);
             return viewingMovie;
         }
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ViewingMovie that = (ViewingMovie) o;
-
-        return new org.apache.commons.lang3.builder.EqualsBuilder().append(id, that.id).append(status, that.status).append(appUser, that.appUser).append(movie, that.movie).isEquals();
-    }
-
-    @Override
-    public int hashCode() {
-        return new org.apache.commons.lang3.builder.HashCodeBuilder(17, 37).append(id).append(status).append(appUser).append(movie).toHashCode();
     }
 }

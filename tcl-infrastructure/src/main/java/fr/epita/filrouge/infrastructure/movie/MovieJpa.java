@@ -1,12 +1,9 @@
 package fr.epita.filrouge.infrastructure.movie;
 
 import fr.epita.filrouge.domain.entity.common.Category;
-import fr.epita.filrouge.domain.entity.common.PublicNotation;
-import fr.epita.filrouge.domain.entity.common.UserAppreciation;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name="movie")

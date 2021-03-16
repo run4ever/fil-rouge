@@ -110,4 +110,9 @@ public class ViewingSerieRepositoryImpl implements ViewingSerieRepository{
     public ViewingSerie findViewingSerieFromUserEmailAndSerieId(String email, String serieId) {
         return viewingSerieJpaMapper.mapToDomain(viewingSerieJpaRepository.findByAppUserJpaEmailAndSerieJpaImdbId(email, serieId));
     }
+
+    @Override
+    public Integer countViewingSerieLikesBySerieid(String idSerie) {
+        return viewingSerieJpaRepository.findBySerieJpaImdbIdAndLove(idSerie, true).size();
+    }
 }

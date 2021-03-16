@@ -28,7 +28,7 @@ public class ViewingSerieResourceTest {
     public void add_viewingSerie_should_be_success() throws Exception {
         //Given
         ViewingSerieCreateDto viewingSerieCreateDto = ViewingSerieCreateDto.Builder.aViewingSerieCreateDto()
-                .withEmail("fabien@tcl.com")
+                .withEmail("demo@tcl.com")
                 .withImdbId("tt0455275")
                 .withCurrentSeason(3)
                 .withCurrentEpisode(1)

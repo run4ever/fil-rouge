@@ -34,6 +34,7 @@ public class ViewingSerieDtoMapperImpl implements ViewingSerieDtoMapper{
         viewingSerieCreateDto.setEmail (viewingSerie.getAppUser ().getEmail ());
         viewingSerieCreateDto.setCurrentSeason (viewingSerie.getCurrentSeason ());
         viewingSerieCreateDto.setCurrentEpisode (viewingSerie.getCurrentEpisode ());
+        viewingSerieCreateDto.setLove(viewingSerie.getLove());
         return viewingSerieCreateDto;
     }
 
@@ -49,6 +50,7 @@ public class ViewingSerieDtoMapperImpl implements ViewingSerieDtoMapper{
         viewingSerie.setCurrentSeason (viewingSerieCreateDto.getCurrentSeason ());
         viewingSerie.setCurrentEpisode (viewingSerieCreateDto.getCurrentEpisode ());
         viewingSerie.setAppUser (appUserRepository.findbyEmail (viewingSerieCreateDto.getEmail ()));
+        viewingSerie.setLove(viewingSerieCreateDto.getLove());
         return viewingSerie;
     }
 
@@ -64,6 +66,7 @@ public class ViewingSerieDtoMapperImpl implements ViewingSerieDtoMapper{
         viewingSerieRestitDto.setEmail (viewingSerie.getAppUser ().getEmail ());
         viewingSerieRestitDto.setSerieDto (serieDtoMapper.mapDomainToDto (viewingSerie.getSerie ()));
         viewingSerieRestitDto.setStatus (viewingSerie.getStatus ());
+        viewingSerieRestitDto.setLove(viewingSerie.getLove());
         return viewingSerieRestitDto;
     }
 }

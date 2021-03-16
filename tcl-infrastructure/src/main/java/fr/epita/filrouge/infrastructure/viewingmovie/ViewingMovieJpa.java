@@ -33,6 +33,8 @@ public class ViewingMovieJpa {
     @UpdateTimestamp
     private Date dateModified;
 
+    private Boolean love;
+
     public ViewingMovieJpa() {
     }
 
@@ -76,6 +78,13 @@ public class ViewingMovieJpa {
         this.dateModified = dateModified;
     }
 
+    public Boolean getLove() {
+        return love;
+    }
+
+    public void setLove(Boolean love) {
+        this.love = love;
+    }
 
     public static final class Builder {
         private Long id;
@@ -83,6 +92,7 @@ public class ViewingMovieJpa {
         private AppUserJpa appUserJpa;
         private MovieJpa movieJpa;
         private Date dateModified;
+        private Boolean love;
 
         private Builder() {
         }
@@ -116,6 +126,11 @@ public class ViewingMovieJpa {
             return this;
         }
 
+        public Builder withLove(Boolean love) {
+            this.love = love;
+            return this;
+        }
+
         public ViewingMovieJpa build() {
             ViewingMovieJpa viewingMovieJpa = new ViewingMovieJpa();
             viewingMovieJpa.setId(id);
@@ -123,6 +138,7 @@ public class ViewingMovieJpa {
             viewingMovieJpa.setAppUserJpa(appUserJpa);
             viewingMovieJpa.setMovieJpa(movieJpa);
             viewingMovieJpa.setDateModified(dateModified);
+            viewingMovieJpa.setLove(love);
             return viewingMovieJpa;
         }
     }

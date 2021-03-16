@@ -15,6 +15,7 @@ public class ViewingSerie {
     private AppUser appUser;
     private Serie serie;
     private LocalDate dateLastAction;
+    private Boolean love;
 
     @Override
     public String toString() {
@@ -29,11 +30,9 @@ public class ViewingSerie {
         return sb.toString ();
     }
 
-
     public ViewingSerie() {
         //default constructor
     }
-
 
     public Status getStatus() {
         return status;
@@ -83,14 +82,18 @@ public class ViewingSerie {
         this.dateLastAction = dateLastAction;
     }
 
-    public static final class Builder {
+    public Boolean getLove() {return love;}
 
+    public void setLove(Boolean love) {this.love = love;}
+
+    public static final class Builder {
         private Status status;
-        private Integer currentSeason;
-        private Integer currentEpisode;
+        private Integer currentSeason = 1;
+        private Integer currentEpisode = 1;
         private AppUser appUser;
         private Serie serie;
         private LocalDate dateLastAction;
+        private Boolean love;
 
         private Builder() {
         }
@@ -98,7 +101,6 @@ public class ViewingSerie {
         public static Builder aViewingSerie() {
             return new Builder();
         }
-
 
         public Builder withStatus(Status status) {
             this.status = status;
@@ -125,8 +127,13 @@ public class ViewingSerie {
             return this;
         }
 
-        public Builder withDateLastAction(LocalDate date) {
-            this.dateLastAction = date;
+        public Builder withDateLastAction(LocalDate dateLastAction) {
+            this.dateLastAction = dateLastAction;
+            return this;
+        }
+
+        public Builder withLove(Boolean love) {
+            this.love = love;
             return this;
         }
 
@@ -137,7 +144,8 @@ public class ViewingSerie {
             viewingSerie.setCurrentEpisode(currentEpisode);
             viewingSerie.setAppUser(appUser);
             viewingSerie.setSerie(serie);
-            viewingSerie.setDateLastAction (dateLastAction);
+            viewingSerie.setDateLastAction(dateLastAction);
+            viewingSerie.setLove(love);
             return viewingSerie;
         }
     }

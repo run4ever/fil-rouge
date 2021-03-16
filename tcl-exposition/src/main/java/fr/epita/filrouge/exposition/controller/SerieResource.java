@@ -5,6 +5,7 @@ import fr.epita.filrouge.application.movie.MovieDto;
 import fr.epita.filrouge.application.serie.SearchSerieDto;
 import fr.epita.filrouge.application.serie.SerieDto;
 import fr.epita.filrouge.application.serie.SerieService;
+import fr.epita.filrouge.application.viewingserie.ViewingSerieService;
 import fr.epita.filrouge.exposition.exception.ErrorModel;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,6 +33,9 @@ public class SerieResource {
 
     @Autowired
     private SerieService iSerieManagement;
+
+    @Autowired
+    private ViewingSerieService viewingSerieService;
 
     @GetMapping("/{id}")
     @ApiOperation (value = "récupération d'une série", nickname = "getSerie", notes ="création d'une série à partir de son id IMDB")
@@ -90,28 +94,6 @@ public class SerieResource {
 
    }
 
-    @GetMapping("/list/{offset}/{limit}")
-    @ApiOperation (value = "restitution paginée de la liste des séries ", nickname = "getAllSeriesByUser",
-            notes ="Resitution de la liste complète des séries selon l'intervalle fourni en entrée")
-    @ApiResponses (value = {
-            @ApiResponse (code = 200, message = "Restitution complète de la liste des séries", response = ErrorModel.class),
-            @ApiResponse (code = 206, message = "Restitution partielle de la liste des séries", response = ErrorModel.class),
-            @ApiResponse (code = 400, message = "Valeurs d'offset et de limite incohérentes", response = ErrorModel.class),
-            @ApiResponse (code = 404, message = "Aucune série trouvée", response = ErrorModel.class),
-            @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = ErrorModel.class)
-    })
-    public ResponseEntity<PageDTO> getAllSeriesByPage(@PathVariable("offset") int offset, @PathVariable("limit") int limit) {
-
-
-            PageDTO pageDTO = iSerieManagement.findAllSeriesByPage(offset, limit);
-            if (pageDTO.getTotal () <= pageDTO.getLimit () && (pageDTO.getOffset () ==0 )) {
-                return new ResponseEntity<PageDTO>(pageDTO, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<PageDTO>(pageDTO, HttpStatus.PARTIAL_CONTENT);
-            }
-        }
-
-
     @PostMapping("/list/search")
     @ApiOperation (value = "Recherche d'une série à partir de critères", nickname = "searchSerie",
             notes ="Recherche multi-critères d'une série existante dans la base")
@@ -122,8 +104,6 @@ public class SerieResource {
             @ApiResponse (code = 500, message = "Erreur lors de l'accès en base", response = ErrorModel.class)
     })
     public ResponseEntity<PageDTO> searchSerie(@RequestBody SearchSerieDto searchSerieDto) {
-
-
         return new ResponseEntity<PageDTO> (iSerieManagement.searchAllSeries(searchSerieDto), HttpStatus.PARTIAL_CONTENT);
     }
 
@@ -161,6 +141,17 @@ public class SerieResource {
     @ResponseStatus(HttpStatus.OK)
     public Integer searchExternalSerieNbResults(@RequestParam("title") final String title) {
         return iSerieManagement.searchExternalSerieNbResults(title);
+    }
+
+    @GetMapping("/loves/{id}")
+    @ApiOperation(value = "Get serie nb of likes")
+    @ApiResponses(value = {
+            @ApiResponse (code = 404, message = "Not found", response = ErrorModel.class),
+            @ApiResponse (code = 500, message = "Internal Server Error", response = ErrorModel.class)
+    })
+    @ResponseStatus(HttpStatus.OK)
+    public Integer exposeSerieNbLikes(@PathVariable("id") final String id) {
+        return viewingSerieService.searchViewingSerieNbLikes(id);
     }
 
 }

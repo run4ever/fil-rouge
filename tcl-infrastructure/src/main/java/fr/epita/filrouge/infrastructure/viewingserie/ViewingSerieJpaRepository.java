@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.awt.print.Pageable;
+import java.util.Collection;
 import java.util.List;
 
 @Repository
@@ -24,4 +25,6 @@ public interface ViewingSerieJpaRepository extends JpaRepository<ViewingSerieJpa
     List<ViewingSerieJpa> findByAppUserJpaEmailOrderBySerieJpaTitle(String email);
 
     Long countByAppUserJpa_Email(String email);
+
+    List<ViewingSerieJpa> findBySerieJpaImdbIdAndLove(String idSerie, boolean b);
 }

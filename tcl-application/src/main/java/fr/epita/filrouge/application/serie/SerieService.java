@@ -18,8 +18,6 @@ public interface SerieService {
 
     boolean deleteSerie(String id);
 
-    PageDTO findAllSeriesByPage(int offset, int limit);
-
     List<SerieDto> findAllSeries();
 
     PageDTO searchAllSeries(SearchSerieDto searchSerieDto);

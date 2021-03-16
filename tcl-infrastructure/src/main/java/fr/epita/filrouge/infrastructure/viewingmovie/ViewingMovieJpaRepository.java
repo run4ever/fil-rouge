@@ -10,5 +10,5 @@ public interface ViewingMovieJpaRepository extends JpaRepository<ViewingMovieJpa
     List<ViewingMovieJpa> findByAppUserJpa(AppUserJpa appUserJpa);
     List<ViewingMovieJpa> findByAppUserJpaEmailOrderByMovieJpaTitle(String email);
     ViewingMovieJpa findByAppUserJpaEmailAndMovieJpaImdbId(String email, String movieId);
-
+    List<ViewingMovieJpa> findByMovieJpaImdbIdAndLove(String idMovie, boolean b);
 }

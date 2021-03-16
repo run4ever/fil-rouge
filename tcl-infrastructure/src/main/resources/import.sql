@@ -2,7 +2,19 @@
 insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('superman@world.com','super','man','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
 insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('youssra@tcl.com','Youssra','TIGE','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_ADMIN');
 insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('arnaud@tcl.com','Arnaud','CHENIER','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_ADMIN');
-insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('fabien@tcl.com','Fabien','LAURETTE','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_ADMIN');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('demo@tcl.com','Lambda','Name','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_ADMIN');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('alexandre@tcl.com','Alexandre','NOM-04','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('farid@tcl.com','Farid','NOM-05','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('kamel@tcl.com','Kamel','NOM-06','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('benoit@tcl.com','Benoit','NOM-07','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('gabri@tcl.com','Gabri','NOM-08','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('julie@tcl.com','Julie','NOM-09','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('agathe@tcl.com','Agathe','NOM-10','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('thomas@tcl.com','Thomas','NOM-11','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('jean-michel@tcl.com','Jean-Michel','NOM-12','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('amandine@tcl.com','Amandine','NOM-13','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+insert into app_user(email,firstname,lastname,birthday_date,password,role) values ('celine@tcl.com','Celine','NOM-14','2000-01-01','$2a$10$XiBW5uqhQ5EBjIL.G6kxAO/E406p.RXJ30jKq0cwEccUrmfmuJG7q','ROLE_USER');
+
 -- alimentation movie
 INSERT INTO public.movie ( actors, average_rating, category, description, duration, image_url, imdb_id, number_of_votes, release_date, title) VALUES ('Ryan Gosling, Dave Bautista, Robin Wright, Mark Arnold', 8, 'ACTION', 'Young Blade Runner discovery of a long-buried secret leads him to track down former Blade Runner Rick Deckard, who''s been missing for thirty years.', 164, 'https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_SX300.jpg', 'tt1856101', 463964, '2017-01-01', 'Blade Runner 2049');
 INSERT INTO public.movie ( actors, average_rating, category, description, duration, image_url, imdb_id, number_of_votes, release_date, title) VALUES ('Harrison Ford, Rutger Hauer, Sean Young, Edward James Olmos', 8.1, 'ACTION', 'A blade runner must pursue and terminate four replicants who stole a ship in space, and have returned to Earth to find their creator.', 117, 'https://m.media-amazon.com/images/M/MV5BNzQzMzJhZTEtOWM4NS00MTdhLTg0YjgtMjM4MDRkZjUwZDBlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg', 'tt0083658', 695428, '1982-01-01', 'Blade Runner');
@@ -26,26 +38,43 @@ INSERT INTO public.serie ( actors, average_rating, category, description, end_ye
 INSERT INTO public.serie ( actors, average_rating, category, description, end_year, image_url, imdb_id, number_of_episode, number_of_season, number_of_votes, start_year, status_serie, title) VALUES ('Christopher Daniel Barnes, Sara Ballantine, Edward Asner, Roscoe Lee Browne', 8.4, 'ANIMATION', 'A young man with spider-like abilities fights crime as a superhero in New York City while trying to have a normal personal life.', 1998, 'https://m.media-amazon.com/images/M/MV5BMmQ1NzBlYmItNmZkZi00OTZkLTg5YTEtNTI5YjczZjk3Yjc1XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg', 'tt0112175', NULL, 5, 26761, 1994, NULL, 'Spider-Man: The Animated Series');
 INSERT INTO public.serie ( actors, average_rating, category, description, end_year, image_url, imdb_id, number_of_episode, number_of_season, number_of_votes, start_year, status_serie, title) VALUES ('Zooey Deschanel, Alan Cumming, Neal McDonough, Kathleen Robertson', 7.2, 'ADVENTURE', 'A re-imagining of L. Frank Baum''s classic "The Wizard of Oz".', NULL, 'https://m.media-amazon.com/images/M/MV5BMzdhODdmMDktYWNmMi00MWYwLWFiZWUtMGM2YzIyYjk0MjA4XkEyXkFqcGdeQXVyMTk3NDAwMzI@._V1_SX300.jpg', 'tt0910812', NULL, 1, 13182, 2007, NULL, 'Tin Man');
 INSERT INTO public.serie ( actors, average_rating, category, description, end_year, image_url, imdb_id, number_of_episode, number_of_season, number_of_votes, start_year, status_serie, title) VALUES ('Bear Grylls', 8.1, 'ADVENTURE', 'Bear Grylls travels the world in search of challenges to his survival skills.', 2020, 'https://m.media-amazon.com/images/M/MV5BNjMyMTVmYTAtODkxZC00NDhmLWJkOTUtZWZmMDI0Y2Q3NTI4XkEyXkFqcGdeQXVyNTg3NDkzMzM@._V1_SX300.jpg', 'tt0883772', NULL, 7, 21806, 2006, NULL, 'Man vs. Wild');
-INSERT INTO public.serie ( actors, average_rating, category, description, end_year, image_url, imdb_id, number_of_episode, number_of_season, number_of_votes, start_year, status_serie, title) VALUES ('Claudine Vallerand', NULL, 'FAMILY', 'N/A', 1962, NULL, 'tt0808083', NULL, NULL, NULL, 1955, NULL, 'Maman Fonfon');
+INSERT INTO public.serie ( actors, average_rating, category, description, end_year, image_url, imdb_id, number_of_episode, number_of_season, number_of_votes, start_year, status_serie, title) VALUES ('Claudine Vallerand', NULL, 'FAMILY', 'N/A', 1962, NULL, 'tt0808083', NULL, 1, NULL, 1955, NULL, 'Maman Fonfon');
 
 -- Visionnage Serie
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (1, 2, '2021-03-01 21:36:15.108', 'TO_WATCH', 1, 2);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (1, 10, '2021-03-08 14:43:46.494', 'WATCHED', 4, 1);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (1, 8, '2021-03-08 14:43:57.731', 'WATCHED', 4, 2);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (1, 5, '2021-03-08 14:44:54.166', 'IN_PROGRESS', 4, 4);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (0, 0, '2021-03-08 14:47:47.671', 'TO_WATCH', 4, 5);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (0, 0, '2021-03-08 14:48:31.535', 'TO_WATCH', 4, 6);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (0, 0, '2021-03-08 14:49:35.314', 'TO_WATCH', 4, 7);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (0, 0, '2021-03-08 14:50:29.333', 'TO_WATCH', 4, 8);
-INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id) VALUES (0, 0, '2021-03-08 14:50:29.333', 'TO_WATCH', 4, 9);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 2, '2021-03-01 21:36:15.108', 'TO_WATCH', 1, 2, false);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 8, '2021-03-08 14:43:57.731', 'WATCHED', 4, 2, false);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:44:54.166', 'IN_PROGRESS', 4, 4, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 1, '2021-03-08 14:47:47.671', 'TO_WATCH', 4, 5, false);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 1, '2021-03-08 14:48:31.535', 'TO_WATCH', 4, 6, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 1, '2021-03-08 14:49:35.314', 'TO_WATCH', 4, 7, false);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 1, '2021-03-08 14:50:29.333', 'TO_WATCH', 4, 8, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 1, '2021-03-08 14:50:29.333', 'TO_WATCH', 4, 9, false);
+
+
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 1, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 2, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 3, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 10, '2021-03-08 14:43:46.494', 'WATCHED', 4, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 5, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 6, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 7, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 8, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 9, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 10, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 11, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 12, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 13, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 14, 1, true);
+INSERT INTO public.serie_viewing ( current_episode, current_season, date_last_action, status, app_user_jpa_user_id, serie_jpa_serie_id, love) VALUES (1, 5, '2021-03-08 14:43:46.494', 'IN_PROGRESS', 15, 1, true);
+
 
 -- Visionnage Movie
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 4, 1);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 4, 2);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 1, 1);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 1, 2);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-06 14:13:19.678', 'TO_WATCH', 4, 3);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-06 14:15:08.196', 'TO_WATCH', 4, 4);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-06 14:24:07.894', 'TO_WATCH', 4, 9);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-06 14:30:16.53', 'TO_WATCH', 4, 11);
-INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id) VALUES ('2021-03-06 14:30:16.53', 'TO_WATCH', 4, 12);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 4, 1, false);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 4, 2, true);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 1, 1, false);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-01 00:00:00', 'TO_WATCH', 1, 2, true);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-06 14:13:19.678', 'TO_WATCH', 4, 3, false);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-06 14:15:08.196', 'TO_WATCH', 4, 4, true);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-06 14:24:07.894', 'TO_WATCH', 4, 9, false);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-06 14:30:16.53', 'TO_WATCH', 4, 11, true);
+INSERT INTO public.movie_viewing ( date_modified, status, user_id, movie_id, love) VALUES ('2021-03-06 14:30:16.53', 'TO_WATCH', 4, 12, false);
